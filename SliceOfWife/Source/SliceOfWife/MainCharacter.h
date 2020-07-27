@@ -15,6 +15,15 @@ public:
 	// Sets default values for this character's properties
 	AMainCharacter();
 
+	UPROPERTY(EditAnywhere, Category = "Camera")
+	class USpringArmComponent* CameraArm;
+
+	UPROPERTY(EditAnywhere, Category = "Camera")
+	class UCameraComponent* Camera;
+
+	UPROPERTY(EditAnywhere, Category = "Rotation")
+	float RotationSpeed = 100;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -26,6 +35,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UFUNCTION() void MoveForward(float Value);
-	UFUNCTION() void MoveRight(float Value);
+	UFUNCTION() void MoveForward(float Axis);
+	UFUNCTION() void MoveRight(float Axis);
+	
 };
