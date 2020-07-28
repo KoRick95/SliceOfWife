@@ -87,7 +87,7 @@ void AMainCharacter::PickUp()
 	FCollisionShape ColShape = FCollisionShape::MakeSphere(DetectionRadius);
 	FCollisionQueryParams* TraceParams = new FCollisionQueryParams();
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Called.")));
-	DrawDebugSphere(GetWorld(), GetActorLocation(), DetectionRadius, 64, FColor::Red, true, -1, 0, 8);
+	DrawDebugSphere(GetWorld(), GetActorLocation(), DetectionRadius, 50, FColor::Red, true, -1, 0, 8);
 	bool isHit = GetWorld()->SweepMultiByChannel(HitResults, Start, End, FQuat::Identity, ECC_Visibility, ColShape);
 	
 	if (isHit)
