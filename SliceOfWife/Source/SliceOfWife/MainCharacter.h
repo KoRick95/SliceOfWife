@@ -21,6 +21,9 @@ public:
 	//UPROPERTY(EditAnywhere, Category = "Camera")
 	//class UCameraComponent* Camera;
 
+	UPROPERTY(EditAnywhere, Category = "Colliders")
+	class USphereComponent* SphereCollider;
+
 	UPROPERTY(EditAnywhere, Category = "Rotation")
 	float RotationSpeed = 100;
 
@@ -28,7 +31,7 @@ public:
 	float DetectionRadius = 100;
 
 	UPROPERTY(EditAnywhere, Category = "PickUp")
-	FVector PickupOffset = { 0, 0, 150 };
+	FVector PickupOffset = { 100, 0, 0 };
 
 	bool isHoldingObject = false;
 
@@ -46,4 +49,7 @@ public:
 	UFUNCTION() void MoveForward(float Axis);
 	UFUNCTION() void MoveRight(float Axis);
 	void PickUp();
+
+	UFUNCTION()
+	void OnOverlapBegin(UPrimitiveComponent* OverLappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 };
