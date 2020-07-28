@@ -24,6 +24,14 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Rotation")
 	float RotationSpeed = 100;
 
+	UPROPERTY(EditAnywhere, Category = "Detection")
+	float DetectionRadius = 100;
+
+	UPROPERTY(EditAnywhere, Category = "PickUp")
+	FVector PickupOffset = { 0, 0, 150 };
+
+	bool isHoldingObject = false;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -37,5 +45,5 @@ public:
 
 	UFUNCTION() void MoveForward(float Axis);
 	UFUNCTION() void MoveRight(float Axis);
-	void Raycast();
+	void PickUp();
 };

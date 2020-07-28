@@ -42,7 +42,6 @@ void AMainCharacter::BeginPlay()
 void AMainCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
@@ -56,6 +55,8 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+
+	PlayerInputComponent->BindAction("Pick Up", IE_Pressed, this, &AMainCharacter::PickUp);
 }
 
 void AMainCharacter::MoveForward(float Axis)
@@ -77,8 +78,28 @@ void AMainCharacter::MoveRight(float Axis)
 	AddMovementInput(Direction, Axis);
 }
 
-void AMainCharacter::Raycast()
+void AMainCharacter::PickUp()
 {
-	//bool hit = GetWorld()
-	
+	TArray<FHitResult> HitResults;
+	FVector Start = this->GetActorLocation();
+	FVector End = this->GetActorLocation();
+	FCollisionShape ColShape = FCollisionShape::MakeSphere(DetectionRadius);
+	FCollisionQueryParams* TraceParams = new FCollisionQueryParams();
+
+	bool isHit = GetWorld()->SweepMultiByChannel(HitResults, Start, End, FQuat::Identity, ECC_Visibility, ColShape);
+
+	if (isHit)
+	{
+		for (int i = 0; i < HitResults.Num; ++i)
+		{
+			AActor* HitActor = HitResults[i].GetActor();
+
+			if (HitActor->ActorHasTag("Pickup"))
+			{
+				HitActor->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
+				HitActor->AddActorLocalOffset(PickupOffset);
+				break;
+			}
+		}
+	}
 }
