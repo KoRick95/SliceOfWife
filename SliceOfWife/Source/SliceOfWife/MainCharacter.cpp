@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "MainCharacter.h"
 #include "Components/InputComponent.h"
+#include "Components/SphereComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -22,6 +23,10 @@ AMainCharacter::AMainCharacter()
 	//Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
 	//Camera->AttachToComponent(CameraArm, FAttachmentTransformRules::KeepRelativeTransform, USpringArmComponent::SocketName);
 	//Camera->bUsePawnControlRotation = false;
+
+	// Create sphere collider
+	SphereCollider = CreateDefaultSubobject<USphereComponent>("SphereCollider");
+	SphereCollider->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationPitch = false;
@@ -58,6 +63,8 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
 	PlayerInputComponent->BindAction("PickUp", IE_Pressed, this, &AMainCharacter::PickUp);
+
+	SphereCollider->OnComponentBeginOverlap.AddDynamic(this, &AMainCharacter::OnOverlapBegin);
 }
 
 void AMainCharacter::MoveForward(float Axis)
@@ -81,15 +88,15 @@ void AMainCharacter::MoveRight(float Axis)
 
 void AMainCharacter::PickUp()
 {
-	TArray<FHitResult> HitResults;
+	/*TArray<FHitResult> HitResults;
 	FVector Start = this->GetActorLocation();
-	FVector End = this->GetActorLocation();
+	FVector End = this->GetActorLocation() + FVector(1, 1, 1);
 	FCollisionShape ColShape = FCollisionShape::MakeSphere(DetectionRadius);
 	FCollisionQueryParams* TraceParams = new FCollisionQueryParams();
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Called.")));
 	DrawDebugSphere(GetWorld(), GetActorLocation(), DetectionRadius, 64, FColor::Red, true, -1, 0, 8);
 	bool isHit = GetWorld()->SweepMultiByChannel(HitResults, Start, End, FQuat::Identity, ECC_Visibility, ColShape);
-	
+
 	if (isHit)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Hit something.")));
@@ -105,5 +112,25 @@ void AMainCharacter::PickUp()
 				break;
 			}
 		}
+	}*/
+
+	TArray<AActor*> actors;
+	SphereCollider->GetOverlappingActors(actors);
+
+	for (int i = 0; i < actors.Num(); ++i)
+	{
+		AActor* actor = actors[i];
+
+		if (actor->ActorHasTag("Pickup"))
+		{
+			actor->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
+			actor->SetActorRelativeLocation(FVector(0) + PickupOffset);
+			break;
+		}
 	}
+}
+
+void AMainCharacter::OnOverlapBegin(UPrimitiveComponent* OverLappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Overlapped.")));
 }
