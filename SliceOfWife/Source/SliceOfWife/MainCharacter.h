@@ -15,11 +15,11 @@ public:
 	// Sets default values for this character's properties
 	AMainCharacter();
 
-	UPROPERTY(EditAnywhere, Category = "Camera")
-	class USpringArmComponent* CameraArm;
+	//UPROPERTY(EditAnywhere, Category = "Camera")
+	//class USpringArmComponent* CameraArm;
 
-	UPROPERTY(EditAnywhere, Category = "Camera")
-	class UCameraComponent* Camera;
+	//UPROPERTY(EditAnywhere, Category = "Camera")
+	//class UCameraComponent* Camera;
 
 	UPROPERTY(EditAnywhere, Category = "Rotation")
 	float RotationSpeed = 100;
@@ -37,5 +37,5 @@ public:
 
 	UFUNCTION() void MoveForward(float Axis);
 	UFUNCTION() void MoveRight(float Axis);
-	
+	void Raycast();
 };

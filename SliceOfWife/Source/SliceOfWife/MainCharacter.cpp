@@ -13,14 +13,15 @@ AMainCharacter::AMainCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	// Create the camera arm
-	CameraArm = CreateDefaultSubobject<USpringArmComponent>("Camera Arm");
-	CameraArm->bUsePawnControlRotation = true;
+	//// Create the camera arm
+	//CameraArm = CreateDefaultSubobject<USpringArmComponent>("Camera Arm");
+	//CameraArm->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	//CameraArm->bUsePawnControlRotation = true;
 
-	// Create the camera
-	Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
-	Camera->AttachToComponent(CameraArm, FAttachmentTransformRules::KeepRelativeTransform);
-	Camera->bUsePawnControlRotation = false;
+	//// Create the camera
+	//Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
+	//Camera->AttachToComponent(CameraArm, FAttachmentTransformRules::KeepRelativeTransform, USpringArmComponent::SocketName);
+	//Camera->bUsePawnControlRotation = false;
 
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationPitch = false;
@@ -74,4 +75,10 @@ void AMainCharacter::MoveRight(float Axis)
 	FRotator YawRotation(0, Rotation.Yaw, 0);
 	FVector Direction = FRotationMatrix(YawRotation).GetScaledAxis(EAxis::Y);
 	AddMovementInput(Direction, Axis);
+}
+
+void AMainCharacter::Raycast()
+{
+	//bool hit = GetWorld()
+	
 }
