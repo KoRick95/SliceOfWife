@@ -90,7 +90,7 @@ void AMainCharacter::PickUp()
 
 	if (isHit)
 	{
-		for (int i = 0; i < HitResults.Num; ++i)
+		for (int i = 0; i < HitResults.Num(); ++i)
 		{
 			AActor* HitActor = HitResults[i].GetActor();
 
