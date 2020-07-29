@@ -171,6 +171,7 @@ void AMainCharacter::PickUp()
 								USceneComponent* sceneComponent = Cast<USceneComponent>(component);
 
 								// snap the held object to the component
+								heldObject->SetActorRotation(FRotator(0));
 								heldObject->AttachToComponent(sceneComponent, FAttachmentTransformRules::KeepRelativeTransform);
 								heldObject->SetActorLocation(sceneComponent->GetComponentLocation());
 								isDropped = true;
