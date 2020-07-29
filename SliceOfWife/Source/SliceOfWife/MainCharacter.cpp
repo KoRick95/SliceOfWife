@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "MainCharacter.h"
 #include "DisassemblingTable.h"
+#include "AssemblingTable.h"
 #include "Components/InputComponent.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/PlayerController.h"
@@ -171,7 +172,7 @@ void AMainCharacter::PickUp()
 								USceneComponent* sceneComponent = Cast<USceneComponent>(component);
 
 								// snap the held object to the component
-								heldObject->SetActorRotation(FRotator(0));
+								heldObject->SetActorRotation(FRotator(0, 0, 0), ETeleportType::ResetPhysics);
 								heldObject->AttachToComponent(sceneComponent, FAttachmentTransformRules::KeepRelativeTransform);
 								heldObject->SetActorLocation(sceneComponent->GetComponentLocation());
 								isDropped = true;
@@ -204,13 +205,12 @@ void AMainCharacter::Interact()
 	TArray<AActor*> actors;
 	SphereCollider->GetOverlappingActors(actors);
 
-	for (int a = 0; a < actors.Num(); ++a)
+	for (int i = 0; i < actors.Num(); ++i)
 	{
-		AActor* actor = actors[a];
-
-		if (actor->ActorHasTag("AssemblingTable"))
+		if (actors[i]->ActorHasTag("AssemblingTable"))
 		{
-			
+			AAssemblingTable* ATable = Cast<AAssemblingTable>(actors[i]);
+
 		}
 	}
 }
