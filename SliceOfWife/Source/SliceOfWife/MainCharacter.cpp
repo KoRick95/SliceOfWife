@@ -114,19 +114,28 @@ void AMainCharacter::PickUp()
 		}
 	}*/
 
-	TArray<AActor*> actors;
-	SphereCollider->GetOverlappingActors(actors);
-
-	for (int i = 0; i < actors.Num(); ++i)
+	if (heldObject == nullptr)
 	{
-		AActor* actor = actors[i];
+		TArray<AActor*> actors;
+		SphereCollider->GetOverlappingActors(actors);
 
-		if (actor->ActorHasTag("Pickup"))
+		for (int i = 0; i < actors.Num(); ++i)
 		{
-			actor->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
-			actor->SetActorRelativeLocation(FVector(0) + PickupOffset);
-			break;
+			AActor* actor = actors[i];
+
+			if (actor->ActorHasTag("Pickup"))
+			{
+				actor->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
+				actor->SetActorRelativeLocation(FVector(0) + PickupOffset);
+				heldObject = actor;
+				break;
+			}
 		}
+	}
+	else
+	{
+		heldObject->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		heldObject = nullptr;
 	}
 }
 

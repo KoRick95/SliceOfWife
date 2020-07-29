@@ -33,7 +33,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "PickUp")
 	FVector PickupOffset = { 100, 0, 0 };
 
-	bool isHoldingObject = false;
+	AActor* heldObject = nullptr;
 
 protected:
 	// Called when the game starts or when spawned
