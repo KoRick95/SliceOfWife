@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "MainCharacter.h"
+#include "DisassemblingTable.h"
 #include "Components/InputComponent.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/PlayerController.h"
@@ -23,6 +24,8 @@ AMainCharacter::AMainCharacter()
 	//Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
 	//Camera->AttachToComponent(CameraArm, FAttachmentTransformRules::KeepRelativeTransform, USpringArmComponent::SocketName);
 	//Camera->bUsePawnControlRotation = false;
+
+	Tags.Add("Player");
 
 	// Create sphere collider
 	SphereCollider = CreateDefaultSubobject<USphereComponent>("SphereCollider");
@@ -116,11 +119,11 @@ void AMainCharacter::PickUp()
 		}
 	}*/
 
+	TArray<AActor*> actors;
+	SphereCollider->GetOverlappingActors(actors);
+
 	if (heldObject == nullptr)
 	{
-		TArray<AActor*> actors;
-		SphereCollider->GetOverlappingActors(actors);
-
 		for (int i = 0; i < actors.Num(); ++i)
 		{
 			AActor* actor = actors[i];
@@ -136,7 +139,59 @@ void AMainCharacter::PickUp()
 	}
 	else
 	{
+		bool isDropped = false;
+
+		// detach the held object from the player
 		heldObject->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+
+		// check nearby objects
+		for (int i = 0; i < actors.Num; ++i)
+		{
+			// if the assembling table is nearby
+			if (actors[i]->ActorHasTag("AssemblingTable"))
+			{
+				// get all of its scene components
+				TArray<UActorComponent*> components;
+				components = actors[i]->GetComponentsByClass(USceneComponent::StaticClass());
+				
+				// check its components
+				for (UActorComponent* component : components)
+				{
+					// check each component's tags
+					for (int c = 0; c < component->ComponentTags.Num(); ++c)
+					{
+						// check the held object's tags
+						for (int h = 0; h < heldObject->Tags.Num(); ++h)
+						{
+							// if there is a matching tag
+							if (component->ComponentTags[c] == heldObject->Tags[h])
+							{
+								// cast the component as a scene component
+								USceneComponent* sceneComponent = Cast<USceneComponent>(component);
+
+								// snap the held object to the component
+								heldObject->AttachToComponent(sceneComponent, FAttachmentTransformRules::KeepRelativeTransform);
+								heldObject->SetActorLocation(sceneComponent->GetComponentLocation());
+								isDropped = true;
+							}
+							
+							if (isDropped)
+								break;
+						}
+
+						if (isDropped)
+							break;
+					}
+
+					if (isDropped)
+						break;
+				}
+			}
+
+			if (isDropped)
+				break;
+		}
+		
 		heldObject = nullptr;
 	}
 }
@@ -146,11 +201,11 @@ void AMainCharacter::Interact()
 	TArray<AActor*> actors;
 	SphereCollider->GetOverlappingActors(actors);
 
-	for (int i = 0; i < actors.Num(); ++i)
+	for (int a = 0; a < actors.Num(); ++a)
 	{
-		AActor* actor = actors[i];
+		AActor* actor = actors[a];
 
-		if (actor->ActorHasTag("DisassemblingTable"))
+		if (actor->ActorHasTag("AssemblingTable"))
 		{
 			
 		}
