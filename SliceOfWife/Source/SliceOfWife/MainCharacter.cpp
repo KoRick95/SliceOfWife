@@ -145,7 +145,7 @@ void AMainCharacter::PickUp()
 		heldObject->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
 		// check nearby objects
-		for (int i = 0; i < actors.Num; ++i)
+		for (int i = 0; i < actors.Num(); ++i)
 		{
 			// if the assembling table is nearby
 			if (actors[i]->ActorHasTag("AssemblingTable"))
