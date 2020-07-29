@@ -132,6 +132,7 @@ void AMainCharacter::PickUp()
 			{
 				actor->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
 				actor->SetActorRelativeLocation(FVector(0) + PickupOffset);
+				actor->SetActorEnableCollision(false);
 				heldObject = actor;
 				break;
 			}
@@ -192,6 +193,7 @@ void AMainCharacter::PickUp()
 				break;
 		}
 		
+		heldObject->SetActorEnableCollision(true);
 		heldObject = nullptr;
 	}
 }
