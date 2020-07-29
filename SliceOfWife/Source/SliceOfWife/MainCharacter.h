@@ -48,7 +48,9 @@ public:
 
 	UFUNCTION() void MoveForward(float Axis);
 	UFUNCTION() void MoveRight(float Axis);
+
 	void PickUp();
+	void Interact();
 
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverLappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);

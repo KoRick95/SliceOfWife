@@ -64,6 +64,8 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	PlayerInputComponent->BindAction("PickUp", IE_Pressed, this, &AMainCharacter::PickUp);
 
+	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &AMainCharacter::Interact);
+
 	SphereCollider->OnComponentBeginOverlap.AddDynamic(this, &AMainCharacter::OnOverlapBegin);
 }
 
@@ -139,7 +141,23 @@ void AMainCharacter::PickUp()
 	}
 }
 
+void AMainCharacter::Interact()
+{
+	TArray<AActor*> actors;
+	SphereCollider->GetOverlappingActors(actors);
+
+	for (int i = 0; i < actors.Num(); ++i)
+	{
+		AActor* actor = actors[i];
+
+		if (actor->ActorHasTag("DisassemblingTable"))
+		{
+			
+		}
+	}
+}
+
 void AMainCharacter::OnOverlapBegin(UPrimitiveComponent* OverLappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Overlapped.")));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Overlapped.")));
 }
