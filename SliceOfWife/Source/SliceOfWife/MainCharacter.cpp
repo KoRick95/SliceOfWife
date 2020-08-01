@@ -141,8 +141,6 @@ void AMainCharacter::PickUp()
 	}
 	else
 	{
-		bool isDropped = false;
-
 		// detach the held object from the player
 		heldObject->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
@@ -154,11 +152,9 @@ void AMainCharacter::PickUp()
 			{
 				// call the table's object snapping function
 				AAssemblingTable* aTable = Cast<AAssemblingTable>(actors[i]);
-				isDropped = aTable->DropToTable(heldObject);
-			}
-
-			if (isDropped)
+				aTable->DropToTable(heldObject);
 				break;
+			}
 		}
 		
 		heldObject->SetActorEnableCollision(true);
@@ -175,8 +171,9 @@ void AMainCharacter::Interact()
 	{
 		if (actors[i]->ActorHasTag("AssemblingTable"))
 		{
-			AAssemblingTable* ATable = Cast<AAssemblingTable>(actors[i]);
-
+			AAssemblingTable* aTable = Cast<AAssemblingTable>(actors[i]);
+			aTable->Animate();
+			break;
 		}
 	}
 }

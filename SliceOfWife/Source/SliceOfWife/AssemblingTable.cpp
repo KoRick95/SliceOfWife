@@ -84,10 +84,10 @@ bool AAssemblingTable::Animate()
 		return false;
 	}
 
-	FVector Location(this->GetActorLocation() + SpawnOffset);
-	FRotator Rotation(this->GetActorRotation());
-	FActorSpawnParameters SpawnInfo;
-	GetWorld()->SpawnActor<AActor>(TemporarySpawnBody, Location, Rotation, SpawnInfo);
+	FVector location(this->GetActorLocation() + SpawnOffset);
+	FRotator rotation(this->GetActorRotation());
+	FActorSpawnParameters spawnInfo;
+	GetWorld()->SpawnActor<AActor>(TemporarySpawnBody, location, rotation, spawnInfo);
 
 	return false;
 }
