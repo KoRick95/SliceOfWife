@@ -21,6 +21,8 @@ public:
 	//UPROPERTY(EditAnywhere, Category = "Camera")
 	//class UCameraComponent* Camera;
 
+	AActor* heldObject = nullptr;
+
 	UPROPERTY(EditAnywhere, Category = "Colliders")
 	class USphereComponent* SphereCollider;
 
@@ -32,8 +34,6 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "PickUp")
 	FVector PickupOffset = { 100, 0, 0 };
-
-	AActor* heldObject = nullptr;
 
 protected:
 	// Called when the game starts or when spawned

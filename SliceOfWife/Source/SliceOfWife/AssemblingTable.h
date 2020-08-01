@@ -15,6 +15,14 @@ public:
 	// Sets default values for this actor's properties
 	AAssemblingTable();
 
+	TArray<FName> bodyPartTags;
+
+	UPROPERTY(EditAnywhere, Category = "Requirements")
+	int MinBodyParts = 6;
+
+	UPROPERTY(EditAnywhere, Category = "Requirements")
+	TSubclassOf<AActor> TemporarySpawnBody = nullptr;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -23,4 +31,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	bool DropToTable(AActor* droppedActor);
+
+	bool Animate();
 };

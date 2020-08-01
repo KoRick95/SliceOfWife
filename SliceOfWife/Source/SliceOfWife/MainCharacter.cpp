@@ -152,43 +152,9 @@ void AMainCharacter::PickUp()
 			// if the assembling table is nearby
 			if (actors[i]->ActorHasTag("AssemblingTable"))
 			{
-				// get all of its scene components
-				TArray<UActorComponent*> components;
-				components = actors[i]->GetComponentsByClass(USceneComponent::StaticClass());
-				
-				// check its components
-				for (UActorComponent* component : components)
-				{
-					// check each component's tags
-					for (int c = 0; c < component->ComponentTags.Num(); ++c)
-					{
-						// check the held object's tags
-						for (int h = 0; h < heldObject->Tags.Num(); ++h)
-						{
-							// if there is a matching tag
-							if (component->ComponentTags[c] == heldObject->Tags[h])
-							{
-								// cast the component as a scene component
-								USceneComponent* sceneComponent = Cast<USceneComponent>(component);
-
-								// snap the held object to the component
-								heldObject->SetActorRotation(FRotator(0, 0, 0), ETeleportType::ResetPhysics);
-								heldObject->AttachToComponent(sceneComponent, FAttachmentTransformRules::KeepRelativeTransform);
-								heldObject->SetActorLocation(sceneComponent->GetComponentLocation());
-								isDropped = true;
-							}
-							
-							if (isDropped)
-								break;
-						}
-
-						if (isDropped)
-							break;
-					}
-
-					if (isDropped)
-						break;
-				}
+				// call the table's object snapping function
+				AAssemblingTable* aTable = Cast<AAssemblingTable>(actors[i]);
+				isDropped = aTable->DropToTable(heldObject);
 			}
 
 			if (isDropped)
