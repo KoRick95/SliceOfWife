@@ -60,7 +60,7 @@ bool AAssemblingTable::DropToTable(AActor* droppedObject)
 
 					// snap the dropped object to the component
 					droppedObject->SetActorRotation(FRotator(0, 0, 0), ETeleportType::ResetPhysics);
-					droppedObject->AttachToComponent(sceneComponent, FAttachmentTransformRules::KeepRelativeTransform);
+					droppedObject->AttachToComponent(sceneComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 					droppedObject->SetActorLocation(sceneComponent->GetComponentLocation());
 					bodyPartTags.Add(droppedObject->Tags[d]);
 					return true;
@@ -78,10 +78,16 @@ bool AAssemblingTable::Animate()
 	{
 		return false;
 	}
-	FVector Location(0.0f, 0.0f, 0.0f);
-	FRotator Rotation(0.0f, 0.0f, 0.0f);
+
+	if (TemporarySpawnBody == nullptr)
+	{
+		return false;
+	}
+
+	FVector Location(this->GetActorLocation() + SpawnOffset);
+	FRotator Rotation(this->GetActorRotation());
 	FActorSpawnParameters SpawnInfo;
-	GetWorld()->SpawnActor<AActor>(Location, Rotation, SpawnInfo);
+	GetWorld()->SpawnActor<AActor>(TemporarySpawnBody, Location, Rotation, SpawnInfo);
 
 	return false;
 }

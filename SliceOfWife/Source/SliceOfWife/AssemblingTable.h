@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -22,6 +20,9 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Requirements")
 	TSubclassOf<AActor> TemporarySpawnBody = nullptr;
+
+	UPROPERTY(EditAnywhere, Category = "Requirements")
+	FVector SpawnOffset = { 0, 0, 150 };
 
 protected:
 	// Called when the game starts or when spawned
