@@ -30,20 +30,6 @@ bool AAssemblingTable::DropToTable(AActor* droppedObject)
 	TArray<UActorComponent*> components;
 	components = this->GetComponentsByClass(USceneComponent::StaticClass());
 
-	// check the dropped object's tags
-	for (int i = 0; i < droppedObject->Tags.Num(); ++i)
-	{
-		// check the existing body parts' tags
-		for (int j = 0; j < bodyParts.Num(); ++j)
-		{
-			// if there is already a body part with the same tag
-			if (droppedObject->Tags[i] == bodyParts[j].tag)
-			{
-				// deny the drop, check the dropped object's next tag
-			}
-		}
-	}
-
 	// check each component
 	for (int i = 0; i < components.Num(); ++i)
 	{
@@ -56,21 +42,36 @@ bool AAssemblingTable::DropToTable(AActor* droppedObject)
 				// if there is a matching tag
 				if (components[i]->ComponentTags[c] == droppedObject->Tags[d])
 				{
-					// cast the component as a scene component
-					USceneComponent* sceneComponent = Cast<USceneComponent>(components[i]);
+					bool isMissingPart = true;
 
-					// snap the dropped object to the component
-					droppedObject->SetActorRotation(FRotator(0, 0, 0), ETeleportType::ResetPhysics);
-					droppedObject->AttachToComponent(sceneComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-					droppedObject->SetActorLocation(sceneComponent->GetComponentLocation());
-					
-					// remember the dropped body part
-					BodyPart bodyPart;
-					bodyPart.object = droppedObject;
-					bodyPart.tag = droppedObject->Tags[d];
-					bodyParts.Add(bodyPart);
+					// check the existing body parts' tags
+					for (int j = 0; j < bodyParts.Num(); ++j)
+					{
+						// if there is already a body part with the same tag
+						if (droppedObject->Tags[i] == bodyParts[j].tag)
+						{
+							isMissingPart = false;
+						}
+					}
 
-					return true;
+					if (isMissingPart)
+					{
+						// cast the component as a scene component
+						USceneComponent* sceneComponent = Cast<USceneComponent>(components[i]);
+
+						// snap the dropped object to the component
+						droppedObject->SetActorRotation(FRotator(0, 0, 0), ETeleportType::ResetPhysics);
+						droppedObject->AttachToComponent(sceneComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+						droppedObject->SetActorLocation(sceneComponent->GetComponentLocation());
+
+						// remember the dropped body part
+						BodyPart bodyPart;
+						bodyPart.object = droppedObject;
+						bodyPart.tag = droppedObject->Tags[d];
+						bodyParts.Add(bodyPart);
+
+						return true;
+					}
 				}
 			}
 		}
@@ -95,7 +96,7 @@ bool AAssemblingTable::Animate()
 
 	// spawn the body
 	FVector location(this->GetActorLocation() + SpawnOffset);
-	FRotator rotation(this->GetActorRotation());
+	FRotator rotation(this->GetActorRotation() + SpawnRotation);
 	FActorSpawnParameters spawnInfo;
 	GetWorld()->SpawnActor<AActor>(TemporarySpawnBody, location, rotation, spawnInfo);
 

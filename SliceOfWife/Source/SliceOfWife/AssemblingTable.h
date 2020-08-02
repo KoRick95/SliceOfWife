@@ -30,6 +30,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Requirements")
 	FVector SpawnOffset = { 0, 0, 150 };
 
+	UPROPERTY(EditAnywhere, Category = "Requirements")
+	FRotator SpawnRotation = { 0, 0, 0 };
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
