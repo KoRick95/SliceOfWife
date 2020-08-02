@@ -19,7 +19,7 @@ AMainCharacter::AMainCharacter()
 	// Create the camera arm
 	CameraArm = CreateDefaultSubobject<USpringArmComponent>("Camera Arm");
 	CameraArm->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-	CameraArm->bUsePawnControlRotation = true;
+	CameraArm->bUsePawnControlRotation = false;
 
 	// Create the camera
 	Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
@@ -131,7 +131,7 @@ void AMainCharacter::PickUp()
 
 			if (actor->ActorHasTag("Pickup"))
 			{
-				actor->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
+				actor->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
 				actor->SetActorRelativeLocation(FVector(0) + PickupOffset);
 				actor->SetActorEnableCollision(false);
 				heldObject = actor;

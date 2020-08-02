@@ -13,7 +13,13 @@ public:
 	// Sets default values for this actor's properties
 	AAssemblingTable();
 
-	TArray<FName> bodyPartTags;
+	struct BodyPart
+	{
+		AActor* object;
+		FName tag;
+	};
+
+	TArray<BodyPart> bodyParts;
 
 	UPROPERTY(EditAnywhere, Category = "Requirements")
 	int MinBodyParts = 6;

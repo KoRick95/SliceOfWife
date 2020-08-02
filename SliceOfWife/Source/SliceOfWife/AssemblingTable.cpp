@@ -34,12 +34,12 @@ bool AAssemblingTable::DropToTable(AActor* droppedObject)
 	for (int i = 0; i < droppedObject->Tags.Num(); ++i)
 	{
 		// check the existing body parts' tags
-		for (int j = 0; j < bodyPartTags.Num(); ++j)
+		for (int j = 0; j < bodyParts.Num(); ++j)
 		{
 			// if there is already a body part with the same tag
-			if (droppedObject->Tags[i] == bodyPartTags[j])
+			if (droppedObject->Tags[i] == bodyParts[j].tag)
 			{
-				// do something? maybe replace the body part or simply deny the dropping
+				// deny the drop, check the dropped object's next tag
 			}
 		}
 	}
@@ -63,7 +63,13 @@ bool AAssemblingTable::DropToTable(AActor* droppedObject)
 					droppedObject->SetActorRotation(FRotator(0, 0, 0), ETeleportType::ResetPhysics);
 					droppedObject->AttachToComponent(sceneComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 					droppedObject->SetActorLocation(sceneComponent->GetComponentLocation());
-					bodyPartTags.Add(droppedObject->Tags[d]);
+					
+					// remember the dropped body part
+					BodyPart bodyPart;
+					bodyPart.object = droppedObject;
+					bodyPart.tag = droppedObject->Tags[d];
+					bodyParts.Add(bodyPart);
+
 					return true;
 				}
 			}
@@ -75,16 +81,19 @@ bool AAssemblingTable::DropToTable(AActor* droppedObject)
 
 bool AAssemblingTable::Animate()
 {
-	if (bodyPartTags.Num() < MinBodyParts)
+	if (bodyParts.Num() < MinBodyParts || TemporarySpawnBody == nullptr)
 	{
 		return false;
 	}
 
-	if (TemporarySpawnBody == nullptr)
+	// destroy each body part
+	for (int i = 0; i < bodyParts.Num(); ++i)
 	{
-		return false;
+		bodyParts[i].object->Destroy();
 	}
+	bodyParts.Empty();
 
+	// spawn the body
 	FVector location(this->GetActorLocation() + SpawnOffset);
 	FRotator rotation(this->GetActorRotation());
 	FActorSpawnParameters spawnInfo;
