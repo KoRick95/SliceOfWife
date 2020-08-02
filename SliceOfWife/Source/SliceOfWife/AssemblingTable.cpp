@@ -45,10 +45,10 @@ bool AAssemblingTable::DropToTable(AActor* droppedObject)
 					bool isMissingPart = true;
 
 					// check the existing body parts' tags
-					for (int j = 0; j < bodyParts.Num(); ++j)
+					for (int b = 0; b < bodyParts.Num(); ++b)
 					{
 						// if there is already a body part with the same tag
-						if (droppedObject->Tags[i] == bodyParts[j].tag)
+						if (droppedObject->Tags[d] == bodyParts[b].tag)
 						{
 							isMissingPart = false;
 						}
