@@ -1,0 +1,7 @@
+## Regenerate Projects
+1) Delete the Intermediate and Binaries Folders
+2) Go to this file directory: C:\Program Files\Epic Games\UE_4.20\Engine\Binaries\DotNET>
+3) Type 'cmd' in the task bar.
+4) Copy paste this in to the command line: UnrealBuildTool.exe -ProjectFiles -project="C:\Users\sXXXXXX\Documents\GitHub\Chicken-Crimpy-Repository\DejaBrew\DejaBrew.uproject" -game -engine
+
+UnrealBuildTool.exe -ProjectFiles -project="C:\Users\s191273\Documents\GitHub\SliceOfWife\SliceOfWife\DejaBrew.uproject" -game -engine
