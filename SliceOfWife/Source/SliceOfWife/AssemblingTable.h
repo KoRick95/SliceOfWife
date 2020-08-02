@@ -41,7 +41,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	bool DropToTable(AActor* droppedActor);
+	bool DropToTable(AActor* objectToDrop);
+	bool RemoveFromTable(AActor* objectToRemove);
 
 	bool Animate();
 };

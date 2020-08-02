@@ -24,7 +24,7 @@ void AAssemblingTable::Tick(float DeltaTime)
 
 }
 
-bool AAssemblingTable::DropToTable(AActor* droppedObject)
+bool AAssemblingTable::DropToTable(AActor* objectToDrop)
 {
 	// get all of its scene components
 	TArray<UActorComponent*> components;
@@ -37,10 +37,10 @@ bool AAssemblingTable::DropToTable(AActor* droppedObject)
 		for (int c = 0; c < components[i]->ComponentTags.Num(); ++c)
 		{
 			// check the dropped object's tags
-			for (int d = 0; d < droppedObject->Tags.Num(); ++d)
+			for (int d = 0; d < objectToDrop->Tags.Num(); ++d)
 			{
 				// if there is a matching tag
-				if (components[i]->ComponentTags[c] == droppedObject->Tags[d])
+				if (components[i]->ComponentTags[c] == objectToDrop->Tags[d])
 				{
 					bool isMissingPart = true;
 
@@ -48,7 +48,7 @@ bool AAssemblingTable::DropToTable(AActor* droppedObject)
 					for (int b = 0; b < bodyParts.Num(); ++b)
 					{
 						// if there is already a body part with the same tag
-						if (droppedObject->Tags[d] == bodyParts[b].tag)
+						if (objectToDrop->Tags[d] == bodyParts[b].tag)
 						{
 							isMissingPart = false;
 						}
@@ -60,20 +60,39 @@ bool AAssemblingTable::DropToTable(AActor* droppedObject)
 						USceneComponent* sceneComponent = Cast<USceneComponent>(components[i]);
 
 						// snap the dropped object to the component
-						droppedObject->SetActorRotation(FRotator(0, 0, 0), ETeleportType::ResetPhysics);
-						droppedObject->AttachToComponent(sceneComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-						droppedObject->SetActorLocation(sceneComponent->GetComponentLocation());
+						objectToDrop->SetActorRotation(FRotator(0, 0, 0), ETeleportType::ResetPhysics);
+						objectToDrop->AttachToComponent(sceneComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+						objectToDrop->SetActorLocation(sceneComponent->GetComponentLocation());
 
 						// remember the dropped body part
 						BodyPart bodyPart;
-						bodyPart.object = droppedObject;
-						bodyPart.tag = droppedObject->Tags[d];
+						bodyPart.object = objectToDrop;
+						bodyPart.tag = objectToDrop->Tags[d];
 						bodyParts.Add(bodyPart);
 
 						return true;
 					}
 				}
 			}
+		}
+	}
+
+	return false;
+}
+
+bool AAssemblingTable::RemoveFromTable(AActor* objectToRemove)
+{
+	// detach the object from the table
+	objectToRemove->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+	
+	// check the list of body parts
+	for (int i = 0; i < bodyParts.Num(); ++i)
+	{
+		// remove the body part from the list
+		if (objectToRemove == bodyParts[i].object)
+		{
+			bodyParts.RemoveAt(i);
+			return true;
 		}
 	}
 

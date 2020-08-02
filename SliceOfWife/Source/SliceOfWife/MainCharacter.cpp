@@ -120,21 +120,32 @@ void AMainCharacter::PickUp()
 		}
 	}*/
 
-	TArray<AActor*> actors;
-	SphereCollider->GetOverlappingActors(actors);
+	// get all nearby objects
+	TArray<AActor*> nearbyObjects;
+	SphereCollider->GetOverlappingActors(nearbyObjects);
 
+	// if the player is not holding anything
 	if (heldObject == nullptr)
 	{
-		for (int i = 0; i < actors.Num(); ++i)
+		// check all nearby objects
+		for (int i = 0; i < nearbyObjects.Num(); ++i)
 		{
-			AActor* actor = actors[i];
-
-			if (actor->ActorHasTag("Pickup"))
+			// if an object has the pickup tag
+			if (nearbyObjects[i]->ActorHasTag("Pickup"))
 			{
-				actor->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
-				actor->SetActorRelativeLocation(FVector(0) + PickupOffset);
-				actor->SetActorEnableCollision(false);
-				heldObject = actor;
+				// if that object is attached to an assembling table
+				if (nearbyObjects[i]->GetAttachParentActor()->ActorHasTag("AssemblingTable"))
+				{
+					// remove it from the table
+					AAssemblingTable* aTable = Cast<AAssemblingTable>(nearbyObjects[i]->GetAttachParentActor());
+					aTable->RemoveFromTable(nearbyObjects[i]);
+				}
+
+				// attach the object to the player
+				nearbyObjects[i]->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
+				nearbyObjects[i]->SetActorRelativeLocation(FVector(0) + PickupOffset);
+				nearbyObjects[i]->SetActorEnableCollision(false);
+				heldObject = nearbyObjects[i];
 				break;
 			}
 		}
@@ -145,13 +156,13 @@ void AMainCharacter::PickUp()
 		heldObject->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
 		// check nearby objects
-		for (int i = 0; i < actors.Num(); ++i)
+		for (int i = 0; i < nearbyObjects.Num(); ++i)
 		{
 			// if the assembling table is nearby
-			if (actors[i]->ActorHasTag("AssemblingTable"))
+			if (nearbyObjects[i]->ActorHasTag("AssemblingTable"))
 			{
 				// call the table's object snapping function
-				AAssemblingTable* aTable = Cast<AAssemblingTable>(actors[i]);
+				AAssemblingTable* aTable = Cast<AAssemblingTable>(nearbyObjects[i]);
 				aTable->DropToTable(heldObject);
 				break;
 			}
