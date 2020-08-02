@@ -14,14 +14,14 @@ class SLICEOFWIFE_API AMainCharacter : public ACharacter
 public:
 	// Sets default values for this character's properties
 	AMainCharacter();
-
-	//UPROPERTY(EditAnywhere, Category = "Camera")
-	//class USpringArmComponent* CameraArm;
-
-	//UPROPERTY(EditAnywhere, Category = "Camera")
-	//class UCameraComponent* Camera;
-
+	
 	AActor* heldObject = nullptr;
+
+	UPROPERTY(EditAnywhere, Category = "Camera")
+	class USpringArmComponent* CameraArm;
+
+	UPROPERTY(EditAnywhere, Category = "Camera")
+	class UCameraComponent* Camera;
 
 	UPROPERTY(EditAnywhere, Category = "Colliders")
 	class USphereComponent* SphereCollider;
