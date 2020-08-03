@@ -1,3 +1,5 @@
+// The class for the table where the player does the body assembling
+
 #pragma once
 
 #include "CoreMinimal.h"

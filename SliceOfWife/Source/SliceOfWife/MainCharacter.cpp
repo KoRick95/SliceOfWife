@@ -1,13 +1,14 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "MainCharacter.h"
-#include "DisassemblingTable.h"
 #include "AssemblingTable.h"
+#include "BodyStorage.h"
+#include "DisassemblingTable.h"
+#include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
-#include "Camera/CameraComponent.h"
 #include "Engine.h"
 
 // Sets default values
@@ -73,6 +74,15 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	SphereCollider->OnComponentBeginOverlap.AddDynamic(this, &AMainCharacter::OnOverlapBegin);
 }
 
+void AMainCharacter::HoldObject(AActor* objectToHold)
+{
+	// attach the object to the player
+	objectToHold->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
+	objectToHold->SetActorRelativeLocation(FVector(0) + PickupOffset);
+	objectToHold->SetActorEnableCollision(false);
+	heldObject = objectToHold;
+}
+
 void AMainCharacter::MoveForward(float Axis)
 {
 	// Find out which way is "forward" and record that the player wants to move that way.
@@ -130,6 +140,13 @@ void AMainCharacter::PickUp()
 		// check all nearby objects
 		for (int i = 0; i < nearbyObjects.Num(); ++i)
 		{
+			if (nearbyObjects[i]->ActorHasTag("BodyStorage"))
+			{
+				ABodyStorage* bodyStorage = Cast<ABodyStorage>(nearbyObjects[i]);
+				HoldObject(bodyStorage->TakeBodyFrom());
+				break;
+			}
+
 			// if an object has the pickup tag
 			if (nearbyObjects[i]->ActorHasTag("Pickup"))
 			{
@@ -145,11 +162,8 @@ void AMainCharacter::PickUp()
 					}
 				}
 
-				// attach the object to the player
-				nearbyObjects[i]->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
-				nearbyObjects[i]->SetActorRelativeLocation(FVector(0) + PickupOffset);
-				nearbyObjects[i]->SetActorEnableCollision(false);
-				heldObject = nearbyObjects[i];
+				// get player to hold the object
+				HoldObject(nearbyObjects[i]);
 				break;
 			}
 		}
