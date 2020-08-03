@@ -133,12 +133,16 @@ void AMainCharacter::PickUp()
 			// if an object has the pickup tag
 			if (nearbyObjects[i]->ActorHasTag("Pickup"))
 			{
-				// if that object is attached to an assembling table
-				if (nearbyObjects[i]->GetAttachParentActor()->ActorHasTag("AssemblingTable"))
+				// if the object is attached to a parent object
+				if (nearbyObjects[i]->GetAttachParentActor() != nullptr)
 				{
-					// remove it from the table
-					AAssemblingTable* aTable = Cast<AAssemblingTable>(nearbyObjects[i]->GetAttachParentActor());
-					aTable->RemoveFromTable(nearbyObjects[i]);
+					// if that object's parent is an assembling table
+					if (nearbyObjects[i]->GetAttachParentActor()->ActorHasTag("AssemblingTable"))
+					{
+						// remove it from the table
+						AAssemblingTable* aTable = Cast<AAssemblingTable>(nearbyObjects[i]->GetAttachParentActor());
+						aTable->RemoveFromTable(nearbyObjects[i]);
+					}
 				}
 
 				// attach the object to the player
