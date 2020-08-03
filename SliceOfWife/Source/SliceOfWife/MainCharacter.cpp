@@ -143,7 +143,7 @@ void AMainCharacter::PickUp()
 			if (nearbyObjects[i]->ActorHasTag("BodyStorage"))
 			{
 				ABodyStorage* bodyStorage = Cast<ABodyStorage>(nearbyObjects[i]);
-				HoldObject(bodyStorage->TakeBodyFrom());
+				HoldObject(bodyStorage->TakeBody());
 				break;
 			}
 
@@ -184,6 +184,13 @@ void AMainCharacter::PickUp()
 				aTable->DropToTable(heldObject);
 				break;
 			}
+
+			if (nearbyObjects[i]->ActorHasTag("DisassemblingTable"))
+			{
+				ADisassemblingTable* dTable = Cast<ADisassemblingTable>(nearbyObjects[i]);
+				dTable->DropToTable(heldObject);
+				break;
+			}
 		}
 		
 		heldObject->SetActorEnableCollision(true);
@@ -198,6 +205,13 @@ void AMainCharacter::Interact()
 
 	for (int i = 0; i < actors.Num(); ++i)
 	{
+		if (actors[i]->ActorHasTag("DisassemblingTable"))
+		{
+			ADisassemblingTable* dTable = Cast<ADisassemblingTable>(actors[i]);
+			dTable->Charge();
+			break;
+		}
+
 		if (actors[i]->ActorHasTag("AssemblingTable"))
 		{
 			AAssemblingTable* aTable = Cast<AAssemblingTable>(actors[i]);
