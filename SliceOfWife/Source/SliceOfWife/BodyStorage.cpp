@@ -24,7 +24,7 @@ void ABodyStorage::Tick(float DeltaTime)
 
 }
 
-AActor* ABodyStorage::TakeBodyFrom()
+AActor* ABodyStorage::TakeBody()
 {
 	// if there is no body in the storage
 	if (Bodies.Num() < 1)

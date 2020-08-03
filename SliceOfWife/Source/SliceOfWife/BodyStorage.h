@@ -28,5 +28,5 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	AActor* TakeBodyFrom();
+	AActor* TakeBody();
 };
