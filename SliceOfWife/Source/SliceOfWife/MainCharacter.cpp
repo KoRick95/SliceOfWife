@@ -76,11 +76,14 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void AMainCharacter::HoldObject(AActor* objectToHold)
 {
-	// attach the object to the player
-	objectToHold->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
-	objectToHold->SetActorRelativeLocation(FVector(0) + PickupOffset);
-	objectToHold->SetActorEnableCollision(false);
-	heldObject = objectToHold;
+	if (objectToHold != nullptr)
+	{
+		// attach the object to the player
+		objectToHold->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
+		objectToHold->SetActorRelativeLocation(FVector(0) + PickupOffset);
+		objectToHold->SetActorEnableCollision(false);
+		heldObject = objectToHold;
+	}
 }
 
 void AMainCharacter::MoveForward(float Axis)
