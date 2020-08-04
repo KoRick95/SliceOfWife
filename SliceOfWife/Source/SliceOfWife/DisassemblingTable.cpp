@@ -42,6 +42,9 @@ bool ADisassemblingTable::DropToTable(AActor* body)
 
 void ADisassemblingTable::Charge()
 {
+	if (bodyOnTable != nullptr)
+		return;
+
 	if (charge < MaxCharge)
 	{
 		charge++;
