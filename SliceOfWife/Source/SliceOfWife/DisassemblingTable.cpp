@@ -45,11 +45,9 @@ void ADisassemblingTable::Charge()
 	if (bodyOnTable != nullptr)
 		return;
 
-	if (charge < MaxCharge)
-	{
-		charge++;
-	}
-	else
+	charge++;
+
+	if (charge >= MaxCharge)
 	{
 		// cut the limbs
 	}
