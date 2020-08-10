@@ -78,10 +78,30 @@ void AMainCharacter::HoldObject(AActor* objectToHold)
 {
 	if (objectToHold != nullptr)
 	{
-		// attach the object to the player
+		// get the object's skeletal mesh component
+		USkeletalMeshComponent* skMeshComponent = (USkeletalMeshComponent*)objectToHold->GetComponentByClass(USkeletalMeshComponent::StaticClass());
+
+		if (skMeshComponent == nullptr)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("SK Mesh not found.")));
+			return;
+		}
+
+		// calculate the mesh offset
+		FBoxSphereBounds meshBounds = skMeshComponent->SkeletalMesh->GetBounds();
+		FVector meshCentre = meshBounds.Origin;
+		float meshHalfHeight = meshBounds.SphereRadius;
+		FVector meshOffset = FVector(0, 0, meshHalfHeight) - meshCentre;
+
+		// attach the object to the playera
 		objectToHold->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
+		//skMeshComponent->SetSimulatePhysics(false);
+
+		// add the offset to the object
 		objectToHold->SetActorRelativeLocation(FVector(0) + PickupOffset);
-		objectToHold->SetActorEnableCollision(false);
+		objectToHold->AddActorLocalOffset(meshOffset);
+
+		//objectToHold->SetActorEnableCollision(false);
 		heldObject = objectToHold;
 	}
 }
@@ -196,7 +216,9 @@ void AMainCharacter::PickUp()
 			}
 		}
 		
-		heldObject->SetActorEnableCollision(true);
+		/*UMeshComponent* meshComponent = (UMeshComponent*)heldObject->GetComponentByClass(UMeshComponent::StaticClass());
+		meshComponent->SetSimulatePhysics(true);*/
+		//heldObject->SetActorEnableCollision(true);
 		heldObject = nullptr;
 	}
 }
