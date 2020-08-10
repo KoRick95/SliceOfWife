@@ -15,6 +15,8 @@ public:
 	// Sets default values for this character's properties
 	AMainCharacter();
 	
+	enum 
+
 	AActor* heldObject = nullptr;
 
 	UPROPERTY(EditAnywhere, Category = "Camera")
@@ -47,6 +49,7 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	void HoldObject(AActor* objectToHold);
+	void HoldBody(ACharacter* body);
 
 	void MoveForward(float Axis);
 	void MoveRight(float Axis);

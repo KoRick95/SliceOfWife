@@ -46,12 +46,38 @@ void ADisassemblingTable::Charge()
 		return;
 
 	charge++;
-
+	// get all of the body's components
+	TArray<AActor*> bodyParts;
+	bodyParts = bodyOnTable->Children;
 	if (charge >= MaxCharge)
 	{
-		// cut the limbs
+		// get all of the table's components
+		TArray<UActorComponent*> tableComponents;
+		tableComponents = this->GetComponentsByClass(USceneComponent::StaticClass());
+
+		
+
+		// check each table component
+		for (int tc = 0; tc < tableComponents.Num(); ++tc)
+		{
+			// check each body component
+			for (int bp = 0; bp < bodyParts.Num(); ++bp)
+			{
+				// check each table component's tags
+				for (int tt = 0; tt < tableComponents[tc]->ComponentTags.Num(); ++tt)
+				{
+					// check each body component's tags
+					for (int bt = 0; bt < bodyParts[bp]->Tags.Num(); ++bt)
+					{
+
+					}
+				}
+			}
+			
+		}
 	}
 	
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("BodyParts = %i"), bodyParts.Num()));
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Emerald, FString::Printf(TEXT("Charge: %i"), charge));
 }
 

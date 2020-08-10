@@ -6,6 +6,7 @@
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
 #include "Components/SphereComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -81,9 +82,9 @@ void AMainCharacter::HoldObject(AActor* objectToHold)
 		// get the object's skeletal mesh component
 		USkeletalMeshComponent* skMeshComponent = (USkeletalMeshComponent*)objectToHold->GetComponentByClass(USkeletalMeshComponent::StaticClass());
 
-		if (skMeshComponent == nullptr)
+		// if the object has skeletal mesh
+		if (skMeshComponent != nullptr && skMeshComponent->SkeletalMesh != nullptr)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("SK Mesh not found.")));
 			return;
 		}
 
@@ -93,9 +94,9 @@ void AMainCharacter::HoldObject(AActor* objectToHold)
 		float meshHalfHeight = meshBounds.SphereRadius;
 		FVector meshOffset = FVector(0, 0, meshHalfHeight) - meshCentre;
 
-		// attach the object to the playera
+		// attach the object to the player
 		objectToHold->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
-		//skMeshComponent->SetSimulatePhysics(false);
+		skMeshComponent->SetSimulatePhysics(false);
 
 		// add the offset to the object
 		objectToHold->SetActorRelativeLocation(FVector(0) + PickupOffset);
@@ -104,6 +105,23 @@ void AMainCharacter::HoldObject(AActor* objectToHold)
 		//objectToHold->SetActorEnableCollision(false);
 		heldObject = objectToHold;
 	}
+}
+
+void AMainCharacter::HoldBody(ACharacter* body)
+{
+	if (body == nullptr)
+		return;
+
+	float bodyHalfHeight = body->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
+
+	// attach the object to the player
+	body->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+	body->GetCapsuleComponent()->SetSimulatePhysics(false);
+
+	// add offset to the object
+	body->SetActorRelativeLocation(FVector(0, 0, bodyHalfHeight) + PickupOffset);
+
+	heldObject = body;
 }
 
 void AMainCharacter::MoveForward(float Axis)
@@ -166,7 +184,7 @@ void AMainCharacter::PickUp()
 			if (nearbyObjects[i]->ActorHasTag("BodyStorage"))
 			{
 				ABodyStorage* bodyStorage = Cast<ABodyStorage>(nearbyObjects[i]);
-				HoldObject(bodyStorage->TakeBody());
+				HoldBody(bodyStorage->TakeBody());
 				break;
 			}
 
