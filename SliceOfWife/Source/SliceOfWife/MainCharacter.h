@@ -14,8 +14,6 @@ class SLICEOFWIFE_API AMainCharacter : public ACharacter
 public:
 	// Sets default values for this character's properties
 	AMainCharacter();
-	
-	enum 
 
 	AActor* heldObject = nullptr;
 

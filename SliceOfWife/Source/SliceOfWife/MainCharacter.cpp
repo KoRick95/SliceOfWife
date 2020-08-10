@@ -83,8 +83,9 @@ void AMainCharacter::HoldObject(AActor* objectToHold)
 		USkeletalMeshComponent* skMeshComponent = (USkeletalMeshComponent*)objectToHold->GetComponentByClass(USkeletalMeshComponent::StaticClass());
 
 		// if the object has skeletal mesh
-		if (skMeshComponent != nullptr && skMeshComponent->SkeletalMesh != nullptr)
+		if (skMeshComponent == nullptr || skMeshComponent->SkeletalMesh == nullptr)
 		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Skeletal mesh not found.")));
 			return;
 		}
 
@@ -184,7 +185,7 @@ void AMainCharacter::PickUp()
 			if (nearbyObjects[i]->ActorHasTag("BodyStorage"))
 			{
 				ABodyStorage* bodyStorage = Cast<ABodyStorage>(nearbyObjects[i]);
-				HoldBody(bodyStorage->TakeBody());
+				HoldBody((ACharacter*)bodyStorage->TakeBody());
 				break;
 			}
 
