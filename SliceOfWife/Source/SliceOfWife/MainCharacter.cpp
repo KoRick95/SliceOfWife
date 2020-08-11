@@ -77,7 +77,25 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void AMainCharacter::HoldObject(AActor* objectToHold)
 {
-	if (objectToHold != nullptr)
+	if (objectToHold == nullptr)
+	{
+		return;
+	}
+
+	if (objectToHold->IsA(ACharacter::StaticClass()))
+	{
+		ACharacter* character = Cast<ACharacter>(objectToHold);
+
+		float bodyHalfHeight = character->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
+
+		// attach the object to the player
+		character->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		character->GetCapsuleComponent()->SetSimulatePhysics(false);
+
+		// add offset to the object
+		character->SetActorRelativeLocation(FVector(0, 0, bodyHalfHeight) + PickupOffset);
+	}
+	else
 	{
 		// get the object's skeletal mesh component
 		USkeletalMeshComponent* skMeshComponent = (USkeletalMeshComponent*)objectToHold->GetComponentByClass(USkeletalMeshComponent::StaticClass());
@@ -96,33 +114,15 @@ void AMainCharacter::HoldObject(AActor* objectToHold)
 		FVector meshOffset = FVector(0, 0, meshHalfHeight) - meshCentre;
 
 		// attach the object to the player
-		objectToHold->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
+		objectToHold->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 		skMeshComponent->SetSimulatePhysics(false);
 
 		// add the offset to the object
 		objectToHold->SetActorRelativeLocation(FVector(0) + PickupOffset);
 		objectToHold->AddActorLocalOffset(meshOffset);
-
-		//objectToHold->SetActorEnableCollision(false);
-		heldObject = objectToHold;
 	}
-}
 
-void AMainCharacter::HoldBody(ACharacter* body)
-{
-	if (body == nullptr)
-		return;
-
-	float bodyHalfHeight = body->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
-
-	// attach the object to the player
-	body->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-	body->GetCapsuleComponent()->SetSimulatePhysics(false);
-
-	// add offset to the object
-	body->SetActorRelativeLocation(FVector(0, 0, bodyHalfHeight) + PickupOffset);
-
-	heldObject = body;
+	heldObject = objectToHold;
 }
 
 void AMainCharacter::MoveForward(float Axis)
@@ -185,7 +185,7 @@ void AMainCharacter::PickUp()
 			if (nearbyObjects[i]->ActorHasTag("BodyStorage"))
 			{
 				ABodyStorage* bodyStorage = Cast<ABodyStorage>(nearbyObjects[i]);
-				HoldBody((ACharacter*)bodyStorage->TakeBody());
+				HoldObject(bodyStorage->TakeBody());
 				break;
 			}
 

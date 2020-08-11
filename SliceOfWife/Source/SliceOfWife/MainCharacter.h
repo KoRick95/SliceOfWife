@@ -47,7 +47,6 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	void HoldObject(AActor* objectToHold);
-	void HoldBody(ACharacter* body);
 
 	void MoveForward(float Axis);
 	void MoveRight(float Axis);
