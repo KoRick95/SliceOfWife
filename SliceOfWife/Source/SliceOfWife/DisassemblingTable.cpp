@@ -55,8 +55,6 @@ void ADisassemblingTable::Charge()
 		TArray<UActorComponent*> tableComponents;
 		tableComponents = this->GetComponentsByClass(USceneComponent::StaticClass());
 
-		
-
 		// check each table component
 		for (int tc = 0; tc < tableComponents.Num(); ++tc)
 		{
@@ -66,14 +64,14 @@ void ADisassemblingTable::Charge()
 				// check each table component's tags
 				for (int tt = 0; tt < tableComponents[tc]->ComponentTags.Num(); ++tt)
 				{
-					// check each body component's tags
-					for (int bt = 0; bt < bodyParts[bp]->Tags.Num(); ++bt)
+					// if the body part has a matching tag with the table component
+					if (bodyParts[bp]->ActorHasTag(tableComponents[tc]->ComponentTags[tt]))
 					{
-
+						// snap the body part to the table component
+						bodyParts[bp]->AttachToComponent(Cast<USceneComponent>(tableComponents[tc]), FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 					}
 				}
 			}
-			
 		}
 	}
 	
