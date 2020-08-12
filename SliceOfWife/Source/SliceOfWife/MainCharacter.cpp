@@ -192,6 +192,7 @@ void AMainCharacter::PickUp()
 			// if an object has the pickup tag
 			if (nearbyObjects[i]->ActorHasTag("Pickup"))
 			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Detected pickup.")));
 				// if the object is attached to a parent object
 				if (nearbyObjects[i]->GetAttachParentActor() != nullptr)
 				{

@@ -1,4 +1,6 @@
 #include "DisassemblingTable.h"
+#include "Components/PrimitiveComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "Engine.h"
 
 // Sets default values
@@ -26,7 +28,7 @@ void ADisassemblingTable::Tick(float DeltaTime)
 
 bool ADisassemblingTable::DropToTable(AActor* body)
 {
-	if (body->ActorHasTag(TagToCheck))
+	if (body->ActorHasTag(TagToCheck) && bodyOnTable == nullptr)
 	{
 		// snap the body to the table
 		body->SetActorRotation(SnapRotation, ETeleportType::ResetPhysics);
@@ -70,12 +72,28 @@ void ADisassemblingTable::Charge()
 					// if the body part has a matching tag with the table component
 					if (bodyParts[bp]->ActorHasTag(tableComponents[tc]->ComponentTags[tt]))
 					{
+						// detach the body part from the body
+						bodyParts[bp]->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+
 						// snap the body part to the table component
 						bodyParts[bp]->AttachToComponent(Cast<USceneComponent>(tableComponents[tc]), FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+
+						// if the body part has a skeletal mesh, enable its physics
+						UActorComponent* getSkMeshComp = bodyParts[bp]->GetComponentByClass(USkeletalMeshComponent::StaticClass());
+						if (getSkMeshComp != nullptr)
+						{
+							//Cast<USkeletalMeshComponent>(getSkMeshComp)->SetSimulatePhysics(true);
+						}
 					}
 				}
 			}
 		}
+
+		// destroy the base body
+		//bodyOnTable->Destroy();
+
+		// reset the charge
+		charge = 0;
 	}
 	
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Emerald, FString::Printf(TEXT("Charge: %i"), charge));
