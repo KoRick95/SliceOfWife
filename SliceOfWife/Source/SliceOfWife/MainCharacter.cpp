@@ -115,6 +115,7 @@ void AMainCharacter::HoldObject(AActor* objectToHold)
 		FVector meshCentre = meshBounds.Origin;
 		float meshHalfHeight = meshBounds.SphereRadius;
 		FVector meshOffset = FVector(0, 0, meshHalfHeight) - meshCentre;
+
 		// disable physics on the object
 		skMeshComponent->SetSimulatePhysics(false);
 
