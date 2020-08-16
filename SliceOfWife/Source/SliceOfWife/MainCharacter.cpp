@@ -4,6 +4,7 @@
 #include "BodyStorage.h"
 #include "DisassemblingTable.h"
 #include "Camera/CameraComponent.h"
+#include "Components/SceneComponent.h"
 #include "Components/InputComponent.h"
 #include "Components/SphereComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -88,12 +89,14 @@ void AMainCharacter::HoldObject(AActor* objectToHold)
 
 		float bodyHalfHeight = character->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
 
-		// attach the object to the player
-		character->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		// disable physics on the object
 		character->GetCapsuleComponent()->SetSimulatePhysics(false);
 
+		// attach the object to the player
+		character->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		
 		// add offset to the object
-		character->SetActorRelativeLocation(FVector(0, 0, bodyHalfHeight) + PickupOffset);
+		character->SetActorRelativeLocation(FVector(0, 0, bodyHalfHeight) + PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
 	}
 	else
 	{
@@ -113,15 +116,19 @@ void AMainCharacter::HoldObject(AActor* objectToHold)
 		float meshHalfHeight = meshBounds.SphereRadius;
 		FVector meshOffset = FVector(0, 0, meshHalfHeight) - meshCentre;
 
-		// attach the object to the player
-		objectToHold->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		// disable physics on the object
 		skMeshComponent->SetSimulatePhysics(false);
 
+		// attach the object to the player
+		objectToHold->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		
 		// add the offset to the object
-		objectToHold->SetActorRelativeLocation(FVector(0) + PickupOffset);
-		objectToHold->AddActorLocalOffset(meshOffset);
+		objectToHold->SetActorRelativeLocation(FVector(0) + PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
+		objectToHold->AddActorLocalOffset(meshOffset, false, nullptr, ETeleportType::ResetPhysics);
 	}
-
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, FString::Printf(TEXT("Disabling physics.")));
+	USceneComponent* rootComponent = objectToHold->GetRootComponent();
+	rootComponent->RecreatePhysicsState();
 	heldObject = objectToHold;
 }
 
@@ -202,6 +209,10 @@ void AMainCharacter::PickUp()
 						AAssemblingTable* aTable = Cast<AAssemblingTable>(nearbyObjects[i]->GetAttachParentActor());
 						aTable->RemoveFromTable(nearbyObjects[i]);
 					}
+					else
+					{
+						nearbyObjects[i] = nearbyObjects[i]->GetAttachParentActor();
+					}
 				}
 
 				// get player to hold the object
@@ -212,6 +223,8 @@ void AMainCharacter::PickUp()
 	}
 	else
 	{
+		bool isSnapped = false;
+
 		// detach the held object from the player
 		heldObject->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
@@ -223,21 +236,29 @@ void AMainCharacter::PickUp()
 			{
 				// call the table's object snapping function
 				AAssemblingTable* aTable = Cast<AAssemblingTable>(nearbyObjects[i]);
-				aTable->DropToTable(heldObject);
+				isSnapped = aTable->DropToTable(heldObject);
 				break;
 			}
-
-			if (nearbyObjects[i]->ActorHasTag("DisassemblingTable"))
+			else if (nearbyObjects[i]->ActorHasTag("DisassemblingTable"))
 			{
+				// call the table's object snapping function
 				ADisassemblingTable* dTable = Cast<ADisassemblingTable>(nearbyObjects[i]);
-				dTable->DropToTable(heldObject);
+				isSnapped = dTable->DropToTable(heldObject);
 				break;
 			}
 		}
-		
-		/*UMeshComponent* meshComponent = (UMeshComponent*)heldObject->GetComponentByClass(UMeshComponent::StaticClass());
-		meshComponent->SetSimulatePhysics(true);*/
-		//heldObject->SetActorEnableCollision(true);
+
+		if (!isSnapped)
+		{
+			// enable physics
+			TArray<UActorComponent*> components = heldObject->GetComponentsByClass(UPrimitiveComponent::StaticClass());
+			for (int i = 0; i < components.Num(); ++i)
+			{
+				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Enabling physics.")));
+				Cast<UPrimitiveComponent>(components[i])->SetSimulatePhysics(true);
+			}
+		}
+
 		heldObject = nullptr;
 	}
 }

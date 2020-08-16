@@ -1,4 +1,7 @@
 #include "DisassemblingTable.h"
+#include "BodyPart.h"
+#include "Components/PrimitiveComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "Engine.h"
 
 // Sets default values
@@ -14,19 +17,17 @@ ADisassemblingTable::ADisassemblingTable()
 void ADisassemblingTable::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
 void ADisassemblingTable::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 bool ADisassemblingTable::DropToTable(AActor* body)
 {
-	if (body->ActorHasTag(TagToCheck))
+	if (body->ActorHasTag(TagToCheck) && bodyOnTable == nullptr)
 	{
 		// snap the body to the table
 		body->SetActorRotation(SnapRotation, ETeleportType::ResetPhysics);
@@ -42,20 +43,21 @@ bool ADisassemblingTable::DropToTable(AActor* body)
 
 void ADisassemblingTable::Charge()
 {
-	if (bodyOnTable != nullptr)
+	if (bodyOnTable == nullptr)
 		return;
 
 	charge++;
 	// get all of the body's components
-	TArray<AActor*> bodyParts;
-	bodyParts = bodyOnTable->Children;
+	
 	if (charge >= MaxCharge)
 	{
+		TArray<AActor*> bodyParts;
+		bodyOnTable->GetAllChildActors(bodyParts, false);
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("BodyParts = %i"), bodyParts.Num()));
+
 		// get all of the table's components
 		TArray<UActorComponent*> tableComponents;
 		tableComponents = this->GetComponentsByClass(USceneComponent::StaticClass());
-
-		
 
 		// check each table component
 		for (int tc = 0; tc < tableComponents.Num(); ++tc)
@@ -66,18 +68,40 @@ void ADisassemblingTable::Charge()
 				// check each table component's tags
 				for (int tt = 0; tt < tableComponents[tc]->ComponentTags.Num(); ++tt)
 				{
-					// check each body component's tags
-					for (int bt = 0; bt < bodyParts[bp]->Tags.Num(); ++bt)
+					// if the body part has a matching tag with the table component
+					if (bodyParts[bp]->ActorHasTag(tableComponents[tc]->ComponentTags[tt]))
 					{
+						// detach the body part from the body
+						//bodyParts[bp]->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
+						UClass* uClass = bodyParts[bp]->GetClass();
+						FTransform transform = bodyParts[bp]->GetActorTransform();
+						FActorSpawnParameters spawnParams;
+						AActor* bodyPart = GetWorld()->SpawnActor(uClass, &transform, spawnParams);
+
+						// snap the body part to the table component
+						//bodyPart->AttachToComponent(Cast<USceneComponent>(tableComponents[tc]), FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+						bodyPart->SetActorLocation(Cast<USceneComponent>(tableComponents[tc])->GetComponentLocation());
+
+						// if the body part has a skeletal mesh, enable its physics
+						UActorComponent* getSkMeshComp = bodyPart->GetComponentByClass(USkeletalMeshComponent::StaticClass());
+						if (getSkMeshComp != nullptr)
+						{
+							//Cast<USkeletalMeshComponent>(getSkMeshComp)->SetSimulatePhysics(true);
+						}
 					}
 				}
 			}
-			
 		}
+
+		// destroy the base body
+		bodyOnTable->Destroy();
+		bodyOnTable = nullptr;
+
+		// reset the charge
+		charge = 0;
 	}
 	
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("BodyParts = %i"), bodyParts.Num()));
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Emerald, FString::Printf(TEXT("Charge: %i"), charge));
 }
 

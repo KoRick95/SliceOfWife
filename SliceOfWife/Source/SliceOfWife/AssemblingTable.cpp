@@ -14,14 +14,12 @@ AAssemblingTable::AAssemblingTable()
 void AAssemblingTable::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
 void AAssemblingTable::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 bool AAssemblingTable::DropToTable(AActor* objectToDrop)
