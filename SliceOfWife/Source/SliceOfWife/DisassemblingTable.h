@@ -38,6 +38,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	bool RemoveFromTable();
 	bool DropToTable(AActor* body);
 
 	void Charge();

@@ -15,6 +15,12 @@ public:
 	// Sets default values for this character's properties
 	AFullCharacter();
 
+	UPROPERTY(EditAnywhere)
+	bool AutoSpawnBodyParts = false;
+
+	UPROPERTY(EditAnywhere)
+	TArray<TSubclassOf<class ABodyPart>> BodyParts;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

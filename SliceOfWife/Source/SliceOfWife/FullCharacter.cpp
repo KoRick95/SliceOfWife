@@ -2,12 +2,14 @@
 
 
 #include "FullCharacter.h"
+#include "BodyPart.h"
+#include "Engine/World.h"
 
 // Sets default values
 AFullCharacter::AFullCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	Tags.Add("Pickup");
 	Tags.Add("FullCharacter");
@@ -17,6 +19,18 @@ AFullCharacter::AFullCharacter()
 void AFullCharacter::BeginPlay()
 {
 	Super::BeginPlay();	
+
+	if (AutoSpawnBodyParts)
+	{
+		for (int i = 0; i < BodyParts.Num(); ++i)
+		{
+			UClass* uClass = BodyParts[i].Get();
+			FTransform transform = this->GetActorTransform();
+			FActorSpawnParameters spawnParams;
+
+			GetWorld()->SpawnActor(uClass, &transform, spawnParams);
+		}
+	}
 }
 
 // Called every frame

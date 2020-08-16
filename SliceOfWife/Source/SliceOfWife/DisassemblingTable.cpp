@@ -1,4 +1,5 @@
 #include "DisassemblingTable.h"
+#include "BodyPart.h"
 #include "Components/PrimitiveComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Engine.h"
@@ -16,14 +17,12 @@ ADisassemblingTable::ADisassemblingTable()
 void ADisassemblingTable::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
 void ADisassemblingTable::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 bool ADisassemblingTable::DropToTable(AActor* body)
@@ -73,13 +72,19 @@ void ADisassemblingTable::Charge()
 					if (bodyParts[bp]->ActorHasTag(tableComponents[tc]->ComponentTags[tt]))
 					{
 						// detach the body part from the body
-						bodyParts[bp]->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+						//bodyParts[bp]->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+
+						UClass* uClass = bodyParts[bp]->GetClass();
+						FTransform transform = bodyParts[bp]->GetActorTransform();
+						FActorSpawnParameters spawnParams;
+						AActor* bodyPart = GetWorld()->SpawnActor(uClass, &transform, spawnParams);
 
 						// snap the body part to the table component
-						bodyParts[bp]->AttachToComponent(Cast<USceneComponent>(tableComponents[tc]), FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+						//bodyPart->AttachToComponent(Cast<USceneComponent>(tableComponents[tc]), FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+						bodyPart->SetActorLocation(Cast<USceneComponent>(tableComponents[tc])->GetComponentLocation());
 
 						// if the body part has a skeletal mesh, enable its physics
-						UActorComponent* getSkMeshComp = bodyParts[bp]->GetComponentByClass(USkeletalMeshComponent::StaticClass());
+						UActorComponent* getSkMeshComp = bodyPart->GetComponentByClass(USkeletalMeshComponent::StaticClass());
 						if (getSkMeshComp != nullptr)
 						{
 							//Cast<USkeletalMeshComponent>(getSkMeshComp)->SetSimulatePhysics(true);
@@ -90,7 +95,8 @@ void ADisassemblingTable::Charge()
 		}
 
 		// destroy the base body
-		//bodyOnTable->Destroy();
+		bodyOnTable->Destroy();
+		bodyOnTable = nullptr;
 
 		// reset the charge
 		charge = 0;
