@@ -4,37 +4,25 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Soul.generated.h"
+#include "SoulSpawner.generated.h"
 
 UCLASS()
-class SLICEOFWIFE_API ASoul : public AActor
+class SLICEOFWIFE_API ASoulSpawner : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ASoul();
+	ASoulSpawner();
 
-	AActor* hauntedObject;
+	class ASoul* soul = nullptr;
+	AActor* hauntedObject = nullptr;
 
-	FVector direction;
 
 	float spawnTimer = 0;
 
 	UPROPERTY(EditAnywhere)
-	float MoveSpeed = 100;
-
-	UPROPERTY(EditAnywhere)
-	float MapEdgeX = 1000;
-
-	UPROPERTY(EditAnywhere)
-	float MapEdgeY = 1000;
-
-	UPROPERTY(EditAnywhere)
-	bool CanRespawn = true;
-
-	UPROPERTY(EditAnywhere)
-	float RespawnTime = 20;
+	TSubclassOf<ASoul> SoulBP = nullptr;
 
 protected:
 	// Called when the game starts or when spawned
@@ -44,9 +32,5 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void HoldObject();
-	void ReleaseObject();
-
-	void Appear();
-	void Disappear();
+	void SpawnSoul();
 };

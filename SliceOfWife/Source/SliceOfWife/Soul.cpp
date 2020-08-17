@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Soul.h"
+#include "Components/PrimitiveComponent.h"
 #include "Engine/World.h"
 #include "Math/UnrealMathUtility.h"
 
@@ -24,22 +25,65 @@ void ASoul::BeginPlay()
 // Called every frame
 void ASoul::Tick(float DeltaTime)
 {
-	FVector position = this->GetActorLocation();
-
 	Super::Tick(DeltaTime);
 
 	// move towards a certain direction
-	this->AddActorWorldOffset(direction * moveSpeed * GetWorld()->GetDeltaSeconds());
+	this->AddActorWorldOffset(direction * MoveSpeed * GetWorld()->GetDeltaSeconds());
+
+	FVector position = this->GetActorLocation();
 
 	// if the soul has crossed the edge of the map
-	if (position.X < -mapEdgeX || position.X > mapEdgeX || position.Y < -mapEdgeY || position.Y > mapEdgeY)
+	if (position.X < -MapEdgeX || position.X > MapEdgeX || position.Y < -MapEdgeY || position.Y > MapEdgeY)
 	{
 		this->Destroy();
 	}
 }
 
-void ASoul::HoldObject(AActor* object)
+void ASoul::HoldObject()
 {
-	object->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-	object->SetActorRelativeLocation(FVector(0));
+	// disable physics
+	TArray<UActorComponent*> primitiveComponents = hauntedObject->GetComponentsByClass(UPrimitiveComponent::StaticClass());
+	for (int i = 0; i < primitiveComponents.Num(); ++i)
+	{
+		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(false);
+	}
+
+	// attach the object to the soul
+	hauntedObject->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+	hauntedObject->SetActorRelativeLocation(FVector(0));
+}
+
+void ASoul::ReleaseObject()
+{
+
+}
+
+void ASoul::Appear()
+{
+	// turn on visibility
+	SetActorHiddenInGame(false);
+
+	// enable collision
+	SetActorEnableCollision(true);
+
+	// attach object
+	HoldObject();
+}
+
+void ASoul::Disappear()
+{
+	// turn off visibility
+	SetActorHiddenInGame(true);
+
+	// disable collision
+	SetActorEnableCollision(false);
+
+	// detach object
+	ReleaseObject();
+
+	if (CanRespawn)
+	{
+		// reset timer
+		spawnTimer = RespawnTime;
+	}
 }

@@ -1,5 +1,6 @@
 #include "DisassemblingTable.h"
 #include "BodyPart.h"
+#include "Soul.h"
 #include "Components/PrimitiveComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Engine.h"
@@ -23,6 +24,20 @@ void ADisassemblingTable::BeginPlay()
 void ADisassemblingTable::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	for (int i = 0; i < soulSpawnTimers.Num(); ++i)
+	{
+		soulSpawnTimers[i] -= GetWorld()->GetDeltaSeconds();
+
+		if (soulSpawnTimers[i] < 0)
+		{
+			UClass* uClass = SoulBP.Get();
+			FTransform transform;
+			FActorSpawnParameters spawnParams;
+
+			GetWorld()->SpawnActor(uClass, &transform, spawnParams);
+		}
+	}
 }
 
 bool ADisassemblingTable::DropToTable(AActor* body)
@@ -46,11 +61,11 @@ void ADisassemblingTable::Charge()
 	if (bodyOnTable == nullptr)
 		return;
 
-	charge++;
-	// get all of the body's components
+	charge += ChargeRate;
 	
 	if (charge >= MaxCharge)
 	{
+		// get all of the body's components
 		TArray<AActor*> bodyParts;
 		bodyOnTable->GetAllChildActors(bodyParts, false);
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("BodyParts = %i"), bodyParts.Num()));
@@ -72,22 +87,22 @@ void ADisassemblingTable::Charge()
 					if (bodyParts[bp]->ActorHasTag(tableComponents[tc]->ComponentTags[tt]))
 					{
 						// detach the body part from the body
-						//bodyParts[bp]->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-
 						UClass* uClass = bodyParts[bp]->GetClass();
 						FTransform transform = bodyParts[bp]->GetActorTransform();
 						FActorSpawnParameters spawnParams;
 						AActor* bodyPart = GetWorld()->SpawnActor(uClass, &transform, spawnParams);
 
+						// store a reference to the body part
+						bodyParts.Add(bodyPart);
+
 						// snap the body part to the table component
-						//bodyPart->AttachToComponent(Cast<USceneComponent>(tableComponents[tc]), FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 						bodyPart->SetActorLocation(Cast<USceneComponent>(tableComponents[tc])->GetComponentLocation());
 
-						// if the body part has a skeletal mesh, enable its physics
-						UActorComponent* getSkMeshComp = bodyPart->GetComponentByClass(USkeletalMeshComponent::StaticClass());
-						if (getSkMeshComp != nullptr)
+						// if the body part has a primitive component, enable its physics
+						UActorComponent* getPrimComp = bodyPart->GetComponentByClass(UPrimitiveComponent::StaticClass());
+						if (getPrimComp != nullptr)
 						{
-							//Cast<USkeletalMeshComponent>(getSkMeshComp)->SetSimulatePhysics(true);
+							Cast<UPrimitiveComponent>(getPrimComp)->SetSimulatePhysics(true);
 						}
 					}
 				}
