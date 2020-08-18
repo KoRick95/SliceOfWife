@@ -42,6 +42,19 @@ bool ADisassemblingTable::DropToTable(AActor* body)
 	return false;
 }
 
+bool ADisassemblingTable::RemoveFromTable()
+{
+	if (bodyOnTable != nullptr)
+	{
+		// detach the object from the table
+		bodyOnTable->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+
+		return true;
+	}
+	
+	return false;
+}
+
 void ADisassemblingTable::Charge()
 {
 	if (bodyOnTable == nullptr)

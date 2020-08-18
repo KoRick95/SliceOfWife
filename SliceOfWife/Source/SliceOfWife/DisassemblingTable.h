@@ -46,6 +46,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	bool DropToTable(AActor* body);
+	bool RemoveFromTable();
 
 	void Charge();
 };

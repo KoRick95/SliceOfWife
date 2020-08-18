@@ -206,8 +206,12 @@ void AMainCharacter::PickUp()
 					if (nearbyObjects[i]->GetAttachParentActor()->ActorHasTag("AssemblingTable"))
 					{
 						// remove it from the table
-						AAssemblingTable* aTable = Cast<AAssemblingTable>(nearbyObjects[i]->GetAttachParentActor());
-						aTable->RemoveFromTable(nearbyObjects[i]);
+						Cast<AAssemblingTable>(nearbyObjects[i]->GetAttachParentActor())->RemoveFromTable(nearbyObjects[i]);
+					}
+					else if (nearbyObjects[i]->GetAttachParentActor()->ActorHasTag("DiassemblingTable"))
+					{
+						// remove it from the table
+						Cast<ADisassemblingTable>(nearbyObjects[i]->GetAttachParentActor())->RemoveFromTable();
 					}
 					else
 					{
