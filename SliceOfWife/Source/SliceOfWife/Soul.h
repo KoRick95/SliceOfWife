@@ -14,19 +14,45 @@ class SLICEOFWIFE_API ASoul : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ASoul();
+	ASoul(AActor* object);
 
-	AActor* heldObject;
+	AActor* hauntedObject;
 
 	FVector direction;
 
-	UPROPERTY(EditAnywhere)
-	float moveSpeed = 100;
+	float spawnTimer = 0;
+
+	bool hasSpawned = false;
 
 	UPROPERTY(EditAnywhere)
-	float mapEdgeX = 1000;
+	float FloatHeight = 200;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
+	float MoveSpeed = 100;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
+	float MapEdgeX = 1000;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
+	float MapEdgeY = 1000;
 
 	UPROPERTY(EditAnywhere)
-	float mapEdgeY = 1000;
+	bool DelaySpawn = true;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0", EditCondition = "DelaySpawn"))
+	float SpawnDelayMin = 1;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0", EditCondition = "DelaySpawn"))
+	float SpawnDelayMax = 3;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0", ClampMax = "1", UIMin = "0", UIMax = "1"))
+	float SpawnChance = 0.5f;
+
+	UPROPERTY(EditAnywhere)
+	bool CanRespawn = true;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "1", EditCondition = "CanRespawn"))
+	float RespawnTime = 20;
 
 protected:
 	// Called when the game starts or when spawned
@@ -36,5 +62,11 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void HoldObject(AActor* object);
+	FVector GetRandomDirection();
+
+	void HoldObject();
+	void ReleaseObject();
+
+	void Spawn();
+	void Despawn();
 };

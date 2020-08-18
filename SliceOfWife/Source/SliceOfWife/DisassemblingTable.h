@@ -16,10 +16,11 @@ public:
 	ADisassemblingTable();
 
 	AActor* bodyOnTable = nullptr;
-	int charge = 0;
+
+	float charge = 0;
 
 	UPROPERTY(EditAnywhere, Category = "Snapping")
-	FName TagToCheck = "Deconstructable";
+	FName TagToCheck = "FullCharacter";
 
 	UPROPERTY(EditAnywhere, Category = "Snapping")
 	FVector SnapPosition = { 0, 0, 150 };
@@ -27,8 +28,14 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Snapping")
 	FRotator SnapRotation = { -90, 0, 0 };
 
-	UPROPERTY(EditAnywhere, Category = "Requirements")
-	int MaxCharge = 5;
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
+	float ChargeRate = 1;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
+	float MaxCharge = 5;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class ASoul> SoulBP;
 
 protected:
 	// Called when the game starts or when spawned
@@ -38,8 +45,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	bool RemoveFromTable();
 	bool DropToTable(AActor* body);
+	AActor* RemoveFromTable();
 
 	void Charge();
 };

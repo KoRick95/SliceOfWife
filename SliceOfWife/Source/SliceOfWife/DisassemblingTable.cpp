@@ -1,5 +1,6 @@
 #include "DisassemblingTable.h"
 #include "BodyPart.h"
+#include "Soul.h"
 #include "Components/PrimitiveComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Engine.h"
@@ -30,9 +31,9 @@ bool ADisassemblingTable::DropToTable(AActor* body)
 	if (body->ActorHasTag(TagToCheck) && bodyOnTable == nullptr)
 	{
 		// snap the body to the table
-		body->SetActorRotation(SnapRotation, ETeleportType::ResetPhysics);
 		body->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 		body->SetActorLocation(this->GetActorLocation() + SnapPosition);
+		body->SetActorRotation(SnapRotation, ETeleportType::ResetPhysics);
 
 		this->bodyOnTable = body;
 		return true;
@@ -41,16 +42,32 @@ bool ADisassemblingTable::DropToTable(AActor* body)
 	return false;
 }
 
+AActor* ADisassemblingTable::RemoveFromTable()
+{
+	AActor* removedBody = nullptr;
+
+	if (bodyOnTable != nullptr)
+	{
+		// detach the object from the table
+		bodyOnTable->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		removedBody = bodyOnTable;
+		bodyOnTable = nullptr;
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Removed.")));
+	}
+	
+	return removedBody;
+}
+
 void ADisassemblingTable::Charge()
 {
 	if (bodyOnTable == nullptr)
 		return;
 
-	charge++;
-	// get all of the body's components
+	charge += ChargeRate;
 	
 	if (charge >= MaxCharge)
 	{
+		// get all of the body's components
 		TArray<AActor*> bodyParts;
 		bodyOnTable->GetAllChildActors(bodyParts, false);
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("BodyParts = %i"), bodyParts.Num()));
@@ -72,22 +89,26 @@ void ADisassemblingTable::Charge()
 					if (bodyParts[bp]->ActorHasTag(tableComponents[tc]->ComponentTags[tt]))
 					{
 						// detach the body part from the body
-						//bodyParts[bp]->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-
 						UClass* uClass = bodyParts[bp]->GetClass();
 						FTransform transform = bodyParts[bp]->GetActorTransform();
 						FActorSpawnParameters spawnParams;
 						AActor* bodyPart = GetWorld()->SpawnActor(uClass, &transform, spawnParams);
 
 						// snap the body part to the table component
-						//bodyPart->AttachToComponent(Cast<USceneComponent>(tableComponents[tc]), FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 						bodyPart->SetActorLocation(Cast<USceneComponent>(tableComponents[tc])->GetComponentLocation());
 
-						// if the body part has a skeletal mesh, enable its physics
-						UActorComponent* getSkMeshComp = bodyPart->GetComponentByClass(USkeletalMeshComponent::StaticClass());
-						if (getSkMeshComp != nullptr)
+						// if the body part has a primitive component, enable its physics
+						UActorComponent* getPrimComp = bodyPart->GetComponentByClass(UPrimitiveComponent::StaticClass());
+						if (getPrimComp != nullptr)
 						{
-							//Cast<USkeletalMeshComponent>(getSkMeshComp)->SetSimulatePhysics(true);
+							Cast<UPrimitiveComponent>(getPrimComp)->SetSimulatePhysics(true);
+						}
+
+						// assign a soul to the body part
+						if (SoulBP != nullptr)
+						{
+							ASoul* soul = Cast<ASoul>(GetWorld()->SpawnActor(SoulBP.Get(), &FTransform::Identity, spawnParams));
+							soul->hauntedObject = bodyPart;
 						}
 					}
 				}
@@ -102,6 +123,6 @@ void ADisassemblingTable::Charge()
 		charge = 0;
 	}
 	
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Emerald, FString::Printf(TEXT("Charge: %i"), charge));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Emerald, FString::Printf(TEXT("Charge: %f"), charge));
 }
 

@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Soul.h"
+#include "Components/PrimitiveComponent.h"
+#include "Engine/Engine.h"
 #include "Engine/World.h"
 #include "Math/UnrealMathUtility.h"
 
@@ -11,35 +13,155 @@ ASoul::ASoul()
 	PrimaryActorTick.bCanEverTick = true;
 }
 
+ASoul::ASoul(AActor* object)
+{
+	ASoul();
+	hauntedObject = object;
+}
+
 // Called when the game starts or when spawned
 void ASoul::BeginPlay()
 {
 	Super::BeginPlay();
 
+	if (DelaySpawn)
+	{
+		SpawnDelayMax = (SpawnDelayMin > SpawnDelayMax) ? SpawnDelayMin : SpawnDelayMax;
+
+		// despawn immediately
+		Despawn();
+
+		// set a random delay timer
+		spawnTimer = FMath::FRandRange(SpawnDelayMin, SpawnDelayMax);
+	}
+	
 	// calculate a random direction
-	direction.X = FMath::FRandRange(-1, 1);
-	direction.Y = FMath::Sqrt(1 - FMath::Square(direction.X)) * FMath::Pow(-1, FMath::RandRange(1, 2));
+	direction = GetRandomDirection();
 }
 
 // Called every frame
 void ASoul::Tick(float DeltaTime)
 {
-	FVector position = this->GetActorLocation();
-
 	Super::Tick(DeltaTime);
 
-	// move towards a certain direction
-	this->AddActorWorldOffset(direction * moveSpeed * GetWorld()->GetDeltaSeconds());
-
-	// if the soul has crossed the edge of the map
-	if (position.X < -mapEdgeX || position.X > mapEdgeX || position.Y < -mapEdgeY || position.Y > mapEdgeY)
+	if (hasSpawned)
 	{
-		this->Destroy();
+		// move towards a certain direction
+		this->AddActorWorldOffset(direction * MoveSpeed * GetWorld()->GetDeltaSeconds());
+
+		FVector position = this->GetActorLocation();
+
+		// if the soul has crossed the edge of the map
+		if (position.X < -MapEdgeX || position.X > MapEdgeX || position.Y < -MapEdgeY || position.Y > MapEdgeY)
+		{
+			this->Destroy();
+		}
+	}
+	else
+	{
+		// count down the spawn timer
+		spawnTimer -= GetWorld()->GetDeltaSeconds();
+
+		if (spawnTimer < 0)
+		{
+			Spawn();
+		}
 	}
 }
 
-void ASoul::HoldObject(AActor* object)
+FVector ASoul::GetRandomDirection()
 {
-	object->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-	object->SetActorRelativeLocation(FVector(0));
+	float x = FMath::FRandRange(-1, 1);
+	float y = direction.Y = FMath::Sqrt(1 - FMath::Square(direction.X)) * FMath::Pow(-1, FMath::RandRange(1, 2));
+	float z = 0;
+	
+	return FVector(x, y, z);
+}
+
+void ASoul::HoldObject()
+{
+	// disable physics
+	TArray<UActorComponent*> primitiveComponents = hauntedObject->GetComponentsByClass(UPrimitiveComponent::StaticClass());
+	for (int i = 0; i < primitiveComponents.Num(); ++i)
+	{
+		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(false);
+	}
+
+	// attach the object to the soul
+	hauntedObject->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+	hauntedObject->SetActorRelativeLocation(FVector(0));
+}
+
+void ASoul::ReleaseObject()
+{
+	if (hauntedObject == nullptr)
+		return;
+
+	// detach object from the soul
+	hauntedObject->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+
+	// enable physics
+	TArray<UActorComponent*> primitiveComponents = hauntedObject->GetComponentsByClass(UPrimitiveComponent::StaticClass());
+	for (int i = 0; i < primitiveComponents.Num(); ++i)
+	{
+		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(true);
+	}
+}
+
+void ASoul::Spawn()
+{
+	float rng = FMath::FRandRange(0, 1);
+
+	// roll for a chance to spawn
+	if (rng > SpawnChance)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, FString::Printf(TEXT("Low rolled: %f"), rng));
+		if (CanRespawn)
+		{
+			spawnTimer = RespawnTime;
+			return;
+		}
+		else
+		{
+			this->Destroy();
+		}
+	}
+
+	// set the manifest location
+	FVector newPosition = hauntedObject->GetActorLocation() + FVector(0, 0, FloatHeight);
+	this->SetActorLocation(newPosition, false, nullptr, ETeleportType::TeleportPhysics);
+
+	// turn on visibility
+	SetActorHiddenInGame(false);
+
+	// enable collision
+	SetActorEnableCollision(true);
+
+	// attach object
+	HoldObject();
+
+	hasSpawned = true;
+}
+
+void ASoul::Despawn()
+{
+	// turn off visibility
+	SetActorHiddenInGame(true);
+
+	// disable collision
+	SetActorEnableCollision(false);
+
+	// detach object
+	ReleaseObject();
+
+	if (CanRespawn)
+	{
+		spawnTimer = RespawnTime;
+	}
+	else
+	{
+		this->Destroy();
+	}
+
+	hasSpawned = false;
 }
