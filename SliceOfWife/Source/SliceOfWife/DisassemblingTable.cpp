@@ -24,20 +24,6 @@ void ADisassemblingTable::BeginPlay()
 void ADisassemblingTable::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	for (int i = 0; i < soulSpawnTimers.Num(); ++i)
-	{
-		soulSpawnTimers[i] -= GetWorld()->GetDeltaSeconds();
-
-		if (soulSpawnTimers[i] < 0)
-		{
-			UClass* uClass = SoulBP.Get();
-			FTransform transform;
-			FActorSpawnParameters spawnParams;
-
-			GetWorld()->SpawnActor(uClass, &transform, spawnParams);
-		}
-	}
 }
 
 bool ADisassemblingTable::DropToTable(AActor* body)
@@ -101,6 +87,11 @@ void ADisassemblingTable::Charge()
 						{
 							Cast<UPrimitiveComponent>(getPrimComp)->SetSimulatePhysics(true);
 						}
+
+						// assign a soul to the body part
+						ASoul* soul = Cast<ASoul>(GetWorld()->SpawnActor(SoulBP.Get(), &FTransform::Identity, spawnParams));
+						soul->hauntedObject = bodyPart;
+						soul->DelaySpawn = true;
 					}
 				}
 			}

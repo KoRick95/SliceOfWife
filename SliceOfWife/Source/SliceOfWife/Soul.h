@@ -14,6 +14,7 @@ class SLICEOFWIFE_API ASoul : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ASoul();
+	ASoul(AActor* object);
 
 	AActor* hauntedObject;
 
@@ -36,13 +37,22 @@ public:
 	float MapEdgeY = 1000;
 
 	UPROPERTY(EditAnywhere)
-	bool CanRespawn = true;
+	bool DelaySpawn = true;
 
-	UPROPERTY(EditAnywhere, meta = (ClampMin = "1"))
-	float RespawnTime = 20;
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0", EditCondition = "DelaySpawn"))
+	float SpawnDelayMin = 1;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0", EditCondition = "DelaySpawn"))
+	float SpawnDelayMax = 3;
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0", ClampMax = "1", UIMin = "0", UIMax = "1"))
 	float SpawnChance = 0.5f;
+
+	UPROPERTY(EditAnywhere)
+	bool CanRespawn = true;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "1", EditCondition = "CanRespawn"))
+	float RespawnTime = 20;
 
 protected:
 	// Called when the game starts or when spawned

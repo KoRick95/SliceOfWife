@@ -12,11 +12,28 @@ ASoul::ASoul()
 	PrimaryActorTick.bCanEverTick = true;
 }
 
+ASoul::ASoul(AActor* object)
+{
+	ASoul();
+	hauntedObject = object;
+}
+
 // Called when the game starts or when spawned
 void ASoul::BeginPlay()
 {
 	Super::BeginPlay();
 
+	if (DelaySpawn)
+	{
+		SpawnDelayMax = (SpawnDelayMin > SpawnDelayMax) ? SpawnDelayMin : SpawnDelayMax;
+
+		// despawn immediately
+		Despawn();
+
+		// set a random delay timer
+		spawnTimer = FMath::FRandRange(SpawnDelayMin, SpawnDelayMax);
+	}
+	
 	// calculate a random direction
 	direction = GetRandomDirection();
 }
