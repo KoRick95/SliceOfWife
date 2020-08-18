@@ -15,9 +15,13 @@ public:
 	// Sets default values for this actor's properties
 	ABodyStorage();
 
-	AActor* currentBody = nullptr;
+	TArray<AActor*> currentBodies;
+	int bodyCount = 0;
 
-	UPROPERTY(EditAnywhere, Category = "Storage")
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
+	int MaxBodyCount = 1;
+
+	UPROPERTY(EditAnywhere)
 	TArray<TSubclassOf<AActor>> Bodies;
 
 protected:

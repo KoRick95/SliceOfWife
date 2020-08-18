@@ -19,10 +19,8 @@ public:
 
 	float charge = 0;
 
-	TArray<float> soulSpawnTimers;
-
 	UPROPERTY(EditAnywhere, Category = "Snapping")
-	FName TagToCheck = "FullCharacter";
+	FName TagToCheck = "FullBody";
 
 	UPROPERTY(EditAnywhere, Category = "Snapping")
 	FVector SnapPosition = { 0, 0, 150 };
@@ -30,20 +28,14 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Snapping")
 	FRotator SnapRotation = { -90, 0, 0 };
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
 	float ChargeRate = 1;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
 	float MaxCharge = 5;
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class ASoul> SoulBP;
-
-	UPROPERTY(EditAnywhere)
-	float SoulSpawnDelayMin = 1;
-
-	UPROPERTY(EditAnywhere)
-	float SoulSpawnDelayMax = 3;
 
 protected:
 	// Called when the game starts or when spawned
@@ -53,8 +45,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	bool RemoveFromTable();
 	bool DropToTable(AActor* body);
+	AActor* RemoveFromTable();
 
 	void Charge();
 };

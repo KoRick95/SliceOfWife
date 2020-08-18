@@ -2,6 +2,7 @@
 
 #include "Soul.h"
 #include "Components/PrimitiveComponent.h"
+#include "Engine/Engine.h"
 #include "Engine/World.h"
 #include "Math/UnrealMathUtility.h"
 
@@ -93,6 +94,9 @@ void ASoul::HoldObject()
 
 void ASoul::ReleaseObject()
 {
+	if (hauntedObject == nullptr)
+		return;
+
 	// detach object from the soul
 	hauntedObject->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
@@ -106,10 +110,21 @@ void ASoul::ReleaseObject()
 
 void ASoul::Spawn()
 {
+	float rng = FMath::FRandRange(0, 1);
+
 	// roll for a chance to spawn
-	if (FMath::FRandRange(0, 1) < SpawnChance)
+	if (rng > SpawnChance)
 	{
-		return;
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, FString::Printf(TEXT("Low rolled: %f"), rng));
+		if (CanRespawn)
+		{
+			spawnTimer = RespawnTime;
+			return;
+		}
+		else
+		{
+			this->Destroy();
+		}
 	}
 
 	// set the manifest location
@@ -141,8 +156,11 @@ void ASoul::Despawn()
 
 	if (CanRespawn)
 	{
-		// reset timer
 		spawnTimer = RespawnTime;
+	}
+	else
+	{
+		this->Destroy();
 	}
 
 	hasSpawned = false;
