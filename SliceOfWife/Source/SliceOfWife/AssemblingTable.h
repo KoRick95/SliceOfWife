@@ -15,24 +15,24 @@ public:
 	// Sets default values for this actor's properties
 	AAssemblingTable();
 
-	struct BodyPart
+	struct BodyPartOnTable
 	{
 		AActor* object;
 		FName tag;
 	};
 
-	TArray<BodyPart> bodyParts;
+	TArray<BodyPartOnTable> bodyParts;
 
-	UPROPERTY(EditAnywhere, Category = "Requirements")
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "1"))
 	int MinBodyParts = 6;
 
-	UPROPERTY(EditAnywhere, Category = "Requirements")
+	UPROPERTY(EditAnywhere)
 	TSubclassOf<AActor> TemporarySpawnBody = nullptr;
 
-	UPROPERTY(EditAnywhere, Category = "Requirements")
+	UPROPERTY(EditAnywhere)
 	FVector SpawnOffset = { 0, 0, 150 };
 
-	UPROPERTY(EditAnywhere, Category = "Requirements")
+	UPROPERTY(EditAnywhere)
 	FRotator SpawnRotation = { 0, 0, 0 };
 
 protected:

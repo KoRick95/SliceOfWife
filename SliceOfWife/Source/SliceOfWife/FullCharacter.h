@@ -18,7 +18,7 @@ public:
 	UPROPERTY(EditAnywhere)
 	bool AutoSpawnBodyParts = false;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, meta = (EditCondition = "AutoSpawnBodyParts"))
 	TArray<TSubclassOf<class ABodyPart>> BodyParts;
 
 protected:

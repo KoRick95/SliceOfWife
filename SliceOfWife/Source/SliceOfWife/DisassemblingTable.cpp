@@ -89,9 +89,11 @@ void ADisassemblingTable::Charge()
 						}
 
 						// assign a soul to the body part
-						ASoul* soul = Cast<ASoul>(GetWorld()->SpawnActor(SoulBP.Get(), &FTransform::Identity, spawnParams));
-						soul->hauntedObject = bodyPart;
-						soul->DelaySpawn = true;
+						if (SoulBP != nullptr)
+						{
+							ASoul* soul = Cast<ASoul>(GetWorld()->SpawnActor(SoulBP.Get(), &FTransform::Identity, spawnParams));
+							soul->hauntedObject = bodyPart;
+						}
 					}
 				}
 			}

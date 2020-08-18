@@ -63,7 +63,7 @@ bool AAssemblingTable::DropToTable(AActor* objectToDrop)
 						objectToDrop->SetActorLocation(sceneComponent->GetComponentLocation());
 
 						// remember the dropped body part
-						BodyPart bodyPart;
+						BodyPartOnTable bodyPart;
 						bodyPart.object = objectToDrop;
 						bodyPart.tag = objectToDrop->Tags[d];
 						bodyParts.Add(bodyPart);
