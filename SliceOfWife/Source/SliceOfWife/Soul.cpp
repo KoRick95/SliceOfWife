@@ -18,8 +18,7 @@ void ASoul::BeginPlay()
 	Super::BeginPlay();
 
 	// calculate a random direction
-	direction.X = FMath::FRandRange(-1, 1);
-	direction.Y = FMath::Sqrt(1 - FMath::Square(direction.X)) * FMath::Pow(-1, FMath::RandRange(1, 2));
+	direction = GetRandomDirection();
 }
 
 // Called every frame
@@ -27,16 +26,38 @@ void ASoul::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	// move towards a certain direction
-	this->AddActorWorldOffset(direction * MoveSpeed * GetWorld()->GetDeltaSeconds());
-
-	FVector position = this->GetActorLocation();
-
-	// if the soul has crossed the edge of the map
-	if (position.X < -MapEdgeX || position.X > MapEdgeX || position.Y < -MapEdgeY || position.Y > MapEdgeY)
+	if (hasSpawned)
 	{
-		this->Destroy();
+		// move towards a certain direction
+		this->AddActorWorldOffset(direction * MoveSpeed * GetWorld()->GetDeltaSeconds());
+
+		FVector position = this->GetActorLocation();
+
+		// if the soul has crossed the edge of the map
+		if (position.X < -MapEdgeX || position.X > MapEdgeX || position.Y < -MapEdgeY || position.Y > MapEdgeY)
+		{
+			this->Destroy();
+		}
 	}
+	else
+	{
+		// count down the spawn timer
+		spawnTimer -= GetWorld()->GetDeltaSeconds();
+
+		if (spawnTimer < 0)
+		{
+			Spawn();
+		}
+	}
+}
+
+FVector ASoul::GetRandomDirection()
+{
+	float x = FMath::FRandRange(-1, 1);
+	float y = direction.Y = FMath::Sqrt(1 - FMath::Square(direction.X)) * FMath::Pow(-1, FMath::RandRange(1, 2));
+	float z = 0;
+	
+	return FVector(x, y, z);
 }
 
 void ASoul::HoldObject()
@@ -55,11 +76,29 @@ void ASoul::HoldObject()
 
 void ASoul::ReleaseObject()
 {
+	// detach object from the soul
+	hauntedObject->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
+	// enable physics
+	TArray<UActorComponent*> primitiveComponents = hauntedObject->GetComponentsByClass(UPrimitiveComponent::StaticClass());
+	for (int i = 0; i < primitiveComponents.Num(); ++i)
+	{
+		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(true);
+	}
 }
 
-void ASoul::Appear()
+void ASoul::Spawn()
 {
+	// roll for a chance to spawn
+	if (FMath::FRandRange(0, 1) < SpawnChance)
+	{
+		return;
+	}
+
+	// set the manifest location
+	FVector newPosition = hauntedObject->GetActorLocation() + FVector(0, 0, FloatHeight);
+	this->SetActorLocation(newPosition, false, nullptr, ETeleportType::TeleportPhysics);
+
 	// turn on visibility
 	SetActorHiddenInGame(false);
 
@@ -68,9 +107,11 @@ void ASoul::Appear()
 
 	// attach object
 	HoldObject();
+
+	hasSpawned = true;
 }
 
-void ASoul::Disappear()
+void ASoul::Despawn()
 {
 	// turn off visibility
 	SetActorHiddenInGame(true);
@@ -86,4 +127,6 @@ void ASoul::Disappear()
 		// reset timer
 		spawnTimer = RespawnTime;
 	}
+
+	hasSpawned = false;
 }

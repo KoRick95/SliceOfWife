@@ -21,20 +21,28 @@ public:
 
 	float spawnTimer = 0;
 
+	bool hasSpawned = false;
+
 	UPROPERTY(EditAnywhere)
+	float FloatHeight = 200;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
 	float MoveSpeed = 100;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
 	float MapEdgeX = 1000;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
 	float MapEdgeY = 1000;
 
 	UPROPERTY(EditAnywhere)
 	bool CanRespawn = true;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "1"))
 	float RespawnTime = 20;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0", ClampMax = "1", UIMin = "0", UIMax = "1"))
+	float SpawnChance = 0.5f;
 
 protected:
 	// Called when the game starts or when spawned
@@ -44,9 +52,11 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	FVector GetRandomDirection();
+
 	void HoldObject();
 	void ReleaseObject();
 
-	void Appear();
-	void Disappear();
+	void Spawn();
+	void Despawn();
 };

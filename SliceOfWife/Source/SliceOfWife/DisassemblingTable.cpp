@@ -92,9 +92,6 @@ void ADisassemblingTable::Charge()
 						FActorSpawnParameters spawnParams;
 						AActor* bodyPart = GetWorld()->SpawnActor(uClass, &transform, spawnParams);
 
-						// store a reference to the body part
-						bodyParts.Add(bodyPart);
-
 						// snap the body part to the table component
 						bodyPart->SetActorLocation(Cast<USceneComponent>(tableComponents[tc])->GetComponentLocation());
 
@@ -117,6 +114,6 @@ void ADisassemblingTable::Charge()
 		charge = 0;
 	}
 	
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Emerald, FString::Printf(TEXT("Charge: %i"), charge));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Emerald, FString::Printf(TEXT("Charge: %f"), charge));
 }
 

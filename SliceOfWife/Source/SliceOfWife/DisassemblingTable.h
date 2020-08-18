@@ -16,7 +16,6 @@ public:
 	ADisassemblingTable();
 
 	AActor* bodyOnTable = nullptr;
-	TArray<AActor*> bodyParts;
 
 	float charge = 0;
 
