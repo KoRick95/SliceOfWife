@@ -93,6 +93,9 @@ void ASoul::HoldObject()
 
 void ASoul::ReleaseObject()
 {
+	if (hauntedObject == nullptr)
+		return;
+
 	// detach object from the soul
 	hauntedObject->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
@@ -108,9 +111,7 @@ void ASoul::Spawn()
 {
 	// roll for a chance to spawn
 	if (FMath::FRandRange(0, 1) < SpawnChance)
-	{
 		return;
-	}
 
 	// set the manifest location
 	FVector newPosition = hauntedObject->GetActorLocation() + FVector(0, 0, FloatHeight);
