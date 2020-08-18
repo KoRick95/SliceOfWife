@@ -39,3 +39,24 @@ void AFullBody::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
+
+void AFullBody::Attach(ABodyPart* bodyPart)
+{
+	bodyPart->AttachTo(this);
+	bodyParts.Add(bodyPart);
+}
+
+bool AFullBody::Detach(ABodyPart* bodyPart)
+{
+	for (int i = 0; i < bodyParts.Num(); ++i)
+	{
+		if (bodyPart == bodyParts[i])
+		{
+			bodyPart->Detach();
+			bodyParts.RemoveAt(i);
+			return true;
+		}
+	}
+
+	return false;
+}
