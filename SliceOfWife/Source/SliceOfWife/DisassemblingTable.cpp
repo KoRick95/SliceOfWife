@@ -24,20 +24,6 @@ void ADisassemblingTable::BeginPlay()
 void ADisassemblingTable::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	for (int i = 0; i < soulSpawnTimers.Num(); ++i)
-	{
-		soulSpawnTimers[i] -= GetWorld()->GetDeltaSeconds();
-
-		if (soulSpawnTimers[i] < 0)
-		{
-			UClass* uClass = SoulBP.Get();
-			FTransform transform;
-			FActorSpawnParameters spawnParams;
-
-			GetWorld()->SpawnActor(uClass, &transform, spawnParams);
-		}
-	}
 }
 
 bool ADisassemblingTable::DropToTable(AActor* body)
@@ -92,9 +78,6 @@ void ADisassemblingTable::Charge()
 						FActorSpawnParameters spawnParams;
 						AActor* bodyPart = GetWorld()->SpawnActor(uClass, &transform, spawnParams);
 
-						// store a reference to the body part
-						bodyParts.Add(bodyPart);
-
 						// snap the body part to the table component
 						bodyPart->SetActorLocation(Cast<USceneComponent>(tableComponents[tc])->GetComponentLocation());
 
@@ -104,6 +87,11 @@ void ADisassemblingTable::Charge()
 						{
 							Cast<UPrimitiveComponent>(getPrimComp)->SetSimulatePhysics(true);
 						}
+
+						// assign a soul to the body part
+						ASoul* soul = Cast<ASoul>(GetWorld()->SpawnActor(SoulBP.Get(), &FTransform::Identity, spawnParams));
+						soul->hauntedObject = bodyPart;
+						soul->DelaySpawn = true;
 					}
 				}
 			}
@@ -117,6 +105,6 @@ void ADisassemblingTable::Charge()
 		charge = 0;
 	}
 	
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Emerald, FString::Printf(TEXT("Charge: %i"), charge));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Emerald, FString::Printf(TEXT("Charge: %f"), charge));
 }
 
