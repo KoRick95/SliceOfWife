@@ -199,28 +199,26 @@ void AMainCharacter::PickUp()
 			// if an object has the pickup tag
 			if (nearbyObjects[i]->ActorHasTag("Pickup"))
 			{
-				// if the object is attached to a parent object
-				if (nearbyObjects[i]->GetAttachParentActor() != nullptr)
+				AActor* attachmentRootObject = nearbyObjects[i]->GetRootComponent()->GetAttachmentRootActor();
+				AActor* objectToHold = nearbyObjects[i];
+
+				if (attachmentRootObject->ActorHasTag("AssemblingTable"))
 				{
-					// if that object's parent is an assembling table
-					if (nearbyObjects[i]->GetAttachParentActor()->ActorHasTag("AssemblingTable"))
-					{
-						// remove it from the table
-						Cast<AAssemblingTable>(nearbyObjects[i]->GetAttachParentActor())->RemoveFromTable(nearbyObjects[i]);
-					}
-					else if (nearbyObjects[i]->GetAttachParentActor()->ActorHasTag("DiassemblingTable"))
-					{
-						// remove it from the table
-						Cast<ADisassemblingTable>(nearbyObjects[i]->GetAttachParentActor())->RemoveFromTable();
-					}
-					else
-					{
-						nearbyObjects[i] = nearbyObjects[i]->GetAttachParentActor();
-					}
+					// remove it from the table
+					Cast<AAssemblingTable>(attachmentRootObject)->RemoveFromTable(objectToHold);
+				}
+				else if (attachmentRootObject->ActorHasTag("DisassemblingTable"))
+				{
+					// remove it from the table and set the object to hold as the removed body
+					objectToHold = Cast<ADisassemblingTable>(attachmentRootObject)->RemoveFromTable();
+				}
+				else
+				{
+					objectToHold = objectToHold->GetAttachParentActor();
 				}
 
 				// get player to hold the object
-				HoldObject(nearbyObjects[i]);
+				HoldObject(objectToHold);
 				break;
 			}
 		}

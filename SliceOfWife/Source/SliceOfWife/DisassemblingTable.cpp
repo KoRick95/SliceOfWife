@@ -31,9 +31,9 @@ bool ADisassemblingTable::DropToTable(AActor* body)
 	if (body->ActorHasTag(TagToCheck) && bodyOnTable == nullptr)
 	{
 		// snap the body to the table
-		body->SetActorRotation(SnapRotation, ETeleportType::ResetPhysics);
 		body->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 		body->SetActorLocation(this->GetActorLocation() + SnapPosition);
+		body->SetActorRotation(SnapRotation, ETeleportType::ResetPhysics);
 
 		this->bodyOnTable = body;
 		return true;
@@ -42,17 +42,20 @@ bool ADisassemblingTable::DropToTable(AActor* body)
 	return false;
 }
 
-bool ADisassemblingTable::RemoveFromTable()
+AActor* ADisassemblingTable::RemoveFromTable()
 {
+	AActor* removedBody = nullptr;
+
 	if (bodyOnTable != nullptr)
 	{
 		// detach the object from the table
 		bodyOnTable->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-
-		return true;
+		removedBody = bodyOnTable;
+		bodyOnTable = nullptr;
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Removed.")));
 	}
 	
-	return false;
+	return removedBody;
 }
 
 void ADisassemblingTable::Charge()
