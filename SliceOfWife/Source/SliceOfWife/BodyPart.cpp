@@ -28,19 +28,22 @@ void ABodyPart::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void ABodyPart::Attach(AFullBody* body)
+void ABodyPart::AttachTo(AFullBody* body)
 {
+	// attach to the body and store its reference
 	this->AttachToActor(body, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-
 	fullBody = body;
 }
 
-void ABodyPart::Detach()
+bool ABodyPart::Detach()
 {
-	if (fullBody == nullptr)
+	if (fullBody != nullptr)
 	{
-		return;
+		// detach from the body and remove its reference
+		this->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		fullBody = nullptr;
+		return true;
 	}
 
-	fullBody = nullptr;
+	return false;
 }

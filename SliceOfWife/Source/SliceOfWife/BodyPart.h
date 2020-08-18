@@ -25,6 +25,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void Attach(AFullBody* body);
-	void Detach();
+	void AttachTo(AFullBody* body);
+	bool Detach();
 };

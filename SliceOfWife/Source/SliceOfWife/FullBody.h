@@ -29,5 +29,5 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	void Attach(ABodyPart* bodyPart);
-	void Detach(ABodyPart* bodyPart);
+	bool Detach(ABodyPart* bodyPart);
 };
