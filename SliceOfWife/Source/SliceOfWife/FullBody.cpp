@@ -1,46 +1,41 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
-#include "FullCharacter.h"
+#include "FullBody.h"
 #include "BodyPart.h"
 #include "Engine/World.h"
 
 // Sets default values
-AFullCharacter::AFullCharacter()
+AFullBody::AFullBody()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
 	Tags.Add("Pickup");
-	Tags.Add("FullCharacter");
+	Tags.Add("FullBody");
 }
 
 // Called when the game starts or when spawned
-void AFullCharacter::BeginPlay()
+void AFullBody::BeginPlay()
 {
-	Super::BeginPlay();	
+	Super::BeginPlay();
 
-	if (AutoSpawnBodyParts)
+	TArray<AActor*> children;
+	this->GetAllChildActors(children);
+
+	for (int i = 0; i < children.Num(); ++i)
 	{
-		for (int i = 0; i < BodyParts.Num(); ++i)
-		{
-			UClass* uClass = BodyParts[i].Get();
-			FTransform transform = this->GetActorTransform();
-			FActorSpawnParameters spawnParams;
-
-			GetWorld()->SpawnActor(uClass, &transform, spawnParams);
-		}
+		bodyParts.Add(Cast<ABodyPart>(children[i]));
 	}
 }
 
 // Called every frame
-void AFullCharacter::Tick(float DeltaTime)
+void AFullBody::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
 
 // Called to bind functionality to input
-void AFullCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void AFullBody::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
