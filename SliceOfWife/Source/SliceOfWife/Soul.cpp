@@ -59,12 +59,16 @@ void ASoul::Tick(float DeltaTime)
 	}
 	else
 	{
-		// count down the spawn timer
-		spawnTimer -= GetWorld()->GetDeltaSeconds();
-
-		if (spawnTimer < 0)
+		// if the object isn't attached to anything
+		if (hauntedObject->GetAttachParentActor() == nullptr)
 		{
-			Spawn();
+			// count down the spawn timer
+			spawnTimer -= GetWorld()->GetDeltaSeconds();
+
+			if (spawnTimer < 0)
+			{
+				Spawn();
+			}
 		}
 	}
 }

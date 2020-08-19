@@ -22,6 +22,7 @@ void AFullBody::BeginPlay()
 	TArray<AActor*> children;
 	this->GetAllChildActors(children);
 
+	// add any 
 	for (int i = 0; i < children.Num(); ++i)
 	{
 		bodyParts.Add(Cast<ABodyPart>(children[i]));
@@ -38,4 +39,28 @@ void AFullBody::Tick(float DeltaTime)
 void AFullBody::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+}
+
+void AFullBody::Attach(ABodyPart* bodyPart)
+{
+	// attach the body part and add it to the array
+	bodyPart->AttachTo(this);
+	bodyParts.Add(bodyPart);
+}
+
+bool AFullBody::Detach(ABodyPart* bodyPart)
+{
+	// check if the body part is a part of this body
+	for (int i = 0; i < bodyParts.Num(); ++i)
+	{
+		if (bodyPart == bodyParts[i])
+		{
+			// detach the body part and remove it from the array
+			bodyPart->Detach();
+			bodyParts.RemoveAt(i);
+			return true;
+		}
+	}
+
+	return false;
 }

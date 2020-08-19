@@ -1,17 +1,19 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "MainCharacter.h"
 #include "AssemblingTable.h"
+#include "BodyPart.h"
 #include "BodyStorage.h"
 #include "DisassemblingTable.h"
+#include "FullBody.h"
 #include "Camera/CameraComponent.h"
 #include "Components/SceneComponent.h"
 #include "Components/InputComponent.h"
 #include "Components/SphereComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Engine.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
-#include "Engine.h"
 
 // Sets default values
 AMainCharacter::AMainCharacter()
@@ -47,7 +49,6 @@ AMainCharacter::AMainCharacter()
 void AMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -69,28 +70,32 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
-	PlayerInputComponent->BindAction("PickUp", IE_Pressed, this, &AMainCharacter::PickUp);
+	PlayerInputComponent->BindAction("PickUp", IE_Pressed, this, &AMainCharacter::PickUpAndDrop);
 
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &AMainCharacter::Interact);
 
 	SphereCollider->OnComponentBeginOverlap.AddDynamic(this, &AMainCharacter::OnOverlapBegin);
 }
 
-void AMainCharacter::HoldObject(AActor* objectToHold)
+bool AMainCharacter::HoldObject(AActor* objectToHold)
 {
 	if (objectToHold == nullptr)
 	{
-		return;
+		return false;
 	}
 
-	if (objectToHold->IsA(ACharacter::StaticClass()))
+	// disable physics on the object
+	TArray<UActorComponent*> primitiveComponents = objectToHold->GetComponentsByClass(UPrimitiveComponent::StaticClass());
+	for (int i = 0; i < primitiveComponents.Num(); ++i)
+	{
+		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(false);
+	}
+
+	if (objectToHold->IsA(AFullBody::StaticClass()))
 	{
 		ACharacter* character = Cast<ACharacter>(objectToHold);
 
 		float bodyHalfHeight = character->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
-
-		// disable physics on the object
-		character->GetCapsuleComponent()->SetSimulatePhysics(false);
 
 		// attach the object to the player
 		character->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
@@ -98,16 +103,16 @@ void AMainCharacter::HoldObject(AActor* objectToHold)
 		// add offset to the object
 		character->SetActorRelativeLocation(FVector(0, 0, bodyHalfHeight) + PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
 	}
-	else
+	else if (objectToHold->IsA(ABodyPart::StaticClass()))
 	{
 		// get the object's skeletal mesh component
-		USkeletalMeshComponent* skMeshComponent = (USkeletalMeshComponent*)objectToHold->GetComponentByClass(USkeletalMeshComponent::StaticClass());
+		USkeletalMeshComponent* skMeshComponent = Cast<USkeletalMeshComponent>(objectToHold->GetComponentByClass(USkeletalMeshComponent::StaticClass()));
 
 		// if the object has skeletal mesh
 		if (skMeshComponent == nullptr || skMeshComponent->SkeletalMesh == nullptr)
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Skeletal mesh not found.")));
-			return;
+			return false;
 		}
 
 		// calculate the mesh offset
@@ -116,9 +121,6 @@ void AMainCharacter::HoldObject(AActor* objectToHold)
 		float meshHalfHeight = meshBounds.SphereRadius;
 		FVector meshOffset = FVector(0, 0, meshHalfHeight) - meshCentre;
 
-		// disable physics on the object
-		skMeshComponent->SetSimulatePhysics(false);
-
 		// attach the object to the player
 		objectToHold->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 		
@@ -126,10 +128,14 @@ void AMainCharacter::HoldObject(AActor* objectToHold)
 		objectToHold->SetActorRelativeLocation(FVector(0) + PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
 		objectToHold->AddActorLocalOffset(meshOffset, false, nullptr, ETeleportType::ResetPhysics);
 	}
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, FString::Printf(TEXT("Disabling physics.")));
-	USceneComponent* rootComponent = objectToHold->GetRootComponent();
-	rootComponent->RecreatePhysicsState();
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Invalid object type.")));
+		return false;
+	}
+
 	heldObject = objectToHold;
+	return true;
 }
 
 void AMainCharacter::MoveForward(float Axis)
@@ -139,7 +145,6 @@ void AMainCharacter::MoveForward(float Axis)
 	FRotator YawRotation(0, Rotation.Yaw, 0);
 	FVector Direction = FRotationMatrix(YawRotation).GetScaledAxis(EAxis::X);
 	AddMovementInput(Direction, Axis);
-	//AddActorLocalRotation(FQuat(Rotation));
 }
 
 void AMainCharacter::MoveRight(float Axis)
@@ -151,7 +156,7 @@ void AMainCharacter::MoveRight(float Axis)
 	AddMovementInput(Direction, Axis);
 }
 
-void AMainCharacter::PickUp()
+void AMainCharacter::PickUpAndDrop()
 {
 	/*TArray<FHitResult> HitResults;
 	FVector Start = this->GetActorLocation();
@@ -191,30 +196,43 @@ void AMainCharacter::PickUp()
 		{
 			if (nearbyObjects[i]->ActorHasTag("BodyStorage"))
 			{
-				ABodyStorage* bodyStorage = Cast<ABodyStorage>(nearbyObjects[i]);
-				HoldObject(bodyStorage->TakeBody());
+				HoldObject(Cast<ABodyStorage>(nearbyObjects[i])->TakeBody());
 				break;
 			}
 
 			// if an object has the pickup tag
 			if (nearbyObjects[i]->ActorHasTag("Pickup"))
 			{
-				AActor* attachmentRootObject = nearbyObjects[i]->GetRootComponent()->GetAttachmentRootActor();
 				AActor* objectToHold = nearbyObjects[i];
 
-				if (attachmentRootObject->ActorHasTag("AssemblingTable"))
+				if (objectToHold->IsA(ABodyPart::StaticClass()))
 				{
-					// remove it from the table
-					Cast<AAssemblingTable>(attachmentRootObject)->RemoveFromTable(objectToHold);
+					ABodyPart* aBodyPart = Cast<ABodyPart>(objectToHold);
+
+					// if the body part is attached to a body
+					if (aBodyPart->body != nullptr)
+					{
+						// set the object to hold as the full body
+						objectToHold = aBodyPart->body;
+					}
 				}
-				else if (attachmentRootObject->ActorHasTag("DisassemblingTable"))
+
+				// get the object's attach parent
+				AActor* objectAttachParent = objectToHold->GetAttachParentActor();
+
+				// if the object has an attach parent
+				if (objectAttachParent != nullptr)
 				{
-					// remove it from the table and set the object to hold as the removed body
-					objectToHold = Cast<ADisassemblingTable>(attachmentRootObject)->RemoveFromTable();
-				}
-				else
-				{
-					objectToHold = objectToHold->GetAttachParentActor();
+					if (objectAttachParent->IsA(AAssemblingTable::StaticClass()))
+					{
+						// remove it from the assembling table
+						Cast<AAssemblingTable>(objectAttachParent)->RemoveFromTable(objectToHold);
+					}
+					else if (objectAttachParent->IsA(ADisassemblingTable::StaticClass()))
+					{
+						// remove it from the disassembling table
+						Cast<ADisassemblingTable>(objectAttachParent)->RemoveFromTable();
+					}
 				}
 
 				// get player to hold the object
