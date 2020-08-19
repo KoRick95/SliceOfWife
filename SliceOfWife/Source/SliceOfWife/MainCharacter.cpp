@@ -196,8 +196,7 @@ void AMainCharacter::PickUpAndDrop()
 		{
 			if (nearbyObjects[i]->ActorHasTag("BodyStorage"))
 			{
-				ABodyStorage* bodyStorage = Cast<ABodyStorage>(nearbyObjects[i]);
-				HoldObject(bodyStorage->TakeBody());
+				HoldObject(Cast<ABodyStorage>(nearbyObjects[i])->TakeBody());
 				break;
 			}
 

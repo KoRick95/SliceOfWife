@@ -20,6 +20,7 @@ public:
 
 	FVector direction;
 
+	bool spawnTimerOn = true;
 	float spawnTimer = 0;
 
 	bool hasSpawned = false;
