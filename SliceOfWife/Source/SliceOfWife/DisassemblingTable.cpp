@@ -42,20 +42,18 @@ bool ADisassemblingTable::DropToTable(AActor* body)
 	return false;
 }
 
-AActor* ADisassemblingTable::RemoveFromTable()
+bool ADisassemblingTable::RemoveFromTable()
 {
-	AActor* removedBody = nullptr;
-
 	if (bodyOnTable != nullptr)
 	{
 		// detach the object from the table
 		bodyOnTable->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-		removedBody = bodyOnTable;
 		bodyOnTable = nullptr;
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Removed.")));
+		return true;
 	}
 	
-	return removedBody;
+	return false;
 }
 
 void ADisassemblingTable::Charge()

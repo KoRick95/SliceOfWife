@@ -15,7 +15,7 @@ public:
 	// Sets default values for this actor's properties
 	ABodyPart();
 
-	class AFullBody* fullBody = nullptr;
+	class AFullBody* body = nullptr;
 
 protected:
 	// Called when the game starts or when spawned
