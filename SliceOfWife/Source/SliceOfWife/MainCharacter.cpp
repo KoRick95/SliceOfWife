@@ -64,14 +64,11 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMainCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMainCharacter::MoveRight);
-	//PlayerInputComponent->BindAxis("Turn", this, &AMainCharacter::AddControllerYawInput);
-	//PlayerInputComponent->BindAxis("LookUp", this, &AMainCharacter::AddControllerPitchInput);
 
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
 	PlayerInputComponent->BindAction("PickUp", IE_Pressed, this, &AMainCharacter::PickUpAndDrop);
-
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &AMainCharacter::Interact);
 
 	SphereCollider->OnComponentBeginOverlap.AddDynamic(this, &AMainCharacter::OnOverlapBegin);
@@ -158,32 +155,6 @@ void AMainCharacter::MoveRight(float Axis)
 
 void AMainCharacter::PickUpAndDrop()
 {
-	/*TArray<FHitResult> HitResults;
-	FVector Start = this->GetActorLocation();
-	FVector End = this->GetActorLocation() + FVector(1, 1, 1);
-	FCollisionShape ColShape = FCollisionShape::MakeSphere(DetectionRadius);
-	FCollisionQueryParams* TraceParams = new FCollisionQueryParams();
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Called.")));
-	DrawDebugSphere(GetWorld(), GetActorLocation(), DetectionRadius, 64, FColor::Red, true, -1, 0, 8);
-	bool isHit = GetWorld()->SweepMultiByChannel(HitResults, Start, End, FQuat::Identity, ECC_Visibility, ColShape);
-
-	if (isHit)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Hit something.")));
-		for (int i = 0; i < HitResults.Num(); ++i)
-		{
-			AActor* HitActor = HitResults[i].GetActor();
-			
-			if (HitActor->ActorHasTag("Pickup"))
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Detected.")));
-				HitActor->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
-				HitActor->AddActorLocalOffset(PickupOffset);
-				break;
-			}
-		}
-	}*/
-
 	// get all nearby objects
 	TArray<AActor*> nearbyObjects;
 	SphereCollider->GetOverlappingActors(nearbyObjects);
@@ -274,7 +245,6 @@ void AMainCharacter::PickUpAndDrop()
 			TArray<UActorComponent*> components = heldObject->GetComponentsByClass(UPrimitiveComponent::StaticClass());
 			for (int i = 0; i < components.Num(); ++i)
 			{
-				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Enabling physics.")));
 				Cast<UPrimitiveComponent>(components[i])->SetSimulatePhysics(true);
 			}
 		}
