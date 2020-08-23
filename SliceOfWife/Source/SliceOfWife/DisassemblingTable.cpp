@@ -65,57 +65,7 @@ void ADisassemblingTable::Charge()
 	
 	if (charge >= MaxCharge)
 	{
-		// get all of the body's components
-		TArray<AActor*> bodyParts;
-		bodyOnTable->GetAllChildActors(bodyParts, false);
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("BodyParts = %i"), bodyParts.Num()));
-
-		// get all of the table's components
-		TArray<UActorComponent*> tableComponents;
-		tableComponents = this->GetComponentsByClass(USceneComponent::StaticClass());
-
-		// check each table component
-		for (int tc = 0; tc < tableComponents.Num(); ++tc)
-		{
-			// check each body component
-			for (int bp = 0; bp < bodyParts.Num(); ++bp)
-			{
-				// check each table component's tags
-				for (int tt = 0; tt < tableComponents[tc]->ComponentTags.Num(); ++tt)
-				{
-					// if the body part has a matching tag with the table component
-					if (bodyParts[bp]->ActorHasTag(tableComponents[tc]->ComponentTags[tt]))
-					{
-						// detach the body part from the body
-						UClass* uClass = bodyParts[bp]->GetClass();
-						FTransform transform = bodyParts[bp]->GetActorTransform();
-						FActorSpawnParameters spawnParams;
-						AActor* bodyPart = GetWorld()->SpawnActor(uClass, &transform, spawnParams);
-
-						// snap the body part to the table component
-						bodyPart->SetActorLocation(Cast<USceneComponent>(tableComponents[tc])->GetComponentLocation());
-
-						// if the body part has a primitive component, enable its physics
-						UActorComponent* getPrimComp = bodyPart->GetComponentByClass(UPrimitiveComponent::StaticClass());
-						if (getPrimComp != nullptr)
-						{
-							Cast<UPrimitiveComponent>(getPrimComp)->SetSimulatePhysics(true);
-						}
-
-						// assign a soul to the body part
-						if (SoulBP != nullptr)
-						{
-							ASoul* soul = Cast<ASoul>(GetWorld()->SpawnActor(SoulBP.Get(), &FTransform::Identity, spawnParams));
-							soul->hauntedObject = bodyPart;
-						}
-					}
-				}
-			}
-		}
-
-		// destroy the base body
-		bodyOnTable->Destroy();
-		bodyOnTable = nullptr;
+		DisassembleBody();
 
 		// reset the charge
 		charge = 0;
@@ -124,3 +74,57 @@ void ADisassemblingTable::Charge()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Emerald, FString::Printf(TEXT("Charge: %f"), charge));
 }
 
+void ADisassemblingTable::DisassembleBody()
+{
+	// get all of the body's components
+	TArray<AActor*> bodyParts;
+	bodyOnTable->GetAllChildActors(bodyParts, false);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("BodyParts = %i"), bodyParts.Num()));
+
+	// get all of the table's components
+	TArray<UActorComponent*> tableComponents;
+	tableComponents = this->GetComponentsByClass(USceneComponent::StaticClass());
+
+	// check each table component
+	for (int tc = 0; tc < tableComponents.Num(); ++tc)
+	{
+		// check each body component
+		for (int bp = 0; bp < bodyParts.Num(); ++bp)
+		{
+			// check each table component's tags
+			for (int tt = 0; tt < tableComponents[tc]->ComponentTags.Num(); ++tt)
+			{
+				// if the body part has a matching tag with the table component
+				if (bodyParts[bp]->ActorHasTag(tableComponents[tc]->ComponentTags[tt]))
+				{
+					// detach the body part from the body
+					UClass* uClass = bodyParts[bp]->GetClass();
+					FTransform transform = bodyParts[bp]->GetActorTransform();
+					FActorSpawnParameters spawnParams;
+					AActor* bodyPart = GetWorld()->SpawnActor(uClass, &transform, spawnParams);
+
+					// snap the body part to the table component
+					bodyPart->SetActorLocation(Cast<USceneComponent>(tableComponents[tc])->GetComponentLocation());
+
+					// if the body part has a primitive component, enable its physics
+					UActorComponent* getPrimComp = bodyPart->GetComponentByClass(UPrimitiveComponent::StaticClass());
+					if (getPrimComp != nullptr)
+					{
+						Cast<UPrimitiveComponent>(getPrimComp)->SetSimulatePhysics(true);
+					}
+
+					// assign a soul to the body part
+					if (SoulBP != nullptr)
+					{
+						ASoul* soul = Cast<ASoul>(GetWorld()->SpawnActor(SoulBP.Get(), &FTransform::Identity, spawnParams));
+						soul->hauntedObject = bodyPart;
+					}
+				}
+			}
+		}
+	}
+
+	// destroy the base body
+	bodyOnTable->Destroy();
+	bodyOnTable = nullptr;
+}
