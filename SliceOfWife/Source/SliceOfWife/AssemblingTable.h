@@ -15,13 +15,16 @@ public:
 	// Sets default values for this actor's properties
 	AAssemblingTable();
 
-	struct BodyPartOnTable
+	struct ObjectOnTable
 	{
 		AActor* object;
 		FName tag;
 	};
 
-	TArray<BodyPartOnTable> bodyParts;
+	TArray<ObjectOnTable> bodyParts;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AHUD> minigameHUD;
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "1"))
 	int MinBodyParts = 6;

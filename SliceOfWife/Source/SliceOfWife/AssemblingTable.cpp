@@ -1,4 +1,5 @@
 #include "AssemblingTable.h"
+#include "Blueprint/UserWidget.h"
 #include "Engine/World.h"
 
 // Sets default values
@@ -63,7 +64,7 @@ bool AAssemblingTable::DropToTable(AActor* objectToDrop)
 						objectToDrop->SetActorLocation(sceneComponent->GetComponentLocation());
 
 						// remember the dropped body part
-						BodyPartOnTable bodyPart;
+						ObjectOnTable bodyPart;
 						bodyPart.object = objectToDrop;
 						bodyPart.tag = objectToDrop->Tags[d];
 						bodyParts.Add(bodyPart);
