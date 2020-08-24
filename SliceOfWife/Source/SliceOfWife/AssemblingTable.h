@@ -53,7 +53,9 @@ public:
 
 	void StartMinigame();
 
-	void Assemble();
+	UFUNCTION(BlueprintCallable)
+	void Assemble(class ABodyPart* bodyPart);
 
+	UFUNCTION(BlueprintCallable)
 	bool Animate();
 };
