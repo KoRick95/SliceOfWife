@@ -270,7 +270,7 @@ void AMainCharacter::Interact()
 		if (actors[i]->ActorHasTag("AssemblingTable"))
 		{
 			AAssemblingTable* aTable = Cast<AAssemblingTable>(actors[i]);
-			aTable->StartSewing();
+			aTable->StartMinigame();
 			break;
 		}
 	}

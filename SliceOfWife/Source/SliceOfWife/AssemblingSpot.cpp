@@ -3,6 +3,7 @@
 
 #include "AssemblingSpot.h"
 #include "AssemblingTable.h"
+#include "BodyPart.h"
 #include "Engine.h"
 
 // Sets default values
@@ -39,5 +40,18 @@ void AAssemblingSpot::BeginPlay()
 void AAssemblingSpot::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+}
+
+bool AAssemblingSpot::BeginSewing()
+{
+	for (int i = 0; i < table->bodyParts.Num(); ++i)
+	{
+		if (this->ActorHasTag(table->bodyParts[i].tag))
+		{
+			
+			return true;
+		}
+	}
+	return false;
 }
 

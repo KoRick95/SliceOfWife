@@ -51,7 +51,7 @@ public:
 	bool DropToTable(AActor* objectToDrop);
 	bool RemoveFromTable(AActor* objectToRemove);
 
-	void StartSewing();
+	void StartMinigame();
 
 	void Assemble();
 

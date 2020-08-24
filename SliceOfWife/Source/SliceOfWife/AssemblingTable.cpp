@@ -100,7 +100,7 @@ bool AAssemblingTable::RemoveFromTable(AActor* objectToRemove)
 	return false;
 }
 
-void AAssemblingTable::StartSewing()
+void AAssemblingTable::StartMinigame()
 {
 	if (WidgetBP != nullptr)
 	{
