@@ -24,7 +24,7 @@ public:
 	TArray<ObjectOnTable> bodyParts;
 
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<AHUD> minigameHUD;
+	TSubclassOf<UUserWidget> WidgetBP;
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "1"))
 	int MinBodyParts = 6;
