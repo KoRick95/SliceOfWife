@@ -2,6 +2,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Engine/World.h"
 
+
 // Sets default values
 AAssemblingTable::AAssemblingTable()
 {
@@ -15,6 +16,11 @@ AAssemblingTable::AAssemblingTable()
 void AAssemblingTable::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (WidgetBP != nullptr)
+	{
+		CreateWidget<UUserWidget>(GetWorld(), WidgetBP.Get());
+	}
 }
 
 // Called every frame
