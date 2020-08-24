@@ -13,12 +13,6 @@ ASoul::ASoul()
 	PrimaryActorTick.bCanEverTick = true;
 }
 
-ASoul::ASoul(AActor* object)
-{
-	ASoul();
-	hauntedObject = object;
-}
-
 // Called when the game starts or when spawned
 void ASoul::BeginPlay()
 {
