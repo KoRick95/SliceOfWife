@@ -109,7 +109,7 @@ void AAssemblingTable::StartMinigame()
 	}
 }
 
-void AAssemblingTable::Assemble()
+void AAssemblingTable::Assemble(ABodyPart* bodyPArt)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Success!")));
 }
