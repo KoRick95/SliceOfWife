@@ -18,11 +18,11 @@ void AAssemblingSpot::BeginPlay()
 
 	if (table == nullptr)
 	{
-		if (this->GetAttachParentActor != nullptr)
+		if (this->GetAttachParentActor() != nullptr)
 		{
-			if (this->GetAttachParentActor.IsA(AAssemblingTable::StaticClass()))
+			if (this->GetAttachParentActor()->IsA(AAssemblingTable::StaticClass()))
 			{
-				table = Cast<AAssemblingTable>(this->GetAttachParentActor);
+				table = Cast<AAssemblingTable>(this->GetAttachParentActor());
 			}
 		}
 	}

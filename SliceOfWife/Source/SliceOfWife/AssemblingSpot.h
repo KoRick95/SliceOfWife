@@ -15,7 +15,7 @@ public:
 	// Sets default values for this actor's properties
 	AAssemblingSpot();
 
-	AAssemblingTable* table = nullptr;
+	class AAssemblingTable* table = nullptr;
 
 protected:
 	// Called when the game starts or when spawned
