@@ -20,7 +20,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Camera")
 	class USpringArmComponent* CameraArm;
 
-	UPROPERTY(EditAnywhere, Category = "Camera")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
 	class UCameraComponent* Camera;
 
 	UPROPERTY(EditAnywhere, Category = "Colliders")
