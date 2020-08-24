@@ -14,7 +14,6 @@ class SLICEOFWIFE_API ASoul : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ASoul();
-	ASoul(AActor* object);
 
 	AActor* hauntedObject;
 
