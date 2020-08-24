@@ -16,4 +16,14 @@ class SLICEOFWIFE_API UMinigameWidget : public UUserWidget
 	
 public:
 
+	AActor* minigameInitator = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool GameCompleted = false;
+
+	UFUNCTION(BlueprintCallable)
+	void StartMinigame(AActor* initiator = nullptr);
+
+	UFUNCTION(BlueprintCallable)
+	void EndMinigame(bool isCompleted = false);
 };
