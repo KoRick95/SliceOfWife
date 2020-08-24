@@ -23,8 +23,10 @@ public:
 
 	TArray<ObjectOnTable> bodyParts;
 
+	class UMinigameWidget* widget;
+
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<UUserWidget> WidgetBP;
+	TSubclassOf<class UMinigameWidget> WidgetBP;
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "1"))
 	int MinBodyParts = 6;
@@ -48,6 +50,10 @@ public:
 
 	bool DropToTable(AActor* objectToDrop);
 	bool RemoveFromTable(AActor* objectToRemove);
+
+	void StartSewing();
+
+	void Assemble();
 
 	bool Animate();
 };

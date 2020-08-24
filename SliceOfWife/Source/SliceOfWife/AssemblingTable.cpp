@@ -1,7 +1,8 @@
 #include "AssemblingTable.h"
+#include "MinigameWidget.h"
 #include "Blueprint/UserWidget.h"
+#include "Engine.h"
 #include "Engine/World.h"
-
 
 // Sets default values
 AAssemblingTable::AAssemblingTable()
@@ -16,11 +17,6 @@ AAssemblingTable::AAssemblingTable()
 void AAssemblingTable::BeginPlay()
 {
 	Super::BeginPlay();
-
-	if (WidgetBP != nullptr)
-	{
-		CreateWidget<UUserWidget>(GetWorld(), WidgetBP.Get());
-	}
 }
 
 // Called every frame
@@ -102,6 +98,20 @@ bool AAssemblingTable::RemoveFromTable(AActor* objectToRemove)
 	}
 
 	return false;
+}
+
+void AAssemblingTable::StartSewing()
+{
+	if (WidgetBP != nullptr)
+	{
+		widget = CreateWidget<UMinigameWidget>(GetWorld(), WidgetBP.Get());
+		widget->StartMinigame(this);
+	}
+}
+
+void AAssemblingTable::Assemble()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Success!")));
 }
 
 bool AAssemblingTable::Animate()

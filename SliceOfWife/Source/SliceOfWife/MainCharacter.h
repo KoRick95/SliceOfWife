@@ -51,8 +51,9 @@ public:
 	void MoveForward(float Axis);
 	void MoveRight(float Axis);
 	void PickUpAndDrop();
+
+	UFUNCTION(BlueprintCallable)
 	void Interact();
 
-	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverLappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 };

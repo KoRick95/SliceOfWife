@@ -257,7 +257,7 @@ void AMainCharacter::Interact()
 {
 	TArray<AActor*> actors;
 	SphereCollider->GetOverlappingActors(actors);
-
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Interacting...")));
 	for (int i = 0; i < actors.Num(); ++i)
 	{
 		if (actors[i]->ActorHasTag("DisassemblingTable"))
@@ -270,7 +270,7 @@ void AMainCharacter::Interact()
 		if (actors[i]->ActorHasTag("AssemblingTable"))
 		{
 			AAssemblingTable* aTable = Cast<AAssemblingTable>(actors[i]);
-			aTable->Animate();
+			aTable->StartSewing();
 			break;
 		}
 	}
