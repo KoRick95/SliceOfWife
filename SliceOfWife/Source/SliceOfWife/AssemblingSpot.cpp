@@ -3,6 +3,7 @@
 
 #include "AssemblingSpot.h"
 #include "AssemblingTable.h"
+#include "Engine.h"
 
 // Sets default values
 AAssemblingSpot::AAssemblingSpot()
@@ -23,8 +24,14 @@ void AAssemblingSpot::BeginPlay()
 			if (this->GetAttachParentActor()->IsA(AAssemblingTable::StaticClass()))
 			{
 				table = Cast<AAssemblingTable>(this->GetAttachParentActor());
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("An assembling spot is not attached to a table.")));
 			}
 		}
+	}
+
+	if (Tags.Num() == 0)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("An assembling spot is not tagged.")));
 	}
 }
 
