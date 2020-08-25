@@ -19,6 +19,8 @@ public:
 
 	class ABodyPart* bodyPart = nullptr;
 
+	USceneComponent* snapComponent = nullptr;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -26,6 +28,9 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	bool DropBodyPart(ABodyPart* aBodyPart);
+	bool RemoveBodyPart();
 
 	bool BeginSewing();
 };

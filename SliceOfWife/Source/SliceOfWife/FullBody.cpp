@@ -19,10 +19,13 @@ void AFullBody::BeginPlay()
 	TArray<AActor*> children;
 	this->GetAllChildActors(children);
 
-	// add any 
+	// add any body part that is attached to the body
 	for (int i = 0; i < children.Num(); ++i)
 	{
-		bodyParts.Add(Cast<ABodyPart>(children[i]));
+		if (children[i]->IsA(ABodyPart::StaticClass()))
+		{
+			this->bodyParts.Add(Cast<ABodyPart>(children[i]));
+		}
 	}
 }
 
@@ -42,19 +45,19 @@ void AFullBody::Attach(ABodyPart* bodyPart)
 {
 	// attach the body part and add it to the array
 	bodyPart->AttachTo(this);
-	bodyParts.Add(bodyPart);
+	this->bodyParts.Add(bodyPart);
 }
 
 bool AFullBody::Detach(ABodyPart* bodyPart)
 {
 	// check if the body part is a part of this body
-	for (int i = 0; i < bodyParts.Num(); ++i)
+	for (int i = 0; i < this->bodyParts.Num(); ++i)
 	{
-		if (bodyPart == bodyParts[i])
+		if (bodyPart == this->bodyParts[i])
 		{
 			// detach the body part and remove it from the array
 			bodyPart->Detach();
-			bodyParts.RemoveAt(i);
+			this->bodyParts.RemoveAt(i);
 			return true;
 		}
 	}
