@@ -16,7 +16,7 @@ void ABodyPart::BeginPlay()
 {
 	Super::BeginPlay();
 
-	body = Cast<AFullBody>(this->GetAttachParentActor());
+	this->attachedBody = Cast<AFullBody>(this->GetAttachParentActor());
 }
 
 // Called every frame
@@ -25,20 +25,20 @@ void ABodyPart::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void ABodyPart::AttachTo(AFullBody* body)
+void ABodyPart::AttachTo(AFullBody* fullBody)
 {
 	// attach to the body and store its reference
-	this->AttachToActor(body, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-	body = body;
+	this->AttachToActor(fullBody, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+	this->attachedBody = fullBody;
 }
 
 bool ABodyPart::Detach()
 {
-	if (body != nullptr)
+	if (this->attachedBody != nullptr)
 	{
 		// detach from the body and remove its reference
 		this->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-		body = nullptr;
+		this->attachedBody = nullptr;
 		return true;
 	}
 

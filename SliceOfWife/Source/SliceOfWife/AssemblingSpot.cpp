@@ -34,6 +34,23 @@ void AAssemblingSpot::BeginPlay()
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("An assembling spot is not tagged.")));
 	}
+
+	TArray<UActorComponent*> tableSceneComponents = table->GetComponentsByClass(USceneComponent::StaticClass());
+	for (int i = 0; i < tableSceneComponents.Num(); ++i)
+	{
+		for (int j = 0; j < tableSceneComponents[i]->ComponentTags.Num(); ++j)
+		{
+			if (ActorHasTag(tableSceneComponents[i]->ComponentTags[j]))
+			{
+				snapComponent = Cast<USceneComponent>(tableSceneComponents[i]);
+			}
+		}
+	}
+
+	if (snapComponent == nullptr)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("An assembling spot cannot find a matching snap point.")));
+	}
 }
 
 // Called every frame
@@ -42,11 +59,53 @@ void AAssemblingSpot::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+bool AAssemblingSpot::DropBodyPart(ABodyPart* aBodyPart)
+{
+	if (aBodyPart->ActorHasTag(table->CentralBodyPartTag))
+	{
+		
+	}
+
+	if (bodyPart == nullptr)
+	{
+		for (int i = 0; i < aBodyPart->Tags.Num(); ++i)
+		{
+			if (this->ActorHasTag(aBodyPart->Tags[i]))
+			{
+				if (snapComponent != nullptr)
+				{
+					// snap the dropped object to the component
+					aBodyPart->SetActorRotation(FRotator(0, 0, 0), ETeleportType::ResetPhysics);
+					aBodyPart->AttachToComponent(snapComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+					aBodyPart->SetActorLocation(snapComponent->GetComponentLocation());
+
+					bodyPart = aBodyPart;
+					return true;
+				}
+			}
+		}
+	}
+	
+	return false;
+}
+
+bool AAssemblingSpot::RemoveBodyPart()
+{
+	if (bodyPart != nullptr)
+	{
+		bodyPart->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		bodyPart = nullptr;
+		return true;
+	}
+
+	return false;
+}
+
 bool AAssemblingSpot::BeginSewing()
 {
-	for (int i = 0; i < table->bodyParts.Num(); ++i)
+	for (int i = 0; i < table->bodyPartsOnTable.Num(); ++i)
 	{
-		if (this->ActorHasTag(table->bodyParts[i].tag))
+		if (this->ActorHasTag(table->bodyPartsOnTable[i].tag))
 		{
 			
 			return true;

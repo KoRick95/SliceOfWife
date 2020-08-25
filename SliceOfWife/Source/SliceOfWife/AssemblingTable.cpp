@@ -1,4 +1,6 @@
 #include "AssemblingTable.h"
+#include "AssemblingSpot.h"
+#include "BodyPart.h"
 #include "MinigameWidget.h"
 #include "Blueprint/UserWidget.h"
 #include "Engine.h"
@@ -15,6 +17,26 @@ AAssemblingTable::AAssemblingTable()
 void AAssemblingTable::BeginPlay()
 {
 	Super::BeginPlay();
+
+	TArray<AActor*> children;
+	this->GetAllChildActors(children);
+
+	// add any assembling spots attached to the table
+	for (int i = 0; i < children.Num(); ++i)
+	{
+		if (children[i]->IsA(AAssemblingSpot::StaticClass()))
+		{
+			this->assemblingSpots.Add(Cast<AAssemblingSpot>(children[i]));
+		}
+	}
+
+	TArray<UActorComponent*> sceneComponents;
+	sceneComponents = GetComponentsByClass(USceneComponent::StaticClass());
+
+	for (int i = 0; i < sceneComponents.Num(); ++i)
+	{
+		snapComponents.Add(Cast<USceneComponent>(sceneComponents[i]));
+	}
 }
 
 // Called every frame
@@ -44,10 +66,10 @@ bool AAssemblingTable::DropToTable(AActor* objectToDrop)
 					bool isMissingPart = true;
 
 					// check the existing body parts' tags
-					for (int b = 0; b < bodyParts.Num(); ++b)
+					for (int b = 0; b < bodyPartsOnTable.Num(); ++b)
 					{
 						// if there is already a body part with the same tag
-						if (objectToDrop->Tags[d] == bodyParts[b].tag)
+						if (objectToDrop->Tags[d] == bodyPartsOnTable[b].tag)
 						{
 							isMissingPart = false;
 						}
@@ -67,7 +89,7 @@ bool AAssemblingTable::DropToTable(AActor* objectToDrop)
 						ObjectOnTable bodyPart;
 						bodyPart.object = objectToDrop;
 						bodyPart.tag = objectToDrop->Tags[d];
-						bodyParts.Add(bodyPart);
+						bodyPartsOnTable.Add(bodyPart);
 
 						return true;
 					}
@@ -79,18 +101,45 @@ bool AAssemblingTable::DropToTable(AActor* objectToDrop)
 	return false;
 }
 
+bool AAssemblingTable::DropToTableV2(ABodyPart* bodyPart)
+{
+	if (bodyPart->ActorHasTag(CentralBodyPartTag))
+	{
+		// snap the dropped object to the component
+		//bodyPart->SetActorRotation(FRotator(0, 0, 0), ETeleportType::ResetPhysics);
+		//bodyPart->AttachToComponent(sceneComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		//bodyPart->SetActorLocation(sceneComponent->GetComponentLocation());
+	}
+
+	return false;
+}
+
 bool AAssemblingTable::RemoveFromTable(AActor* objectToRemove)
 {
 	// detach the object from the table
 	objectToRemove->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 	
 	// check the list of body parts
-	for (int i = 0; i < bodyParts.Num(); ++i)
+	for (int i = 0; i < bodyPartsOnTable.Num(); ++i)
 	{
 		// remove the body part from the list
-		if (objectToRemove == bodyParts[i].object)
+		if (objectToRemove == bodyPartsOnTable[i].object)
 		{
-			bodyParts.RemoveAt(i);
+			bodyPartsOnTable.RemoveAt(i);
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool AAssemblingTable::RemoveFromTableV2(ABodyPart* bodyPart)
+{
+	for (int i = 0; i < assemblingSpots.Num(); ++i)
+	{
+		if (assemblingSpots[i]->bodyPart == bodyPart)
+		{
+			assemblingSpots[i]->RemoveBodyPart();
 			return true;
 		}
 	}
@@ -107,24 +156,24 @@ void AAssemblingTable::StartMinigame()
 	}
 }
 
-void AAssemblingTable::Assemble(ABodyPart* bodyPArt)
+void AAssemblingTable::Assemble(ABodyPart* bodyPart)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Success!")));
 }
 
 bool AAssemblingTable::Animate()
 {
-	if (bodyParts.Num() < MinBodyParts || TemporarySpawnBody == nullptr)
+	if (bodyPartsOnTable.Num() < MinBodyParts || TemporarySpawnBody == nullptr)
 	{
 		return false;
 	}
 
 	// destroy each body part
-	for (int i = 0; i < bodyParts.Num(); ++i)
+	for (int i = 0; i < bodyPartsOnTable.Num(); ++i)
 	{
-		bodyParts[i].object->Destroy();
+		bodyPartsOnTable[i].object->Destroy();
 	}
-	bodyParts.Empty();
+	bodyPartsOnTable.Empty();
 
 	// spawn the body
 	FVector location(this->GetActorLocation() + SpawnOffset);

@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "MainCharacter.h"
 #include "AssemblingTable.h"
+#include "AssemblingSpot.h"
 #include "BodyPart.h"
 #include "BodyStorage.h"
 #include "DisassemblingTable.h"
@@ -176,10 +177,10 @@ void AMainCharacter::PickUpAndDrop()
 				ABodyPart* aBodyPart = Cast<ABodyPart>(objectToHold);
 
 				// if the body part is attached to a body
-				if (aBodyPart->body != nullptr)
+				if (aBodyPart->attachedBody != nullptr)
 				{
 					// set the object to hold as the full body
-					objectToHold = aBodyPart->body;
+					objectToHold = aBodyPart->attachedBody;
 				}
 			}
 
@@ -192,7 +193,7 @@ void AMainCharacter::PickUpAndDrop()
 				if (objectAttachParent->IsA(AAssemblingTable::StaticClass()))
 				{
 					// remove it from the assembling table
-					Cast<AAssemblingTable>(objectAttachParent)->RemoveFromTable(objectToHold);
+					Cast<AAssemblingTable>(objectAttachParent)->RemoveFromTableV2(Cast<ABodyPart>(objectToHold));
 				}
 				else if (objectAttachParent->IsA(ADisassemblingTable::StaticClass()))
 				{
@@ -216,19 +217,14 @@ void AMainCharacter::PickUpAndDrop()
 		// check nearby objects
 		for (int i = 0; i < nearbyObjects.Num(); ++i)
 		{
-			// if the assembling table is nearby
-			if (nearbyObjects[i]->ActorHasTag("AssemblingTable"))
+			if (nearbyObjects[i]->IsA(AAssemblingSpot::StaticClass()))
 			{
-				// call the table's object snapping function
-				AAssemblingTable* aTable = Cast<AAssemblingTable>(nearbyObjects[i]);
-				isSnapped = aTable->DropToTable(heldObject);
+				isSnapped = Cast<AAssemblingSpot>(nearbyObjects[i])->DropBodyPart(Cast<ABodyPart>(heldObject));
 				break;
 			}
-			else if (nearbyObjects[i]->ActorHasTag("DisassemblingTable"))
+			else if (nearbyObjects[i]->IsA(ADisassemblingTable::StaticClass()))
 			{
-				// call the table's object snapping function
-				ADisassemblingTable* dTable = Cast<ADisassemblingTable>(nearbyObjects[i]);
-				isSnapped = dTable->DropToTable(heldObject);
+				isSnapped = Cast<ADisassemblingTable>(nearbyObjects[i])->DropToTable(heldObject);
 				break;
 			}
 		}
@@ -251,7 +247,7 @@ void AMainCharacter::Interact()
 {
 	TArray<AActor*> actors;
 	SphereCollider->GetOverlappingActors(actors);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Interacting...")));
+
 	for (int i = 0; i < actors.Num(); ++i)
 	{
 		if (actors[i]->IsA(ADisassemblingTable::StaticClass()))

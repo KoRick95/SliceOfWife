@@ -21,12 +21,18 @@ public:
 		FName tag;
 	};
 
-	TArray<ObjectOnTable> bodyParts;
+	TArray<class AAssemblingSpot*> assemblingSpots;
+
+	TArray<class USceneComponent*> snapComponents;
+
+	TArray<ObjectOnTable> bodyPartsOnTable;
+
+	//TArray<class ABodyPart*> bodyParts;
 
 	class UMinigameWidget* widget;
 
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<class UMinigameWidget> WidgetBP;
+	FName CentralBodyPartTag = "Torso";
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "1"))
 	int MinBodyParts = 6;
@@ -40,6 +46,9 @@ public:
 	UPROPERTY(EditAnywhere)
 	FRotator SpawnRotation = { 0, 0, 0 };
 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UMinigameWidget> WidgetBP;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -49,12 +58,14 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	bool DropToTable(AActor* objectToDrop);
+	bool DropToTableV2(ABodyPart* bodyPart);
 	bool RemoveFromTable(AActor* objectToRemove);
+	bool RemoveFromTableV2(ABodyPart* bodyPart);
 
 	void StartMinigame();
 
 	UFUNCTION(BlueprintCallable)
-	void Assemble(class ABodyPart* bodyPart);
+	void Assemble(ABodyPart* bodyPart);
 
 	UFUNCTION(BlueprintCallable)
 	bool Animate();

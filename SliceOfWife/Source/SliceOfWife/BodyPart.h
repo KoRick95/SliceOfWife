@@ -15,7 +15,7 @@ public:
 	// Sets default values for this actor's properties
 	ABodyPart();
 
-	class AFullBody* body = nullptr;
+	class AFullBody* attachedBody = nullptr;
 
 protected:
 	// Called when the game starts or when spawned
@@ -25,6 +25,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void AttachTo(AFullBody* body);
+	void AttachTo(AFullBody* fullBody);
 	bool Detach();
 };
