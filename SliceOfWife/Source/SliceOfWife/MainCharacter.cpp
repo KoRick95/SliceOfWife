@@ -164,55 +164,47 @@ void AMainCharacter::PickUpAndDrop()
 		// check all nearby objects
 		for (int i = 0; i < nearbyObjects.Num(); ++i)
 		{
-			AActor* objectToHold = nullptr;
+			AActor* objectToHold = nearbyObjects[i];
 
-			if (nearbyObjects[i]->IsA(ABodyStorage::StaticClass()))
+			if (objectToHold->IsA(ABodyStorage::StaticClass()))
 			{
-				objectToHold = Cast<ABodyStorage>(nearbyObjects[i])->TakeBody();
+				HoldObject(Cast<ABodyStorage>(nearbyObjects[i])->TakeBody());
+				break;
 			}
-			else if (nearbyObjects[i]->IsA(AFullBody::StaticClass()))
+
+			if (objectToHold->IsA(ABodyPart::StaticClass()))
 			{
-				objectToHold = nearbyObjects[i];
-			}
-			else if (nearbyObjects[i]->IsA(ABodyPart::StaticClass()))
-			{
-				ABodyPart* aBodyPart = Cast<ABodyPart>(nearbyObjects[i]);
+				ABodyPart* aBodyPart = Cast<ABodyPart>(objectToHold);
 
 				// if the body part is attached to a body
 				if (aBodyPart->attachedBody != nullptr)
 				{
+					// set the object to hold as the full body
 					objectToHold = aBodyPart->attachedBody;
 				}
-				else
-				{
-					objectToHold = aBodyPart;
-				}
 			}
 
-			if (objectToHold != nullptr)
+			// get the object's attach parent
+			AActor* objectAttachParent = objectToHold->GetAttachParentActor();
+
+			// if the object has an attach parent
+			if (objectAttachParent != nullptr)
 			{
-				// get the object's attach parent
-				AActor* objectAttachParent = objectToHold->GetAttachParentActor();
-
-				// if the object has an attach parent
-				if (objectAttachParent != nullptr)
+				if (objectAttachParent->IsA(AAssemblingTable::StaticClass()))
 				{
-					if (objectAttachParent->IsA(AAssemblingTable::StaticClass()))
-					{
-						// remove it from the assembling table
-						Cast<AAssemblingTable>(objectAttachParent)->RemoveFromTableV2(Cast<ABodyPart>(objectToHold));
-					}
-					else if (objectAttachParent->IsA(ADisassemblingTable::StaticClass()))
-					{
-						// remove it from the disassembling table
-						Cast<ADisassemblingTable>(objectAttachParent)->RemoveFromTable();
-					}
+					// remove it from the assembling table
+					Cast<AAssemblingTable>(objectAttachParent)->RemoveFromTableV2(Cast<ABodyPart>(objectToHold));
 				}
-
-				// get player to hold the object
-				HoldObject(objectToHold);
-				break;
+				else if (objectAttachParent->IsA(ADisassemblingTable::StaticClass()))
+				{
+					// remove it from the disassembling table
+					Cast<ADisassemblingTable>(objectAttachParent)->RemoveFromTable();
+				}
 			}
+
+			// get player to hold the object
+			HoldObject(objectToHold);
+			break;
 		}
 	}
 	else
@@ -227,7 +219,7 @@ void AMainCharacter::PickUpAndDrop()
 		{
 			if (nearbyObjects[i]->IsA(AAssemblingSpot::StaticClass()))
 			{
-				isSnapped = Cast<AAssemblingSpot>(nearbyObjects[i])->DropToTable(Cast<ABodyPart>(heldObject));
+				isSnapped = Cast<AAssemblingSpot>(nearbyObjects[i])->DropBodyPart(Cast<ABodyPart>(heldObject));
 				break;
 			}
 			else if (nearbyObjects[i]->IsA(ADisassemblingTable::StaticClass()))
@@ -260,13 +252,15 @@ void AMainCharacter::Interact()
 	{
 		if (actors[i]->IsA(ADisassemblingTable::StaticClass()))
 		{
-			Cast<ADisassemblingTable>(actors[i])->Charge();
+			ADisassemblingTable* dTable = Cast<ADisassemblingTable>(actors[i]);
+			dTable->Charge();
 			break;
 		}
 
 		if (actors[i]->IsA(AAssemblingTable::StaticClass()))
 		{
-			Cast<AAssemblingTable>(actors[i])->StartMinigame();
+			AAssemblingTable* aTable = Cast<AAssemblingTable>(actors[i]);
+			aTable->StartMinigame();
 			break;
 		}
 	}

@@ -23,8 +23,11 @@ public:
 
 	TArray<class AAssemblingSpot*> assemblingSpots;
 
-	ABodyPart* centralBodyPart = nullptr;
-	USceneComponent* centralComponent = nullptr;
+	TArray<class USceneComponent*> snapComponents;
+
+	TArray<ObjectOnTable> bodyPartsOnTable;
+
+	//TArray<class ABodyPart*> bodyParts;
 
 	class UMinigameWidget* widget;
 
@@ -54,7 +57,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	bool DropToTableV2(ABodyPart* bodyPart, AAssemblingSpot* spot);
+	bool DropToTable(AActor* objectToDrop);
+	bool DropToTableV2(ABodyPart* bodyPart);
+	bool RemoveFromTable(AActor* objectToRemove);
 	bool RemoveFromTableV2(ABodyPart* bodyPart);
 
 	void StartMinigame();
