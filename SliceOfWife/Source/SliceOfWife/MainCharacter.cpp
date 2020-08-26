@@ -219,7 +219,7 @@ void AMainCharacter::PickUpAndDrop()
 		{
 			if (nearbyObjects[i]->IsA(AAssemblingSpot::StaticClass()))
 			{
-				isSnapped = Cast<AAssemblingSpot>(nearbyObjects[i])->DropToTable(Cast<ABodyPart>(heldObject));
+				isSnapped = Cast<AAssemblingSpot>(nearbyObjects[i])->DropBodyPart(Cast<ABodyPart>(heldObject));
 				break;
 			}
 			else if (nearbyObjects[i]->IsA(ADisassemblingTable::StaticClass()))
@@ -252,13 +252,15 @@ void AMainCharacter::Interact()
 	{
 		if (actors[i]->IsA(ADisassemblingTable::StaticClass()))
 		{
-			Cast<ADisassemblingTable>(actors[i])->Charge();
+			ADisassemblingTable* dTable = Cast<ADisassemblingTable>(actors[i]);
+			dTable->Charge();
 			break;
 		}
 
 		if (actors[i]->IsA(AAssemblingTable::StaticClass()))
 		{
-			Cast<AAssemblingTable>(actors[i])->StartMinigame();
+			AAssemblingTable* aTable = Cast<AAssemblingTable>(actors[i]);
+			aTable->StartMinigame();
 			break;
 		}
 	}
