@@ -1,5 +1,6 @@
 #include "DisassemblingTable.h"
 #include "BodyPart.h"
+#include "FullBody.h"
 #include "Soul.h"
 #include "Components/PrimitiveComponent.h"
 #include "Components/SkeletalMeshComponent.h"
@@ -26,7 +27,7 @@ void ADisassemblingTable::Tick(float DeltaTime)
 
 bool ADisassemblingTable::DropToTable(AActor* body)
 {
-	if (body->ActorHasTag(TagToCheck) && bodyOnTable == nullptr)
+	if (body->IsA(AFullBody::StaticClass()) && bodyOnTable == nullptr)
 	{
 		// snap the body to the table
 		body->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
@@ -47,7 +48,6 @@ bool ADisassemblingTable::RemoveFromTable()
 		// detach the object from the table
 		bodyOnTable->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		bodyOnTable = nullptr;
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Removed.")));
 		return true;
 	}
 	
