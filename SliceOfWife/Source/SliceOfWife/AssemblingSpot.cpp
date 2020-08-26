@@ -71,5 +71,13 @@ bool AAssemblingSpot::RemoveFromTable(ABodyPart* aBodyPart)
 
 bool AAssemblingSpot::BeginSewing()
 {
+	for (int i = 0; i < table->bodyPartsOnTable.Num(); ++i)
+	{
+		if (this->ActorHasTag(table->bodyPartsOnTable[i].tag))
+		{
+			
+			return true;
+		}
+	}
 	return false;
 }

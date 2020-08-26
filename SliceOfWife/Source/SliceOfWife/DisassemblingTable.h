@@ -20,6 +20,9 @@ public:
 	float charge = 0;
 
 	UPROPERTY(EditAnywhere, Category = "Snapping")
+	FName TagToCheck = "FullBody";
+
+	UPROPERTY(EditAnywhere, Category = "Snapping")
 	FVector SnapPosition = { 0, 0, 150 };
 
 	UPROPERTY(EditAnywhere, Category = "Snapping")
