@@ -3,7 +3,6 @@
 #include "BodyPart.h"
 #include "FullBody.h"
 #include "Components/SkeletalMeshComponent.h"
-#include "Engine.h"
 
 // Sets default values
 ABodyPart::ABodyPart()
@@ -17,7 +16,7 @@ void ABodyPart::BeginPlay()
 {
 	Super::BeginPlay();
 
-	attachedBody = Cast<AFullBody>(this->GetAttachParentActor());
+	this->attachedBody = Cast<AFullBody>(this->GetAttachParentActor());
 }
 
 // Called every frame
@@ -26,14 +25,14 @@ void ABodyPart::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void ABodyPart::AttachToBody(AFullBody* fullBody)
+void ABodyPart::AttachTo(AFullBody* fullBody)
 {
 	// attach to the body and store its reference
 	this->AttachToActor(fullBody, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 	this->attachedBody = fullBody;
 }
 
-bool ABodyPart::DetachFromBody()
+bool ABodyPart::Detach()
 {
 	if (this->attachedBody != nullptr)
 	{
