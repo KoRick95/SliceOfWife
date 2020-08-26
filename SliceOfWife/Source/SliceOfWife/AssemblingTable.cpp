@@ -35,7 +35,15 @@ void AAssemblingTable::BeginPlay()
 
 	for (int i = 0; i < sceneComponents.Num(); ++i)
 	{
-		snapComponents.Add(Cast<USceneComponent>(sceneComponents[i]));
+		if (sceneComponents[i]->ComponentHasTag(CentralBodyPartTag))
+		{
+			CentralComponent = Cast<USceneComponent>(sceneComponents[i]);
+		}
+	}
+
+	if (CentralComponent == nullptr)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("The disassembling table has no central component.")));
 	}
 }
 
@@ -101,14 +109,36 @@ bool AAssemblingTable::DropToTable(AActor* objectToDrop)
 	return false;
 }
 
-bool AAssemblingTable::DropToTableV2(ABodyPart* bodyPart)
+bool AAssemblingTable::DropToTableV2(ABodyPart* bodyPart, AAssemblingSpot* spot)
 {
+	if (bodyPart == nullptr || spot == nullptr)
+	{
+		return false;
+	}
+
 	if (bodyPart->ActorHasTag(CentralBodyPartTag))
 	{
-		// snap the dropped object to the component
-		//bodyPart->SetActorRotation(FRotator(0, 0, 0), ETeleportType::ResetPhysics);
-		//bodyPart->AttachToComponent(sceneComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-		//bodyPart->SetActorLocation(sceneComponent->GetComponentLocation());
+		// snap the dropped object to the central component
+		bodyPart->SetActorRotation(FRotator(0, 0, 0), ETeleportType::ResetPhysics);
+		bodyPart->AttachToComponent(CentralComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		bodyPart->SetActorLocation(CentralComponent->GetComponentLocation());
+		return true;
+	}
+	else if (spot->bodyPart == nullptr)
+	{
+		for (int i = 0; i < bodyPart->Tags.Num(); ++i)
+		{
+			if (this->ActorHasTag(bodyPart->Tags[i]))
+			{
+				spot->bodyPart = bodyPart;
+
+				// snap the dropped object to the component
+				bodyPart->SetActorRotation(FRotator(0, 0, 0), ETeleportType::ResetPhysics);
+				bodyPart->AttachToComponent(spot->tableComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+				bodyPart->SetActorLocation(spot->tableComponent->GetComponentLocation());
+				return true;
+			}
+		}
 	}
 
 	return false;
@@ -139,7 +169,8 @@ bool AAssemblingTable::RemoveFromTableV2(ABodyPart* bodyPart)
 	{
 		if (assemblingSpots[i]->bodyPart == bodyPart)
 		{
-			assemblingSpots[i]->RemoveBodyPart();
+			bodyPart->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+			assemblingSpots[i]->bodyPart = nullptr;
 			return true;
 		}
 	}
