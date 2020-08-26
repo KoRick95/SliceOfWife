@@ -164,47 +164,55 @@ void AMainCharacter::PickUpAndDrop()
 		// check all nearby objects
 		for (int i = 0; i < nearbyObjects.Num(); ++i)
 		{
-			AActor* objectToHold = nearbyObjects[i];
+			AActor* objectToHold = nullptr;
 
-			if (objectToHold->IsA(ABodyStorage::StaticClass()))
+			if (nearbyObjects[i]->IsA(ABodyStorage::StaticClass()))
 			{
-				HoldObject(Cast<ABodyStorage>(nearbyObjects[i])->TakeBody());
-				break;
+				objectToHold = Cast<ABodyStorage>(nearbyObjects[i])->TakeBody();
 			}
-
-			if (objectToHold->IsA(ABodyPart::StaticClass()))
+			else if (nearbyObjects[i]->IsA(AFullBody::StaticClass()))
 			{
-				ABodyPart* aBodyPart = Cast<ABodyPart>(objectToHold);
+				objectToHold = nearbyObjects[i];
+			}
+			else if (nearbyObjects[i]->IsA(ABodyPart::StaticClass()))
+			{
+				ABodyPart* aBodyPart = Cast<ABodyPart>(nearbyObjects[i]);
 
 				// if the body part is attached to a body
 				if (aBodyPart->attachedBody != nullptr)
 				{
-					// set the object to hold as the full body
 					objectToHold = aBodyPart->attachedBody;
 				}
+				else
+				{
+					objectToHold = aBodyPart;
+				}
 			}
 
-			// get the object's attach parent
-			AActor* objectAttachParent = objectToHold->GetAttachParentActor();
-
-			// if the object has an attach parent
-			if (objectAttachParent != nullptr)
+			if (objectToHold != nullptr)
 			{
-				if (objectAttachParent->IsA(AAssemblingTable::StaticClass()))
-				{
-					// remove it from the assembling table
-					Cast<AAssemblingTable>(objectAttachParent)->RemoveFromTableV2(Cast<ABodyPart>(objectToHold));
-				}
-				else if (objectAttachParent->IsA(ADisassemblingTable::StaticClass()))
-				{
-					// remove it from the disassembling table
-					Cast<ADisassemblingTable>(objectAttachParent)->RemoveFromTable();
-				}
-			}
+				// get the object's attach parent
+				AActor* objectAttachParent = objectToHold->GetAttachParentActor();
 
-			// get player to hold the object
-			HoldObject(objectToHold);
-			break;
+				// if the object has an attach parent
+				if (objectAttachParent != nullptr)
+				{
+					if (objectAttachParent->IsA(AAssemblingTable::StaticClass()))
+					{
+						// remove it from the assembling table
+						Cast<AAssemblingTable>(objectAttachParent)->RemoveFromTableV2(Cast<ABodyPart>(objectToHold));
+					}
+					else if (objectAttachParent->IsA(ADisassemblingTable::StaticClass()))
+					{
+						// remove it from the disassembling table
+						Cast<ADisassemblingTable>(objectAttachParent)->RemoveFromTable();
+					}
+				}
+
+				// get player to hold the object
+				HoldObject(objectToHold);
+				break;
+			}
 		}
 	}
 	else

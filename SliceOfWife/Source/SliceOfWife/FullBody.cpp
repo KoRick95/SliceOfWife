@@ -41,14 +41,14 @@ void AFullBody::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
-void AFullBody::Attach(ABodyPart* bodyPart)
+void AFullBody::AttachBodyPart(ABodyPart* bodyPart)
 {
 	// attach the body part and add it to the array
-	bodyPart->AttachTo(this);
+	bodyPart->AttachToBody(this);
 	this->bodyParts.Add(bodyPart);
 }
 
-bool AFullBody::Detach(ABodyPart* bodyPart)
+bool AFullBody::DetachBodyPart(ABodyPart* bodyPart)
 {
 	// check if the body part is a part of this body
 	for (int i = 0; i < this->bodyParts.Num(); ++i)
@@ -56,7 +56,7 @@ bool AFullBody::Detach(ABodyPart* bodyPart)
 		if (bodyPart == this->bodyParts[i])
 		{
 			// detach the body part and remove it from the array
-			bodyPart->Detach();
+			bodyPart->DetachFromBody();
 			this->bodyParts.RemoveAt(i);
 			return true;
 		}
