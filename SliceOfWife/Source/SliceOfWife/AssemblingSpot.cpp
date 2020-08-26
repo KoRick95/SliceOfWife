@@ -42,12 +42,12 @@ void AAssemblingSpot::BeginPlay()
 		{
 			if (ActorHasTag(tableSceneComponents[i]->ComponentTags[j]))
 			{
-				snapComponent = Cast<USceneComponent>(tableSceneComponents[i]);
+				tableComponent = Cast<USceneComponent>(tableSceneComponents[i]);
 			}
 		}
 	}
 
-	if (snapComponent == nullptr)
+	if (tableComponent == nullptr)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("An assembling spot cannot find a matching snap point.")));
 	}
@@ -59,58 +59,17 @@ void AAssemblingSpot::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-bool AAssemblingSpot::DropBodyPart(ABodyPart* aBodyPart)
+bool AAssemblingSpot::DropToTable(ABodyPart* aBodyPart)
 {
-	if (aBodyPart->ActorHasTag(table->CentralBodyPartTag))
-	{
-		
-	}
-
-	if (bodyPart == nullptr)
-	{
-		for (int i = 0; i < aBodyPart->Tags.Num(); ++i)
-		{
-			if (this->ActorHasTag(aBodyPart->Tags[i]))
-			{
-				if (snapComponent != nullptr)
-				{
-					// snap the dropped object to the component
-					aBodyPart->SetActorRotation(FRotator(0, 0, 0), ETeleportType::ResetPhysics);
-					aBodyPart->AttachToComponent(snapComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-					aBodyPart->SetActorLocation(snapComponent->GetComponentLocation());
-
-					bodyPart = aBodyPart;
-					return true;
-				}
-			}
-		}
-	}
-	
-	return false;
+	return table->DropToTableV2(aBodyPart, this);
 }
 
-bool AAssemblingSpot::RemoveBodyPart()
+bool AAssemblingSpot::RemoveFromTable(ABodyPart* aBodyPart)
 {
-	if (bodyPart != nullptr)
-	{
-		bodyPart->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-		bodyPart = nullptr;
-		return true;
-	}
-
-	return false;
+	return table->RemoveFromTableV2(aBodyPart);
 }
 
 bool AAssemblingSpot::BeginSewing()
 {
-	for (int i = 0; i < table->bodyPartsOnTable.Num(); ++i)
-	{
-		if (this->ActorHasTag(table->bodyPartsOnTable[i].tag))
-		{
-			
-			return true;
-		}
-	}
 	return false;
 }
-
