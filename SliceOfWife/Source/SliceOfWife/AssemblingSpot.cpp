@@ -18,21 +18,24 @@ void AAssemblingSpot::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (table == nullptr)
-	{
-		if (this->GetAttachParentActor() != nullptr)
-		{
-			if (this->GetAttachParentActor()->IsA(AAssemblingTable::StaticClass()))
-			{
-				table = Cast<AAssemblingTable>(this->GetAttachParentActor());
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("An assembling spot is not attached to a table.")));
-			}
-		}
-	}
-
 	if (Tags.Num() == 0)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("An assembling spot is not tagged.")));
+	}
+
+	if (this->GetAttachParentActor() != nullptr)
+	{
+		if (this->GetAttachParentActor()->IsA(AAssemblingTable::StaticClass()))
+		{
+			table = Cast<AAssemblingTable>(this->GetAttachParentActor());
+			
+		}
+	}
+
+	if (table == nullptr)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("An assembling spot is not attached to a table.")));
+		return;
 	}
 
 	TArray<UActorComponent*> tableSceneComponents = table->GetComponentsByClass(USceneComponent::StaticClass());
