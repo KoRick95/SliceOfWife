@@ -35,7 +35,6 @@ void AAssemblingTable::BeginPlay()
 
 	for (int i = 0; i < sceneComponents.Num(); ++i)
 	{
-<<<<<<< HEAD
 		if (sceneComponents[i]->ComponentHasTag(CentralBodyPartTag))
 		{
 			CentralComponent = Cast<USceneComponent>(sceneComponents[i]);
@@ -45,9 +44,6 @@ void AAssemblingTable::BeginPlay()
 	if (CentralComponent == nullptr)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("The disassembling table has no central component.")));
-=======
-		snapComponents.Add(Cast<USceneComponent>(sceneComponents[i]));
->>>>>>> parent of 14e10f4... Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
 	}
 }
 
@@ -58,7 +54,6 @@ void AAssemblingTable::Tick(float DeltaTime)
 }
 
 bool AAssemblingTable::DropToTable(AActor* objectToDrop)
-<<<<<<< HEAD
 {
 	// get all of its scene components
 	TArray<UActorComponent*> components;
@@ -115,17 +110,14 @@ bool AAssemblingTable::DropToTable(AActor* objectToDrop)
 }
 
 bool AAssemblingTable::DropToTableV2(ABodyPart* bodyPart, AAssemblingSpot* spot)
-=======
->>>>>>> parent of 14e10f4... Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
 {
-	// get all of its scene components
-	TArray<UActorComponent*> components;
-	components = this->GetComponentsByClass(USceneComponent::StaticClass());
-
-	// check each component
-	for (int i = 0; i < components.Num(); ++i)
+	if (bodyPart == nullptr || spot == nullptr)
 	{
-<<<<<<< HEAD
+		return false;
+	}
+
+	if (bodyPart->ActorHasTag(CentralBodyPartTag))
+	{
 		// snap the dropped object to the central component
 		bodyPart->SetActorRotation(FRotator(0, 0, 0), ETeleportType::ResetPhysics);
 		bodyPart->AttachToComponent(CentralComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
@@ -135,48 +127,16 @@ bool AAssemblingTable::DropToTableV2(ABodyPart* bodyPart, AAssemblingSpot* spot)
 	else if (spot->bodyPart == nullptr)
 	{
 		for (int i = 0; i < bodyPart->Tags.Num(); ++i)
-=======
-		// check each component's tags
-		for (int c = 0; c < components[i]->ComponentTags.Num(); ++c)
->>>>>>> parent of 14e10f4... Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
 		{
-			// check the dropped object's tags
-			for (int d = 0; d < objectToDrop->Tags.Num(); ++d)
+			if (this->ActorHasTag(bodyPart->Tags[i]))
 			{
-				// if there is a matching tag
-				if (components[i]->ComponentTags[c] == objectToDrop->Tags[d])
-				{
-					bool isMissingPart = true;
+				spot->bodyPart = bodyPart;
 
-					// check the existing body parts' tags
-					for (int b = 0; b < bodyPartsOnTable.Num(); ++b)
-					{
-						// if there is already a body part with the same tag
-						if (objectToDrop->Tags[d] == bodyPartsOnTable[b].tag)
-						{
-							isMissingPart = false;
-						}
-					}
-
-					if (isMissingPart)
-					{
-						// cast the component as a scene component
-						USceneComponent* sceneComponent = Cast<USceneComponent>(components[i]);
-
-						// snap the dropped object to the component
-						objectToDrop->SetActorRotation(FRotator(0, 0, 0), ETeleportType::ResetPhysics);
-						objectToDrop->AttachToComponent(sceneComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-						objectToDrop->SetActorLocation(sceneComponent->GetComponentLocation());
-
-						// remember the dropped body part
-						ObjectOnTable bodyPart;
-						bodyPart.object = objectToDrop;
-						bodyPart.tag = objectToDrop->Tags[d];
-						bodyPartsOnTable.Add(bodyPart);
-
-						return true;
-					}
-				}
+				// snap the dropped object to the component
+				bodyPart->SetActorRotation(FRotator(0, 0, 0), ETeleportType::ResetPhysics);
+				bodyPart->AttachToComponent(spot->tableComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+				bodyPart->SetActorLocation(spot->tableComponent->GetComponentLocation());
+				return true;
 			}
 		}
 	}
@@ -184,39 +144,6 @@ bool AAssemblingTable::DropToTableV2(ABodyPart* bodyPart, AAssemblingSpot* spot)
 	return false;
 }
 
-<<<<<<< HEAD
-bool AAssemblingTable::RemoveFromTable(AActor* objectToRemove)
-{
-	// detach the object from the table
-	objectToRemove->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-	
-	// check the list of body parts
-	for (int i = 0; i < bodyPartsOnTable.Num(); ++i)
-	{
-		// remove the body part from the list
-		if (objectToRemove == bodyPartsOnTable[i].object)
-		{
-			bodyPartsOnTable.RemoveAt(i);
-			return true;
-		}
-=======
-bool AAssemblingTable::DropToTableV2(ABodyPart* bodyPart)
-{
-	if (bodyPart->ActorHasTag(CentralBodyPartTag))
-	{
-		// snap the dropped object to the component
-		//bodyPart->SetActorRotation(FRotator(0, 0, 0), ETeleportType::ResetPhysics);
-		//bodyPart->AttachToComponent(sceneComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-		//bodyPart->SetActorLocation(sceneComponent->GetComponentLocation());
->>>>>>> parent of 14e10f4... Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
-	}
-
-	return false;
-}
-<<<<<<< HEAD
-
-=======
-
 bool AAssemblingTable::RemoveFromTable(AActor* objectToRemove)
 {
 	// detach the object from the table
@@ -236,14 +163,14 @@ bool AAssemblingTable::RemoveFromTable(AActor* objectToRemove)
 	return false;
 }
 
->>>>>>> parent of 14e10f4... Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
 bool AAssemblingTable::RemoveFromTableV2(ABodyPart* bodyPart)
 {
 	for (int i = 0; i < assemblingSpots.Num(); ++i)
 	{
 		if (assemblingSpots[i]->bodyPart == bodyPart)
 		{
-			assemblingSpots[i]->RemoveBodyPart();
+			bodyPart->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+			assemblingSpots[i]->bodyPart = nullptr;
 			return true;
 		}
 	}

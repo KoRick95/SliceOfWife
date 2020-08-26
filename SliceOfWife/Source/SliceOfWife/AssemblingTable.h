@@ -23,20 +23,13 @@ public:
 
 	TArray<class AAssemblingSpot*> assemblingSpots;
 
-<<<<<<< HEAD
 	//TArray<class USceneComponent*> snapComponents;
-=======
-	TArray<class USceneComponent*> snapComponents;
->>>>>>> parent of 14e10f4... Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
 
 	TArray<ObjectOnTable> bodyPartsOnTable;
 
 	//TArray<class ABodyPart*> bodyParts;
-<<<<<<< HEAD
 
 	USceneComponent* CentralComponent;
-=======
->>>>>>> parent of 14e10f4... Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
 
 	class UMinigameWidget* widget;
 
@@ -67,11 +60,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	bool DropToTable(AActor* objectToDrop);
-<<<<<<< HEAD
 	bool DropToTableV2(ABodyPart* bodyPart, AAssemblingSpot* spot);
-=======
-	bool DropToTableV2(ABodyPart* bodyPart);
->>>>>>> parent of 14e10f4... Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
 	bool RemoveFromTable(AActor* objectToRemove);
 	bool RemoveFromTableV2(ABodyPart* bodyPart);
 
