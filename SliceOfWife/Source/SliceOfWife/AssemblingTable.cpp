@@ -53,13 +53,13 @@ void AAssemblingTable::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-bool AAssemblingTable::DropToTableV2(ABodyPart* bodyPart, AAssemblingSpot* spot)
+bool AAssemblingTable::DropToTable(ABodyPart* bodyPart, AAssemblingSpot* spot)
 {
 	if (bodyPart == nullptr || spot == nullptr)
 	{
 		return false;
 	}
-
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Drop function called.")));
 	if (bodyPart->ActorHasTag(CentralBodyPartTag))
 	{
 		centralBodyPart = bodyPart;
@@ -70,14 +70,18 @@ bool AAssemblingTable::DropToTableV2(ABodyPart* bodyPart, AAssemblingSpot* spot)
 		bodyPart->SetActorLocation(centralComponent->GetComponentLocation());
 		return true;
 	}
+	// if spot is not already occupied by another body part
 	else if (spot->bodyPart == nullptr)
 	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Assembling table has an open spot.")));
+		// check the body part's tags
 		for (int i = 0; i < bodyPart->Tags.Num(); ++i)
 		{
-			if (this->ActorHasTag(bodyPart->Tags[i]))
+			// if this spot has a matching tag
+			if (spot->ActorHasTag(bodyPart->Tags[i]))
 			{
 				spot->bodyPart = bodyPart;
-
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Matching tag found.")));
 				// snap the dropped object to the component
 				bodyPart->SetActorRotation(FRotator(0, 0, 0), ETeleportType::ResetPhysics);
 				bodyPart->AttachToComponent(spot->tableComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
@@ -90,7 +94,7 @@ bool AAssemblingTable::DropToTableV2(ABodyPart* bodyPart, AAssemblingSpot* spot)
 	return false;
 }
 
-bool AAssemblingTable::RemoveFromTableV2(ABodyPart* bodyPart)
+bool AAssemblingTable::RemoveFromTable(ABodyPart* bodyPart)
 {
 	if (bodyPart == nullptr)
 	{

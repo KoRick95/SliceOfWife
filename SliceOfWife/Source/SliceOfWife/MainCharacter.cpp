@@ -200,7 +200,7 @@ void AMainCharacter::PickUpAndDrop()
 					if (objectAttachParent->IsA(AAssemblingTable::StaticClass()))
 					{
 						// remove it from the assembling table
-						Cast<AAssemblingTable>(objectAttachParent)->RemoveFromTableV2(Cast<ABodyPart>(objectToHold));
+						Cast<AAssemblingTable>(objectAttachParent)->RemoveFromTable(Cast<ABodyPart>(objectToHold));
 					}
 					else if (objectAttachParent->IsA(ADisassemblingTable::StaticClass()))
 					{
@@ -227,6 +227,7 @@ void AMainCharacter::PickUpAndDrop()
 		{
 			if (nearbyObjects[i]->IsA(AAssemblingSpot::StaticClass()))
 			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Assembling spot found.")));
 				isSnapped = Cast<AAssemblingSpot>(nearbyObjects[i])->DropToTable(Cast<ABodyPart>(heldObject));
 				break;
 			}
