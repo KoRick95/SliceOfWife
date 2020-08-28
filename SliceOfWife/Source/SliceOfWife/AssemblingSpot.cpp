@@ -28,7 +28,6 @@ void AAssemblingSpot::BeginPlay()
 		if (this->GetAttachParentActor()->IsA(AAssemblingTable::StaticClass()))
 		{
 			table = Cast<AAssemblingTable>(this->GetAttachParentActor());
-			
 		}
 	}
 
@@ -64,12 +63,12 @@ void AAssemblingSpot::Tick(float DeltaTime)
 
 bool AAssemblingSpot::DropToTable(ABodyPart* aBodyPart)
 {
-	return table->DropToTableV2(aBodyPart, this);
+	return table->DropToTable(aBodyPart, this);
 }
 
 bool AAssemblingSpot::RemoveFromTable(ABodyPart* aBodyPart)
 {
-	return table->RemoveFromTableV2(aBodyPart);
+	return table->RemoveFromTable(aBodyPart);
 }
 
 bool AAssemblingSpot::BeginSewing()

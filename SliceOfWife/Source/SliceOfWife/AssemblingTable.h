@@ -54,8 +54,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	bool DropToTableV2(ABodyPart* bodyPart, AAssemblingSpot* spot);
-	bool RemoveFromTableV2(ABodyPart* bodyPart);
+	bool DropToTable(ABodyPart* bodyPart, AAssemblingSpot* spot);
+	bool RemoveFromTable(ABodyPart* bodyPart);
 
 	void StartMinigame();
 
