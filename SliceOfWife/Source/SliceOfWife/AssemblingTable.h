@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Enums.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "AssemblingTable.generated.h"
@@ -15,21 +16,14 @@ public:
 	// Sets default values for this actor's properties
 	AAssemblingTable();
 
-	struct ObjectOnTable
-	{
-		AActor* object;
-		FName tag;
-	};
-
 	TArray<class AAssemblingSpot*> assemblingSpots;
 
 	ABodyPart* centralBodyPart = nullptr;
-	USceneComponent* centralComponent = nullptr;
 
 	class UMinigameWidget* widget;
 
 	UPROPERTY(EditAnywhere)
-	FName CentralBodyPartTag = "Torso";
+	TEnumAsByte<EBodyPartType> CentralBodyPartType = EBodyPartType::Torso;
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "1"))
 	int MinBodyParts = 6;

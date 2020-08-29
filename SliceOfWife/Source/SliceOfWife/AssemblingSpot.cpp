@@ -9,8 +9,11 @@
 // Sets default values
 AAssemblingSpot::AAssemblingSpot()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	//BoxCollider = CreateDefaultSubobject<UBoxComponent>("Fuckmeamirite");
+	//BoxCollider->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 }
 
 // Called when the game starts or when spawned
@@ -35,23 +38,6 @@ void AAssemblingSpot::BeginPlay()
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("An assembling spot is not attached to a table.")));
 		return;
-	}
-
-	TArray<UActorComponent*> tableSceneComponents = table->GetComponentsByClass(USceneComponent::StaticClass());
-	for (int i = 0; i < tableSceneComponents.Num(); ++i)
-	{
-		for (int j = 0; j < tableSceneComponents[i]->ComponentTags.Num(); ++j)
-		{
-			if (ActorHasTag(tableSceneComponents[i]->ComponentTags[j]))
-			{
-				tableComponent = Cast<USceneComponent>(tableSceneComponents[i]);
-			}
-		}
-	}
-
-	if (tableComponent == nullptr)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("An assembling spot cannot find a matching snap point.")));
 	}
 }
 

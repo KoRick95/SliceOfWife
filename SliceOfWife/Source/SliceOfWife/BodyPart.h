@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Enums.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "BodyPart.generated.h"
@@ -19,6 +20,9 @@ public:
 
 	class USkeletalMesh* skeletalMesh = nullptr;
 
+	UPROPERTY(EditAnywhere)
+	TArray<TEnumAsByte<EBodyPartType>> BodyPartTypes;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -29,6 +33,8 @@ public:
 
 	FVector GetMeshRelativeLocation();
 	float GetMeshRadius();
+
+	bool CheckForType(EBodyPartType type);
 
 	bool AttachToBody(AFullBody* fullBody);
 	bool DetachFromBody();

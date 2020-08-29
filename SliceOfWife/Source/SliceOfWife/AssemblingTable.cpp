@@ -29,22 +29,6 @@ void AAssemblingTable::BeginPlay()
 			this->assemblingSpots.Add(Cast<AAssemblingSpot>(children[i]));
 		}
 	}
-
-	TArray<UActorComponent*> sceneComponents;
-	sceneComponents = GetComponentsByClass(USceneComponent::StaticClass());
-
-	for (int i = 0; i < sceneComponents.Num(); ++i)
-	{
-		if (sceneComponents[i]->ComponentHasTag(CentralBodyPartTag))
-		{
-			centralComponent = Cast<USceneComponent>(sceneComponents[i]);
-		}
-	}
-
-	if (centralComponent == nullptr)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("The disassembling table has no central component.")));
-	}
 }
 
 // Called every frame
@@ -62,31 +46,22 @@ bool AAssemblingTable::DropToTable(ABodyPart* bodyPart, AAssemblingSpot* spot)
 
 	bool dropped = false;
 
-	if (bodyPart->ActorHasTag(CentralBodyPartTag))
+	if (bodyPart->CheckForType(CentralBodyPartType))
 	{
 		centralBodyPart = bodyPart;
 
-		// snap the dropped object to the central component
-		bodyPart->AttachToComponent(centralComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-		bodyPart->SetActorLocation(centralComponent->GetComponentLocation());
+		// snap
+
 		dropped = true;
 	}
 	// if spot is not already occupied by another body part
 	else if (spot->bodyPart == nullptr)
 	{
-		// check the body part's tags
-		for (int i = 0; i < bodyPart->Tags.Num(); ++i)
+		if (bodyPart->CheckForType(spot->BodyPartType))
 		{
-			// if this spot has a matching tag
-			if (spot->ActorHasTag(bodyPart->Tags[i]))
-			{
-				spot->bodyPart = bodyPart;
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Matching tag found.")));
-				// snap the dropped object to the component
-				bodyPart->AttachToComponent(spot->tableComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-				bodyPart->SetActorLocation(spot->tableComponent->GetComponentLocation(), false, nullptr, ETeleportType::ResetPhysics);
-				dropped = true;
-			}
+			// snap
+
+			dropped = true;
 		}
 	}
 
@@ -107,7 +82,7 @@ bool AAssemblingTable::RemoveFromTable(ABodyPart* bodyPart)
 		return false;
 	}
 
-	if (bodyPart->ActorHasTag(CentralBodyPartTag))
+	if (bodyPart->CheckForType(CentralBodyPartType))
 	{
 		bodyPart->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		centralBodyPart = nullptr;

@@ -2,9 +2,11 @@
 
 #pragma once
 
+#include "Enums.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "AssemblingSpot.generated.h"
+
 
 UCLASS()
 class SLICEOFWIFE_API AAssemblingSpot : public AActor
@@ -19,7 +21,8 @@ public:
 
 	class ABodyPart* bodyPart = nullptr;
 
-	USceneComponent* tableComponent = nullptr;
+	UPROPERTY(EditAnywhere)
+	TEnumAsByte<EBodyPartType> BodyPartType;
 
 protected:
 	// Called when the game starts or when spawned

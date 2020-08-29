@@ -43,6 +43,19 @@ float ABodyPart::GetMeshRadius()
 	return skeletalMesh->GetBounds().SphereRadius;
 }
 
+bool ABodyPart::CheckForType(EBodyPartType type)
+{
+	for (int i = 0; i < BodyPartTypes.Num(); ++i)
+	{
+		if (BodyPartTypes[i] == type)
+		{
+			return true;
+		}
+	}
+	
+	return false;
+}
+
 bool ABodyPart::AttachToBody(AFullBody* fullBody)
 {
 	if (fullBody != nullptr)
