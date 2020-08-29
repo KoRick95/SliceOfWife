@@ -59,21 +59,21 @@ bool AAssemblingTable::DropToTable(ABodyPart* bodyPart, AAssemblingSpot* spot)
 	{
 		return false;
 	}
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Drop function called.")));
+
+	bool dropped = false;
+
 	if (bodyPart->ActorHasTag(CentralBodyPartTag))
 	{
 		centralBodyPart = bodyPart;
 
 		// snap the dropped object to the central component
-		bodyPart->SetActorRotation(FRotator(0, 0, 0), ETeleportType::ResetPhysics);
 		bodyPart->AttachToComponent(centralComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 		bodyPart->SetActorLocation(centralComponent->GetComponentLocation());
-		return true;
+		dropped = true;
 	}
 	// if spot is not already occupied by another body part
 	else if (spot->bodyPart == nullptr)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Assembling table has an open spot.")));
 		// check the body part's tags
 		for (int i = 0; i < bodyPart->Tags.Num(); ++i)
 		{
@@ -83,15 +83,21 @@ bool AAssemblingTable::DropToTable(ABodyPart* bodyPart, AAssemblingSpot* spot)
 				spot->bodyPart = bodyPart;
 				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Matching tag found.")));
 				// snap the dropped object to the component
-				bodyPart->SetActorRotation(FRotator(0, 0, 0), ETeleportType::ResetPhysics);
 				bodyPart->AttachToComponent(spot->tableComponent, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-				bodyPart->SetActorLocation(spot->tableComponent->GetComponentLocation());
-				return true;
+				bodyPart->SetActorLocation(spot->tableComponent->GetComponentLocation(), false, nullptr, ETeleportType::ResetPhysics);
+				dropped = true;
 			}
 		}
 	}
 
-	return false;
+	if (dropped)
+	{
+		// offset the body part by its mesh's relative position
+		FVector offset = -bodyPart->GetMeshRelativeLocation();
+		bodyPart->SetActorRelativeLocation(offset, false, nullptr, ETeleportType::ResetPhysics);
+	}
+
+	return dropped;
 }
 
 bool AAssemblingTable::RemoveFromTable(ABodyPart* bodyPart)

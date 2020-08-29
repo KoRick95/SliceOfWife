@@ -17,6 +17,8 @@ public:
 
 	class AFullBody* attachedBody = nullptr;
 
+	class USkeletalMesh* skeletalMesh = nullptr;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -25,6 +27,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void AttachToBody(AFullBody* fullBody);
+	FVector GetMeshRelativeLocation();
+	float GetMeshRadius();
+
+	bool AttachToBody(AFullBody* fullBody);
 	bool DetachFromBody();
 };

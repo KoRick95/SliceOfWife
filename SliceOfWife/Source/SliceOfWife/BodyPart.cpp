@@ -18,6 +18,13 @@ void ABodyPart::BeginPlay()
 	Super::BeginPlay();
 
 	attachedBody = Cast<AFullBody>(this->GetAttachParentActor());
+
+	USkeletalMeshComponent* skeletalMeshComponent = Cast<USkeletalMeshComponent>(GetComponentByClass(USkeletalMeshComponent::StaticClass()));
+	
+	if (skeletalMeshComponent != nullptr)
+	{
+		skeletalMesh = skeletalMeshComponent->SkeletalMesh;
+	}
 }
 
 // Called every frame
@@ -26,11 +33,27 @@ void ABodyPart::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void ABodyPart::AttachToBody(AFullBody* fullBody)
+FVector ABodyPart::GetMeshRelativeLocation()
 {
-	// attach to the body and store its reference
-	this->AttachToActor(fullBody, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-	this->attachedBody = fullBody;
+	return skeletalMesh->GetBounds().Origin;
+}
+
+float ABodyPart::GetMeshRadius()
+{
+	return skeletalMesh->GetBounds().SphereRadius;
+}
+
+bool ABodyPart::AttachToBody(AFullBody* fullBody)
+{
+	if (fullBody != nullptr)
+	{
+		// attach to the body and store its reference
+		this->AttachToActor(fullBody, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		this->attachedBody = fullBody;
+		return true;
+	}
+	
+	return false;
 }
 
 bool ABodyPart::DetachFromBody()

@@ -102,19 +102,11 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 	else if (objectToHold->IsA(ABodyPart::StaticClass()))
 	{
 		// get the object's skeletal mesh component
-		USkeletalMeshComponent* skMeshComponent = Cast<USkeletalMeshComponent>(objectToHold->GetComponentByClass(USkeletalMeshComponent::StaticClass()));
-
-		// if the object has skeletal mesh
-		if (skMeshComponent == nullptr || skMeshComponent->SkeletalMesh == nullptr)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Skeletal mesh not found.")));
-			return false;
-		}
+		ABodyPart* bodyPart = Cast<ABodyPart>(objectToHold);
 
 		// calculate the mesh offset
-		FBoxSphereBounds meshBounds = skMeshComponent->SkeletalMesh->GetBounds();
-		FVector meshCentre = meshBounds.Origin;
-		float meshHalfHeight = meshBounds.SphereRadius;
+		FVector meshCentre = bodyPart->GetMeshRelativeLocation();
+		float meshHalfHeight = bodyPart->GetMeshRadius();
 		FVector meshOffset = FVector(0, 0, meshHalfHeight) - meshCentre;
 
 		// attach the object to the player
