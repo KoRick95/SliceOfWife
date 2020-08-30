@@ -23,6 +23,12 @@ public:
 	class UMinigameWidget* widget;
 
 	UPROPERTY(EditAnywhere)
+	FVector SnapPosition = { 0, -100, 100 };
+
+	UPROPERTY(EditAnywhere)
+	FRotator SnapRotation = { -90, 0, 90 };
+
+	UPROPERTY(EditAnywhere)
 	TEnumAsByte<EBodyPartType> CentralBodyPartType = EBodyPartType::Torso;
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "1"))

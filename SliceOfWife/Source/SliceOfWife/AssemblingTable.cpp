@@ -51,6 +51,9 @@ bool AAssemblingTable::DropToTable(ABodyPart* bodyPart, AAssemblingSpot* spot)
 		centralBodyPart = bodyPart;
 
 		// snap
+		bodyPart->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		bodyPart->SetActorRelativeLocation(SnapPosition);
+		bodyPart->SetActorRelativeRotation(SnapRotation);
 
 		dropped = true;
 	}
@@ -60,17 +63,20 @@ bool AAssemblingTable::DropToTable(ABodyPart* bodyPart, AAssemblingSpot* spot)
 		if (bodyPart->CheckForType(spot->BodyPartType))
 		{
 			// snap
+			bodyPart->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+			bodyPart->SetActorRelativeLocation(SnapPosition);
+			bodyPart->SetActorRelativeRotation(SnapRotation);
 
 			dropped = true;
 		}
 	}
 
-	if (dropped)
-	{
-		// offset the body part by its mesh's relative position
-		FVector offset = -bodyPart->GetMeshRelativeLocation();
-		bodyPart->SetActorRelativeLocation(offset, false, nullptr, ETeleportType::ResetPhysics);
-	}
+	//if (dropped)
+	//{
+	//	// offset the body part by its mesh's relative position
+	//	FVector offset = -bodyPart->GetMeshRelativeLocation();
+	//	bodyPart->SetActorRelativeLocation(offset, false, nullptr, ETeleportType::ResetPhysics);
+	//}
 
 	return dropped;
 }
