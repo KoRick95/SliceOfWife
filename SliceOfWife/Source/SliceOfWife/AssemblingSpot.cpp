@@ -64,5 +64,5 @@ bool AAssemblingSpot::BeginSewing()
 
 void AAssemblingSpot::AssembleBodyPart()
 {
-	table->Assemble(bodyPart);
+	table->AssembleBodyPart(bodyPart);
 }

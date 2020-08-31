@@ -35,7 +35,7 @@ public:
 	float GetMeshRadius();
 
 	bool IsAttachedToBody();
-	bool IsOfType(TEnumAsByte<EBodyPartType> type);
+	bool IsOfType(EBodyPartType type);
 
 	bool AttachToBody(AFullBody* fullBody);
 	bool DetachFromBody();

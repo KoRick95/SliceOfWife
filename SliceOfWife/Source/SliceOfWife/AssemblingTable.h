@@ -18,7 +18,8 @@ public:
 
 	TArray<class AAssemblingSpot*> assemblingSpots;
 
-	ABodyPart* centralBodyPart = nullptr;
+	class ABodyPart* centralBodyPart = nullptr;
+	class AFullBody* finalBody = nullptr;
 
 	class UMinigameWidget* widget;
 
@@ -60,7 +61,7 @@ public:
 	bool BeginSewing(AAssemblingSpot* spot);
 
 	UFUNCTION(BlueprintCallable)
-	void Assemble(ABodyPart* bodyPart);
+	void AssembleBodyPart(ABodyPart* bodyPart);
 
 	UFUNCTION(BlueprintCallable)
 	bool Animate();
