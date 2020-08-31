@@ -48,13 +48,12 @@ bool ABodyPart::IsAttachedToBody()
 	return attachedBody != nullptr;
 }
 
-bool ABodyPart::IsOfType(TEnumAsByte<EBodyPartType> type)
+bool ABodyPart::IsOfType(EBodyPartType type)
 {
 	for (int i = 0; i < BodyPartTypes.Num(); ++i)
-	{
+	{ 
 		if (BodyPartTypes[i] == type)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Correct body type!")));
 			return true;
 		}
 	}

@@ -25,7 +25,7 @@ public:
 	bool hasSpawned = false;
 
 	UPROPERTY(EditAnywhere)
-	float FloatHeight = 200;
+	float FloatHeight = 150;
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
 	float MoveSpeed = 100;

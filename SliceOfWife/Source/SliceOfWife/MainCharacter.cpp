@@ -6,6 +6,7 @@
 #include "BodyStorage.h"
 #include "DisassemblingTable.h"
 #include "FullBody.h"
+#include "Soul.h"
 #include "Camera/CameraComponent.h"
 #include "Components/SceneComponent.h"
 #include "Components/InputComponent.h"
@@ -260,6 +261,12 @@ void AMainCharacter::Interact()
 		if (nearbyObjects[i]->IsA(AAssemblingSpot::StaticClass()))
 		{
 			Cast<AAssemblingSpot>(nearbyObjects[i])->BeginSewing();
+			break;
+		}
+
+		if (nearbyObjects[i]->IsA(ASoul::StaticClass()))
+		{
+			Cast<ASoul>(nearbyObjects[i])->Despawn();
 			break;
 		}
 	}

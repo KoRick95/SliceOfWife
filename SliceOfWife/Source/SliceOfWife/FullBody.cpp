@@ -41,6 +41,11 @@ void AFullBody::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
+int AFullBody::GetBodyPartsCount()
+{
+	return bodyParts.Num();
+}
+
 void AFullBody::AttachBodyPart(ABodyPart* bodyPart)
 {
 	// attach the body part and add it to the array
