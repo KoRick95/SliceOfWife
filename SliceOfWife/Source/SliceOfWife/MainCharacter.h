@@ -46,11 +46,11 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	bool HoldObject(AActor* objectToHold);
-
 	void MoveForward(float Axis);
 	void MoveRight(float Axis);
+
 	void PickUpAndDrop();
+	bool HoldObject(AActor* objectToHold);
 
 	UFUNCTION(BlueprintCallable)
 	void Interact();
