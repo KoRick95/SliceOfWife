@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Soul.h"
+#include "BodyPart.h"
 #include "Components/PrimitiveComponent.h"
 #include "Engine/Engine.h"
 #include "Engine/World.h"
@@ -87,7 +88,7 @@ void ASoul::HoldObject()
 
 	// attach the object to the soul
 	hauntedObject->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-	hauntedObject->SetActorRelativeLocation(FVector(0));
+	hauntedObject->SetActorRelativeLocation(-Cast<ABodyPart>(hauntedObject)->GetMeshRelativeLocation());
 }
 
 void ASoul::ReleaseObject()
@@ -113,7 +114,7 @@ void ASoul::Spawn()
 	// roll for a chance to spawn
 	if (rng > SpawnChance)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, FString::Printf(TEXT("Low rolled: %f"), rng));
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, FString::Printf(TEXT("Failed chance to spawn."), rng));
 		if (CanRespawn)
 		{
 			spawnTimer = RespawnTime;

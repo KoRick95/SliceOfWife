@@ -1,6 +1,7 @@
 #include "AssemblingTable.h"
 #include "AssemblingSpot.h"
 #include "BodyPart.h"
+#include "FullBody.h"
 #include "MinigameWidget.h"
 #include "Blueprint/UserWidget.h"
 #include "Engine.h"
@@ -128,9 +129,22 @@ bool AAssemblingTable::BeginSewing(AAssemblingSpot* spot)
 	return true;
 }
 
-void AAssemblingTable::Assemble(ABodyPart* bodyPart)
+void AAssemblingTable::AssembleBodyPart(ABodyPart* bodyPart)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Assemble Success!")));
+
+	if (finalBody == nullptr)
+	{
+		FTransform transform;
+		transform.SetLocation(SnapPosition);
+		transform.SetRotation(FQuat(SnapRotation));
+		AActor* emptyBody = GetWorld()->SpawnActor(AFullBody::StaticClass(), &transform);
+		emptyBody->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
+		finalBody = Cast<AFullBody>(emptyBody);
+		finalBody->AttachBodyPart(centralBodyPart);
+	}
+
+	finalBody->AttachBodyPart(bodyPart);
 }
 
 bool AAssemblingTable::Animate()
