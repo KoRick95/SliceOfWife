@@ -1,6 +1,7 @@
 #include "AssemblingTable.h"
 #include "AssemblingSpot.h"
 #include "BodyPart.h"
+#include "FullBody.h"
 #include "MinigameWidget.h"
 #include "Blueprint/UserWidget.h"
 #include "Engine.h"
@@ -46,31 +47,39 @@ bool AAssemblingTable::DropToTable(ABodyPart* bodyPart, AAssemblingSpot* spot)
 
 	bool dropped = false;
 
-	if (bodyPart->CheckForType(CentralBodyPartType))
+	if (bodyPart->IsOfType(CentralBodyPartType))
 	{
 		centralBodyPart = bodyPart;
 
 		// snap
+		bodyPart->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		bodyPart->SetActorRelativeLocation(SnapPosition);
+		bodyPart->SetActorRelativeRotation(SnapRotation);
 
 		dropped = true;
 	}
 	// if spot is not already occupied by another body part
 	else if (spot->bodyPart == nullptr)
 	{
-		if (bodyPart->CheckForType(spot->BodyPartType))
+		if (bodyPart->IsOfType(spot->BodyPartType))
 		{
+			spot->bodyPart = bodyPart;
+
 			// snap
+			bodyPart->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+			bodyPart->SetActorRelativeLocation(SnapPosition);
+			bodyPart->SetActorRelativeRotation(SnapRotation);
 
 			dropped = true;
 		}
 	}
 
-	if (dropped)
-	{
-		// offset the body part by its mesh's relative position
-		FVector offset = -bodyPart->GetMeshRelativeLocation();
-		bodyPart->SetActorRelativeLocation(offset, false, nullptr, ETeleportType::ResetPhysics);
-	}
+	//if (dropped)
+	//{
+	//	// offset the body part by its mesh's relative position
+	//	FVector offset = -bodyPart->GetMeshRelativeLocation();
+	//	bodyPart->SetActorRelativeLocation(offset, false, nullptr, ETeleportType::ResetPhysics);
+	//}
 
 	return dropped;
 }
@@ -82,7 +91,7 @@ bool AAssemblingTable::RemoveFromTable(ABodyPart* bodyPart)
 		return false;
 	}
 
-	if (bodyPart->CheckForType(CentralBodyPartType))
+	if (bodyPart->IsOfType(CentralBodyPartType))
 	{
 		bodyPart->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		centralBodyPart = nullptr;
@@ -102,18 +111,40 @@ bool AAssemblingTable::RemoveFromTable(ABodyPart* bodyPart)
 	return false;
 }
 
-void AAssemblingTable::StartMinigame()
+bool AAssemblingTable::BeginSewing(AAssemblingSpot* spot)
 {
-	if (WidgetBP != nullptr)
+	if (centralBodyPart == nullptr || spot->bodyPart == nullptr || spot->bodyPart->IsAttachedToBody() || WidgetBP == nullptr)
 	{
-		widget = CreateWidget<UMinigameWidget>(GetWorld(), WidgetBP.Get());
-		widget->StartMinigame(this);
+		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, FString::Printf(TEXT("Check one of the following:\n"
+			"1. Is it missing the central body part?\n"
+			"2. Is there a body part on that spot?\n"
+			"3. Is the body part already sown together?\n"
+			"4. Is the table missing the widget BP?")));
+		return false;
 	}
+
+	widget = CreateWidget<UMinigameWidget>(GetWorld(), WidgetBP.Get());
+	widget->StartMinigame(spot);
+
+	return true;
 }
 
-void AAssemblingTable::Assemble(ABodyPart* bodyPart)
+void AAssemblingTable::AssembleBodyPart(ABodyPart* bodyPart)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Assemble Success!")));
+
+	if (finalBody == nullptr)
+	{
+		FTransform transform;
+		transform.SetLocation(SnapPosition);
+		transform.SetRotation(FQuat(SnapRotation));
+		AActor* emptyBody = GetWorld()->SpawnActor(AFullBody::StaticClass(), &transform);
+		emptyBody->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
+		finalBody = Cast<AFullBody>(emptyBody);
+		finalBody->AttachBodyPart(centralBodyPart);
+	}
+
+	finalBody->AttachBodyPart(bodyPart);
 }
 
 bool AAssemblingTable::Animate()

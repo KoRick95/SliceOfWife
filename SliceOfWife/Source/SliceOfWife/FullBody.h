@@ -28,6 +28,8 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	int GetBodyPartsCount();
+
 	void AttachBodyPart(ABodyPart* bodyPart);
 	bool DetachBodyPart(ABodyPart* bodyPart);
 };

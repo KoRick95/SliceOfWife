@@ -18,9 +18,16 @@ public:
 
 	TArray<class AAssemblingSpot*> assemblingSpots;
 
-	ABodyPart* centralBodyPart = nullptr;
+	class ABodyPart* centralBodyPart = nullptr;
+	class AFullBody* finalBody = nullptr;
 
 	class UMinigameWidget* widget;
+
+	UPROPERTY(EditAnywhere)
+	FVector SnapPosition = { -100, 0, 100 };
+
+	UPROPERTY(EditAnywhere)
+	FRotator SnapRotation = { -90, 0, 90 };
 
 	UPROPERTY(EditAnywhere)
 	TEnumAsByte<EBodyPartType> CentralBodyPartType = EBodyPartType::Torso;
@@ -51,10 +58,10 @@ public:
 	bool DropToTable(ABodyPart* bodyPart, AAssemblingSpot* spot);
 	bool RemoveFromTable(ABodyPart* bodyPart);
 
-	void StartMinigame();
+	bool BeginSewing(AAssemblingSpot* spot);
 
 	UFUNCTION(BlueprintCallable)
-	void Assemble(ABodyPart* bodyPart);
+	void AssembleBodyPart(ABodyPart* bodyPart);
 
 	UFUNCTION(BlueprintCallable)
 	bool Animate();

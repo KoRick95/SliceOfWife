@@ -6,6 +6,7 @@
 #include "BodyStorage.h"
 #include "DisassemblingTable.h"
 #include "FullBody.h"
+#include "Soul.h"
 #include "Camera/CameraComponent.h"
 #include "Components/SceneComponent.h"
 #include "Components/InputComponent.h"
@@ -71,59 +72,6 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &AMainCharacter::Interact);
 
 	DetectionCollider->OnComponentBeginOverlap.AddDynamic(this, &AMainCharacter::OnOverlapBegin);
-}
-
-bool AMainCharacter::HoldObject(AActor* objectToHold)
-{
-	if (objectToHold == nullptr)
-	{
-		return false;
-	}
-
-	// disable physics on the object
-	TArray<UActorComponent*> primitiveComponents = objectToHold->GetComponentsByClass(UPrimitiveComponent::StaticClass());
-	for (int i = 0; i < primitiveComponents.Num(); ++i)
-	{
-		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(false);
-	}
-
-	if (objectToHold->IsA(AFullBody::StaticClass()))
-	{
-		ACharacter* character = Cast<ACharacter>(objectToHold);
-
-		float bodyHalfHeight = character->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
-
-		// attach the object to the player
-		character->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-		
-		// add offset to the object
-		character->SetActorRelativeLocation(FVector(0, 0, bodyHalfHeight) + PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
-	}
-	else if (objectToHold->IsA(ABodyPart::StaticClass()))
-	{
-		// get the object's skeletal mesh component
-		ABodyPart* bodyPart = Cast<ABodyPart>(objectToHold);
-
-		// calculate the mesh offset
-		FVector meshCentre = bodyPart->GetMeshRelativeLocation();
-		float meshHalfHeight = bodyPart->GetMeshRadius();
-		FVector meshOffset = FVector(0, 0, meshHalfHeight) - meshCentre;
-
-		// attach the object to the player
-		objectToHold->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-		
-		// add the offset to the object
-		objectToHold->SetActorRelativeLocation(FVector(0) + PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
-		objectToHold->AddActorLocalOffset(meshOffset, false, nullptr, ETeleportType::ResetPhysics);
-	}
-	else
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Invalid object type.")));
-		return false;
-	}
-
-	heldObject = objectToHold;
-	return true;
 }
 
 void AMainCharacter::MoveForward(float Axis)
@@ -199,6 +147,10 @@ void AMainCharacter::PickUpAndDrop()
 						// remove it from the disassembling table
 						Cast<ADisassemblingTable>(objectAttachParent)->RemoveFromTable();
 					}
+					else if (objectAttachParent->IsA(ASoul::StaticClass()))
+					{
+						return;
+					}
 				}
 
 				// get player to hold the object
@@ -244,22 +196,81 @@ void AMainCharacter::PickUpAndDrop()
 	}
 }
 
+bool AMainCharacter::HoldObject(AActor* objectToHold)
+{
+	if (objectToHold == nullptr)
+	{
+		return false;
+	}
+
+	// disable physics on the object
+	TArray<UActorComponent*> primitiveComponents = objectToHold->GetComponentsByClass(UPrimitiveComponent::StaticClass());
+	for (int i = 0; i < primitiveComponents.Num(); ++i)
+	{
+		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(false);
+	}
+
+	if (objectToHold->IsA(AFullBody::StaticClass()))
+	{
+		AFullBody* fullBody = Cast<AFullBody>(objectToHold);
+
+		float bodyHalfHeight = fullBody->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
+
+		// attach the object to the player
+		fullBody->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+
+		// add offset to the object
+		fullBody->SetActorRelativeLocation(FVector(0, 0, bodyHalfHeight) + PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
+	}
+	else if (objectToHold->IsA(ABodyPart::StaticClass()))
+	{
+		// get the object's skeletal mesh component
+		ABodyPart* bodyPart = Cast<ABodyPart>(objectToHold);
+
+		// calculate the mesh offset
+		FVector meshCentre = bodyPart->GetMeshRelativeLocation();
+		float meshHalfHeight = bodyPart->GetMeshRadius();
+		FVector meshOffset = FVector(0, 0, meshHalfHeight) - meshCentre;
+
+		// attach the object to the player
+		objectToHold->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+
+		// add the offset to the object
+		objectToHold->SetActorRelativeLocation(FVector(0) + PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
+		objectToHold->AddActorLocalOffset(meshOffset, false, nullptr, ETeleportType::ResetPhysics);
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Invalid object type.")));
+		return false;
+	}
+
+	heldObject = objectToHold;
+	return true;
+}
+
 void AMainCharacter::Interact()
 {
-	TArray<AActor*> actors;
-	DetectionCollider->GetOverlappingActors(actors);
+	TArray<AActor*> nearbyObjects;
+	DetectionCollider->GetOverlappingActors(nearbyObjects);
 
-	for (int i = 0; i < actors.Num(); ++i)
+	for (int i = 0; i < nearbyObjects.Num(); ++i)
 	{
-		if (actors[i]->IsA(ADisassemblingTable::StaticClass()))
+		if (nearbyObjects[i]->IsA(ASoul::StaticClass()))
 		{
-			Cast<ADisassemblingTable>(actors[i])->Charge();
+			Cast<ASoul>(nearbyObjects[i])->Despawn();
 			break;
 		}
 
-		if (actors[i]->IsA(AAssemblingTable::StaticClass()))
+		if (nearbyObjects[i]->IsA(ADisassemblingTable::StaticClass()))
 		{
-			Cast<AAssemblingTable>(actors[i])->StartMinigame();
+			Cast<ADisassemblingTable>(nearbyObjects[i])->Charge();
+			break;
+		}
+
+		if (nearbyObjects[i]->IsA(AAssemblingSpot::StaticClass()))
+		{
+			Cast<AAssemblingSpot>(nearbyObjects[i])->BeginSewing();
 			break;
 		}
 	}
