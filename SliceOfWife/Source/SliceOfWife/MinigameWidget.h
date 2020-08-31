@@ -18,9 +18,6 @@ public:
 
 	AActor* minigameInitator = nullptr;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool GameCompleted = false;
-
 	UFUNCTION(BlueprintCallable)
 	void StartMinigame(AActor* initiator = nullptr);
 

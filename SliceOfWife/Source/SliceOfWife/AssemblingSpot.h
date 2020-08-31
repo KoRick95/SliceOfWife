@@ -36,4 +36,6 @@ public:
 	bool RemoveFromTable(ABodyPart* aBodyPart);
 
 	bool BeginSewing();
+
+	void AssembleBodyPart();
 };

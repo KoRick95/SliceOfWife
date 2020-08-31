@@ -43,12 +43,18 @@ float ABodyPart::GetMeshRadius()
 	return skeletalMesh->GetBounds().SphereRadius;
 }
 
-bool ABodyPart::CheckForType(EBodyPartType type)
+bool ABodyPart::IsAttachedToBody()
+{
+	return attachedBody != nullptr;
+}
+
+bool ABodyPart::IsOfType(TEnumAsByte<EBodyPartType> type)
 {
 	for (int i = 0; i < BodyPartTypes.Num(); ++i)
 	{
 		if (BodyPartTypes[i] == type)
 		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Correct body type!")));
 			return true;
 		}
 	}
