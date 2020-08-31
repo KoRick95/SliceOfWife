@@ -127,7 +127,8 @@ void ASoul::Spawn()
 	}
 
 	// set the manifest location
-	FVector newPosition = hauntedObject->GetActorLocation() + FVector(0, 0, FloatHeight);
+	FVector newPosition = hauntedObject->GetActorLocation(); 
+	newPosition.Z = FloatHeight;
 	this->SetActorLocation(newPosition, false, nullptr, ETeleportType::TeleportPhysics);
 
 	// turn on visibility
