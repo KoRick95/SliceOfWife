@@ -59,5 +59,5 @@ bool AAssemblingSpot::RemoveFromTable(ABodyPart* aBodyPart)
 
 bool AAssemblingSpot::BeginSewing()
 {
-	return false;
+	return table->BeginSewing(bodyPart);
 }

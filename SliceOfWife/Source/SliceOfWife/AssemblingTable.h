@@ -57,7 +57,7 @@ public:
 	bool DropToTable(ABodyPart* bodyPart, AAssemblingSpot* spot);
 	bool RemoveFromTable(ABodyPart* bodyPart);
 
-	void StartMinigame();
+	bool BeginSewing(ABodyPart* bodyPart);
 
 	UFUNCTION(BlueprintCallable)
 	void Assemble(ABodyPart* bodyPart);

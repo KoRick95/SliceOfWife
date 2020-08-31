@@ -43,7 +43,12 @@ float ABodyPart::GetMeshRadius()
 	return skeletalMesh->GetBounds().SphereRadius;
 }
 
-bool ABodyPart::CheckForType(TEnumAsByte<EBodyPartType> type)
+bool ABodyPart::IsAttachedToBody()
+{
+	return attachedBody != nullptr;
+}
+
+bool ABodyPart::IsOfType(TEnumAsByte<EBodyPartType> type)
 {
 	for (int i = 0; i < BodyPartTypes.Num(); ++i)
 	{

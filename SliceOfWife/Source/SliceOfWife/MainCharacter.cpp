@@ -246,20 +246,20 @@ void AMainCharacter::PickUpAndDrop()
 
 void AMainCharacter::Interact()
 {
-	TArray<AActor*> actors;
-	DetectionCollider->GetOverlappingActors(actors);
+	TArray<AActor*> nearbyObjects;
+	DetectionCollider->GetOverlappingActors(nearbyObjects);
 
-	for (int i = 0; i < actors.Num(); ++i)
+	for (int i = 0; i < nearbyObjects.Num(); ++i)
 	{
-		if (actors[i]->IsA(ADisassemblingTable::StaticClass()))
+		if (nearbyObjects[i]->IsA(ADisassemblingTable::StaticClass()))
 		{
-			Cast<ADisassemblingTable>(actors[i])->Charge();
+			Cast<ADisassemblingTable>(nearbyObjects[i])->Charge();
 			break;
 		}
 
-		if (actors[i]->IsA(AAssemblingTable::StaticClass()))
+		if (nearbyObjects[i]->IsA(AAssemblingSpot::StaticClass()))
 		{
-			Cast<AAssemblingTable>(actors[i])->StartMinigame();
+			Cast<AAssemblingSpot>(nearbyObjects[i])->BeginSewing();
 			break;
 		}
 	}

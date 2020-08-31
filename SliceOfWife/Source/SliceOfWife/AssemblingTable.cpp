@@ -46,7 +46,7 @@ bool AAssemblingTable::DropToTable(ABodyPart* bodyPart, AAssemblingSpot* spot)
 
 	bool dropped = false;
 
-	if (bodyPart->CheckForType(CentralBodyPartType))
+	if (bodyPart->IsOfType(CentralBodyPartType))
 	{
 		centralBodyPart = bodyPart;
 
@@ -60,7 +60,7 @@ bool AAssemblingTable::DropToTable(ABodyPart* bodyPart, AAssemblingSpot* spot)
 	// if spot is not already occupied by another body part
 	else if (spot->bodyPart == nullptr)
 	{
-		if (bodyPart->CheckForType(spot->BodyPartType))
+		if (bodyPart->IsOfType(spot->BodyPartType))
 		{
 			// snap
 			bodyPart->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
@@ -88,7 +88,7 @@ bool AAssemblingTable::RemoveFromTable(ABodyPart* bodyPart)
 		return false;
 	}
 
-	if (bodyPart->CheckForType(CentralBodyPartType))
+	if (bodyPart->IsOfType(CentralBodyPartType))
 	{
 		bodyPart->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		centralBodyPart = nullptr;
@@ -108,13 +108,21 @@ bool AAssemblingTable::RemoveFromTable(ABodyPart* bodyPart)
 	return false;
 }
 
-void AAssemblingTable::StartMinigame()
+bool AAssemblingTable::BeginSewing(ABodyPart* bodyPart)
 {
+	if (centralBodyPart == nullptr && bodyPart->IsAttachedToBody())
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Missing central body OR already sown together!")));
+		return false;
+	}
+
 	if (WidgetBP != nullptr)
 	{
 		widget = CreateWidget<UMinigameWidget>(GetWorld(), WidgetBP.Get());
 		widget->StartMinigame(this);
 	}
+
+	return false;
 }
 
 void AAssemblingTable::Assemble(ABodyPart* bodyPart)
