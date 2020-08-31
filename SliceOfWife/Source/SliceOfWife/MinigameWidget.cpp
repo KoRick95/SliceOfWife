@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "MinigameWidget.h"
+#include "AssemblingSpot.h"
 
 void UMinigameWidget::StartMinigame(AActor* initiator)
 {
@@ -12,7 +12,10 @@ void UMinigameWidget::StartMinigame(AActor* initiator)
 
 void UMinigameWidget::EndMinigame(bool isCompleted)
 {
-	GameCompleted = isCompleted;
+	if (minigameInitator->IsA(AAssemblingSpot::StaticClass()))
+	{
+		Cast<AAssemblingSpot>(minigameInitator)->AssembleBodyPart();
+	}
 
 	this->RemoveFromParent();
 }
