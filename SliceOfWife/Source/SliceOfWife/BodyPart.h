@@ -34,7 +34,7 @@ public:
 	FVector GetMeshRelativeLocation();
 	float GetMeshRadius();
 
-	bool CheckForType(EBodyPartType type);
+	bool CheckForType(TEnumAsByte<EBodyPartType> type);
 
 	bool AttachToBody(AFullBody* fullBody);
 	bool DetachFromBody();

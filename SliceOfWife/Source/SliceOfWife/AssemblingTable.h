@@ -23,7 +23,7 @@ public:
 	class UMinigameWidget* widget;
 
 	UPROPERTY(EditAnywhere)
-	FVector SnapPosition = { 0, -100, 100 };
+	FVector SnapPosition = { -100, 0, 100 };
 
 	UPROPERTY(EditAnywhere)
 	FRotator SnapRotation = { -90, 0, 90 };
