@@ -5,24 +5,19 @@
 #include "Commons.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "AssemblingSpot.generated.h"
-
+#include "ResizeDevice.generated.h"
 
 UCLASS()
-class SLICEOFWIFE_API AAssemblingSpot : public AActor
+class SLICEOFWIFE_API AResizeDevice : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AAssemblingSpot();
-
-	class AAssemblingTable* table = nullptr;
-
-	class ABodyPart* bodyPart = nullptr;
+	AResizeDevice();
 
 	UPROPERTY(EditAnywhere)
-	TEnumAsByte<EBodyPartType> BodyPartType;
+	TArray<FBodyPartReplacement> BodyPartReplacements;
 
 protected:
 	// Called when the game starts or when spawned
@@ -31,11 +26,6 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	bool DropToTable(ABodyPart* aBodyPart);
-	bool RemoveFromTable(ABodyPart* aBodyPart);
-
-	bool BeginSewing();
-
-	void AssembleBodyPart();
+	
+	bool ReplaceBody(class ABodyPart* bodyPart);
 };

@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Enums.h"
+#include "Commons.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "BodyPart.generated.h"
@@ -19,6 +19,9 @@ public:
 	class AFullBody* attachedBody = nullptr;
 
 	class USkeletalMesh* skeletalMesh = nullptr;
+
+	UPROPERTY(EditAnywhere)
+	TEnumAsByte<ECreatureType> OriginalCreatureType; 
 
 	UPROPERTY(EditAnywhere)
 	TArray<TEnumAsByte<EBodyPartType>> BodyPartTypes;
