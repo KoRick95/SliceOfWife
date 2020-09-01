@@ -21,11 +21,6 @@ void AAssemblingSpot::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (Tags.Num() == 0)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("An assembling spot is not tagged.")));
-	}
-
 	if (this->GetAttachParentActor() != nullptr)
 	{
 		if (this->GetAttachParentActor()->IsA(AAssemblingTable::StaticClass()))
