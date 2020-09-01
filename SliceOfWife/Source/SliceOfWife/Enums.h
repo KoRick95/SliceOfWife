@@ -14,3 +14,17 @@ enum EBodyPartType
 	RightLeg	UMETA(DisplayName = "RightLeg"),
 	Tail		UMETA(DisplayName = "Tail")
 };
+
+USTRUCT()
+struct FBodyPartReplacement
+{
+	GENERATED_BODY()
+
+public:
+
+	UPROPERTY(EditAnywhere)
+	class ABodyPart* input;
+
+	UPROPERTY(EditAnywhere)
+	class ABodyPart* output;
+};
