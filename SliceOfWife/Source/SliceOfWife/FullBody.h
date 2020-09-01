@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Commons.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "FullBody.generated.h"
@@ -16,6 +17,9 @@ public:
 	AFullBody();
 
 	TArray<class ABodyPart*> bodyParts;
+
+	UPROPERTY(EditAnywhere)
+	TEnumAsByte<ECreatureType> CreatureType;
 
 protected:
 	// Called when the game starts or when spawned

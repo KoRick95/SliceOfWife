@@ -21,10 +21,10 @@ public:
 	class USkeletalMesh* skeletalMesh = nullptr;
 
 	UPROPERTY(EditAnywhere)
-	TArray<TEnumAsByte<EBodyPartType>> BodyPartTypes;
+	TEnumAsByte<ECreatureType> OriginalCreatureType; 
 
 	UPROPERTY(EditAnywhere)
-	FBodyPartReplacement fuckYou;
+	TArray<TEnumAsByte<EBodyPartType>> BodyPartTypes;
 
 protected:
 	// Called when the game starts or when spawned
