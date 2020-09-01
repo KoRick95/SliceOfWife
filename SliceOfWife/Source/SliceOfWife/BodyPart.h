@@ -23,6 +23,9 @@ public:
 	UPROPERTY(EditAnywhere)
 	TArray<TEnumAsByte<EBodyPartType>> BodyPartTypes;
 
+	UPROPERTY(EditAnywhere)
+	FBodyPartReplacement fuckYou;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
