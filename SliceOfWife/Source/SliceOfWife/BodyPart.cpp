@@ -29,6 +29,11 @@ void ABodyPart::BeginPlay()
 	{
 		skeletalMesh = skeletalMeshComponent->SkeletalMesh;
 	}
+
+	if (BodyPartTypes.Num() == 0)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("A body part is not assigned a tag.")));
+	}
 }
 
 // Called every frame

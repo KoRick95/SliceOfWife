@@ -26,7 +26,7 @@ bool AResizeDevice::ReplaceBody(ABodyPart* bodyPart)
 {
 	for (int i = 0; i < BodyPartReplacements.Num(); ++i)
 	{
-		if (BodyPartReplacements[i].input.Get() == bodyPart->GetClass())
+		if (BodyPartReplacements[i].Input.Get() == bodyPart->GetClass())
 		{
 
 		}
