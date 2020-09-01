@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Enums.generated.h"
+#include "Commons.generated.h"
 
 UENUM()
 enum EBodyPartType
@@ -23,8 +23,8 @@ struct FBodyPartReplacement
 public:
 
 	UPROPERTY(EditAnywhere)
-	class ABodyPart* input;
+	TSubclassOf<class ABodyPart> input;
 
 	UPROPERTY(EditAnywhere)
-	class ABodyPart* output;
+	TSubclassOf<class ABodyPart> output;
 };
