@@ -17,7 +17,11 @@ void ABodyPart::BeginPlay()
 {
 	Super::BeginPlay();
 
-	attachedBody = Cast<AFullBody>(this->GetAttachParentActor());
+	if (this->GetAttachParentActor()->IsA(AFullBody::StaticClass()))
+	{
+		attachedBody = Cast<AFullBody>(this->GetAttachParentActor());
+		OriginalCreatureType = attachedBody->CreatureType;
+	}
 
 	USkeletalMeshComponent* skeletalMeshComponent = Cast<USkeletalMeshComponent>(GetComponentByClass(USkeletalMeshComponent::StaticClass()));
 	
