@@ -17,13 +17,22 @@ void ABodyPart::BeginPlay()
 {
 	Super::BeginPlay();
 
-	attachedBody = Cast<AFullBody>(this->GetAttachParentActor());
+	if (this->GetAttachParentActor()->IsA(AFullBody::StaticClass()))
+	{
+		attachedBody = Cast<AFullBody>(this->GetAttachParentActor());
+		OriginalCreatureType = attachedBody->CreatureType;
+	}
 
 	USkeletalMeshComponent* skeletalMeshComponent = Cast<USkeletalMeshComponent>(GetComponentByClass(USkeletalMeshComponent::StaticClass()));
 	
 	if (skeletalMeshComponent != nullptr)
 	{
 		skeletalMesh = skeletalMeshComponent->SkeletalMesh;
+	}
+
+	if (BodyPartTypes.Num() == 0)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("A body part is not assigned a tag.")));
 	}
 }
 
