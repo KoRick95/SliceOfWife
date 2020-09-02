@@ -4,3 +4,5 @@
 4) Copy paste this in to the command line: UnrealBuildTool.exe -ProjectFiles -project="C:\Users\sXXXXXX\Documents\GitHub\Chicken-Crimpy-Repository\DejaBrew\DejaBrew.uproject" -game -engine
 
 UnrealBuildTool.exe -ProjectFiles -project="C:\Users\s191273\Documents\GitHub\SliceOfWife\SliceOfWife\SliceOfWife.uproject" -game -engine
+
+Will: UnrealBuildTool.exe -ProjectFiles -project="C:\Users\s191533\Documents\GitHub\SliceOfWife\SliceOfWife\SliceOfWife.uproject" -game -engine

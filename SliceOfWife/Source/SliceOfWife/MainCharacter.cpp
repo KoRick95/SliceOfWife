@@ -6,6 +6,7 @@
 #include "BodyStorage.h"
 #include "DisassemblingTable.h"
 #include "FullBody.h"
+#include "ResizingDevice.h"
 #include "Soul.h"
 #include "Camera/CameraComponent.h"
 #include "Components/SceneComponent.h"
@@ -128,28 +129,38 @@ void AMainCharacter::PickUpAndDrop()
 				// get the object's attach parent
 				AActor* objectAttachParent = objectToHold->GetAttachParentActor();
 
+				bool canPickupObject = true;
+
 				// if the object has an attach parent
 				if (objectAttachParent != nullptr)
 				{
 					if (objectAttachParent->IsA(AAssemblingTable::StaticClass()))
 					{
 						// remove it from the assembling table
-						Cast<AAssemblingTable>(objectAttachParent)->RemoveFromTable(Cast<ABodyPart>(objectToHold));
+						canPickupObject = Cast<AAssemblingTable>(objectAttachParent)->RemoveFromTable(Cast<ABodyPart>(objectToHold));
 					}
 					else if (objectAttachParent->IsA(ADisassemblingTable::StaticClass()))
 					{
 						// remove it from the disassembling table
-						Cast<ADisassemblingTable>(objectAttachParent)->RemoveFromTable();
+						canPickupObject = Cast<ADisassemblingTable>(objectAttachParent)->RemoveFromTable();
 					}
-					else if (objectAttachParent->IsA(ASoul::StaticClass()))
+					else if (objectAttachParent->IsA(AResizingDevice::StaticClass()))
 					{
-						return;
+						// remove it from the resize device
+						canPickupObject = Cast<AResizingDevice>(objectAttachParent)->RemoveFromDevice();
+					}
+					else
+					{
+						canPickupObject = false;
 					}
 				}
 
-				// get player to hold the object
-				HoldObject(objectToHold);
-				break;
+				if (canPickupObject)
+				{
+					// get player to hold the object
+					HoldObject(objectToHold);
+					break;
+				}
 			}
 		}
 	}
@@ -165,15 +176,19 @@ void AMainCharacter::PickUpAndDrop()
 		{
 			if (nearbyObjects[i]->IsA(AAssemblingSpot::StaticClass()))
 			{
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Assembling spot found.")));
 				isSnapped = Cast<AAssemblingSpot>(nearbyObjects[i])->DropToTable(Cast<ABodyPart>(heldObject));
-				break;
 			}
 			else if (nearbyObjects[i]->IsA(ADisassemblingTable::StaticClass()))
 			{
 				isSnapped = Cast<ADisassemblingTable>(nearbyObjects[i])->DropToTable(heldObject);
-				break;
 			}
+			else if (nearbyObjects[i]->IsA(AResizingDevice::StaticClass()))
+			{
+				isSnapped = Cast<AResizingDevice>(nearbyObjects[i])->DropToDevice(heldObject);
+			}
+
+			if (isSnapped)
+				break;
 		}
 
 		if (!isSnapped)
@@ -248,25 +263,26 @@ void AMainCharacter::Interact()
 	TArray<AActor*> nearbyObjects;
 	this->GetOverlappingActors(nearbyObjects);
 
+	bool hasInteracted = false;
+
 	for (int i = 0; i < nearbyObjects.Num(); ++i)
 	{
 		if (nearbyObjects[i]->IsA(ASoul::StaticClass()))
 		{
 			Cast<ASoul>(nearbyObjects[i])->Despawn();
-			break;
+			hasInteracted = true;
+		}
+		else if (nearbyObjects[i]->IsA(ADisassemblingTable::StaticClass()))
+		{
+			hasInteracted = Cast<ADisassemblingTable>(nearbyObjects[i])->Charge();
+		}
+		else if (nearbyObjects[i]->IsA(AAssemblingSpot::StaticClass()))
+		{
+			hasInteracted = Cast<AAssemblingSpot>(nearbyObjects[i])->BeginSewing();
 		}
 
-		if (nearbyObjects[i]->IsA(ADisassemblingTable::StaticClass()))
-		{
-			Cast<ADisassemblingTable>(nearbyObjects[i])->Charge();
+		if (hasInteracted)
 			break;
-		}
-
-		if (nearbyObjects[i]->IsA(AAssemblingSpot::StaticClass()))
-		{
-			Cast<AAssemblingSpot>(nearbyObjects[i])->BeginSewing();
-			break;
-		}
 	}
 }
 

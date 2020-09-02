@@ -29,15 +29,15 @@ enum ECreatureType
 };
 
 USTRUCT()
-struct FBodyPartReplacement
+struct FObjectReplacement
 {
 	GENERATED_BODY()
 
 public:
 
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<class ABodyPart> Input;
+	TSubclassOf<AActor> Input;
 
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<class ABodyPart> Output;
+	TSubclassOf<AActor> Output;
 };

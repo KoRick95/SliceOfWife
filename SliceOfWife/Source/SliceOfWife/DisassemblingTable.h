@@ -45,6 +45,6 @@ public:
 	bool DropToTable(AActor* body);
 	bool RemoveFromTable();
 
-	void Charge();
+	bool Charge();
 	void DisassembleBody();
 };
