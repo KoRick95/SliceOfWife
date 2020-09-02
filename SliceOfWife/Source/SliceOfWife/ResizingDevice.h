@@ -5,16 +5,16 @@
 #include "EnumsStructs.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "ResizeDevice.generated.h"
+#include "ResizingDevice.generated.h"
 
 UCLASS()
-class SLICEOFWIFE_API AResizeDevice : public AActor
+class SLICEOFWIFE_API AResizingDevice : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AResizeDevice();
+	AResizingDevice();
 
 	AActor* objectOnDevice = nullptr;
 

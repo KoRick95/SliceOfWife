@@ -1,31 +1,30 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "EnumsStructs.h"
-#include "ResizeDevice.h"
+#include "ResizingDevice.h"
 #include "BodyPart.h"
 #include "Engine.h"
 #include "Engine/World.h"
 
 // Sets default values
-AResizeDevice::AResizeDevice()
+AResizingDevice::AResizingDevice()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 }
 
 // Called when the game starts or when spawned
-void AResizeDevice::BeginPlay()
+void AResizingDevice::BeginPlay()
 {
 	Super::BeginPlay();
 }
 
 // Called every frame
-void AResizeDevice::Tick(float DeltaTime)
+void AResizingDevice::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
 
-bool AResizeDevice::DropToDevice(AActor* object)
+bool AResizingDevice::DropToDevice(AActor* object)
 {
 	if (object == nullptr)
 		return false;
@@ -49,7 +48,7 @@ bool AResizeDevice::DropToDevice(AActor* object)
 	return true;
 }
 
-bool AResizeDevice::RemoveFromDevice()
+bool AResizingDevice::RemoveFromDevice()
 {
 	if (objectOnDevice != nullptr)
 		return false;
@@ -59,7 +58,7 @@ bool AResizeDevice::RemoveFromDevice()
 	return true;
 }
 
-bool AResizeDevice::ReplaceObject(AActor* object)
+bool AResizingDevice::ReplaceObject(AActor* object)
 {
 	for (int i = 0; i < ObjectReplacements.Num(); ++i)
 	{

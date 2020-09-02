@@ -6,7 +6,7 @@
 #include "BodyStorage.h"
 #include "DisassemblingTable.h"
 #include "FullBody.h"
-#include "ResizeDevice.h"
+#include "ResizingDevice.h"
 #include "Soul.h"
 #include "Camera/CameraComponent.h"
 #include "Components/SceneComponent.h"
@@ -144,10 +144,10 @@ void AMainCharacter::PickUpAndDrop()
 						// remove it from the disassembling table
 						canPickupObject = Cast<ADisassemblingTable>(objectAttachParent)->RemoveFromTable();
 					}
-					else if (objectAttachParent->IsA(AResizeDevice::StaticClass()))
+					else if (objectAttachParent->IsA(AResizingDevice::StaticClass()))
 					{
 						// remove it from the resize device
-						canPickupObject = Cast<AResizeDevice>(objectAttachParent)->RemoveFromDevice();
+						canPickupObject = Cast<AResizingDevice>(objectAttachParent)->RemoveFromDevice();
 					}
 					else
 					{
@@ -182,9 +182,9 @@ void AMainCharacter::PickUpAndDrop()
 			{
 				isSnapped = Cast<ADisassemblingTable>(nearbyObjects[i])->DropToTable(heldObject);
 			}
-			else if (nearbyObjects[i]->IsA(AResizeDevice::StaticClass()))
+			else if (nearbyObjects[i]->IsA(AResizingDevice::StaticClass()))
 			{
-				isSnapped = Cast<AResizeDevice>(nearbyObjects[i])->DropToDevice(heldObject);
+				isSnapped = Cast<AResizingDevice>(nearbyObjects[i])->DropToDevice(heldObject);
 			}
 
 			if (isSnapped)
