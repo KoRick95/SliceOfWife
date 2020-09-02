@@ -33,10 +33,6 @@ AMainCharacter::AMainCharacter()
 	//Camera->AttachToComponent(CameraArm, FAttachmentTransformRules::KeepRelativeTransform, USpringArmComponent::SocketName);
 	//Camera->bUsePawnControlRotation = false;
 
-	// Create sphere collider
-	DetectionCollider = CreateDefaultSubobject<USphereComponent>("SphereCollider");
-	DetectionCollider->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
@@ -70,8 +66,6 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	PlayerInputComponent->BindAction("PickUp", IE_Pressed, this, &AMainCharacter::PickUpAndDrop);
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &AMainCharacter::Interact);
-
-	DetectionCollider->OnComponentBeginOverlap.AddDynamic(this, &AMainCharacter::OnOverlapBegin);
 }
 
 void AMainCharacter::MoveForward(float Axis)
@@ -96,7 +90,7 @@ void AMainCharacter::PickUpAndDrop()
 {
 	// get all nearby objects
 	TArray<AActor*> nearbyObjects;
-	DetectionCollider->GetOverlappingActors(nearbyObjects);
+	this->GetOverlappingActors(nearbyObjects);
 
 	// if the player is not holding anything
 	if (heldObject == nullptr)
@@ -252,7 +246,7 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 void AMainCharacter::Interact()
 {
 	TArray<AActor*> nearbyObjects;
-	DetectionCollider->GetOverlappingActors(nearbyObjects);
+	this->GetOverlappingActors(nearbyObjects);
 
 	for (int i = 0; i < nearbyObjects.Num(); ++i)
 	{

@@ -23,9 +23,6 @@ public:
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
 	//class UCameraComponent* Camera;
 
-	UPROPERTY(EditAnywhere, Category = "Colliders")
-	class USphereComponent* DetectionCollider;
-
 	UPROPERTY(EditAnywhere, Category = "Rotation")
 	float RotationSpeed = 100;
 
