@@ -16,8 +16,16 @@ public:
 	// Sets default values for this actor's properties
 	AResizeDevice();
 
+	AActor* objectOnDevice = nullptr;
+
 	UPROPERTY(EditAnywhere)
-	TArray<FBodyPartReplacement> BodyPartReplacements;
+	FVector SnapLocation = { 0, 0, 100 };
+
+	UPROPERTY(EditAnywhere)
+	FRotator SnapRotation = { 0, 0, 0 };
+
+	UPROPERTY(EditAnywhere)
+	TArray<FObjectReplacement> ObjectReplacements;
 
 protected:
 	// Called when the game starts or when spawned
@@ -27,5 +35,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	
-	bool ReplaceBody(class ABodyPart* bodyPart);
+	bool DropToDevice(AActor* object);
+	bool RemoveFromDevice();
+
+	bool ReplaceObject(AActor* object);
 };

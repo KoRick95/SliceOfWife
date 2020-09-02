@@ -25,14 +25,48 @@ void AResizeDevice::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-bool AResizeDevice::ReplaceBody(ABodyPart* bodyPart)
+bool AResizeDevice::DropToDevice(AActor* object)
 {
-	for (int i = 0; i < BodyPartReplacements.Num(); ++i)
+	if (object == nullptr)
+		return false;
+
+	FVector offset;
+
+	if (object->IsA(ABodyPart::StaticClass()))
 	{
-		if (BodyPartReplacements[i].Input.Get() == bodyPart->GetClass())
+		offset = SnapLocation - Cast<ABodyPart>(object)->GetMeshRelativeLocation();
+	}
+	else
+	{
+		return false;
+	}
+
+	object->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+	object->SetActorRelativeLocation(offset, false, nullptr, ETeleportType::ResetPhysics);
+	object->SetActorRelativeRotation(FQuat(SnapRotation), false, nullptr, ETeleportType::ResetPhysics);
+
+	objectOnDevice = object;
+	return true;
+}
+
+bool AResizeDevice::RemoveFromDevice()
+{
+	if (objectOnDevice != nullptr)
+		return false;
+
+	objectOnDevice->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+	objectOnDevice = nullptr;
+	return true;
+}
+
+bool AResizeDevice::ReplaceObject(AActor* object)
+{
+	for (int i = 0; i < ObjectReplacements.Num(); ++i)
+	{
+		if (ObjectReplacements[i].Input.Get() == object->GetClass())
 		{
-			UClass* uClass = BodyPartReplacements[i].Output.Get();
-			FTransform transform = bodyPart->GetActorTransform();
+			UClass* uClass = ObjectReplacements[i].Output.Get();
+			FTransform transform = object->GetActorTransform();
 			GetWorld()->SpawnActor(uClass, &transform);
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Replaced body woo!")));
 			return true;
