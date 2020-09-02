@@ -28,16 +28,16 @@ enum ECreatureType
 	Snake		UMETA(DisplayName = "Snake"),
 };
 
-//USTRUCT()
-//struct FBodyPartReplacement
-//{
-//	GENERATED_BODY()
-//
-//public:
-//
-//	UPROPERTY(EditAnywhere)
-//	TSubclassOf<class ABodyPart> Input;
-//
-//	UPROPERTY(EditAnywhere)
-//	TSubclassOf<class ABodyPart> Output;
-//};
+USTRUCT()
+struct FObjectReplacement
+{
+	GENERATED_BODY()
+
+public:
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AActor> Input;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AActor> Output;
+};

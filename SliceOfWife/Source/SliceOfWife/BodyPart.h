@@ -37,6 +37,8 @@ public:
 	FVector GetMeshRelativeLocation();
 	float GetMeshRadius();
 
+	void SetPhysicsState(bool state);
+
 	bool IsAttachedToBody();
 	bool IsOfType(EBodyPartType type);
 

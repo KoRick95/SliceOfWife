@@ -49,6 +49,7 @@ void ASoul::Tick(float DeltaTime)
 		// if the soul has crossed the edge of the map
 		if (position.X < -MapEdgeX || position.X > MapEdgeX || position.Y < -MapEdgeY || position.Y > MapEdgeY)
 		{
+			hauntedObject->Destroy();
 			this->Destroy();
 		}
 	}

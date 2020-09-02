@@ -55,6 +55,11 @@ float ABodyPart::GetMeshRadius()
 	return skeletalMesh->GetBounds().SphereRadius;
 }
 
+void ABodyPart::SetPhysicsState(bool state)
+{
+	Cast<UPrimitiveComponent>(GetComponentByClass(UPrimitiveComponent::StaticClass()))->SetSimulatePhysics(state);
+}
+
 bool ABodyPart::IsAttachedToBody()
 {
 	return attachedBody != nullptr;
