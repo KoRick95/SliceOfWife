@@ -30,27 +30,27 @@ AActor* ABodyStorage::TakeBody()
 
 	bool canCreateNewBody = true;
 
-	// if the player already has the max allowable number of bodies from this storage
-	if (bodyCount == MaxBodyCount)
-	{
-		canCreateNewBody = false;
+	//// if the player already has the max allowable number of bodies from this storage
+	//if (bodyCount == MaxBodyCount)
+	//{
+	//	canCreateNewBody = false;
 
-		// while the player cannot create a new body and there are still bodies to check through
-		while (!canCreateNewBody && currentBodies.Num() > 0)
-		{
-			// if the body has not been destroyed
-			if (IsValid(currentBodies[0]))
-			{
-				// destroy the oldest body in the array and allow the player to create a new body
-				currentBodies[0]->Destroy();
-				bodyCount--;
-				canCreateNewBody = true;
-			}
+	//	// while the player cannot create a new body and there are still bodies to check through
+	//	while (!canCreateNewBody && currentBodies.Num() > 0)
+	//	{
+	//		// if the body has not been destroyed
+	//		if (IsValid(currentBodies[0]))
+	//		{
+	//			// destroy the oldest body in the array and allow the player to create a new body
+	//			currentBodies[0]->Destroy();
+	//			bodyCount--;
+	//			canCreateNewBody = true;
+	//		}
 
-			// remove the body from the array
-			currentBodies.RemoveAt(0);
-		}
-	}
+	//		// remove the body from the array
+	//		currentBodies.RemoveAt(0);
+	//	}
+	//}
 
 	if (canCreateNewBody)
 	{

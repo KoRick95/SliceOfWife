@@ -24,8 +24,6 @@ void AResizeDevice::Tick(float DeltaTime)
 
 bool AResizeDevice::ReplaceBody(ABodyPart* bodyPart)
 {
-
-
 	return false;
 }
 
