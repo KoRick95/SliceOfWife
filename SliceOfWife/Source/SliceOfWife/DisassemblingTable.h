@@ -46,5 +46,5 @@ public:
 	bool RemoveFromTable();
 
 	void Charge();
-	void Disassemble();
+	void DisassembleBody();
 };
