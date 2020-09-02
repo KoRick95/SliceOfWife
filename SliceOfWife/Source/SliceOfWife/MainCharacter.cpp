@@ -96,7 +96,7 @@ void AMainCharacter::PickUpAndDrop()
 {
 	// get all nearby objects
 	TArray<AActor*> nearbyObjects;
-	DetectionCollider->GetOverlappingActors(nearbyObjects);
+	this->GetOverlappingActors(nearbyObjects);
 
 	// if the player is not holding anything
 	if (heldObject == nullptr)
