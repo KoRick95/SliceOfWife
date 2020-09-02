@@ -263,23 +263,26 @@ void AMainCharacter::Interact()
 	TArray<AActor*> nearbyObjects;
 	this->GetOverlappingActors(nearbyObjects);
 
+	bool hasInteracted = false;
+
 	for (int i = 0; i < nearbyObjects.Num(); ++i)
 	{
 		if (nearbyObjects[i]->IsA(ASoul::StaticClass()))
 		{
 			Cast<ASoul>(nearbyObjects[i])->Despawn();
-			break;
+			hasInteracted = true;
 		}
 		else if (nearbyObjects[i]->IsA(ADisassemblingTable::StaticClass()))
 		{
-			Cast<ADisassemblingTable>(nearbyObjects[i])->Charge();
-			break;
+			hasInteracted = Cast<ADisassemblingTable>(nearbyObjects[i])->Charge();
 		}
 		else if (nearbyObjects[i]->IsA(AAssemblingSpot::StaticClass()))
 		{
-			Cast<AAssemblingSpot>(nearbyObjects[i])->BeginSewing();
-			break;
+			hasInteracted = Cast<AAssemblingSpot>(nearbyObjects[i])->BeginSewing();
 		}
+
+		if (hasInteracted)
+			break;
 	}
 }
 

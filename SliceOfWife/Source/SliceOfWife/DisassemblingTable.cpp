@@ -54,22 +54,21 @@ bool ADisassemblingTable::RemoveFromTable()
 	return false;
 }
 
-void ADisassemblingTable::Charge()
+bool ADisassemblingTable::Charge()
 {
 	if (bodyOnTable == nullptr)
-		return;
+		return false;
 
 	charge += ChargeRate;
 	
 	if (charge >= MaxCharge)
 	{
 		DisassembleBody();
-
-		// reset the charge
 		charge = 0;
 	}
 	
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, FString::Printf(TEXT("Charge: %f"), charge));
+	return true;
 }
 
 void ADisassemblingTable::DisassembleBody()
