@@ -15,15 +15,15 @@ public:
 	// Sets default values for this actor's properties
 	ADisassemblingTable();
 
-	AActor* bodyOnTable = nullptr;
+	class AFullBody* bodyOnTable = nullptr;
 
 	float charge = 0;
 
 	UPROPERTY(EditAnywhere, Category = "Snapping")
-	FVector SnapPosition = { 0, 0, 150 };
+	FVector SnapPosition = { 0, 0, 100 };
 
 	UPROPERTY(EditAnywhere, Category = "Snapping")
-	FRotator SnapRotation = { -90, 0, 0 };
+	FRotator SnapRotation = { 0, 90, 180 };
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
 	float ChargeRate = 1;
@@ -45,6 +45,6 @@ public:
 	bool DropToTable(AActor* body);
 	bool RemoveFromTable();
 
-	void Charge();
+	bool Charge();
 	void DisassembleBody();
 };

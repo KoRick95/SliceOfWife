@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Commons.h"
+#include "EnumsStructs.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "AssemblingTable.generated.h"
@@ -24,7 +24,7 @@ public:
 	class UMinigameWidget* widget;
 
 	UPROPERTY(EditAnywhere)
-	FVector SnapPosition = { -100, 0, 100 };
+	FVector SnapPosition = { -90, 0, 105 };
 
 	UPROPERTY(EditAnywhere)
 	FRotator SnapRotation = { -90, 0, 90 };

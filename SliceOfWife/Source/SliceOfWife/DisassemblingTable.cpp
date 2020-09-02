@@ -34,7 +34,7 @@ bool ADisassemblingTable::DropToTable(AActor* body)
 		body->SetActorLocation(this->GetActorLocation() + SnapPosition);
 		body->SetActorRotation(SnapRotation, ETeleportType::ResetPhysics);
 
-		this->bodyOnTable = body;
+		this->bodyOnTable = Cast<AFullBody>(body);
 		return true;
 	}
 
@@ -54,39 +54,36 @@ bool ADisassemblingTable::RemoveFromTable()
 	return false;
 }
 
-void ADisassemblingTable::Charge()
+bool ADisassemblingTable::Charge()
 {
 	if (bodyOnTable == nullptr)
-		return;
+		return false;
 
 	charge += ChargeRate;
 	
 	if (charge >= MaxCharge)
 	{
 		DisassembleBody();
-
-		// reset the charge
 		charge = 0;
 	}
 	
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, FString::Printf(TEXT("Charge: %f"), charge));
+	return true;
 }
 
 void ADisassemblingTable::DisassembleBody()
 {
-	// get all of the body's components
-	TArray<AActor*> bodyParts;
-	bodyOnTable->GetAllChildActors(bodyParts, false);
+	int bodyPartsCount = bodyOnTable->GetBodyPartsCount();
 
-	for (int i = 0; i < bodyParts.Num(); ++i)
+	for (int i = 0; i < bodyPartsCount; ++i)
 	{
-		UClass* uClass = bodyParts[i]->GetClass();
-		FTransform transform = bodyParts[i]->GetActorTransform();
+		UClass* uClass = bodyOnTable->bodyParts[i]->GetClass();
+		FTransform transform = bodyOnTable->bodyParts[i]->GetTransform();
 
-		AActor* bodyPart = GetWorld()->SpawnActor(uClass, &transform);
+		AActor* splitBodyPart = GetWorld()->SpawnActor(uClass, &transform);
 
 		// if the body part has a primitive component, enable its physics
-		UActorComponent* getPrimComp = bodyPart->GetComponentByClass(UPrimitiveComponent::StaticClass());
+		UActorComponent* getPrimComp = splitBodyPart->GetComponentByClass(UPrimitiveComponent::StaticClass());
 		if (getPrimComp != nullptr)
 		{
 			Cast<UPrimitiveComponent>(getPrimComp)->SetSimulatePhysics(true);
@@ -96,11 +93,10 @@ void ADisassemblingTable::DisassembleBody()
 		if (SoulBP != nullptr)
 		{
 			ASoul* soul = Cast<ASoul>(GetWorld()->SpawnActor(SoulBP.Get(), &FTransform::Identity));
-			soul->hauntedObject = bodyPart;
+			soul->hauntedObject = splitBodyPart;
 		}
 	}
 
-	// destroy the base body
 	bodyOnTable->Destroy();
 	bodyOnTable = nullptr;
 }

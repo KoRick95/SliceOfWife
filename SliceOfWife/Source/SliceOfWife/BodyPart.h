@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Commons.h"
+#include "EnumsStructs.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "BodyPart.generated.h"
@@ -36,6 +36,8 @@ public:
 
 	FVector GetMeshRelativeLocation();
 	float GetMeshRadius();
+
+	void SetPhysicsState(bool state);
 
 	bool IsAttachedToBody();
 	bool IsOfType(EBodyPartType type);

@@ -17,10 +17,13 @@ void ABodyPart::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (this->GetAttachParentActor()->IsA(AFullBody::StaticClass()))
+	if (this->GetAttachParentActor() != nullptr)
 	{
-		attachedBody = Cast<AFullBody>(this->GetAttachParentActor());
-		OriginalCreatureType = attachedBody->CreatureType;
+		if (this->GetAttachParentActor()->IsA(AFullBody::StaticClass()))
+		{
+			attachedBody = Cast<AFullBody>(this->GetAttachParentActor());
+			OriginalCreatureType = attachedBody->CreatureType;
+		}
 	}
 
 	USkeletalMeshComponent* skeletalMeshComponent = Cast<USkeletalMeshComponent>(GetComponentByClass(USkeletalMeshComponent::StaticClass()));
@@ -50,6 +53,11 @@ FVector ABodyPart::GetMeshRelativeLocation()
 float ABodyPart::GetMeshRadius()
 {
 	return skeletalMesh->GetBounds().SphereRadius;
+}
+
+void ABodyPart::SetPhysicsState(bool state)
+{
+	Cast<UPrimitiveComponent>(GetComponentByClass(UPrimitiveComponent::StaticClass()))->SetSimulatePhysics(state);
 }
 
 bool ABodyPart::IsAttachedToBody()
