@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Commons.h"
+#include "EnumsStructs.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "ResizeDevice.generated.h"
@@ -16,8 +16,8 @@ public:
 	// Sets default values for this actor's properties
 	AResizeDevice();
 
-	UPROPERTY(EditAnywhere)
-	TArray<FBodyPartReplacement> BodyPartReplacements;
+	//UPROPERTY(EditAnywhere)
+	//TArray<FBodyPartReplacement> BodyPartReplacements;
 
 protected:
 	// Called when the game starts or when spawned

@@ -15,7 +15,7 @@ public:
 	// Sets default values for this actor's properties
 	ADisassemblingTable();
 
-	AActor* bodyOnTable = nullptr;
+	class AFullBody* bodyOnTable = nullptr;
 
 	float charge = 0;
 
@@ -46,5 +46,5 @@ public:
 	bool RemoveFromTable();
 
 	void Charge();
-	void DisassembleBody();
+	void Disassemble();
 };

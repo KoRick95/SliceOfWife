@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Commons.h"
+#include "EnumsStructs.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "FullBody.generated.h"
