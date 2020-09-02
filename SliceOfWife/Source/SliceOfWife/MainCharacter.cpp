@@ -280,6 +280,10 @@ void AMainCharacter::Interact()
 		{
 			hasInteracted = Cast<AAssemblingSpot>(nearbyObjects[i])->BeginSewing();
 		}
+		else if (nearbyObjects[i]->IsA(AResizingDevice::StaticClass()))
+		{
+			hasInteracted = Cast<AResizingDevice>(nearbyObjects[i])->ReplaceObject();
+		}
 
 		if (hasInteracted)
 			break;

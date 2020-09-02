@@ -29,7 +29,7 @@ bool AResizingDevice::DropToDevice(AActor* object)
 	if (object == nullptr)
 		return false;
 
-	FVector offset;
+	FVector offset = SnapLocation;
 
 	if (object->IsA(ABodyPart::StaticClass()))
 	{
@@ -37,7 +37,7 @@ bool AResizingDevice::DropToDevice(AActor* object)
 	}
 	else
 	{
-		return false;
+		//return false;
 	}
 
 	object->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
@@ -58,16 +58,20 @@ bool AResizingDevice::RemoveFromDevice()
 	return true;
 }
 
-bool AResizingDevice::ReplaceObject(AActor* object)
+bool AResizingDevice::ReplaceObject()
 {
+	if (objectOnDevice == nullptr)
+		return false;
+
 	for (int i = 0; i < ObjectReplacements.Num(); ++i)
 	{
-		if (ObjectReplacements[i].Input.Get() == object->GetClass())
+		if (ObjectReplacements[i].Input.Get() == objectOnDevice->GetClass())
 		{
 			UClass* uClass = ObjectReplacements[i].Output.Get();
-			FTransform transform = object->GetActorTransform();
+			FTransform transform = objectOnDevice->GetActorTransform();
 			GetWorld()->SpawnActor(uClass, &transform);
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Replaced body woo!")));
+			objectOnDevice->Destroy();
+			objectOnDevice = nullptr;
 			return true;
 		}
 	}

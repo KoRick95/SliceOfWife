@@ -38,5 +38,5 @@ public:
 	bool DropToDevice(AActor* object);
 	bool RemoveFromDevice();
 
-	bool ReplaceObject(AActor* object);
+	bool ReplaceObject();
 };

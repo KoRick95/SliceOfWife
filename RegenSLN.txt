@@ -1,8 +1,7 @@
 ## Regenerate Projects
 2) Go to this file directory: C:\Program Files\Epic Games\UE_4.23\Engine\Binaries\DotNET>
 3) Type 'cmd' in the task bar.
-4) Copy paste this in to the command line: UnrealBuildTool.exe -ProjectFiles -project="C:\Users\sXXXXXX\Documents\GitHub\Chicken-Crimpy-Repository\DejaBrew\DejaBrew.uproject" -game -engine
+4) Copy paste this in to the command line:
 
-UnrealBuildTool.exe -ProjectFiles -project="C:\Users\s191273\Documents\GitHub\SliceOfWife\SliceOfWife\SliceOfWife.uproject" -game -engine
-
+Rick: UnrealBuildTool.exe -ProjectFiles -project="C:\Users\s191273\Documents\GitHub\SliceOfWife\SliceOfWife\SliceOfWife.uproject" -game -engine
 Will: UnrealBuildTool.exe -ProjectFiles -project="C:\Users\s191533\Documents\GitHub\SliceOfWife\SliceOfWife\SliceOfWife.uproject" -game -engine

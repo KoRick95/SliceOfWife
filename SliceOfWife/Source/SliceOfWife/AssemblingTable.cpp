@@ -74,13 +74,6 @@ bool AAssemblingTable::DropToTable(ABodyPart* bodyPart, AAssemblingSpot* spot)
 		}
 	}
 
-	//if (dropped)
-	//{
-	//	// offset the body part by its mesh's relative position
-	//	FVector offset = -bodyPart->GetMeshRelativeLocation();
-	//	bodyPart->SetActorRelativeLocation(offset, false, nullptr, ETeleportType::ResetPhysics);
-	//}
-
 	return dropped;
 }
 
