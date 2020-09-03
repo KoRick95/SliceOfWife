@@ -2,6 +2,8 @@
 
 
 #include "AnimatingDevice.h"
+#include "AssemblingTable.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AAnimatingDevice::AAnimatingDevice()
@@ -14,6 +16,8 @@ AAnimatingDevice::AAnimatingDevice()
 void AAnimatingDevice::BeginPlay()
 {
 	Super::BeginPlay();
+
+	assemblingTable = Cast<AAssemblingTable>(UGameplayStatics::GetActorOfClass(this, AAssemblingTable::StaticClass()));
 }
 
 // Called every frame

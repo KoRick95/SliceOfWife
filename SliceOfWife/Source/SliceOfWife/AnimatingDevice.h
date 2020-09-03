@@ -15,7 +15,10 @@ public:
 	// Sets default values for this actor's properties
 	AAnimatingDevice();
 
-	class AAssemblyTable* assemblyTable = nullptr;
+	class AAssemblingTable* assemblingTable = nullptr;
+
+	UPROPERTY(VisibleAnywhere)
+	bool Animated = false;
 
 protected:
 	// Called when the game starts or when spawned
@@ -24,5 +27,4 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
 };
