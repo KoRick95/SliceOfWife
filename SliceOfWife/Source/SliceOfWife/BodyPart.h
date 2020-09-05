@@ -20,11 +20,18 @@ public:
 
 	class USkeletalMesh* skeletalMesh = nullptr;
 
+	class USkeletalMeshComponent* skeletalMeshComponent = nullptr;
+
+	FBodyPartMeshType* currentMeshType = nullptr;
+
 	UPROPERTY(EditAnywhere)
 	TEnumAsByte<ECreatureType> OriginalCreatureType; 
 
 	UPROPERTY(EditAnywhere)
 	TArray<TEnumAsByte<EBodyPartType>> BodyPartTypes;
+
+	UPROPERTY(EditAnywhere)
+	TArray<FBodyPartMeshType> BodyPartMeshTypes;
 
 protected:
 	// Called when the game starts or when spawned
@@ -41,6 +48,9 @@ public:
 
 	bool IsAttachedToBody();
 	bool IsOfType(EBodyPartType type);
+	bool HasMeshType(EBodyPartType type);
+
+	bool SwitchMeshType(EBodyPartType type);
 
 	bool AttachToBody(AFullBody* fullBody);
 	bool DetachFromBody();

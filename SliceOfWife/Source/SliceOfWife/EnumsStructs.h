@@ -21,7 +21,8 @@ UENUM()
 enum ECreatureType
 {
 	Unknown		UMETA(DisplayName = "Unknown"),
-	Human		UMETA(DisplayName = "Human"),
+	HumanM		UMETA(DisplayName = "Human (Male)"),
+	HumanF		UMETA(DisplayName = "Human (Female)"),
 	Bird		UMETA(DisplayName = "Bird"),
 	Bull		UMETA(DisplayName = "Bull"),
 	Fish		UMETA(DisplayName = "Fish"),
@@ -40,4 +41,18 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AActor> Output;
+};
+
+USTRUCT()
+struct FBodyPartMeshType
+{
+	GENERATED_BODY()
+
+public:
+
+	UPROPERTY(EditAnywhere)
+	TEnumAsByte<EBodyPartType> BodyPartType = EBodyPartType::None;
+
+	UPROPERTY(EditAnywhere)
+	USkeletalMesh* SkeletalMesh = nullptr;
 };

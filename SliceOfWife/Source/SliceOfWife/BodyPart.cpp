@@ -26,7 +26,7 @@ void ABodyPart::BeginPlay()
 		}
 	}
 
-	USkeletalMeshComponent* skeletalMeshComponent = Cast<USkeletalMeshComponent>(GetComponentByClass(USkeletalMeshComponent::StaticClass()));
+	skeletalMeshComponent = Cast<USkeletalMeshComponent>(GetComponentByClass(USkeletalMeshComponent::StaticClass()));
 	
 	if (skeletalMeshComponent != nullptr)
 	{
@@ -75,6 +75,40 @@ bool ABodyPart::IsOfType(EBodyPartType type)
 		}
 	}
 	
+	return false;
+}
+
+bool ABodyPart::HasMeshType(EBodyPartType type)
+{
+	for (int i = 0; i < BodyPartMeshTypes.Num(); ++i)
+	{
+		if (BodyPartMeshTypes[i].BodyPartType == type)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool ABodyPart::SwitchMeshType(EBodyPartType type)
+{
+	// check from the available mesh types
+	for (int i = 0; i < BodyPartMeshTypes.Num(); ++i)
+	{
+		// if a matching mesh type is found
+		if (BodyPartMeshTypes[i].BodyPartType == type)
+		{
+			// set that mesh type as current
+			currentMeshType = &BodyPartMeshTypes[i];
+			
+			// change this object's skeletal mesh
+			skeletalMeshComponent->SetSkeletalMesh(currentMeshType->SkeletalMesh);
+
+			return true;
+		}
+	}
+
 	return false;
 }
 
