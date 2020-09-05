@@ -25,3 +25,15 @@ void AAnimatingDevice::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
+
+bool AAnimatingDevice::AnimateBody()
+{
+	if (assemblingTable == nullptr)
+	{
+		return false;
+	}
+
+
+
+	return false;
+}

@@ -20,6 +20,12 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	bool Animated = false;
 
+	UPROPERTY(EditAnywhere)
+	int MinBodyParts = 6;
+
+	UPROPERTY(EditAnywhere)
+	TArray<TEnumAsByte<EBodyPartType>> RequiredBodyParts;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -27,4 +33,6 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	bool AnimateBody();
 };
