@@ -2,7 +2,10 @@
 
 
 #include "AnimatingDevice.h"
+#include "AssemblingSpot.h"
 #include "AssemblingTable.h"
+#include "BodyPart.h"
+#include "FullBody.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -33,7 +36,23 @@ bool AAnimatingDevice::AnimateBody()
 		return false;
 	}
 
+	bool allRequirementsMet = true;
 
+	for (int i = 0; i < RequiredBodyPartTypes.Num(); ++i)
+	{
+		bool requirementMet = false;
+		
+		if (!requirementMet)
+		{
+			allRequirementsMet = false;
+			break;
+		}
+	}
 
-	return false;
+	if (allRequirementsMet)
+	{
+
+	}
+
+	return allRequirementsMet;
 }

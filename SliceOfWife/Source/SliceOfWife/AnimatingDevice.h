@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "EnumsStructs.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "AnimatingDevice.generated.h"
@@ -21,10 +22,7 @@ public:
 	bool Animated = false;
 
 	UPROPERTY(EditAnywhere)
-	int MinBodyParts = 6;
-
-	UPROPERTY(EditAnywhere)
-	TArray<TEnumAsByte<EBodyPartType>> RequiredBodyParts;
+	TArray<TEnumAsByte<EBodyPartType>> RequiredBodyPartTypes;
 
 protected:
 	// Called when the game starts or when spawned
