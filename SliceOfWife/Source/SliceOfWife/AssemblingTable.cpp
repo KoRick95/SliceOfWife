@@ -45,36 +45,34 @@ bool AAssemblingTable::DropToTable(ABodyPart* bodyPart, AAssemblingSpot* spot)
 		return false;
 	}
 
-	bool dropped = false;
+	bool canBeDropped = false;
 
-	if (bodyPart->IsOfType(CentralBodyPartType))
+	if (centralBodyPart == nullptr)
 	{
-		centralBodyPart = bodyPart;
-
-		// snap
-		bodyPart->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-		bodyPart->SetActorRelativeLocation(SnapPosition);
-		bodyPart->SetActorRelativeRotation(SnapRotation);
-
-		dropped = true;
+		if (bodyPart->HasMeshType(CentralBodyPartType, true))
+		{
+			centralBodyPart = bodyPart;
+			canBeDropped = true;
+		}
 	}
-	// if spot is not already occupied by another body part
 	else if (spot->bodyPart == nullptr)
 	{
-		if (bodyPart->IsOfType(spot->BodyPartType))
+		if (bodyPart->HasMeshType(spot->BodyPartType, true))
 		{
 			spot->bodyPart = bodyPart;
-
-			// snap
-			bodyPart->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-			bodyPart->SetActorRelativeLocation(SnapPosition);
-			bodyPart->SetActorRelativeRotation(SnapRotation);
-
-			dropped = true;
+			canBeDropped = true;
 		}
 	}
 
-	return dropped;
+	if (canBeDropped)
+	{
+		// snap the body part to the table
+		bodyPart->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		bodyPart->SetActorRelativeLocation(SnapPosition);
+		bodyPart->SetActorRelativeRotation(SnapRotation);
+	}
+
+	return canBeDropped;
 }
 
 bool AAssemblingTable::RemoveFromTable(ABodyPart* bodyPart)
@@ -84,24 +82,31 @@ bool AAssemblingTable::RemoveFromTable(ABodyPart* bodyPart)
 		return false;
 	}
 
-	if (bodyPart->IsOfType(CentralBodyPartType))
-	{
-		bodyPart->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-		centralBodyPart = nullptr;
-		return true;
-	}
+	bool canBeRemoved = false;
 
-	for (int i = 0; i < assemblingSpots.Num(); ++i)
+	if (bodyPart->HasMeshType(CentralBodyPartType))
 	{
-		if (assemblingSpots[i]->bodyPart == bodyPart)
+		centralBodyPart = nullptr;
+		canBeRemoved = true;
+	}
+	else
+	{
+		for (int i = 0; i < assemblingSpots.Num(); ++i)
 		{
-			bodyPart->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-			assemblingSpots[i]->bodyPart = nullptr;
-			return true;
+			if (assemblingSpots[i]->bodyPart == bodyPart)
+			{
+				assemblingSpots[i]->bodyPart = nullptr;
+				canBeRemoved = true;
+			}
 		}
 	}
 
-	return false;
+	if (canBeRemoved)
+	{
+		bodyPart->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+	}
+
+	return canBeRemoved;
 }
 
 bool AAssemblingTable::BeginSewing(AAssemblingSpot* spot)
