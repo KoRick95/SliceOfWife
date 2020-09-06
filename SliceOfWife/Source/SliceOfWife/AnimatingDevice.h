@@ -24,6 +24,9 @@ public:
 	UPROPERTY(EditAnywhere)
 	TArray<TEnumAsByte<EBodyPartType>> RequiredBodyPartTypes;
 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UMinigameWidget> MinigameWidget;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

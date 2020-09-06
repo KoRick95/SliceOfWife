@@ -22,7 +22,7 @@ void UMinigameWidget::EndMinigame(bool isCompleted)
 	}
 	else if (minigameInitator->IsA(AAnimatingDevice::StaticClass()))
 	{
-		Cast<AAnimatingDevice>(minigameInitator)->AnimateBody();
+		//Cast<AAnimatingDevice>(minigameInitator)->AnimateBody();
 	}
 
 	this->RemoveFromParent();

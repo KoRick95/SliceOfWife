@@ -21,8 +21,6 @@ public:
 	class ABodyPart* centralBodyPart = nullptr;
 	class AFullBody* finalBody = nullptr;
 
-	class UMinigameWidget* widget;
-
 	UPROPERTY(EditAnywhere)
 	FVector SnapPosition = { -90, 0, 105 };
 
@@ -45,7 +43,7 @@ public:
 	FRotator SpawnRotation = { 0, 0, 0 };
 
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<class UMinigameWidget> WidgetBP;
+	TSubclassOf<class UMinigameWidget> MinigameWidget;
 
 protected:
 	// Called when the game starts or when spawned

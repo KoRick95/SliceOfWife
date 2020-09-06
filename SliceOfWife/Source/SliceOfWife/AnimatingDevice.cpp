@@ -6,6 +6,7 @@
 #include "AssemblingTable.h"
 #include "BodyPart.h"
 #include "FullBody.h"
+#include "MinigameWidget.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -65,6 +66,11 @@ bool AAnimatingDevice::AnimateBody()
 
 	if (allRequirementsMet)
 	{
+		if (MinigameWidget != nullptr)
+		{
+			CreateWidget<UMinigameWidget>(GetWorld(), MinigameWidget.Get())->StartMinigame(this);
+		}
+		
 		assemblingTable->AnimateBody();
 		Animated = true;
 	}

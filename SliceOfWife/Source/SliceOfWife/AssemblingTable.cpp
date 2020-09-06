@@ -111,7 +111,7 @@ bool AAssemblingTable::RemoveFromTable(ABodyPart* bodyPart)
 
 bool AAssemblingTable::BeginSewing(AAssemblingSpot* spot)
 {
-	if (centralBodyPart == nullptr || spot->bodyPart == nullptr || spot->bodyPart->IsAttachedToBody() || WidgetBP == nullptr)
+	if (centralBodyPart == nullptr || spot->bodyPart == nullptr || spot->bodyPart->IsAttachedToBody() || MinigameWidget == nullptr)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, FString::Printf(TEXT("Check one of the following:\n"
 			"1. Is it missing the central body part?\n"
@@ -121,8 +121,7 @@ bool AAssemblingTable::BeginSewing(AAssemblingSpot* spot)
 		return false;
 	}
 
-	widget = CreateWidget<UMinigameWidget>(GetWorld(), WidgetBP.Get());
-	widget->StartMinigame(spot);
+	CreateWidget<UMinigameWidget>(GetWorld(), MinigameWidget.Get())->StartMinigame(spot);
 
 	return true;
 }
