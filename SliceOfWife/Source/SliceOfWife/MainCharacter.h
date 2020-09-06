@@ -17,12 +17,6 @@ public:
 
 	AActor* heldObject = nullptr;
 
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
-	//class USpringArmComponent* CameraArm;
-
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
-	//class UCameraComponent* Camera;
-
 	UPROPERTY(EditAnywhere, Category = "Rotation")
 	float RotationSpeed = 100;
 

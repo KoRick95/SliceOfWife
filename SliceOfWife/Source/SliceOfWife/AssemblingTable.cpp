@@ -145,35 +145,16 @@ void AAssemblingTable::AssembleBodyPart(ABodyPart* bodyPart)
 	finalBody->AttachBodyPart(bodyPart);
 }
 
-bool AAssemblingTable::Animate()
+bool AAssemblingTable::AnimateBody()
 {
-	int bodyPartsCount = 0;
-
-	for (int i = 0; i < assemblingSpots.Num(); ++i)
-	{
-		if (assemblingSpots[i]->bodyPart != nullptr)
-		{
-			bodyPartsCount++;
-		}
-	}
-
-	if (bodyPartsCount < MinBodyParts || TemporarySpawnBody == nullptr)
+	if (finalBody == nullptr)
 	{
 		return false;
 	}
 
-	// destroy each body part
-	for (int i = 0; i < assemblingSpots.Num(); ++i)
-	{
-		assemblingSpots[i]->bodyPart->Destroy();
-		assemblingSpots[i]->bodyPart = nullptr;
-	}
-
-	// spawn the body
-	FVector location(this->GetActorLocation() + SpawnOffset);
-	FRotator rotation(this->GetActorRotation() + SpawnRotation);
-	FActorSpawnParameters spawnInfo;
-	GetWorld()->SpawnActor<AActor>(TemporarySpawnBody, location, rotation, spawnInfo);
+	finalBody->SetActorRelativeLocation(SpawnOffset);
+	finalBody->SetActorRelativeRotation(SpawnRotation);
+	DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
 	return false;
 }

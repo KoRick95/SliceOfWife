@@ -36,13 +36,13 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	FVector GetMeshRelativeLocation();
 	float GetMeshRadius();
+	FVector GetMeshRelativeLocation();
+	EBodyPartType GetBodyPartType();
 
 	void SetPhysicsState(bool state);
 
 	bool IsAttachedToBody();
-
 	bool HasMeshType(EBodyPartType type, bool switchMesh = false);
 
 	bool AttachToBody(AFullBody* fullBody);

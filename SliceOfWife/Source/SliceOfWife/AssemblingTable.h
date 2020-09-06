@@ -60,9 +60,7 @@ public:
 
 	bool BeginSewing(AAssemblingSpot* spot);
 
-	UFUNCTION(BlueprintCallable)
 	void AssembleBodyPart(ABodyPart* bodyPart);
 
-	UFUNCTION(BlueprintCallable)
-	bool Animate();
+	bool AnimateBody();
 };

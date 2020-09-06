@@ -31,27 +31,42 @@ void AAnimatingDevice::Tick(float DeltaTime)
 
 bool AAnimatingDevice::AnimateBody()
 {
-	if (assemblingTable == nullptr)
+	if (assemblingTable == nullptr || assemblingTable->finalBody == nullptr)
 	{
 		return false;
 	}
 
+	TArray<ABodyPart*> uncheckedBodyParts = assemblingTable->finalBody->bodyParts;
 	bool allRequirementsMet = true;
 
-	for (int i = 0; i < RequiredBodyPartTypes.Num(); ++i)
+	if (RequiredBodyPartTypes.Num() <= uncheckedBodyParts.Num())
 	{
-		bool requirementMet = false;
-		
-		if (!requirementMet)
+		for (int r = 0; r < RequiredBodyPartTypes.Num(); ++r)
 		{
-			allRequirementsMet = false;
-			break;
+			bool requirementMet = false;
+
+			for (int u = 0; u < uncheckedBodyParts.Num(); ++u)
+			{
+				if (RequiredBodyPartTypes[r] == uncheckedBodyParts[u]->GetBodyPartType())
+				{
+					uncheckedBodyParts.RemoveAt(u);
+					requirementMet = true;
+					break;
+				}
+			}
+
+			if (!requirementMet)
+			{
+				allRequirementsMet = false;
+				break;
+			}
 		}
 	}
 
 	if (allRequirementsMet)
 	{
-
+		assemblingTable->AnimateBody();
+		Animated = true;
 	}
 
 	return allRequirementsMet;

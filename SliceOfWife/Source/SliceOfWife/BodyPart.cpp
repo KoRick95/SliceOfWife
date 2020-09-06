@@ -48,14 +48,19 @@ void ABodyPart::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+float ABodyPart::GetMeshRadius()
+{
+	return skeletalMeshComponent->SkeletalMesh->GetBounds().SphereRadius;
+}
+
 FVector ABodyPart::GetMeshRelativeLocation()
 {
 	return skeletalMeshComponent->SkeletalMesh->GetBounds().Origin;
 }
 
-float ABodyPart::GetMeshRadius()
+EBodyPartType ABodyPart::GetBodyPartType()
 {
-	return skeletalMeshComponent->SkeletalMesh->GetBounds().SphereRadius;
+	return currentMeshType->BodyPartType;
 }
 
 void ABodyPart::SetPhysicsState(bool state)

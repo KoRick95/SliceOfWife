@@ -24,16 +24,6 @@ AMainCharacter::AMainCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	//// Create the camera arm
-	//CameraArm = CreateDefaultSubobject<USpringArmComponent>("Camera Arm");
-	//CameraArm->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-	//CameraArm->bUsePawnControlRotation = false;
-
-	//// Create the camera
-	//Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
-	//Camera->AttachToComponent(CameraArm, FAttachmentTransformRules::KeepRelativeTransform, USpringArmComponent::SocketName);
-	//Camera->bUsePawnControlRotation = false;
-
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
