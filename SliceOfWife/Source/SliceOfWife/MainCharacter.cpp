@@ -166,7 +166,7 @@ void AMainCharacter::PickUpAndDrop()
 		{
 			if (nearbyObjects[i]->IsA(AAssemblingSpot::StaticClass()))
 			{
-				isSnapped = Cast<AAssemblingSpot>(nearbyObjects[i])->DropToTable(Cast<ABodyPart>(heldObject));
+				isSnapped = Cast<AAssemblingSpot>(nearbyObjects[i])->DropToTable(heldObject);
 			}
 			else if (nearbyObjects[i]->IsA(ADisassemblingTable::StaticClass()))
 			{
