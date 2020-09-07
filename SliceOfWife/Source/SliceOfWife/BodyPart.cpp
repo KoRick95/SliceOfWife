@@ -37,6 +37,7 @@ void ABodyPart::BeginPlay()
 			if (defaultMesh != nullptr)
 			{
 				skeletalMeshComponent->SetSkeletalMesh(defaultMesh);
+				currentMeshType = &BodyPartMeshTypes[0];
 			}
 		}
 	}

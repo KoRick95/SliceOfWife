@@ -51,7 +51,7 @@ bool AAssemblingSpot::SetBodyPart(ABodyPart* aBodyPart)
 {
 	if (aBodyPart != nullptr)
 	{
-		if (bodyPart->GetBodyPartType() == this->BodyPartType)
+		if (aBodyPart->GetBodyPartType() == this->BodyPartType)
 		{
 			bodyPart = aBodyPart;
 			return true;

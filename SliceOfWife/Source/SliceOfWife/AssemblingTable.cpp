@@ -59,6 +59,12 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 			{
 				bool bodyPartPlaced = false;
 
+				if (body->bodyParts[b]->GetBodyPartType() == CentralBodyPartType)
+				{
+					centralBodyPart = body->bodyParts[b];
+					continue;
+				}
+
 				for (int a = 0; a < assemblingSpots.Num(); ++a)
 				{
 					if (assemblingSpots[a]->SetBodyPart(body->bodyParts[b]))
@@ -196,7 +202,7 @@ void AAssemblingTable::AssembleBodyPart(ABodyPart* bodyPart)
 	if (finalBody == nullptr)
 	{
 		AActor* emptyBody = GetWorld()->SpawnActor(AFullBody::StaticClass(), &SnapPosition, &SnapRotation);
-		emptyBody->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		emptyBody->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
 		finalBody = Cast<AFullBody>(emptyBody);
 		finalBody->CreatureType = ECreatureType::Custom;
 		finalBody->AttachBodyPart(centralBodyPart);
