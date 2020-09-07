@@ -94,7 +94,8 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 				canBeDropped = true;
 			}
 		}
-		else if (spot->bodyPart == nullptr)
+		
+		if (!canBeDropped && spot->bodyPart == nullptr)
 		{
 			if (bodyPart->HasMeshType(spot->BodyPartType, true))
 			{
