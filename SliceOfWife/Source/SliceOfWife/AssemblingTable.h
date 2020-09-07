@@ -53,8 +53,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	bool DropToTable(ABodyPart* bodyPart, AAssemblingSpot* spot);
-	bool RemoveFromTable(ABodyPart* bodyPart);
+	bool DropToTable(AActor* object, AAssemblingSpot* spot);
+	bool RemoveFromTable(AActor* object);
 
 	bool BeginSewing(AAssemblingSpot* spot);
 

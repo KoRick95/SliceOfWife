@@ -27,6 +27,7 @@ enum ECreatureType
 	Bull		UMETA(DisplayName = "Bull"),
 	Fish		UMETA(DisplayName = "Fish"),
 	Snake		UMETA(DisplayName = "Snake"),
+	Custom		UMETA(DisplayName = "Custom"),
 };
 
 USTRUCT()

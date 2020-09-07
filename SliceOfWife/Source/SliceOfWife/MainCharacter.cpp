@@ -127,7 +127,7 @@ void AMainCharacter::PickUpAndDrop()
 					if (objectAttachParent->IsA(AAssemblingTable::StaticClass()))
 					{
 						// remove it from the assembling table
-						canPickupObject = Cast<AAssemblingTable>(objectAttachParent)->RemoveFromTable(Cast<ABodyPart>(objectToHold));
+						canPickupObject = Cast<AAssemblingTable>(objectAttachParent)->RemoveFromTable(objectToHold);
 					}
 					else if (objectAttachParent->IsA(ADisassemblingTable::StaticClass()))
 					{

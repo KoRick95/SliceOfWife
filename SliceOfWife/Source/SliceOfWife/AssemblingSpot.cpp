@@ -47,9 +47,23 @@ void AAssemblingSpot::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-bool AAssemblingSpot::DropToTable(ABodyPart* aBodyPart)
+bool AAssemblingSpot::SetBodyPart(ABodyPart* aBodyPart)
 {
-	return table->DropToTable(aBodyPart, this);
+	if (aBodyPart != nullptr)
+	{
+		if (bodyPart->GetBodyPartType() == this->BodyPartType)
+		{
+			bodyPart = aBodyPart;
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool AAssemblingSpot::DropToTable(AActor* object)
+{
+	return table->DropToTable(object, this);
 }
 
 bool AAssemblingSpot::RemoveFromTable(ABodyPart* aBodyPart)

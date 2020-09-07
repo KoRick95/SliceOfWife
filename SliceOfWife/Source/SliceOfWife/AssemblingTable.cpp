@@ -38,72 +38,134 @@ void AAssemblingTable::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-bool AAssemblingTable::DropToTable(ABodyPart* bodyPart, AAssemblingSpot* spot)
+bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 {
-	if (bodyPart == nullptr || spot == nullptr)
+	if (object == nullptr || spot == nullptr)
 	{
 		return false;
 	}
 
 	bool canBeDropped = false;
 
-	if (centralBodyPart == nullptr)
+	if (object->IsA(AFullBody::StaticClass()))
 	{
-		if (bodyPart->HasMeshType(CentralBodyPartType, true))
+		AFullBody* body = Cast<AFullBody>(object);
+
+		if (body->CreatureType == ECreatureType::Custom)
 		{
-			centralBodyPart = bodyPart;
-			canBeDropped = true;
+			bool allBodyPartsPlaced = true;
+
+			for (int b = 0; b < body->bodyParts.Num(); ++b)
+			{
+				bool bodyPartPlaced = false;
+
+				for (int a = 0; a < assemblingSpots.Num(); ++a)
+				{
+					if (assemblingSpots[a]->SetBodyPart(body->bodyParts[b]))
+					{
+						bodyPartPlaced = true;
+						break;
+					}
+				}
+
+				if (!bodyPartPlaced)
+				{
+					allBodyPartsPlaced = false;
+					break;
+				}
+			}
+
+			if (allBodyPartsPlaced)
+			{
+				finalBody = body;
+				canBeDropped = true;
+			}
 		}
 	}
-	else if (spot->bodyPart == nullptr)
+	else if (object->IsA(ABodyPart::StaticClass()))
 	{
-		if (bodyPart->HasMeshType(spot->BodyPartType, true))
+		ABodyPart* bodyPart = Cast<ABodyPart>(object);
+
+		if (centralBodyPart == nullptr)
 		{
-			spot->bodyPart = bodyPart;
-			canBeDropped = true;
+			if (bodyPart->HasMeshType(CentralBodyPartType, true))
+			{
+				centralBodyPart = bodyPart;
+				canBeDropped = true;
+			}
+		}
+		else if (spot->bodyPart == nullptr)
+		{
+			if (bodyPart->HasMeshType(spot->BodyPartType, true))
+			{
+				spot->bodyPart = bodyPart;
+				canBeDropped = true;
+			}
 		}
 	}
 
 	if (canBeDropped)
 	{
 		// snap the body part to the table
-		bodyPart->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-		bodyPart->SetActorRelativeLocation(SnapPosition);
-		bodyPart->SetActorRelativeRotation(SnapRotation);
+		object->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		object->SetActorRelativeLocation(SnapPosition);
+		object->SetActorRelativeRotation(SnapRotation);
 	}
 
 	return canBeDropped;
 }
 
-bool AAssemblingTable::RemoveFromTable(ABodyPart* bodyPart)
+bool AAssemblingTable::RemoveFromTable(AActor* object)
 {
-	if (bodyPart == nullptr)
+	if (object == nullptr)
 	{
 		return false;
 	}
 
 	bool canBeRemoved = false;
 
-	if (bodyPart->HasMeshType(CentralBodyPartType))
+	if (object == finalBody)
 	{
-		centralBodyPart = nullptr;
+		for (int i = 0; i < finalBody->bodyParts.Num(); ++i)
+		{
+			for (int j = 0; j < assemblingSpots.Num(); ++j)
+			{
+				if (finalBody->bodyParts[i] == assemblingSpots[j]->bodyPart)
+				{
+					assemblingSpots[j]->bodyPart = nullptr;
+					break;
+				}
+			}
+		}
+
+		finalBody = nullptr;
 		canBeRemoved = true;
 	}
 	else
 	{
-		for (int i = 0; i < assemblingSpots.Num(); ++i)
+		ABodyPart* bodyPart = Cast<ABodyPart>(object);
+
+		if (bodyPart->HasMeshType(CentralBodyPartType))
 		{
-			if (assemblingSpots[i]->bodyPart == bodyPart)
+			centralBodyPart = nullptr;
+			canBeRemoved = true;
+		}
+		else
+		{
+			for (int i = 0; i < assemblingSpots.Num(); ++i)
 			{
-				assemblingSpots[i]->bodyPart = nullptr;
-				canBeRemoved = true;
+				if (assemblingSpots[i]->bodyPart == bodyPart)
+				{
+					assemblingSpots[i]->bodyPart = nullptr;
+					canBeRemoved = true;
+				}
 			}
 		}
 	}
 
 	if (canBeRemoved)
 	{
-		bodyPart->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		object->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 	}
 
 	return canBeRemoved;
@@ -132,12 +194,10 @@ void AAssemblingTable::AssembleBodyPart(ABodyPart* bodyPart)
 
 	if (finalBody == nullptr)
 	{
-		FTransform transform;
-		transform.SetLocation(SnapPosition);
-		transform.SetRotation(FQuat(SnapRotation));
-		AActor* emptyBody = GetWorld()->SpawnActor(AFullBody::StaticClass(), &transform);
-		emptyBody->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
+		AActor* emptyBody = GetWorld()->SpawnActor(AFullBody::StaticClass(), &SnapPosition, &SnapRotation);
+		emptyBody->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 		finalBody = Cast<AFullBody>(emptyBody);
+		finalBody->CreatureType = ECreatureType::Custom;
 		finalBody->AttachBodyPart(centralBodyPart);
 	}
 
@@ -157,4 +217,3 @@ bool AAssemblingTable::AnimateBody()
 
 	return false;
 }
-
