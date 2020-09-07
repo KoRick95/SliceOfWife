@@ -45,7 +45,7 @@ public:
 };
 
 USTRUCT()
-struct FBodyPartMeshType
+struct FBodyPartMesh
 {
 	GENERATED_BODY()
 

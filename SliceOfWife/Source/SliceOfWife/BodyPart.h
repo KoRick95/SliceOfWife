@@ -20,13 +20,13 @@ public:
 
 	class USkeletalMeshComponent* skeletalMeshComponent = nullptr;
 
-	FBodyPartMeshType* currentMeshType = nullptr;
+	FBodyPartMesh* currentMesh = nullptr;
 
 	UPROPERTY(EditAnywhere)
 	TEnumAsByte<ECreatureType> OriginalCreatureType;
 
 	UPROPERTY(EditAnywhere)
-	TArray<FBodyPartMeshType> BodyPartMeshTypes;
+	TArray<FBodyPartMesh> BodyPartMeshes;
 
 protected:
 	// Called when the game starts or when spawned
