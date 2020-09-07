@@ -55,5 +55,11 @@ public:
 	TEnumAsByte<EBodyPartType> BodyPartType = EBodyPartType::None;
 
 	UPROPERTY(EditAnywhere)
-	USkeletalMesh* SkeletalMesh = nullptr;
+	class USkeletalMesh* SkeletalMesh = nullptr;
+
+	UPROPERTY(EditAnywhere)
+	bool Multitype = false;
+
+	UPROPERTY(EditAnywhere, meta = (EditCondition = "Multitype"))
+	TArray<TEnumAsByte<EBodyPartType>> AdditionalTypes;
 };
