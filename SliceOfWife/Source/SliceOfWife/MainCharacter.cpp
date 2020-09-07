@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "MainCharacter.h"
+#include "AnimatingDevice.h"
 #include "AssemblingTable.h"
 #include "AssemblingSpot.h"
 #include "BodyPart.h"
@@ -273,6 +274,10 @@ void AMainCharacter::Interact()
 		else if (nearbyObjects[i]->IsA(AResizingDevice::StaticClass()))
 		{
 			hasInteracted = Cast<AResizingDevice>(nearbyObjects[i])->ReplaceObject();
+		}
+		else if (nearbyObjects[i]->IsA(AAnimatingDevice::StaticClass()))
+		{
+			hasInteracted = Cast<AAnimatingDevice>(nearbyObjects[i])->AnimateBody();
 		}
 
 		if (hasInteracted)
