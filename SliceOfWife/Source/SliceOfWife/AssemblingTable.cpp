@@ -61,6 +61,7 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 
 			if (bodyPartTypes[i] == CentralBodyPartType && centralBodyPart == nullptr)
 			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("This doesn't make sense")));
 				pointersToSet.Add(&centralBodyPart);
 				canBeDropped = true;
 			}
@@ -141,12 +142,22 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 			{
 				for (int t = 0; t < typeCounts[b]; ++t)
 				{
+					GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Set pointer #%i"), p + 1));
 					pointersToSet[p] = &bodyParts[b];
+					if (pointersToSet[p] != &centralBodyPart)
+					{
+						GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("fuck off")));
+					}
 					p++;
 				}
 			}
 		}
 
+		if (centralBodyPart == nullptr)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Central is missing")));
+		}
+		
 		// snap the body part to the table
 		object->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 		object->SetActorRelativeLocation(SnapPosition);

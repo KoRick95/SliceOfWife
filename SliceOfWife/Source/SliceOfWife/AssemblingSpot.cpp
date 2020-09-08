@@ -49,7 +49,14 @@ void AAssemblingSpot::Tick(float DeltaTime)
 
 bool AAssemblingSpot::IsOccupied()
 {
-	return bodyPart != nullptr;
+	bool occupied = bodyPart != nullptr;
+
+	if (occupied)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, FString::Printf(TEXT("An assembling spot is occupied!")));
+	}
+
+	return occupied;
 }
 
 bool AAssemblingSpot::SetBodyPart(ABodyPart* aBodyPart)
