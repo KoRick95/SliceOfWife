@@ -52,14 +52,8 @@ struct FBodyPartMesh
 public:
 
 	UPROPERTY(EditAnywhere)
-	TEnumAsByte<EBodyPartType> BodyPartType = EBodyPartType::None;
-
-	UPROPERTY(EditAnywhere)
 	class USkeletalMesh* SkeletalMesh = nullptr;
 
 	UPROPERTY(EditAnywhere)
-	bool Multitype = false;
-
-	UPROPERTY(EditAnywhere, meta = (EditCondition = "Multitype"))
-	TArray<TEnumAsByte<EBodyPartType>> AdditionalTypes;
+	TArray<TEnumAsByte<EBodyPartType>> BodyPartTypes;
 };

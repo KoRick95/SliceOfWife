@@ -59,9 +59,16 @@ FVector ABodyPart::GetMeshRelativeLocation()
 	return skeletalMeshComponent->SkeletalMesh->GetBounds().Origin;
 }
 
-EBodyPartType ABodyPart::GetBodyPartType()
+TArray<EBodyPartType> ABodyPart::GetCurrentMeshTypes()
 {
-	return currentMesh->BodyPartType;
+	TArray<EBodyPartType> currentMeshTypes;
+
+	for (int i = 0; i < currentMesh->BodyPartTypes.Num(); ++i)
+	{
+		currentMeshTypes.Add(currentMesh->BodyPartTypes[i]);
+	}
+
+	return currentMeshTypes;
 }
 
 void ABodyPart::SetPhysicsState(bool state)
@@ -79,19 +86,22 @@ bool ABodyPart::HasMeshType(EBodyPartType type, bool switchMesh)
 	// check from the available mesh types
 	for (int i = 0; i < BodyPartMeshes.Num(); ++i)
 	{
-		// if a matching mesh type is found
-		if (BodyPartMeshes[i].BodyPartType == type)
+		for (int j = 0; j < BodyPartMeshes[i].BodyPartTypes.Num(); ++j)
 		{
-			if (switchMesh)
+			// if a matching mesh type is found
+			if (BodyPartMeshes[i].BodyPartTypes[j] == type)
 			{
-				// set that mesh type as current
-				currentMesh = &BodyPartMeshes[i];
+				if (switchMesh)
+				{
+					// set that mesh type as current
+					currentMesh = &BodyPartMeshes[i];
 
-				// change this object's skeletal mesh
-				skeletalMeshComponent->SetSkeletalMesh(currentMesh->SkeletalMesh);
+					// change this object's skeletal mesh
+					skeletalMeshComponent->SetSkeletalMesh(currentMesh->SkeletalMesh);
+				}
+
+				return true;
 			}
-			
-			return true;
 		}
 	}
 
