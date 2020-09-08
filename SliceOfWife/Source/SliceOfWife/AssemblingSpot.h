@@ -32,10 +32,12 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	bool IsOccupied();
 	bool SetBodyPart(ABodyPart* aBodyPart);
 
 	bool DropToTable(AActor* object);
 	bool RemoveFromTable(ABodyPart* aBodyPart);
+	//bool CheckBody
 
 	bool BeginSewing();
 	void AssembleBodyPart();
