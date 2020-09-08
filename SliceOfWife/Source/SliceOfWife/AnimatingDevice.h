@@ -22,7 +22,7 @@ public:
 	bool Animated = false;
 
 	UPROPERTY(EditAnywhere)
-	TArray<TEnumAsByte<EBodyPartType>> RequiredBodyPartTypes;
+	TArray<TEnumAsByte<EBodyPartType>> RequiredBodyParts;
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class UMinigameWidget> MinigameWidget;

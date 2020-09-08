@@ -38,7 +38,7 @@ public:
 
 	float GetMeshRadius();
 	FVector GetMeshRelativeLocation();
-	EBodyPartType GetBodyPartType();
+	TArray<EBodyPartType> GetCurrentMeshTypes();
 
 	void SetPhysicsState(bool state);
 

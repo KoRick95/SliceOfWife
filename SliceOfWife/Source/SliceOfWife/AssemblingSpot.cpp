@@ -47,14 +47,24 @@ void AAssemblingSpot::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+bool AAssemblingSpot::IsOccupied()
+{
+	return bodyPart != nullptr;
+}
+
 bool AAssemblingSpot::SetBodyPart(ABodyPart* aBodyPart)
 {
 	if (aBodyPart != nullptr)
 	{
-		if (aBodyPart->GetBodyPartType() == this->BodyPartType)
+		TArray<EBodyPartType> currentTypes = aBodyPart->GetCurrentMeshTypes();
+
+		for (int i = 0; i < currentTypes.Num(); ++i)
 		{
-			bodyPart = aBodyPart;
-			return true;
+			if (currentTypes[i] == this->BodyPartType)
+			{
+				bodyPart = aBodyPart;
+				return true;
+			}
 		}
 	}
 
