@@ -53,33 +53,35 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 	{
 		ABodyPart* bodyPart = Cast<ABodyPart>(object);
 		bodyParts.Add(bodyPart);
-		TArray<EBodyPartType> bodyPartTypes = bodyPart->GetCurrentMeshTypes();
 
-		for (int i = 0; i < bodyPartTypes.Num(); ++i)
+		if (bodyPart->HasMeshType(spot->BodyPartType) || bodyPart->HasMeshType(CentralBodyPartType))
 		{
-			canBeDropped = false;
+			TArray<EBodyPartType> bodyPartTypes = bodyPart->GetCurrentMeshTypes();
 
-			if (bodyPartTypes[i] == CentralBodyPartType && centralBodyPart == nullptr)
+			for (int i = 0; i < bodyPartTypes.Num(); ++i)
 			{
-				pointersToSet.Add(-1);
-				canBeDropped = true;
-			}
-			else
-			{
-				for (int j = 0; j < assemblingSpots.Num(); ++j)
+				canBeDropped = false;
+
+				if (bodyPartTypes[i] == CentralBodyPartType && centralBodyPart == nullptr)
 				{
-					if (bodyPartTypes[i] == assemblingSpots[j]->BodyPartType && !assemblingSpots[j]->IsOccupied())
+					pointersToSet.Add(-1);
+					canBeDropped = true;
+				}
+				else
+				{
+					for (int j = 0; j < assemblingSpots.Num(); ++j)
 					{
-						pointersToSet.Add(j);
-						canBeDropped = true;
-						break;
+						if (bodyPartTypes[i] == assemblingSpots[j]->BodyPartType && !assemblingSpots[j]->IsOccupied())
+						{
+							pointersToSet.Add(j);
+							canBeDropped = true;
+							break;
+						}
 					}
 				}
-			}
-			
-			if (!canBeDropped)
-			{
-				return false;
+
+				if (!canBeDropped)
+					break;
 			}
 		}
 	}
@@ -92,31 +94,32 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 		{
 			TArray<EBodyPartType> bodyPartTypes = bodyParts[i]->GetCurrentMeshTypes();
 
-			for (int j = 0; j < bodyPartTypes.Num(); ++j)
+			if (bodyParts[i]->HasMeshType(spot->BodyPartType) || bodyParts[i]->HasMeshType(CentralBodyPartType))
 			{
-				canBeDropped = false;
+				for (int j = 0; j < bodyPartTypes.Num(); ++j)
+				{
+					canBeDropped = false;
 
-				if (bodyPartTypes[j] == CentralBodyPartType && centralBodyPart == nullptr)
-				{
-					pointersToSet.Add(-1);
-					canBeDropped = true;
-				}
-				else
-				{
-					for (int k = 0; k < assemblingSpots.Num(); ++k)
+					if (bodyPartTypes[j] == CentralBodyPartType && centralBodyPart == nullptr)
 					{
-						if (bodyPartTypes[j] == assemblingSpots[k]->BodyPartType && !assemblingSpots[k]->IsOccupied())
+						pointersToSet.Add(-1);
+						canBeDropped = true;
+					}
+					else
+					{
+						for (int k = 0; k < assemblingSpots.Num(); ++k)
 						{
-							pointersToSet.Add(k);
-							canBeDropped = true;
-							break;
+							if (bodyPartTypes[j] == assemblingSpots[k]->BodyPartType && !assemblingSpots[k]->IsOccupied())
+							{
+								pointersToSet.Add(k);
+								canBeDropped = true;
+								break;
+							}
 						}
 					}
-				}
 
-				if (!canBeDropped)
-				{
-					return false;
+					if (!canBeDropped)
+						break;
 				}
 			}
 		}
