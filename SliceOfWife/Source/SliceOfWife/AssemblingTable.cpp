@@ -136,8 +136,6 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 			totalTypeCount += typeCounts[i];
 		}
 
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, FString::Printf(TEXT("Total Types: %i"), totalTypeCount));
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, FString::Printf(TEXT("Total Pointers: %i"), pointersToSet.Num()));
 		if (totalTypeCount == pointersToSet.Num())
 		{
 			int p = 0;

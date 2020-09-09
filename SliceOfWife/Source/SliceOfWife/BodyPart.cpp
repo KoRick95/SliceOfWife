@@ -40,9 +40,14 @@ void ABodyPart::BeginPlay()
 				currentMesh = &BodyPartMeshes[0];
 			}
 		}
-		else
+		else if (skeletalMeshComponent->SkeletalMesh != nullptr)
 		{
-			//currentMesh = skeletalMeshComponent->SkeletalMesh;
+			FBodyPartMesh newBodyPartMesh;
+			newBodyPartMesh.SkeletalMesh = skeletalMeshComponent->SkeletalMesh;
+			newBodyPartMesh.BodyPartTypes.Add(EBodyPartType::None);
+			currentMesh = &newBodyPartMesh;
+
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, FString::Printf(TEXT("A body part is not assigned a type.")));
 		}
 	}
 }
