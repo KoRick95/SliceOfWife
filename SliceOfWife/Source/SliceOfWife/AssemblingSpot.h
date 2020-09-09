@@ -37,7 +37,6 @@ public:
 
 	bool DropToTable(AActor* object);
 	bool RemoveFromTable(ABodyPart* aBodyPart);
-	//bool CheckBody
 
 	bool BeginSewing();
 	void AssembleBodyPart();
