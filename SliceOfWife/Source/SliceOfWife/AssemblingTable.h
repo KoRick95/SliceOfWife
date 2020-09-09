@@ -54,6 +54,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	bool DropToTable(AActor* object, AAssemblingSpot* spot);
+	bool CheckBodyPart(ABodyPart* bodyPart, TArray<int>* spotIndexes);
 	bool RemoveFromTable(AActor* object);
 
 	bool BeginSewing(AAssemblingSpot* spot);

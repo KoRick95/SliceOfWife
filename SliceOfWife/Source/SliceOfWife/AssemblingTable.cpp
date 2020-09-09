@@ -46,7 +46,7 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 	}
 
 	TArray<ABodyPart*> bodyParts;
-	TArray<int> pointersToSet;
+	TArray<int> spotIndexes;
 	bool canBeDropped = false;
 
 	if (object->IsA(ABodyPart::StaticClass()))
@@ -56,72 +56,30 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 
 		if (bodyPart->HasMeshType(spot->BodyPartType) || bodyPart->HasMeshType(CentralBodyPartType))
 		{
-			TArray<EBodyPartType> bodyPartTypes = bodyPart->GetCurrentMeshTypes();
+			canBeDropped = CheckBodyPart(bodyPart, &spotIndexes);
 
-			for (int i = 0; i < bodyPartTypes.Num(); ++i)
-			{
-				canBeDropped = false;
-
-				if (bodyPartTypes[i] == CentralBodyPartType && centralBodyPart == nullptr)
-				{
-					pointersToSet.Add(-1);
-					canBeDropped = true;
-				}
-				else
-				{
-					for (int j = 0; j < assemblingSpots.Num(); ++j)
-					{
-						if (bodyPartTypes[i] == assemblingSpots[j]->BodyPartType && !assemblingSpots[j]->IsOccupied())
-						{
-							pointersToSet.Add(j);
-							canBeDropped = true;
-							break;
-						}
-					}
-				}
-
-				if (!canBeDropped)
-					break;
-			}
+			if (!canBeDropped)
+				return false;
 		}
 	}
 	else if (object->IsA(AFullBody::StaticClass()))
 	{
 		AFullBody* body = Cast<AFullBody>(object);
-		bodyParts = body->bodyParts;
 
-		for (int i = 0; i < bodyParts.Num(); ++i)
+		if (body->CreatureType == ECreatureType::Custom)
 		{
-			TArray<EBodyPartType> bodyPartTypes = bodyParts[i]->GetCurrentMeshTypes();
+			bodyParts = body->bodyParts;
 
-			if (bodyParts[i]->HasMeshType(spot->BodyPartType) || bodyParts[i]->HasMeshType(CentralBodyPartType))
+			for (int i = 0; i < bodyParts.Num(); ++i)
 			{
-				for (int j = 0; j < bodyPartTypes.Num(); ++j)
-				{
-					canBeDropped = false;
+				canBeDropped = CheckBodyPart(bodyParts[i], &spotIndexes);
 
-					if (bodyPartTypes[j] == CentralBodyPartType && centralBodyPart == nullptr)
-					{
-						pointersToSet.Add(-1);
-						canBeDropped = true;
-					}
-					else
-					{
-						for (int k = 0; k < assemblingSpots.Num(); ++k)
-						{
-							if (bodyPartTypes[j] == assemblingSpots[k]->BodyPartType && !assemblingSpots[k]->IsOccupied())
-							{
-								pointersToSet.Add(k);
-								canBeDropped = true;
-								break;
-							}
-						}
-					}
-
-					if (!canBeDropped)
-						break;
-				}
+				if (!canBeDropped)
+					return false;
 			}
+
+			if (canBeDropped)
+				finalBody = body;
 		}
 	}
 
@@ -136,40 +94,69 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 			totalTypeCount += typeCounts[i];
 		}
 
-		if (totalTypeCount == pointersToSet.Num())
+		if (totalTypeCount == spotIndexes.Num())
 		{
-			int p = 0;
+			int s = 0;
 
 			for (int b = 0; b < bodyParts.Num(); ++b)
 			{
 				for (int t = 0; t < typeCounts[b]; ++t)
 				{
-					GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Set pointer #%i"), p + 1));
-					if (pointersToSet[p] >= 0)
+					GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Set pointer #%i"), s + 1));
+					if (spotIndexes[s] >= 0)
 					{
-						assemblingSpots[pointersToSet[p]]->bodyPart = bodyParts[b];
+						assemblingSpots[spotIndexes[s]]->bodyPart = bodyParts[b];
 					}
 					else
 					{
 						centralBodyPart = bodyParts[b];
 					}
-					p++;
+					s++;
+				}
+			}
+
+			// snap the body part to the table
+			object->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+			object->SetActorRelativeLocation(SnapPosition);
+			object->SetActorRelativeRotation(SnapRotation);
+		}
+	}
+
+	return canBeDropped;
+}
+
+bool AAssemblingTable::CheckBodyPart(ABodyPart* bodyPart, TArray<int>* spotIndexes)
+{
+	bool isValid = false;
+	TArray<EBodyPartType> bodyPartTypes = bodyPart->GetCurrentMeshTypes();
+
+	for (int i = 0; i < bodyPartTypes.Num(); ++i)
+	{
+		isValid = false;
+
+		if (bodyPartTypes[i] == CentralBodyPartType && centralBodyPart == nullptr)
+		{
+			spotIndexes->Add(-1);
+			isValid = true;
+		}
+		else
+		{
+			for (int j = 0; j < assemblingSpots.Num(); ++j)
+			{
+				if (bodyPartTypes[i] == assemblingSpots[j]->BodyPartType && !assemblingSpots[j]->IsOccupied())
+				{
+					spotIndexes->Add(j);
+					isValid = true;
+					break;
 				}
 			}
 		}
 
-		if (centralBodyPart == nullptr)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Central is missing")));
-		}
-		
-		// snap the body part to the table
-		object->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-		object->SetActorRelativeLocation(SnapPosition);
-		object->SetActorRelativeRotation(SnapRotation);
+		if (!isValid)
+			break;
 	}
 
-	return canBeDropped;
+	return isValid;
 }
 
 bool AAssemblingTable::RemoveFromTable(AActor* object)
