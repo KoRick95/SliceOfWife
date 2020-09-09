@@ -81,7 +81,7 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 				}
 
 				if (!canBeDropped)
-					break;
+					return false;
 			}
 		}
 	}
@@ -94,35 +94,35 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 		{
 			TArray<EBodyPartType> bodyPartTypes = bodyParts[i]->GetCurrentMeshTypes();
 
-			if (bodyParts[i]->HasMeshType(spot->BodyPartType) || bodyParts[i]->HasMeshType(CentralBodyPartType))
+			for (int j = 0; j < bodyPartTypes.Num(); ++j)
 			{
-				for (int j = 0; j < bodyPartTypes.Num(); ++j)
-				{
-					canBeDropped = false;
+				canBeDropped = false;
 
-					if (bodyPartTypes[j] == CentralBodyPartType && centralBodyPart == nullptr)
+				if (bodyPartTypes[j] == CentralBodyPartType && centralBodyPart == nullptr)
+				{
+					pointersToSet.Add(-1);
+					canBeDropped = true;
+				}
+				else
+				{
+					for (int k = 0; k < assemblingSpots.Num(); ++k)
 					{
-						pointersToSet.Add(-1);
-						canBeDropped = true;
-					}
-					else
-					{
-						for (int k = 0; k < assemblingSpots.Num(); ++k)
+						if (bodyPartTypes[j] == assemblingSpots[k]->BodyPartType && !assemblingSpots[k]->IsOccupied())
 						{
-							if (bodyPartTypes[j] == assemblingSpots[k]->BodyPartType && !assemblingSpots[k]->IsOccupied())
-							{
-								pointersToSet.Add(k);
-								canBeDropped = true;
-								break;
-							}
+							pointersToSet.Add(k);
+							canBeDropped = true;
+							break;
 						}
 					}
-
-					if (!canBeDropped)
-						break;
 				}
+
+				if (!canBeDropped)
+					return false;
 			}
 		}
+
+		if (canBeDropped)
+			finalBody = body;
 	}
 
 	if (canBeDropped)
@@ -136,6 +136,8 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 			totalTypeCount += typeCounts[i];
 		}
 
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, FString::Printf(TEXT("Total Types: %i"), totalTypeCount));
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, FString::Printf(TEXT("Total Pointers: %i"), pointersToSet.Num()));
 		if (totalTypeCount == pointersToSet.Num())
 		{
 			int p = 0;
@@ -156,11 +158,6 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 					p++;
 				}
 			}
-		}
-
-		if (centralBodyPart == nullptr)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Central is missing")));
 		}
 		
 		// snap the body part to the table
