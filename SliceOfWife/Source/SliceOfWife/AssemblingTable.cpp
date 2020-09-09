@@ -46,7 +46,7 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 	}
 
 	TArray<ABodyPart*> bodyParts;
-	TArray<ABodyPart**> pointersToSet;
+	TArray<int> pointersToSet;
 	bool canBeDropped = false;
 
 	if (object->IsA(ABodyPart::StaticClass()))
@@ -61,8 +61,7 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 
 			if (bodyPartTypes[i] == CentralBodyPartType && centralBodyPart == nullptr)
 			{
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("This doesn't make sense")));
-				pointersToSet.Add(&centralBodyPart);
+				pointersToSet.Add(-1);
 				canBeDropped = true;
 			}
 			else
@@ -71,7 +70,7 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 				{
 					if (bodyPartTypes[i] == assemblingSpots[j]->BodyPartType && !assemblingSpots[j]->IsOccupied())
 					{
-						pointersToSet.Add(&assemblingSpots[j]->bodyPart);
+						pointersToSet.Add(j);
 						canBeDropped = true;
 						break;
 					}
@@ -99,7 +98,7 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 
 				if (bodyPartTypes[j] == CentralBodyPartType && centralBodyPart == nullptr)
 				{
-					pointersToSet.Add(&centralBodyPart);
+					pointersToSet.Add(-1);
 					canBeDropped = true;
 				}
 				else
@@ -108,7 +107,7 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 					{
 						if (bodyPartTypes[j] == assemblingSpots[k]->BodyPartType && !assemblingSpots[k]->IsOccupied())
 						{
-							pointersToSet.Add(&assemblingSpots[k]->bodyPart);
+							pointersToSet.Add(k);
 							canBeDropped = true;
 							break;
 						}
@@ -143,10 +142,13 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 				for (int t = 0; t < typeCounts[b]; ++t)
 				{
 					GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Set pointer #%i"), p + 1));
-					pointersToSet[p] = &bodyParts[b];
-					if (pointersToSet[p] != &centralBodyPart)
+					if (pointersToSet[p] >= 0)
 					{
-						GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("fuck off")));
+						assemblingSpots[pointersToSet[p]]->bodyPart = bodyParts[b];
+					}
+					else
+					{
+						centralBodyPart = bodyParts[b];
 					}
 					p++;
 				}

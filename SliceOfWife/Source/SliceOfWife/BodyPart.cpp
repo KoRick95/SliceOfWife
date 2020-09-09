@@ -40,6 +40,10 @@ void ABodyPart::BeginPlay()
 				currentMesh = &BodyPartMeshes[0];
 			}
 		}
+		else
+		{
+			//currentMesh = skeletalMeshComponent->SkeletalMesh;
+		}
 	}
 }
 
