@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "MainCharacter.h"
+#include "AnimatingDevice.h"
 #include "AssemblingTable.h"
 #include "AssemblingSpot.h"
 #include "BodyPart.h"
@@ -23,16 +24,6 @@ AMainCharacter::AMainCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
-	//// Create the camera arm
-	//CameraArm = CreateDefaultSubobject<USpringArmComponent>("Camera Arm");
-	//CameraArm->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-	//CameraArm->bUsePawnControlRotation = false;
-
-	//// Create the camera
-	//Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
-	//Camera->AttachToComponent(CameraArm, FAttachmentTransformRules::KeepRelativeTransform, USpringArmComponent::SocketName);
-	//Camera->bUsePawnControlRotation = false;
 
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationPitch = false;
@@ -137,7 +128,7 @@ void AMainCharacter::PickUpAndDrop()
 					if (objectAttachParent->IsA(AAssemblingTable::StaticClass()))
 					{
 						// remove it from the assembling table
-						canPickupObject = Cast<AAssemblingTable>(objectAttachParent)->RemoveFromTable(Cast<ABodyPart>(objectToHold));
+						canPickupObject = Cast<AAssemblingTable>(objectAttachParent)->RemoveFromTable(objectToHold);
 					}
 					else if (objectAttachParent->IsA(ADisassemblingTable::StaticClass()))
 					{
@@ -176,7 +167,7 @@ void AMainCharacter::PickUpAndDrop()
 		{
 			if (nearbyObjects[i]->IsA(AAssemblingSpot::StaticClass()))
 			{
-				isSnapped = Cast<AAssemblingSpot>(nearbyObjects[i])->DropToTable(Cast<ABodyPart>(heldObject));
+				isSnapped = Cast<AAssemblingSpot>(nearbyObjects[i])->DropToTable(heldObject);
 			}
 			else if (nearbyObjects[i]->IsA(ADisassemblingTable::StaticClass()))
 			{
@@ -283,6 +274,10 @@ void AMainCharacter::Interact()
 		else if (nearbyObjects[i]->IsA(AResizingDevice::StaticClass()))
 		{
 			hasInteracted = Cast<AResizingDevice>(nearbyObjects[i])->ReplaceObject();
+		}
+		else if (nearbyObjects[i]->IsA(AAnimatingDevice::StaticClass()))
+		{
+			hasInteracted = Cast<AAnimatingDevice>(nearbyObjects[i])->AnimateBody();
 		}
 
 		if (hasInteracted)

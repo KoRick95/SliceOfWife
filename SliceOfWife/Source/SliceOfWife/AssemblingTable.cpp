@@ -38,75 +38,149 @@ void AAssemblingTable::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-bool AAssemblingTable::DropToTable(ABodyPart* bodyPart, AAssemblingSpot* spot)
+bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 {
-	if (bodyPart == nullptr || spot == nullptr)
+	if (object == nullptr || spot == nullptr)
 	{
 		return false;
 	}
 
-	bool dropped = false;
+	bool canBeDropped = false;
 
-	if (bodyPart->IsOfType(CentralBodyPartType))
+	if (object->IsA(AFullBody::StaticClass()))
 	{
-		centralBodyPart = bodyPart;
+		AFullBody* body = Cast<AFullBody>(object);
 
-		// snap
-		bodyPart->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-		bodyPart->SetActorRelativeLocation(SnapPosition);
-		bodyPart->SetActorRelativeRotation(SnapRotation);
-
-		dropped = true;
-	}
-	// if spot is not already occupied by another body part
-	else if (spot->bodyPart == nullptr)
-	{
-		if (bodyPart->IsOfType(spot->BodyPartType))
+		if (body->CreatureType == ECreatureType::Custom)
 		{
-			spot->bodyPart = bodyPart;
+			bool allBodyPartsPlaced = true;
 
-			// snap
-			bodyPart->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-			bodyPart->SetActorRelativeLocation(SnapPosition);
-			bodyPart->SetActorRelativeRotation(SnapRotation);
+			for (int b = 0; b < body->bodyParts.Num(); ++b)
+			{
+				bool bodyPartPlaced = false;
 
-			dropped = true;
+				if (body->bodyParts[b]->GetBodyPartType() == CentralBodyPartType)
+				{
+					centralBodyPart = body->bodyParts[b];
+					continue;
+				}
+
+				for (int a = 0; a < assemblingSpots.Num(); ++a)
+				{
+					if (assemblingSpots[a]->SetBodyPart(body->bodyParts[b]))
+					{
+						bodyPartPlaced = true;
+						break;
+					}
+				}
+
+				if (!bodyPartPlaced)
+				{
+					allBodyPartsPlaced = false;
+					break;
+				}
+			}
+
+			if (allBodyPartsPlaced)
+			{
+				finalBody = body;
+				canBeDropped = true;
+			}
+		}
+	}
+	else if (object->IsA(ABodyPart::StaticClass()))
+	{
+		ABodyPart* bodyPart = Cast<ABodyPart>(object);
+
+		if (centralBodyPart == nullptr)
+		{
+			if (bodyPart->HasMeshType(CentralBodyPartType, true))
+			{
+				centralBodyPart = bodyPart;
+				canBeDropped = true;
+			}
+		}
+		
+		if (!canBeDropped && spot->bodyPart == nullptr)
+		{
+			if (bodyPart->HasMeshType(spot->BodyPartType, true))
+			{
+				spot->bodyPart = bodyPart;
+				canBeDropped = true;
+			}
 		}
 	}
 
-	return dropped;
+	if (canBeDropped)
+	{
+		// snap the body part to the table
+		object->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		object->SetActorRelativeLocation(SnapPosition);
+		object->SetActorRelativeRotation(SnapRotation);
+	}
+
+	return canBeDropped;
 }
 
-bool AAssemblingTable::RemoveFromTable(ABodyPart* bodyPart)
+bool AAssemblingTable::RemoveFromTable(AActor* object)
 {
-	if (bodyPart == nullptr)
+	if (object == nullptr)
 	{
 		return false;
 	}
 
-	if (bodyPart->IsOfType(CentralBodyPartType))
-	{
-		bodyPart->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-		centralBodyPart = nullptr;
-		return true;
-	}
+	bool canBeRemoved = false;
 
-	for (int i = 0; i < assemblingSpots.Num(); ++i)
+	if (object == finalBody)
 	{
-		if (assemblingSpots[i]->bodyPart == bodyPart)
+		for (int i = 0; i < finalBody->bodyParts.Num(); ++i)
 		{
-			bodyPart->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-			assemblingSpots[i]->bodyPart = nullptr;
-			return true;
+			for (int j = 0; j < assemblingSpots.Num(); ++j)
+			{
+				if (finalBody->bodyParts[i] == assemblingSpots[j]->bodyPart)
+				{
+					assemblingSpots[j]->bodyPart = nullptr;
+					break;
+				}
+			}
+		}
+
+		finalBody = nullptr;
+		canBeRemoved = true;
+	}
+	else
+	{
+		ABodyPart* bodyPart = Cast<ABodyPart>(object);
+
+		if (bodyPart->HasMeshType(CentralBodyPartType))
+		{
+			centralBodyPart = nullptr;
+			canBeRemoved = true;
+		}
+		else
+		{
+			for (int i = 0; i < assemblingSpots.Num(); ++i)
+			{
+				if (assemblingSpots[i]->bodyPart == bodyPart)
+				{
+					assemblingSpots[i]->bodyPart = nullptr;
+					canBeRemoved = true;
+				}
+			}
 		}
 	}
 
-	return false;
+	if (canBeRemoved)
+	{
+		object->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+	}
+
+	return canBeRemoved;
 }
 
 bool AAssemblingTable::BeginSewing(AAssemblingSpot* spot)
 {
-	if (centralBodyPart == nullptr || spot->bodyPart == nullptr || spot->bodyPart->IsAttachedToBody() || WidgetBP == nullptr)
+	if (centralBodyPart == nullptr || spot->bodyPart == nullptr || spot->bodyPart->IsAttachedToBody() || MinigameWidget == nullptr)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, FString::Printf(TEXT("Check one of the following:\n"
 			"1. Is it missing the central body part?\n"
@@ -116,8 +190,7 @@ bool AAssemblingTable::BeginSewing(AAssemblingSpot* spot)
 		return false;
 	}
 
-	widget = CreateWidget<UMinigameWidget>(GetWorld(), WidgetBP.Get());
-	widget->StartMinigame(spot);
+	CreateWidget<UMinigameWidget>(GetWorld(), MinigameWidget.Get())->StartMinigame(spot);
 
 	return true;
 }
@@ -128,48 +201,26 @@ void AAssemblingTable::AssembleBodyPart(ABodyPart* bodyPart)
 
 	if (finalBody == nullptr)
 	{
-		FTransform transform;
-		transform.SetLocation(SnapPosition);
-		transform.SetRotation(FQuat(SnapRotation));
-		AActor* emptyBody = GetWorld()->SpawnActor(AFullBody::StaticClass(), &transform);
+		AActor* emptyBody = GetWorld()->SpawnActor(AFullBody::StaticClass(), &SnapPosition, &SnapRotation);
 		emptyBody->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
 		finalBody = Cast<AFullBody>(emptyBody);
+		finalBody->CreatureType = ECreatureType::Custom;
 		finalBody->AttachBodyPart(centralBodyPart);
 	}
 
 	finalBody->AttachBodyPart(bodyPart);
 }
 
-bool AAssemblingTable::Animate()
+bool AAssemblingTable::AnimateBody()
 {
-	int bodyPartsCount = 0;
-
-	for (int i = 0; i < assemblingSpots.Num(); ++i)
-	{
-		if (assemblingSpots[i]->bodyPart != nullptr)
-		{
-			bodyPartsCount++;
-		}
-	}
-
-	if (bodyPartsCount < MinBodyParts || TemporarySpawnBody == nullptr)
+	if (finalBody == nullptr)
 	{
 		return false;
 	}
 
-	// destroy each body part
-	for (int i = 0; i < assemblingSpots.Num(); ++i)
-	{
-		assemblingSpots[i]->bodyPart->Destroy();
-		assemblingSpots[i]->bodyPart = nullptr;
-	}
-
-	// spawn the body
-	FVector location(this->GetActorLocation() + SpawnOffset);
-	FRotator rotation(this->GetActorRotation() + SpawnRotation);
-	FActorSpawnParameters spawnInfo;
-	GetWorld()->SpawnActor<AActor>(TemporarySpawnBody, location, rotation, spawnInfo);
+	finalBody->SetActorRelativeLocation(SpawnOffset);
+	finalBody->SetActorRelativeRotation(SpawnRotation);
+	DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
 	return false;
 }
-

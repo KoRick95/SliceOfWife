@@ -18,20 +18,15 @@ public:
 
 	class AFullBody* attachedBody = nullptr;
 
-	class USkeletalMesh* skeletalMesh = nullptr;
-
 	class USkeletalMeshComponent* skeletalMeshComponent = nullptr;
 
-	FBodyPartMeshType* currentMeshType = nullptr;
+	FBodyPartMesh* currentMesh = nullptr;
 
 	UPROPERTY(EditAnywhere)
-	TEnumAsByte<ECreatureType> OriginalCreatureType; 
+	TEnumAsByte<ECreatureType> OriginalCreatureType;
 
 	UPROPERTY(EditAnywhere)
-	TArray<TEnumAsByte<EBodyPartType>> BodyPartTypes;
-
-	UPROPERTY(EditAnywhere)
-	TArray<FBodyPartMeshType> BodyPartMeshTypes;
+	TArray<FBodyPartMesh> BodyPartMeshes;
 
 protected:
 	// Called when the game starts or when spawned
@@ -41,16 +36,14 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	FVector GetMeshRelativeLocation();
 	float GetMeshRadius();
+	FVector GetMeshRelativeLocation();
+	EBodyPartType GetBodyPartType();
 
 	void SetPhysicsState(bool state);
 
 	bool IsAttachedToBody();
-	bool IsOfType(EBodyPartType type);
-	bool HasMeshType(EBodyPartType type);
-
-	bool SwitchMeshType(EBodyPartType type);
+	bool HasMeshType(EBodyPartType type, bool switchMesh = false);
 
 	bool AttachToBody(AFullBody* fullBody);
 	bool DetachFromBody();

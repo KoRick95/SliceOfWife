@@ -18,11 +18,14 @@ public:
 
 	class AAssemblingTable* assemblingTable = nullptr;
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	bool Animated = false;
 
 	UPROPERTY(EditAnywhere)
 	TArray<TEnumAsByte<EBodyPartType>> RequiredBodyPartTypes;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UMinigameWidget> MinigameWidget;
 
 protected:
 	// Called when the game starts or when spawned

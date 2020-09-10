@@ -30,12 +30,16 @@ void ABodyPart::BeginPlay()
 	
 	if (skeletalMeshComponent != nullptr)
 	{
-		skeletalMesh = skeletalMeshComponent->SkeletalMesh;
-	}
+		if (BodyPartMeshes.Num() > 0)
+		{
+			USkeletalMesh* defaultMesh = BodyPartMeshes[0].SkeletalMesh;
 
-	if (BodyPartTypes.Num() == 0)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("A body part is not assigned a tag.")));
+			if (defaultMesh != nullptr)
+			{
+				skeletalMeshComponent->SetSkeletalMesh(defaultMesh);
+				currentMesh = &BodyPartMeshes[0];
+			}
+		}
 	}
 }
 
@@ -45,14 +49,19 @@ void ABodyPart::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-FVector ABodyPart::GetMeshRelativeLocation()
-{
-	return skeletalMesh->GetBounds().Origin;
-}
-
 float ABodyPart::GetMeshRadius()
 {
-	return skeletalMesh->GetBounds().SphereRadius;
+	return skeletalMeshComponent->SkeletalMesh->GetBounds().SphereRadius;
+}
+
+FVector ABodyPart::GetMeshRelativeLocation()
+{
+	return skeletalMeshComponent->SkeletalMesh->GetBounds().Origin;
+}
+
+EBodyPartType ABodyPart::GetBodyPartType()
+{
+	return currentMesh->BodyPartType;
 }
 
 void ABodyPart::SetPhysicsState(bool state)
@@ -65,46 +74,23 @@ bool ABodyPart::IsAttachedToBody()
 	return attachedBody != nullptr;
 }
 
-bool ABodyPart::IsOfType(EBodyPartType type)
-{
-	for (int i = 0; i < BodyPartTypes.Num(); ++i)
-	{ 
-		if (BodyPartTypes[i] == type)
-		{
-			return true;
-		}
-	}
-	
-	return false;
-}
-
-bool ABodyPart::HasMeshType(EBodyPartType type)
-{
-	for (int i = 0; i < BodyPartMeshTypes.Num(); ++i)
-	{
-		if (BodyPartMeshTypes[i].BodyPartType == type)
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
-
-bool ABodyPart::SwitchMeshType(EBodyPartType type)
+bool ABodyPart::HasMeshType(EBodyPartType type, bool switchMesh)
 {
 	// check from the available mesh types
-	for (int i = 0; i < BodyPartMeshTypes.Num(); ++i)
+	for (int i = 0; i < BodyPartMeshes.Num(); ++i)
 	{
 		// if a matching mesh type is found
-		if (BodyPartMeshTypes[i].BodyPartType == type)
+		if (BodyPartMeshes[i].BodyPartType == type)
 		{
-			// set that mesh type as current
-			currentMeshType = &BodyPartMeshTypes[i];
-			
-			// change this object's skeletal mesh
-			skeletalMeshComponent->SetSkeletalMesh(currentMeshType->SkeletalMesh);
+			if (switchMesh)
+			{
+				// set that mesh type as current
+				currentMesh = &BodyPartMeshes[i];
 
+				// change this object's skeletal mesh
+				skeletalMeshComponent->SetSkeletalMesh(currentMesh->SkeletalMesh);
+			}
+			
 			return true;
 		}
 	}

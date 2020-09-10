@@ -27,6 +27,7 @@ enum ECreatureType
 	Bull		UMETA(DisplayName = "Bull"),
 	Fish		UMETA(DisplayName = "Fish"),
 	Snake		UMETA(DisplayName = "Snake"),
+	Custom		UMETA(DisplayName = "Custom"),
 };
 
 USTRUCT()
@@ -44,7 +45,7 @@ public:
 };
 
 USTRUCT()
-struct FBodyPartMeshType
+struct FBodyPartMesh
 {
 	GENERATED_BODY()
 
@@ -54,5 +55,11 @@ public:
 	TEnumAsByte<EBodyPartType> BodyPartType = EBodyPartType::None;
 
 	UPROPERTY(EditAnywhere)
-	USkeletalMesh* SkeletalMesh = nullptr;
+	class USkeletalMesh* SkeletalMesh = nullptr;
+
+	UPROPERTY(EditAnywhere)
+	bool Multitype = false;
+
+	UPROPERTY(EditAnywhere, meta = (EditCondition = "Multitype"))
+	TArray<TEnumAsByte<EBodyPartType>> AdditionalTypes;
 };

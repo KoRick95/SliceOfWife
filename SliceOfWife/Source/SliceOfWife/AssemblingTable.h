@@ -21,8 +21,6 @@ public:
 	class ABodyPart* centralBodyPart = nullptr;
 	class AFullBody* finalBody = nullptr;
 
-	class UMinigameWidget* widget;
-
 	UPROPERTY(EditAnywhere)
 	FVector SnapPosition = { -90, 0, 105 };
 
@@ -45,7 +43,7 @@ public:
 	FRotator SpawnRotation = { 0, 0, 0 };
 
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<class UMinigameWidget> WidgetBP;
+	TSubclassOf<class UMinigameWidget> MinigameWidget;
 
 protected:
 	// Called when the game starts or when spawned
@@ -55,14 +53,12 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	bool DropToTable(ABodyPart* bodyPart, AAssemblingSpot* spot);
-	bool RemoveFromTable(ABodyPart* bodyPart);
+	bool DropToTable(AActor* object, AAssemblingSpot* spot);
+	bool RemoveFromTable(AActor* object);
 
 	bool BeginSewing(AAssemblingSpot* spot);
 
-	UFUNCTION(BlueprintCallable)
 	void AssembleBodyPart(ABodyPart* bodyPart);
 
-	UFUNCTION(BlueprintCallable)
-	bool Animate();
+	bool AnimateBody();
 };
