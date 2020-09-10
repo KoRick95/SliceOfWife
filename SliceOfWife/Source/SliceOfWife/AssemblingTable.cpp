@@ -54,7 +54,7 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 		ABodyPart* bodyPart = Cast<ABodyPart>(object);
 		bodyParts.Add(bodyPart);
 
-		if (bodyPart->HasMeshType(spot->BodyPartType) || bodyPart->HasMeshType(CentralBodyPartType))
+		if (bodyPart->HasMeshType(CentralBodyPartType, true) || bodyPart->HasMeshType(spot->BodyPartType, true))
 		{
 			canBeDropped = CheckBodyPart(bodyPart, &spotIndexes);
 
