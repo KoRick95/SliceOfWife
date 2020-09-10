@@ -43,7 +43,8 @@ public:
 	void SetPhysicsState(bool state);
 
 	bool IsAttachedToBody();
-	bool HasMeshType(EBodyPartType type, bool switchMesh = false);
+	bool HasMeshOfType(EBodyPartType type, bool switchMesh = false);
+	bool SwitchMesh(int index = 0);
 
 	bool AttachToBody(AFullBody* fullBody);
 	bool DetachFromBody();

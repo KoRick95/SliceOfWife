@@ -54,7 +54,7 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 		ABodyPart* bodyPart = Cast<ABodyPart>(object);
 		bodyParts.Add(bodyPart);
 
-		if (bodyPart->HasMeshType(CentralBodyPartType, true) || bodyPart->HasMeshType(spot->BodyPartType, true))
+		if (bodyPart->HasMeshOfType(CentralBodyPartType, true) || bodyPart->HasMeshOfType(spot->BodyPartType, true))
 		{
 			canBeDropped = CheckBodyPart(bodyPart, &spotIndexes);
 
@@ -172,8 +172,6 @@ bool AAssemblingTable::RemoveFromTable(AActor* object)
 	{
 		for (int i = 0; i < finalBody->bodyParts.Num(); ++i)
 		{
-			TArray<EBodyPartType> currentTypes = finalBody->bodyParts[i]->GetCurrentMeshTypes();
-
 			if (finalBody->bodyParts[i] == centralBodyPart)
 			{
 				centralBodyPart = nullptr;
@@ -214,6 +212,7 @@ bool AAssemblingTable::RemoveFromTable(AActor* object)
 			}
 		}
 
+		bodyPart->SwitchMesh();
 		canBeRemoved = true;
 	}
 
