@@ -93,6 +93,6 @@ int AFullBody::CountCreatureTypeVariation()
 			creatureTypes.Add(bodyParts[b]->OriginalCreatureType);
 		}
 	}
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("%i unique body parts found.")));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("%i unique body parts found."), creatureTypes.Num()));
 	return creatureTypes.Num();
 }
