@@ -12,7 +12,7 @@ int URatingWidget::CalculateRating()
 {
 	float rating = (float)CountPlayerCreatureVariation() / RequiredCreatureTypes * StarCount;
 
-	return FMath::Clamp((int)rating, 0, StarCount);
+	return (int)rating;
 }
 
 int URatingWidget::CountPlayerCreatureVariation()
