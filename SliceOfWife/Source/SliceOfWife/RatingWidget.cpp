@@ -8,7 +8,6 @@
 #include "Engine/World.h"
 #include "Kismet/GameplayStatics.h"
 
-
 int URatingWidget::CalculateRating()
 {
 	float rating = CountPlayerCreatureVariation() / RequiredCreatureTypes * StarCount;

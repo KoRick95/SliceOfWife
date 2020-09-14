@@ -2,6 +2,7 @@
 
 #include "FullBody.h"
 #include "BodyPart.h"
+#include "Engine.h"
 #include "Engine/World.h"
 
 // Sets default values
@@ -92,6 +93,6 @@ int AFullBody::CountCreatureTypeVariation()
 			creatureTypes.Add(bodyParts[b]->OriginalCreatureType);
 		}
 	}
-
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("%i unique body parts found.")));
 	return creatureTypes.Num();
 }

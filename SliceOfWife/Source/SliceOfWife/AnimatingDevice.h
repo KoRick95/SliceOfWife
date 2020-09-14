@@ -18,7 +18,7 @@ public:
 
 	class AAssemblingTable* assemblingTable = nullptr;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly)
 	bool Animated = false;
 
 	UPROPERTY(EditAnywhere)
