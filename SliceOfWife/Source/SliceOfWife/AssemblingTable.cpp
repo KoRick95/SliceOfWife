@@ -79,7 +79,7 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 			}
 
 			if (canBeDropped)
-				finalBody = body;
+				FinalBody = body;
 		}
 	}
 
@@ -168,11 +168,11 @@ bool AAssemblingTable::RemoveFromTable(AActor* object)
 
 	bool canBeRemoved = false;
 
-	if (object == finalBody)
+	if (object == FinalBody)
 	{
-		for (int i = 0; i < finalBody->bodyParts.Num(); ++i)
+		for (int i = 0; i < FinalBody->bodyParts.Num(); ++i)
 		{
-			if (finalBody->bodyParts[i] == centralBodyPart)
+			if (FinalBody->bodyParts[i] == centralBodyPart)
 			{
 				centralBodyPart = nullptr;
 			}
@@ -180,7 +180,7 @@ bool AAssemblingTable::RemoveFromTable(AActor* object)
 			{
 				for (int j = 0; j < assemblingSpots.Num(); ++j)
 				{
-					if (finalBody->bodyParts[i] == assemblingSpots[j]->bodyPart)
+					if (FinalBody->bodyParts[i] == assemblingSpots[j]->bodyPart)
 					{
 						assemblingSpots[j]->bodyPart = nullptr;
 						break;
@@ -189,7 +189,7 @@ bool AAssemblingTable::RemoveFromTable(AActor* object)
 			}
 		}
 
-		finalBody = nullptr;
+		FinalBody = nullptr;
 		canBeRemoved = true;
 	}
 	else if (object->IsA(ABodyPart::StaticClass()))
@@ -245,27 +245,27 @@ void AAssemblingTable::AssembleBodyPart(ABodyPart* bodyPart)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Assemble Success!")));
 
-	if (finalBody == nullptr)
+	if (FinalBody == nullptr)
 	{
 		AActor* emptyBody = GetWorld()->SpawnActor(AFullBody::StaticClass(), &SnapPosition, &SnapRotation);
 		emptyBody->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
-		finalBody = Cast<AFullBody>(emptyBody);
-		finalBody->CreatureType = ECreatureType::Custom;
-		finalBody->AttachBodyPart(centralBodyPart);
+		FinalBody = Cast<AFullBody>(emptyBody);
+		FinalBody->CreatureType = ECreatureType::Custom;
+		FinalBody->AttachBodyPart(centralBodyPart);
 	}
 
-	finalBody->AttachBodyPart(bodyPart);
+	FinalBody->AttachBodyPart(bodyPart);
 }
 
 bool AAssemblingTable::AnimateBody()
 {
-	if (finalBody == nullptr)
+	if (FinalBody == nullptr)
 	{
 		return false;
 	}
 
-	finalBody->SetActorRelativeLocation(SpawnOffset);
-	finalBody->SetActorRelativeRotation(SpawnRotation);
+	FinalBody->SetActorRelativeLocation(SpawnOffset);
+	FinalBody->SetActorRelativeRotation(SpawnRotation);
 	DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
 	return false;
