@@ -1,4 +1,5 @@
 #include "BodyStorage.h"
+#include "FullBody.h"
 #include "Engine/World.h"
 
 // Sets default values
