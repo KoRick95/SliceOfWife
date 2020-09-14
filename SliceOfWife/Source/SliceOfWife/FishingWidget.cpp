@@ -13,4 +13,6 @@ void UFishingWidget::ListenForAxisInput()
 	FInputAxisKeyMapping inputAxisKeyMapping;
 	inputAxisKeyMapping.AxisName = "killme";
 	playerInput->AddAxisMapping(inputAxisKeyMapping);
+
+	
 }
