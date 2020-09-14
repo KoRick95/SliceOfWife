@@ -32,13 +32,13 @@ void AAnimatingDevice::Tick(float DeltaTime)
 
 bool AAnimatingDevice::AnimateBody()
 {
-	if (assemblingTable == nullptr || assemblingTable->finalBody == nullptr)
+	if (assemblingTable == nullptr || assemblingTable->FinalBody == nullptr)
 	{
 		return false;
 	}
 
 	TArray<TEnumAsByte<EBodyPartType>> missingBodyParts = RequiredBodyParts;
-	TArray<ABodyPart*> currentBodyParts = assemblingTable->finalBody->bodyParts;
+	TArray<ABodyPart*> currentBodyParts = assemblingTable->FinalBody->bodyParts;
 	TArray<EBodyPartType> currentMeshTypes;
 	bool requirementsMet = true;
 

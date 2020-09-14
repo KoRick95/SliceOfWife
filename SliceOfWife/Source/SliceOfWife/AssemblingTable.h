@@ -19,7 +19,9 @@ public:
 	TArray<class AAssemblingSpot*> assemblingSpots;
 
 	class ABodyPart* centralBodyPart = nullptr;
-	class AFullBody* finalBody = nullptr;
+
+	UPROPERTY(BlueprintReadOnly)
+	class AFullBody* FinalBody = nullptr;
 
 	UPROPERTY(EditAnywhere)
 	FVector SnapPosition = { -90, 0, 105 };
