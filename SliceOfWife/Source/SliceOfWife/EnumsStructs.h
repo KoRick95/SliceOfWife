@@ -58,3 +58,17 @@ public:
 	UPROPERTY(EditAnywhere)
 	TArray<TEnumAsByte<EBodyPartType>> BodyPartTypes;
 };
+
+USTRUCT()
+struct FGachaItem
+{
+	GENERATED_BODY()
+
+public:
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AActor> Item;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
+	float ProbabilityValue = 0;
+};
