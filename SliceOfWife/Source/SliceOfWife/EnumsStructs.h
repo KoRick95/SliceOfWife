@@ -23,6 +23,7 @@ enum ECreatureType
 	Unknown		UMETA(DisplayName = "Unknown"),
 	HumanM		UMETA(DisplayName = "Human (Male)"),
 	HumanF		UMETA(DisplayName = "Human (Female)"),
+	Bat			UMETA(DisplayName = "Bat"),
 	Bird		UMETA(DisplayName = "Bird"),
 	Bull		UMETA(DisplayName = "Bull"),
 	Fish		UMETA(DisplayName = "Fish"),
