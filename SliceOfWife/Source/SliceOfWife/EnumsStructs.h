@@ -23,11 +23,20 @@ enum ECreatureType
 	Unknown		UMETA(DisplayName = "Unknown"),
 	HumanM		UMETA(DisplayName = "Human (Male)"),
 	HumanF		UMETA(DisplayName = "Human (Female)"),
+	Bat			UMETA(DisplayName = "Bat"),
 	Bird		UMETA(DisplayName = "Bird"),
 	Bull		UMETA(DisplayName = "Bull"),
 	Fish		UMETA(DisplayName = "Fish"),
 	Snake		UMETA(DisplayName = "Snake"),
 	Custom		UMETA(DisplayName = "Custom"),
+};
+
+UENUM()
+enum EGachaRarity
+{
+	Common		UMETA(DisplayName = "Common"),
+	Rare		UMETA(DisplayName = "Rare"),
+	SuperRare	UMETA(DisplayName = "Super Rare"),
 };
 
 USTRUCT()
@@ -56,4 +65,35 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	TArray<TEnumAsByte<EBodyPartType>> BodyPartTypes;
+};
+
+USTRUCT()
+struct FGachaRarityValue
+{
+	GENERATED_BODY()
+
+public:
+
+	UPROPERTY(EditAnywhere)
+	TEnumAsByte<EGachaRarity> Rarity;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
+	float ProbabilityValue = 0;
+};
+
+USTRUCT()
+struct FGachaItem
+{
+	GENERATED_BODY()
+
+public:
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AActor> Item;
+
+	UPROPERTY(EditAnywhere)
+	TEnumAsByte<EGachaRarity> Rarity;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
+	float ProbabilityValue = 0;
 };

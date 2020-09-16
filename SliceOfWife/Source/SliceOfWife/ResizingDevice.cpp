@@ -69,9 +69,9 @@ bool AResizingDevice::ReplaceObject()
 		{
 			UClass* uClass = ObjectReplacements[i].Output.Get();
 			FTransform transform = objectOnDevice->GetActorTransform();
-			GetWorld()->SpawnActor(uClass, &transform);
+			AActor* newObject = GetWorld()->SpawnActor(uClass, &transform);
 			objectOnDevice->Destroy();
-			objectOnDevice = nullptr;
+			objectOnDevice = newObject;
 			return true;
 		}
 	}
