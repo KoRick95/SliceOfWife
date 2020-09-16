@@ -44,7 +44,7 @@ void ABodyPart::BeginPlay()
 		{
 			FBodyPartMesh newBodyPartMesh;
 			newBodyPartMesh.SkeletalMesh = skeletalMeshComponent->SkeletalMesh;
-			newBodyPartMesh.BodyPartTypes.Add(EBodyPartType::None);
+			newBodyPartMesh.BodyPartTypes.Add(EBodyPartType::Other);
 			currentMesh = &newBodyPartMesh;
 
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, FString::Printf(TEXT("A body part is not assigned a type.")));
