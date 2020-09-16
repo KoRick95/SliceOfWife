@@ -31,6 +31,14 @@ enum ECreatureType
 	Custom		UMETA(DisplayName = "Custom"),
 };
 
+UENUM()
+enum EGachaRarity
+{
+	Common		UMETA(DisplayName = "Common"),
+	Rare		UMETA(DisplayName = "Rare"),
+	SuperRare	UMETA(DisplayName = "Super Rare"),
+};
+
 USTRUCT()
 struct FObjectReplacement
 {
@@ -60,6 +68,20 @@ public:
 };
 
 USTRUCT()
+struct FGachaRarityValue
+{
+	GENERATED_BODY()
+
+public:
+
+	UPROPERTY(EditAnywhere)
+	TEnumAsByte<EGachaRarity> Rarity;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
+	float ProbabilityValue = 0;
+};
+
+USTRUCT()
 struct FGachaItem
 {
 	GENERATED_BODY()
@@ -68,6 +90,9 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AActor> Item;
+
+	UPROPERTY(EditAnywhere)
+	TEnumAsByte<EGachaRarity> Rarity;
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
 	float ProbabilityValue = 0;

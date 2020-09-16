@@ -16,6 +16,17 @@ class SLICEOFWIFE_API UShopWidget : public UUserWidget
 	GENERATED_BODY()
 	
 public:
+
 	UPROPERTY(EditAnywhere)
-	TArray<FGachaItem> GachaItems;
+	TArray<FGachaRarityValue> RarityValues;
+
+	UPROPERTY(EditAnywhere)
+	TArray<FGachaItem> GachaSkins;
+
+	UPROPERTY(EditAnywhere)
+	TArray<FGachaItem> GachaBodyParts;
+
+public:
+
+
 };
