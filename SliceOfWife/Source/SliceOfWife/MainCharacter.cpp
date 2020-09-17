@@ -96,6 +96,10 @@ void AMainCharacter::PickUpAndDrop()
 			{
 				objectToHold = Cast<ABodyStorage>(nearbyObjects[i])->TakeBody();
 			}
+			else if (nearbyObjects[i]->IsA(AResizingDevice::StaticClass()))
+			{
+				objectToHold = Cast<AResizingDevice>(nearbyObjects[i])->objectOnDevice;
+			}
 			else if (nearbyObjects[i]->IsA(AFullBody::StaticClass()))
 			{
 				objectToHold = nearbyObjects[i];

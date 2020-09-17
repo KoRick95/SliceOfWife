@@ -34,11 +34,6 @@ void AAssemblingSpot::BeginPlay()
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("An assembling spot is not attached to a table.")));
 		return;
 	}
-
-	if (BodyPartType == EBodyPartType::None)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, FString::Printf(TEXT("An assembling spot is not assigned a body part type.")));
-	}
 }
 
 // Called every frame
@@ -47,14 +42,31 @@ void AAssemblingSpot::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+bool AAssemblingSpot::IsOccupied()
+{
+	bool occupied = bodyPart != nullptr;
+
+	if (occupied)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, FString::Printf(TEXT("An assembling spot is occupied!")));
+	}
+
+	return occupied;
+}
+
 bool AAssemblingSpot::SetBodyPart(ABodyPart* aBodyPart)
 {
 	if (aBodyPart != nullptr)
 	{
-		if (aBodyPart->GetBodyPartType() == this->BodyPartType)
+		TArray<EBodyPartType> currentTypes = aBodyPart->GetCurrentMeshTypes();
+
+		for (int i = 0; i < currentTypes.Num(); ++i)
 		{
-			bodyPart = aBodyPart;
-			return true;
+			if (currentTypes[i] == this->BodyPartType)
+			{
+				bodyPart = aBodyPart;
+				return true;
+			}
 		}
 	}
 

@@ -19,7 +19,9 @@ public:
 	TArray<class AAssemblingSpot*> assemblingSpots;
 
 	class ABodyPart* centralBodyPart = nullptr;
-	class AFullBody* finalBody = nullptr;
+
+	UPROPERTY(BlueprintReadOnly)
+	class AFullBody* FinalBody = nullptr;
 
 	UPROPERTY(EditAnywhere)
 	FVector SnapPosition = { -90, 0, 105 };
@@ -54,6 +56,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	bool DropToTable(AActor* object, AAssemblingSpot* spot);
+	bool CheckBodyPart(ABodyPart* bodyPart, TArray<int>* spotIndexes);
 	bool RemoveFromTable(AActor* object);
 
 	bool BeginSewing(AAssemblingSpot* spot);

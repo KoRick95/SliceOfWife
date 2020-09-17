@@ -32,39 +32,44 @@ void AAnimatingDevice::Tick(float DeltaTime)
 
 bool AAnimatingDevice::AnimateBody()
 {
-	if (assemblingTable == nullptr || assemblingTable->finalBody == nullptr)
+	if (assemblingTable == nullptr || assemblingTable->FinalBody == nullptr)
 	{
 		return false;
 	}
 
-	TArray<ABodyPart*> uncheckedBodyParts = assemblingTable->finalBody->bodyParts;
-	bool allRequirementsMet = true;
+	TArray<TEnumAsByte<EBodyPartType>> missingBodyParts = RequiredBodyParts;
+	TArray<ABodyPart*> currentBodyParts = assemblingTable->FinalBody->bodyParts;
+	TArray<EBodyPartType> currentMeshTypes;
+	bool requirementsMet = true;
 
-	if (RequiredBodyPartTypes.Num() <= uncheckedBodyParts.Num())
+	for (int b = 0; b < currentBodyParts.Num(); ++b)
 	{
-		for (int r = 0; r < RequiredBodyPartTypes.Num(); ++r)
-		{
-			bool requirementMet = false;
+		currentMeshTypes.Append(currentBodyParts[b]->GetCurrentMeshTypes());
+	}
 
-			for (int u = 0; u < uncheckedBodyParts.Num(); ++u)
+	if (RequiredBodyParts.Num() <= currentMeshTypes.Num())
+	{
+		for (int r = 0; r < RequiredBodyParts.Num(); ++r)
+		{
+			requirementsMet = false;
+
+			for (int c = 0; c < currentMeshTypes.Num(); ++c)
 			{
-				if (RequiredBodyPartTypes[r] == uncheckedBodyParts[u]->GetBodyPartType())
+				if (RequiredBodyParts[r] == currentMeshTypes[c])
 				{
-					uncheckedBodyParts.RemoveAt(u);
-					requirementMet = true;
+					requirementsMet = true;
 					break;
 				}
 			}
 
-			if (!requirementMet)
+			if (!requirementsMet)
 			{
-				allRequirementsMet = false;
-				break;
+				return false;
 			}
 		}
 	}
 
-	if (allRequirementsMet)
+	if (requirementsMet)
 	{
 		if (MinigameWidget != nullptr)
 		{
@@ -75,5 +80,5 @@ bool AAnimatingDevice::AnimateBody()
 		Animated = true;
 	}
 
-	return allRequirementsMet;
+	return requirementsMet;
 }

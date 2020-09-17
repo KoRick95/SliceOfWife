@@ -2,6 +2,7 @@
 
 #include "FullBody.h"
 #include "BodyPart.h"
+#include "Engine.h"
 #include "Engine/World.h"
 
 // Sets default values
@@ -68,4 +69,30 @@ bool AFullBody::DetachBodyPart(ABodyPart* bodyPart)
 	}
 
 	return false;
+}
+
+int AFullBody::CountCreatureTypeVariation()
+{
+	TArray<ECreatureType> creatureTypes;
+
+	for (int b = 0; b < bodyParts.Num(); ++b)
+	{
+		bool unique = true;
+
+		for (int c = 0; c < creatureTypes.Num(); ++c)
+		{
+			if (bodyParts[b]->OriginalCreatureType == creatureTypes[c])
+			{
+				unique = false;
+				break;
+			}
+		}
+
+		if (unique)
+		{
+			creatureTypes.Add(bodyParts[b]->OriginalCreatureType);
+		}
+	}
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("%i unique body parts found."), creatureTypes.Num()));
+	return creatureTypes.Num();
 }
