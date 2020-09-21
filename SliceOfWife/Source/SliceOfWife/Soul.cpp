@@ -39,6 +39,12 @@ void ASoul::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (hauntedObject == nullptr)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, FString::Printf(TEXT("A soul lost its possession.")));
+		this->Destroy();
+	}
+
 	if (hasSpawned)
 	{
 		// move towards a certain direction
