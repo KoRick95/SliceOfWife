@@ -23,21 +23,12 @@ public:
 	UPROPERTY(EditAnywhere)
 	TArray<FGachaRarityPool> GachaBodyPartPool;
 
-private:
-
-	bool gachaInitialized = false;
-
 public:
-
-	UFUNCTION(BlueprintCallable)
-	void InitializeGachaSystem();
 
 	UFUNCTION(BlueprintCallable)
 	FGachaItem RollGacha(EGachaItemType itemType);
 
 private:
-
-	void SortGachaPool(TArray<FGachaRarityPool>* gachaPool);
 
 	EGachaRarity DetermineRarity(EGachaItemType itemType);
 };
