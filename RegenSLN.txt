@@ -8,3 +8,6 @@ UnrealBuildTool.exe -ProjectFiles -project="C:\Users\s191273\Documents\GitHub\Sl
 
 Will: 
 UnrealBuildTool.exe -ProjectFiles -project="C:\Users\s191533\Documents\GitHub\SliceOfWife\SliceOfWife\SliceOfWife.uproject" -game -engine
+
+To retrieve Git log:
+git --no-pager log > log.txt
