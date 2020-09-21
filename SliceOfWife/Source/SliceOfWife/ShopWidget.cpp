@@ -2,8 +2,21 @@
 
 #include "ShopWidget.h"
 
+void UShopWidget::InitializeGachaSystem()
+{
+	SortGachaPool(&GachaSkinPool);
+	SortGachaPool(&GachaBodyPartPool);
+
+	gachaInitialized = true;
+}
+
 FGachaItem UShopWidget::RollGacha(EGachaItemType itemType)
 {
+	if (!gachaInitialized)
+	{
+		InitializeGachaSystem();
+	}
+
 	TArray<FGachaItem>* itemPool = nullptr;
 	EGachaRarity rarity = DetermineRarity(itemType);
 
@@ -32,11 +45,24 @@ FGachaItem UShopWidget::RollGacha(EGachaItemType itemType)
 
 	if (itemPool != nullptr)
 	{
-		int index = FMath::RandRange(0, itemPool->Num());
+		int index = FMath::RandRange(0, itemPool->Num() - 1);
 		return (*itemPool)[index];
 	}
 
 	return FGachaItem();
+}
+
+void UShopWidget::SortGachaPool(TArray<FGachaRarityPool>* gachaPool)
+{
+	for (int i = 0; i < gachaPool->Num(); ++i)
+	{
+		EGachaRarity currentRarity = (*gachaPool)[i].Rarity;
+
+		for (FGachaItem item : (*gachaPool)[i].Items)
+		{
+			item.Rarity = currentRarity;
+		}
+	}
 }
 
 EGachaRarity UShopWidget::DetermineRarity(EGachaItemType itemType)

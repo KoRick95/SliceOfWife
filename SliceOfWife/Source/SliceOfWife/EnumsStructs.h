@@ -84,7 +84,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TEnumAsByte<EGachaItemType> Type;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly)
 	TEnumAsByte<EGachaRarity> Rarity;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
