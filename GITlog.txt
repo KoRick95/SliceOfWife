@@ -1,3 +1,158 @@
+commit 2ec172f7235c128375f888e76e1de23271400059
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 22 12:28:23 2020 +1000
+
+    Update Soul Placement
+
+commit f398333a2bcbc90007d3e5a59a23ba7056215f1e
+Merge: d7b5ed5 7f0e2e2
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 22 12:15:22 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit d7b5ed515e5142c88a871a58c62774892f2ca6c5
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 22 12:15:18 2020 +1000
+
+    Fix colours
+
+commit 7f0e2e222b79a94c8d3623dee40bd8beba6fdeab
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Tue Sep 22 12:14:15 2020 +1000
+
+    !
+
+commit c4d26c84228361a0b37bceb25cd53c9a648917d1
+Merge: 802f0bb 7f35549
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Tue Sep 22 11:24:15 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 802f0bba3589a8754599c17903728c06eec4fbea
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Tue Sep 22 11:24:10 2020 +1000
+
+    applied fix for soul crashing
+
+commit 7f35549e5745aa92234a77d8c9cd46b3039cdfc0
+Merge: 8be30ac d19bf5a
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 22 11:11:34 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 8be30ac85b6bad4788318e880f05667bec70faea
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 22 11:11:26 2020 +1000
+
+    Dialogue for build ready
+
+commit d19bf5a02c831419736b855232df592aea4a71b3
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Sep 22 11:09:30 2020 +1000
+
+    Reimported demon tail mesh with correct UVs
+
+commit f399d3236a3f10efe24a4e47e13205f25fe928ce
+Merge: 8def6e8 f7a71eb
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Tue Sep 22 11:06:39 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 8def6e8d9f97b592ad2c861e336ef49ec78f8ab6
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Tue Sep 22 11:06:33 2020 +1000
+
+    Create Dali_Aristocat.png
+
+commit f7a71ebd6c6d77aeea597bee7f0155744a4731df
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Sep 22 10:58:34 2020 +1000
+
+    Reimported hybrid skeletal meshes
+    
+    Don't override my stuff plz... it sucks having to re-import 48 meshes
+
+commit c269a16990423f3989cf9ab2e6641d8801622765
+Merge: 76af618 50b22c1
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Sep 22 10:38:01 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 76af61817a3e4af42ef672efae88a915710067b7
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Sep 22 10:30:38 2020 +1000
+
+    Imported first pass textures for hybrid assets and assigned materials
+    
+    Will fix broken UVs next
+
+commit 50b22c11e4665509641134ccdd9b9e5259f5c255
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 22 10:30:29 2020 +1000
+
+    Kana done
+
+commit ff5d12b0b7ed58dffa81499f56982472cabc5c4b
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Tue Sep 22 10:26:01 2020 +1000
+
+    Kana_Skel_mesh
+
+commit 1760c48c80fb15dc4e53d5f4bd4c6a741b8aefa6
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Tue Sep 22 10:09:58 2020 +1000
+
+    Kana_textures
+
+commit acaab2a5b130c873c6bd55fb109c990cdf67a679
+Merge: c62f13d ae749d3
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 22 10:08:19 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit c62f13de6a5e9cd5f66e04a74ad6c7a5f91e7381
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 22 10:07:20 2020 +1000
+
+    Fix for build
+
+commit ae749d388abfccac4298a39f54d367d6d1e670f0
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Sep 22 09:00:41 2020 +1000
+
+    wall roughness change
+
+commit 984734e6022b3b9983ba7c28bf4809ee6fc1af0c
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Sep 21 16:53:38 2020 +1000
+
+    testing light
+
+commit 7fbe4c1126d0e1afa3fdda644b999ab7faa0356c
+Merge: 4bc1a3b 8c89c88
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Sep 21 16:52:49 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 4bc1a3b84c59ebf6a6d88ab880628a2fe441caa3
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Sep 21 16:52:32 2020 +1000
+
+    Git Logs and Instructions
+
+commit 8c89c88fcf52909ec8237dde7561322878b7fd58
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Mon Sep 21 16:44:17 2020 +1000
+
+    applied fix for soul crashing
+
 commit 25629751765a3a89ace2aee7e311a0c99e344518
 Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
 Date:   Mon Sep 21 16:37:08 2020 +1000
