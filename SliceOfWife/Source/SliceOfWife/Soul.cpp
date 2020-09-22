@@ -6,6 +6,7 @@
 #include "Engine/Engine.h"
 #include "Engine/World.h"
 #include "Math/UnrealMathUtility.h"
+#include "UObject/WeakObjectPtrTemplates.h"
 
 // Sets default values
 ASoul::ASoul()
@@ -39,6 +40,12 @@ void ASoul::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (!IsValid(possession))
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, FString::Printf(TEXT("A soul lost its possession.")));
+		this->Destroy();
+	}
+
 	if (hasSpawned)
 	{
 		// move towards a certain direction
@@ -49,14 +56,14 @@ void ASoul::Tick(float DeltaTime)
 		// if the soul has crossed the edge of the map
 		if (position.X < -MapEdgeX || position.X > MapEdgeX || position.Y < -MapEdgeY || position.Y > MapEdgeY)
 		{
-			hauntedObject->Destroy();
+			possession->Destroy();
 			this->Destroy();
 		}
 	}
 	else
 	{
 		// if the object isn't attached to anything
-		if (hauntedObject->GetAttachParentActor() == nullptr)
+		if (possession->GetAttachParentActor() == nullptr)
 		{
 			// count down the spawn timer
 			spawnTimer -= GetWorld()->GetDeltaSeconds();
@@ -81,27 +88,27 @@ FVector ASoul::GetRandomDirection()
 void ASoul::HoldObject()
 {
 	// disable physics
-	TArray<UActorComponent*> primitiveComponents = hauntedObject->GetComponentsByClass(UPrimitiveComponent::StaticClass());
+	TArray<UActorComponent*> primitiveComponents = possession->GetComponentsByClass(UPrimitiveComponent::StaticClass());
 	for (int i = 0; i < primitiveComponents.Num(); ++i)
 	{
 		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(false);
 	}
 
 	// attach the object to the soul
-	hauntedObject->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-	hauntedObject->SetActorRelativeLocation(-Cast<ABodyPart>(hauntedObject)->GetMeshRelativeLocation());
+	possession->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+	possession->SetActorRelativeLocation(-Cast<ABodyPart>(possession)->GetMeshRelativeLocation());
 }
 
 void ASoul::ReleaseObject()
 {
-	if (hauntedObject == nullptr)
+	if (possession == nullptr)
 		return;
 
 	// detach object from the soul
-	hauntedObject->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+	possession->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
 	// enable physics
-	TArray<UActorComponent*> primitiveComponents = hauntedObject->GetComponentsByClass(UPrimitiveComponent::StaticClass());
+	TArray<UActorComponent*> primitiveComponents = possession->GetComponentsByClass(UPrimitiveComponent::StaticClass());
 	for (int i = 0; i < primitiveComponents.Num(); ++i)
 	{
 		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(true);
@@ -128,7 +135,7 @@ void ASoul::Spawn()
 	}
 
 	// set the manifest location
-	FVector newPosition = hauntedObject->GetActorLocation(); 
+	FVector newPosition = possession->GetActorLocation(); 
 	newPosition.Z = FloatHeight;
 	this->SetActorLocation(newPosition, false, nullptr, ETeleportType::TeleportPhysics);
 

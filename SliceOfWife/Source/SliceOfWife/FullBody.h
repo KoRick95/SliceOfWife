@@ -20,7 +20,7 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	TEnumAsByte<ECreatureType> CreatureType;
-
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

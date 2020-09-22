@@ -32,20 +32,14 @@ public:
 	UPROPERTY(EditAnywhere)
 	TEnumAsByte<EBodyPartType> CentralBodyPartType = EBodyPartType::Torso;
 
-	UPROPERTY(EditAnywhere, meta = (ClampMin = "1"))
-	int MinBodyParts = 6;
-
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<AActor> TemporarySpawnBody = nullptr;
+	TSubclassOf<class UMinigameWidget> MinigameWidget;
 
 	UPROPERTY(EditAnywhere)
 	FVector SpawnOffset = { 0, 0, 150 };
 
 	UPROPERTY(EditAnywhere)
 	FRotator SpawnRotation = { 0, 0, 0 };
-
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<class UMinigameWidget> MinigameWidget;
 
 protected:
 	// Called when the game starts or when spawned

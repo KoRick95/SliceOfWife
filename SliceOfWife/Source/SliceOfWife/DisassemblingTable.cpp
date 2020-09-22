@@ -93,7 +93,7 @@ void ADisassemblingTable::DisassembleBody()
 		if (SoulBP != nullptr)
 		{
 			ASoul* soul = Cast<ASoul>(GetWorld()->SpawnActor(SoulBP.Get(), &FTransform::Identity));
-			soul->hauntedObject = splitBodyPart;
+			soul->possession = splitBodyPart;
 		}
 	}
 
