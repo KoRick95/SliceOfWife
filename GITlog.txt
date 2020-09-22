@@ -1,0 +1,4903 @@
+commit 2ec172f7235c128375f888e76e1de23271400059
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 22 12:28:23 2020 +1000
+
+    Update Soul Placement
+
+commit f398333a2bcbc90007d3e5a59a23ba7056215f1e
+Merge: d7b5ed5 7f0e2e2
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 22 12:15:22 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit d7b5ed515e5142c88a871a58c62774892f2ca6c5
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 22 12:15:18 2020 +1000
+
+    Fix colours
+
+commit 7f0e2e222b79a94c8d3623dee40bd8beba6fdeab
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Tue Sep 22 12:14:15 2020 +1000
+
+    !
+
+commit c4d26c84228361a0b37bceb25cd53c9a648917d1
+Merge: 802f0bb 7f35549
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Tue Sep 22 11:24:15 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 802f0bba3589a8754599c17903728c06eec4fbea
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Tue Sep 22 11:24:10 2020 +1000
+
+    applied fix for soul crashing
+
+commit 7f35549e5745aa92234a77d8c9cd46b3039cdfc0
+Merge: 8be30ac d19bf5a
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 22 11:11:34 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 8be30ac85b6bad4788318e880f05667bec70faea
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 22 11:11:26 2020 +1000
+
+    Dialogue for build ready
+
+commit d19bf5a02c831419736b855232df592aea4a71b3
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Sep 22 11:09:30 2020 +1000
+
+    Reimported demon tail mesh with correct UVs
+
+commit f399d3236a3f10efe24a4e47e13205f25fe928ce
+Merge: 8def6e8 f7a71eb
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Tue Sep 22 11:06:39 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 8def6e8d9f97b592ad2c861e336ef49ec78f8ab6
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Tue Sep 22 11:06:33 2020 +1000
+
+    Create Dali_Aristocat.png
+
+commit f7a71ebd6c6d77aeea597bee7f0155744a4731df
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Sep 22 10:58:34 2020 +1000
+
+    Reimported hybrid skeletal meshes
+    
+    Don't override my stuff plz... it sucks having to re-import 48 meshes
+
+commit c269a16990423f3989cf9ab2e6641d8801622765
+Merge: 76af618 50b22c1
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Sep 22 10:38:01 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 76af61817a3e4af42ef672efae88a915710067b7
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Sep 22 10:30:38 2020 +1000
+
+    Imported first pass textures for hybrid assets and assigned materials
+    
+    Will fix broken UVs next
+
+commit 50b22c11e4665509641134ccdd9b9e5259f5c255
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 22 10:30:29 2020 +1000
+
+    Kana done
+
+commit ff5d12b0b7ed58dffa81499f56982472cabc5c4b
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Tue Sep 22 10:26:01 2020 +1000
+
+    Kana_Skel_mesh
+
+commit 1760c48c80fb15dc4e53d5f4bd4c6a741b8aefa6
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Tue Sep 22 10:09:58 2020 +1000
+
+    Kana_textures
+
+commit acaab2a5b130c873c6bd55fb109c990cdf67a679
+Merge: c62f13d ae749d3
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 22 10:08:19 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit c62f13de6a5e9cd5f66e04a74ad6c7a5f91e7381
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 22 10:07:20 2020 +1000
+
+    Fix for build
+
+commit ae749d388abfccac4298a39f54d367d6d1e670f0
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Sep 22 09:00:41 2020 +1000
+
+    wall roughness change
+
+commit 984734e6022b3b9983ba7c28bf4809ee6fc1af0c
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Sep 21 16:53:38 2020 +1000
+
+    testing light
+
+commit 7fbe4c1126d0e1afa3fdda644b999ab7faa0356c
+Merge: 4bc1a3b 8c89c88
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Sep 21 16:52:49 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 4bc1a3b84c59ebf6a6d88ab880628a2fe441caa3
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Sep 21 16:52:32 2020 +1000
+
+    Git Logs and Instructions
+
+commit 8c89c88fcf52909ec8237dde7561322878b7fd58
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Mon Sep 21 16:44:17 2020 +1000
+
+    applied fix for soul crashing
+
+commit 25629751765a3a89ace2aee7e311a0c99e344518
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Sep 21 16:37:08 2020 +1000
+
+    Update Level_Creative.umap
+
+commit 2942284feb8e61609bf0e0f7122469c0a9c32431
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Sep 21 16:10:15 2020 +1000
+
+    added enviro greybox textures
+
+commit e0b028ba01bfd929d28dbb1082179ab0c60cc97f
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Mon Sep 21 15:51:59 2020 +1000
+
+    Imported textures for creatures and fixed merge conflict issues that affected meshes
+
+commit b853e3297ae070ba6d8a4cb08f7411dba6a62ff0
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Mon Sep 21 15:34:37 2020 +1000
+
+    Update Dali_Aristocat.png
+
+commit 518821d942dc89c3060f0b09b9d5c3a9abe11407
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Mon Sep 21 15:31:59 2020 +1000
+
+    Create Dali_Aristocat.png
+
+commit 47ddfed708a841aa85528934342848cd9bd92997
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Mon Sep 21 15:30:41 2020 +1000
+
+    Revert "Cat"
+    
+    This reverts commit b34a3d6711ccc5976e3aaac02eac59cbed40ae06.
+
+commit eb5b00df1af5d1f75f3d76a98a3963f8ff30760a
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Mon Sep 21 15:30:23 2020 +1000
+
+    Revert "Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature"
+    
+    This reverts commit 00c385bd4fd7b0b3080ee976e24c11e68f5a9d42, reversing
+    changes made to b34a3d6711ccc5976e3aaac02eac59cbed40ae06.
+
+commit 00c385bd4fd7b0b3080ee976e24c11e68f5a9d42
+Merge: b34a3d6 26cbe80
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Mon Sep 21 15:26:35 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit b34a3d6711ccc5976e3aaac02eac59cbed40ae06
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Mon Sep 21 14:56:08 2020 +1000
+
+    Cat
+
+commit 26cbe80109b8b1b528dec5d3ab35bd8b0c4e9541
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Sep 21 13:54:57 2020 +1000
+
+    Gacha Fix
+
+commit 591a0fa612bab26e722abc8f42d13b16e3100a8f
+Merge: 1fd79ee 4478364
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Mon Sep 21 12:32:07 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 1fd79ee0486940896d16e47a088580d7fb7f6426
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Mon Sep 21 12:32:03 2020 +1000
+
+    Reimported creature parts with correct UVs
+
+commit 4478364499e9e9c590f9a8375b438bc611882506
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Sep 21 11:00:16 2020 +1000
+
+    Fix Gacha Tags
+
+commit 05657a09c57f6badf55b68c019fc0bba455b1f2e
+Merge: e4e5d98 b037efa
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Mon Sep 21 10:59:40 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit e4e5d985939c95a6546423bb99a4c1a14a5da06a
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Mon Sep 21 10:59:36 2020 +1000
+
+    applied fix for shop widget
+
+commit b037efaf4930e9fdbaf6d33b697046ddebff3171
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Mon Sep 21 10:32:15 2020 +1000
+
+    Imported horns and re-imported assets with correct materials and UVs
+
+commit 71f3d6514a53faaa5ceb56041b6e9e3a614b0967
+Merge: a7d71b9 5f18291
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Mon Sep 21 10:15:58 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit a7d71b9e967c4eed893f1398512b301980b3c537
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Mon Sep 21 10:15:44 2020 +1000
+
+    Fixed bull skeleton so it's no longer just a head
+
+commit 5f18291f7afd1630f356049259d84ae3b11fe30f
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Sep 21 10:07:56 2020 +1000
+
+    added bull idle anim
+
+commit 054d581258438556eb8db76d586e6f51e20daffc
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sun Sep 20 22:18:51 2020 +1000
+
+    Creative Level for Debugging
+
+commit 15bcfe31a82f2d914fda6a1c7b62ea55fa956cb0
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sun Sep 20 19:38:17 2020 +1000
+
+    Rename Lv2 map
+
+commit dc9eff8f6cf662461e8fd3f87b3ce6ac18eb89f0
+Author: xevionne <xevionart@gmail.com>
+Date:   Sun Sep 20 18:37:50 2020 +1000
+
+    updated all enviro UVs to match atlas
+
+commit 174523a8b13d066e77f11887f330a23c1241c110
+Merge: 4782a6d 0f3e6a7
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sun Sep 20 18:03:12 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 4782a6daf32bbcd04f1b0e14d78d7fcfa8acfdb1
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sun Sep 20 18:03:07 2020 +1000
+
+    Added chance for tips system, reduced base pay for lower ratings, fixed taking out bull from bull container
+
+commit 0f3e6a7b88f72eae61d6cce7afc22a6c8da015a8
+Author: xevionne <xevionart@gmail.com>
+Date:   Sun Sep 20 16:53:04 2020 +1000
+
+    updated Torch n Yarnball size
+
+commit 9290fe6735d32aa0e6d07ec89ec4ad43f47c5bce
+Author: xevionne <xevionart@gmail.com>
+Date:   Sun Sep 20 16:51:56 2020 +1000
+
+    shuffled some enviro folders
+
+commit e7002403b08366e42d6474bd3f7f0292927c2764
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sun Sep 20 15:13:39 2020 +1000
+
+    Create static environment BPs and Fish AnimBP
+
+commit 66a7d971b5f4ccabd578bafb7097b7e4e7bc2fb5
+Author: eva-ko <eva.ko.878@gmail.com>
+Date:   Sat Sep 19 23:11:34 2020 +1000
+
+    Tried fixing the SSS issue but Substance Painter said no...
+
+commit 747824d577b3970a64174142b197a1251123e5ff
+Author: xevionne <xevionart@gmail.com>
+Date:   Sat Sep 19 22:35:13 2020 +1000
+
+    Create ANIM_Fish_Flop.uasset
+
+commit ea3a8d5fad4519a24bfb8d03f5ceb1f33cbe31d3
+Author: eva-ko <eva.ko.878@gmail.com>
+Date:   Sat Sep 19 22:32:32 2020 +1000
+
+    Imported base mesh textures, created SSS mat and instances, removed unused assets
+
+commit cde2af23890df23b5532e76841aae9356e325ff1
+Author: xevionne <xevionart@gmail.com>
+Date:   Sat Sep 19 22:01:59 2020 +1000
+
+    Create ANIM__Fish_Swim.uasset
+
+commit 6c698222273a820b3c0e97dbd9b1b40c78d88770
+Author: xevionne <xevionart@gmail.com>
+Date:   Sat Sep 19 20:52:14 2020 +1000
+
+    Create SM_Bookshelf.uasset
+
+commit 186284460e4deb9993eedbd30bd3c8c4a8333902
+Author: xevionne <xevionart@gmail.com>
+Date:   Sat Sep 19 18:10:36 2020 +1000
+
+    Create SM_Crate.uasset
+
+commit 4d2dfefa5b45d3dcced14c416fb437d8d290f118
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Fri Sep 18 02:20:58 2020 +1000
+
+    Created BPs to test gacha
+
+commit 98b3b570ff9925a94fa817c14d20b71d90e63fe2
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Thu Sep 17 16:05:28 2020 +1000
+
+    Added containers to BPs, readjusted shop economy, spawning of bat containers, microwave of bat BPs
+
+commit 7c15cbe55169bf96da232061164333c631dcaa9d
+Merge: bba0bed bca9c59
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Sep 16 16:58:47 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit bba0bed39e3ce6fde81fc4b76b69faf05c209ec3
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Sep 16 16:58:42 2020 +1000
+
+    finilised second level
+
+commit bca9c594882cb7091593f848f554293bc6b2255c
+Author: xevionne <xevionart@gmail.com>
+Date:   Wed Sep 16 16:40:25 2020 +1000
+
+    Create ANIM_Snake_Slither.uasset
+
+commit 7cddde451a4d16be91da641a4c9beda374398f07
+Merge: 86aa701 0f7aec6
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 16 16:13:14 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 86aa7010865f850be2188988d7d2c82e24aff9eb
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 16 16:13:10 2020 +1000
+
+    All dialogue done
+
+commit 0f7aec6398bcddb1a2e360c08ea3614496bad1a4
+Author: William Tjang <s191533@students.aie.edu.au>
+Date:   Wed Sep 16 14:58:40 2020 +1000
+
+    Gacha system for testing
+
+commit 6c5fc7dd3f5128fcca6badedf5043c7cefac34e8
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 16 14:42:02 2020 +1000
+
+    Fix Music Again
+
+commit 95fc7895ab8d61686a67bc03c31c7a9929f7092b
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 16 14:36:11 2020 +1000
+
+    Fix Level Play Music
+
+commit d8c7598d2f484dc7e7e4c93f38ecb49ffa2ca40c
+Merge: 2484922 a77b873
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Sep 16 14:29:45 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 24849224c5e78c0966bc04854a1450cc4ebde608
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Sep 16 14:29:41 2020 +1000
+
+    Moving platform For second level
+
+commit a77b8732c111cba3f4587c875bd23cffd046d368
+Merge: 9a2e349 dd6f4ea
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 16 14:26:42 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 9a2e3496ad1b357c73d17fcd4979bcbb862e05d1
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 16 14:26:37 2020 +1000
+
+    Add dialogue for tutorial and fix end level dialogue
+
+commit dd6f4eabb30077cabcf9f6616a96d9130d568985
+Author: xevionne <xevionart@gmail.com>
+Date:   Wed Sep 16 12:40:28 2020 +1000
+
+    Create ANIM_Flower_Spit.uasset
+
+commit a587caa5c5038f4038240989fcf5fef2b89f5383
+Author: xevionne <xevionart@gmail.com>
+Date:   Wed Sep 16 12:15:43 2020 +1000
+
+    Create SM_Basket.uasset
+
+commit fbe0946643443680ba4989a0e60704d16de384a0
+Author: xevionne <xevionart@gmail.com>
+Date:   Wed Sep 16 11:52:00 2020 +1000
+
+    Create SM_Portal.uasset
+
+commit 55b1d9abaa53d344486f531a2b7f24c226c42c92
+Merge: 9f8a9dd 1ddc2d7
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 16 10:21:47 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 9f8a9dd824c7b027858d75020360544c50b766b6
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 16 10:21:43 2020 +1000
+
+    Create Tutorial Dialogue and Reception
+
+commit 1ddc2d7306fd124998b4f786b13f890cf3d6472c
+Author: William Tjang <s191533@students.aie.edu.au>
+Date:   Wed Sep 16 10:20:18 2020 +1000
+
+    Pickup object from resizing device
+
+commit c391d58aa63f685fbb2d067f299921c245170dd0
+Author: William Tjang <s191533@students.aie.edu.au>
+Date:   Wed Sep 16 10:15:18 2020 +1000
+
+    Continuous microwave enabled
+
+commit f4e59ac854ea16124fc3466fdf2f684d7f71527d
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Tue Sep 15 23:27:37 2020 +1000
+
+    Tagged Bat BPs
+
+commit 2295948931dc6c08d5896d2e336b43bf604f21ef
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Sep 15 22:49:45 2020 +1000
+
+    WIP shop gacha system
+
+commit ac23e631f2f58af219e31dae7f30a91ad3f26800
+Merge: a1c0364 cef69af
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Sep 15 18:01:11 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit a1c0364caef7578afb7a14d8f9fb2ec2184fc82d
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Sep 15 18:01:07 2020 +1000
+
+    Bat type added
+
+commit cef69af5374522f56371efe161f07d286f1e901c
+Merge: 7289456 19ae839
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Tue Sep 15 16:59:36 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 7289456b27b26b9e5e15596baa978811a8084d29
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Tue Sep 15 16:59:20 2020 +1000
+
+    Added close anim to AnimBP Flower
+
+commit 19ae839ecdd5431f48a5c0184ecb6372a5e71308
+Merge: a2bb959 d62254c
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Tue Sep 15 16:50:47 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit a2bb959c47053b2292885c6f0f66f6f8dc1a83a6
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Tue Sep 15 16:50:40 2020 +1000
+
+    new main charcter
+
+commit d62254cd880570ae3109a04cd633945890ae993b
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Tue Sep 15 16:38:37 2020 +1000
+
+    Bat storage and Bat Hybrid Parts Created, no microwave functionality yet
+
+commit ff9d01df2fde5cc9cf6b6f1f54998ec3210b20fd
+Merge: cff6961 e8dd1c9
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Tue Sep 15 16:31:28 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit cff69610816c592972025595a693c6f5431d96e9
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Tue Sep 15 16:31:24 2020 +1000
+
+    Created BP Bat assets and Full Character and Container
+
+commit e8dd1c952e139abbe23a7bfc1d2605cd3e80d5a7
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Sep 15 16:18:09 2020 +1000
+
+    Batcage in
+
+commit 6e9252c4e63b1c2e010397a04b5c7c788c17069b
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Sep 15 15:55:15 2020 +1000
+
+    BIRDCAGE is here
+
+commit 0d1176d5143db54c8197106e695e3ffada70b8f1
+Merge: a5b5785 dedb011
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Tue Sep 15 15:51:14 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit a5b57858db179c88b71d9aec0dc944271d320cbe
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Tue Sep 15 15:51:10 2020 +1000
+
+    Shop Prices In
+
+commit dedb011a8de7aceb9f2f7af2c51b0fa0418898d9
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Sep 15 15:49:53 2020 +1000
+
+    Fixed snake and bull head so they face forwards
+
+commit 1a71319ae05582611fff77bd84dd16160f07fd05
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Sep 15 15:28:50 2020 +1000
+
+    Imported demon wings and bat head
+
+commit 5e68d56328ffc506aa0302ab0017e396d6320777
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Tue Sep 15 15:22:38 2020 +1000
+
+    Change Currency viarble to float
+
+commit 74be289bc0bbd61427ca2c9f20712dd107eb1690
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Sep 15 13:46:11 2020 +1000
+
+    Changes to Fishtank split into 2 parts
+
+commit a4e4d99a484756882492e0983dcceda698f8704c
+Merge: fc1e86b d949d40
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Tue Sep 15 13:43:10 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit fc1e86bc446949849a7384a5c7025a5f8dd9933c
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Tue Sep 15 13:42:50 2020 +1000
+
+    Tried to adjust microwave
+
+commit d949d40843d1c7363902699e2237eacbcd49cfb1
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Sep 15 13:42:27 2020 +1000
+
+    Imported bat as skeletal mesh
+
+commit 1db113bf963d5d6f95860c9fc4821bce6f0ee2cc
+Merge: f895e6f 73d47e9
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Tue Sep 15 12:38:44 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit f895e6fd1b49e42c7164945c8e873e09f6e93202
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Tue Sep 15 12:38:19 2020 +1000
+
+    need to get cam back, changed levels up a bit.
+
+commit 73d47e985bf35359183c1817747a1291d6d4872c
+Merge: 882d2e5 ffa2ed0
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Sep 15 12:37:43 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 882d2e5e533ae848f76d2f5ff07b33c7109acd74
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Sep 15 12:36:44 2020 +1000
+
+    Create ANIM_Flower_Close.uasset
+
+commit ffa2ed0aa3c5fc37df4c0f8ad71f035f134589d5
+Merge: 0aee560 c47d76d
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Tue Sep 15 12:15:24 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 0aee560db08397dc65d30480cbdb4f93ab2f471b
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Tue Sep 15 12:15:21 2020 +1000
+
+    Create AnimBP for Flower and Fix Dove Head
+
+commit c47d76d54039122b23c5c71ee0c49290924c82dc
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Sep 15 12:03:46 2020 +1000
+
+    Reimported fish head parts that needed to be changed
+
+commit e8765320670ab18f3afe42275143b5437420489a
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Tue Sep 15 11:55:46 2020 +1000
+
+    All Hybrid Parts Tagged + Microwave Function Tagged
+
+commit 09db10b67a570d55e42d5bf79d418fbbc90daa63
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Sep 15 11:22:45 2020 +1000
+
+    Imported large snake tail and L/R hybrid ball arms
+
+commit c6c628dd089c38bafd4561dcde0467fdc80841ad
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Sep 15 10:59:16 2020 +1000
+
+    Create ANIM_Flower_Idle.uasset
+
+commit 1e6ccb6a96edd0c09bc5ccf617589d8bc48b1e13
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Sep 15 09:40:08 2020 +1000
+
+    Imported skin weighted backwards legs (bull and bird)
+
+commit 51df07bc4d70eb76853305e2072e463778cbae0a
+Merge: 10b82bc 70c38e1
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Mon Sep 14 16:58:47 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 10b82bcf6200ff8d251f1de92828fb2f7fa099fb
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Mon Sep 14 16:58:04 2020 +1000
+
+    Create chance macro
+
+commit 70c38e18b035912d21e2891cc43b7ea1ab7edf0f
+Merge: 5c18900 7c9b954
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Mon Sep 14 16:54:24 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 5c18900ec36ca50de8473cffd50d5e0cb715ca48
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Mon Sep 14 16:53:24 2020 +1000
+
+    MAde teh second level its own scene
+
+commit 7c9b954c5b67f6c409cf2774362d86b304267267
+Merge: 2b9770c 751a954
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Sep 14 16:49:50 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 2b9770c4f3c4c6b324e293ffa0e4064d6e3dae2b
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Sep 14 16:48:55 2020 +1000
+
+    flower skeletal meesh in
+
+commit 751a9540ff85d28365848cf4771a406ecb8454f9
+Merge: dd78143 f7cc7c4
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Mon Sep 14 16:48:06 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit dd78143bd02a4cddc369dab649acf61c7ba4962d
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Mon Sep 14 16:48:02 2020 +1000
+
+    Imported mermaid tail into LargeTail folder located in hybrid
+
+commit f7cc7c47b7cd09852dd0dac17c5eca6c922d7a8b
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Mon Sep 14 16:33:07 2020 +1000
+
+    rating changes
+
+commit a629f1d34961ba5b3fdae7113ff1ba98309ca131
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Mon Sep 14 16:29:01 2020 +1000
+
+    rating fix
+
+commit 5efb8977d5887b1892ae1e7c0f16098181e46341
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Mon Sep 14 16:22:31 2020 +1000
+
+    debug
+
+commit 75d7596b27505b6b49431b349dd59701edc8ecb5
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Mon Sep 14 16:21:28 2020 +1000
+
+    WIP fishing
+
+commit 1575f87059cdd850b3d41104a8e25ce2a3db33bf
+Merge: 8523027 31164a3
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Mon Sep 14 16:18:01 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 8523027cefefa19291c74743151abcaf7240bd9c
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Mon Sep 14 16:17:56 2020 +1000
+
+    Request screen variables bound
+
+commit 31164a3b9112cdb7585484b438130350105cd6c8
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Mon Sep 14 15:38:15 2020 +1000
+
+    Updated male base mesh parts
+
+commit dac0d01028ea0c996cfe3dc326bbe353b3482a76
+Merge: c4fb93a e9ac48f
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Mon Sep 14 14:40:30 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit c4fb93aa13a515ed2d0702d7f63f6fe9c9986250
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Mon Sep 14 14:40:25 2020 +1000
+
+    second level blocked and functional
+
+commit e9ac48f362ca2fb2b607b0229983caf77d40753a
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Mon Sep 14 13:51:35 2020 +1000
+
+    Fixed limb meshes to fit with female base mesh
+
+commit 266684490368882e2e11e48656bd942784c48d45
+Merge: 899f355 c84eff9
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Mon Sep 14 12:36:25 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 899f355326b73b48d861cab114e29c0f3eccc9f2
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Mon Sep 14 12:36:21 2020 +1000
+
+    Created BP Resizing Device, Request Complete Widget
+
+commit c84eff9094c97c859f13f19a9189bf40a086930d
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Mon Sep 14 12:26:52 2020 +1000
+
+    Rating system untested
+
+commit 42c1e819aa2f9523e40c9fc91ba17391f875340e
+Merge: 7e79a14 9abe3b0
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Mon Sep 14 10:23:47 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 7e79a14bd3db2b9200d92e99f31184369ac43da5
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Mon Sep 14 10:23:10 2020 +1000
+
+    Rename BP Reception
+
+commit 9abe3b0cb07d4a7a736fc834b43c4e244632b6cb
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Sep 14 10:09:42 2020 +1000
+
+    Added greyboxed Flower
+
+commit c0d6902d48641ef817de8eee93bf9ab074b829c6
+Merge: c28c24a 4862744
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Mon Sep 14 00:11:13 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit c28c24a5d9f056c4f2656aecc31f3fecfb9a0360
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Mon Sep 14 00:11:09 2020 +1000
+
+    WIP Level Completion Screen
+
+commit 4862744da0e0b5a4df3eddef1a041a28525ae537
+Merge: 247981c 3cfface
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sun Sep 13 23:38:24 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 247981c8203d2d4c923c4634df1f47923dbb08f9
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sun Sep 13 23:38:17 2020 +1000
+
+    WIP rating system
+
+commit 3cffacea7045a591915469316527623d6130ecf9
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sun Sep 13 12:36:01 2020 +1000
+
+    Text colour change reflects obtained requirements
+
+commit 11c0a2bf9a31198f64029c03425c911c140b797e
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sat Sep 12 21:23:40 2020 +1000
+
+    Level Selection with Dropdown List working, Body Containers based on Dropdowns Chosen Spawn, cannot start level if missing requirements
+
+commit 5f7dc5ab4c1f90e534b9740158135994edd0d94a
+Author: Twillij <silentwill29@gmail.com>
+Date:   Thu Sep 10 23:59:42 2020 +1000
+
+    sewing minigame dual button
+
+commit f08bebe1c09a498fdd005fb44103e4d54e8f144e
+Author: Twillij <silentwill29@gmail.com>
+Date:   Thu Sep 10 23:25:14 2020 +1000
+
+    sewing minigame working kinda
+
+commit d605805ee80c4b5fd0bc6e0f3a1192c6d8f1001d
+Merge: 54cb5b2 b73578e
+Author: Twillij <silentwill29@gmail.com>
+Date:   Thu Sep 10 21:46:59 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 54cb5b2f0aca6f5cc5be32c08d1ef61888acd4ed
+Author: Twillij <silentwill29@gmail.com>
+Date:   Thu Sep 10 21:46:55 2020 +1000
+
+    switch to default mesh
+
+commit b73578e2b8ddea3e840b78e2e046b52cbf9f3b78
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Thu Sep 10 20:22:44 2020 +1000
+
+    Fix Transitioning Level
+
+commit ac6c03ec44878cd5df67fd81e2222feaaa782bf5
+Merge: 6e3c8f3 2290f33
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Thu Sep 10 19:51:52 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 6e3c8f3a532f3176e2798b62ddd47726e42dcbe0
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Thu Sep 10 19:51:48 2020 +1000
+
+    Fix Level Options Hide Unhide
+
+commit 2290f33d5cf274623c95d92b812a087e313a1f21
+Author: Twillij <silentwill29@gmail.com>
+Date:   Thu Sep 10 19:26:50 2020 +1000
+
+    fixed switch mesh bug
+
+commit c70092b69d75e7240f504f76fe22e33dafc654f4
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Thu Sep 10 15:53:56 2020 +1000
+
+    Shop Body Container Purchase Functionality
+
+commit af847b386387633b6932f0e6b09610a2f2a42aa7
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Thu Sep 10 14:02:25 2020 +1000
+
+    Setting of BodyPart Tags
+
+commit a39a148618b7734d653ac6486066e3776090983e
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Thu Sep 10 13:33:59 2020 +1000
+
+    Added Soul Effect and fix Level Start Widget
+
+commit b5cac1e1f724a8bbb21bc9eedc9ef8483923534c
+Merge: 9cfd4a8 9477f81
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 9 17:08:19 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 9cfd4a8639941c49521d12a07f3d07309b5496a6
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 9 17:08:04 2020 +1000
+
+    Progress Bar Complete
+
+commit 9477f81e18fa9fcc4199eb684c33096e8c3e4f0a
+Merge: 104a292 5ac9c3a
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 9 16:57:43 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 104a292675a61bf4b6997d8385afe803ff2b089a
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 9 16:57:39 2020 +1000
+
+    WIP sewing minigame
+
+commit 5ac9c3a99b1452ebdd316f3bf4dadccad3d0c335
+Merge: 3dce876 3600c4b
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 9 16:10:21 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 3dce87685d20e4946d0a937f35633ea0488fcad7
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 9 16:10:03 2020 +1000
+
+    Testing of Will Scripts
+
+commit 3600c4b1ceaf6367b9669c950730f391c63ece35
+Merge: 9e64b06 e1aa9d7
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Wed Sep 9 16:08:29 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 9e64b063ac56702d6005bca3d3b418b8772de783
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Wed Sep 9 16:08:22 2020 +1000
+
+    Update PlaneEmpty.png
+
+commit e1aa9d7727f1886d7b437ba8f8025c862638ccfd
+Merge: 29c5821 3d6868a
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 9 16:05:57 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 29c5821c3bf3e1dad4ad887e294336833c264edd
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 9 16:05:51 2020 +1000
+
+    Fixed minor bug #3
+
+commit 3d6868a8131988b83acee402a0ec3611d3c809c7
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Wed Sep 9 16:05:01 2020 +1000
+
+    Imported limbs using base biped skeletal asset
+
+commit eed30eda51f0172d0cab12e5f1fc891e4a5d8bc5
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 9 15:28:15 2020 +1000
+
+    minor touchups
+
+commit b7b609e4bb91f15834bc219ecf66115b073b2ffc
+Merge: b757d1e 4c2fb1f
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 9 15:16:10 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit b757d1ee7e191c65676926b6158e50679f320fdd
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 9 15:16:06 2020 +1000
+
+    Bar colour & emotion image done
+
+commit 78e7be20c8ca64f61a7c44164a890c5a8c98d0ff
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 9 15:06:12 2020 +1000
+
+    Fixed minor bug #2
+
+commit 4c2fb1fbbb74b693d530bcf189e578bb0823a0a3
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 9 13:31:40 2020 +1000
+
+    Fixed minor bug #1
+
+commit 203d618c784d2287cd61e18a9b2a397ebef0b8c0
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 9 12:27:28 2020 +1000
+
+    Fixed major bug
+
+commit 70869cae3f4c04a0728954a18962e9af5a9308e0
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Sep 9 10:39:55 2020 +1000
+
+    playing with more camera settings
+
+commit 37da0d85fd6a7bfeccedcd46d6abd74a776013e0
+Merge: 7f1ba85 b8ed9a3
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Tue Sep 8 16:54:21 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 7f1ba85490e1147f9b39d75a5815654c021681db
+Merge: 44a10ca 6520bb7
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Tue Sep 8 16:54:04 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit b8ed9a30a2b1a3d06118fa1cde099e77e63be122
+Merge: 9f23438 6520bb7
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Tue Sep 8 16:53:51 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 9f23438f6abc5459b932cd9bb31d357d7cb5dd7a
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Tue Sep 8 16:53:45 2020 +1000
+
+    fixed up levels
+
+commit 44a10cae07d4489c2b76503ec0463913acdfa21c
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Tue Sep 8 16:53:28 2020 +1000
+
+    DFASDFASDF
+
+commit 6520bb7e5afdd7d71d5fc47ac3f5ad9897614900
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 8 16:49:41 2020 +1000
+
+    Added Timer and Hide/Show Visibility
+
+commit 09b5fcadb5cfab39393747574608f86761758b53
+Merge: ef40a6e 4e8061e
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Tue Sep 8 15:25:25 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit ef40a6ec55daf801bfe8d1e7d640df1fd060295c
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Tue Sep 8 15:25:09 2020 +1000
+
+    Timer visibility WIP
+
+commit 4e8061e4c68ddc4681088766df1165418dccdf2a
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Tue Sep 8 15:22:48 2020 +1000
+
+    Test this pls
+
+commit 0362ee5a9e18b38003a806c42b61f9327b450857
+Merge: 80f89b0 b2d0b43
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Tue Sep 8 15:04:23 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 80f89b029b9ec5c20e54c263bbf2082c9c1ca6a7
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Tue Sep 8 15:04:18 2020 +1000
+
+    Timer and currency reward on level complete
+
+commit b2d0b4395920b4e0168f116d87bd4ef1c4853d25
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Tue Sep 8 15:02:16 2020 +1000
+
+    fixed camera, made movable camera
+
+commit e3a68bebd7d21879d86be544c14d56da312b5c93
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Tue Sep 8 14:46:56 2020 +1000
+
+    mock ups for level 2 and 3
+
+commit d2bcf9d378cb43367670b341fb3fbddf78f70c88
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Tue Sep 8 12:43:47 2020 +1000
+
+    Fixed play music
+
+commit 671ad23fc783b2f938094521e1b470f259d23481
+Merge: 8c2090e 3e047e7
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Tue Sep 8 12:25:24 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 8c2090e285fd6c0ed42b541de1d8d630dd1f23ef
+Author: Rick Ko <s191273@students.aie.edu.au>
+Date:   Tue Sep 8 12:25:20 2020 +1000
+
+    Quest updating functioning across levels
+
+commit 3e047e738f6810da8982681b067263f398df5747
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Sep 8 10:11:38 2020 +1000
+
+    added Torch fbx
+
+commit cf9fc4ddbfa6c8ff0e47de823c09f91c4a863417
+Merge: 84fbf70 13cff73
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Mon Sep 7 16:52:18 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 84fbf70843e8538689f97241220d684262861419
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Mon Sep 7 16:52:00 2020 +1000
+
+    WIP more refactoring
+
+commit 13cff7359c1f12c5145e849f50a64e7d65161269
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Sep 7 16:51:53 2020 +1000
+
+    Fix to Fix Main Menu Music
+
+commit ed28338f15cae28eb44e99588c2338a3c8527e60
+Merge: b679a03 85d3ddf
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Sep 7 16:39:03 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit b679a03ea6222258aaa5386d776eed4a94b6dcba
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Sep 7 16:38:59 2020 +1000
+
+    MainMenu Music Added
+
+commit 85d3ddf735666e6760d6243e2d8f868af9fa9164
+Merge: 33978c9 0c9212d
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Mon Sep 7 16:22:08 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 33978c91b4404e11c534f70f82362bf226296a0f
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Mon Sep 7 16:22:02 2020 +1000
+
+    Renamed some variables
+
+commit 30b26230ce3b7dc318e39620352acf17069fe30d
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Mon Sep 7 16:15:22 2020 +1000
+
+    Revert "Added player controls for animating"
+    
+    This reverts commit 9fea200671ddd6fc55b4da31bdab07ae3f16ae3b.
+
+commit 0c9212d7deb7893bc372b426fcb207bc0da307da
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Sep 7 15:54:21 2020 +1000
+
+    added soul FX
+
+commit cdd55678a30d58785be4822eb4a349dcbd789dca
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Sep 7 15:38:23 2020 +1000
+
+    Quest Detect Fulfilled Requirements
+
+commit 7226895e7710dd8f130e57d7dcd06327920b6bfe
+Merge: 2fbc631 6ab41cb
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Sep 7 12:54:05 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 2fbc63127780c07cdfdc81980b8f42f2f34cb512
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Sep 7 12:53:00 2020 +1000
+
+    LevelOptions and Select Done
+
+commit 6ab41cb33aeb30bec53beed2bf7cbf17ed948201
+Merge: 9fea200 f9aa2d5
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Mon Sep 7 12:45:09 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 9fea200671ddd6fc55b4da31bdab07ae3f16ae3b
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Mon Sep 7 12:45:01 2020 +1000
+
+    Added player controls for animating
+
+commit 2ca9343483ca0cd13726bd17fd1ef76ba9812285
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Mon Sep 7 12:31:40 2020 +1000
+
+    Exposed variable for blueprint
+
+commit f9aa2d5e87ab7c9725a9f1cac7c86dd6c71b42c9
+Merge: cc79b82 1d4d920
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Sep 7 12:27:05 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit cc79b8299d3c82c7e5079d365d5e1033f10e5632
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Sep 7 12:26:49 2020 +1000
+
+    Level Select Widget
+
+commit 1d4d920795487ee573c4301441714416d0996aa4
+Merge: 73c52f6 7bdc5d3
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Mon Sep 7 12:18:17 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 73c52f623c22e0459b7ff18d487e0edb741386ec
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Mon Sep 7 12:18:13 2020 +1000
+
+    Fixed some bugs
+
+commit 7bdc5d35f7221f0599913f27921de6dc8e74eb85
+Merge: bace5fa 0658a97
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Sep 7 11:42:59 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit bace5fab81ef2e1dadc477623e42e32ee3fad3d7
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Sep 7 11:42:32 2020 +1000
+
+    LevelSelect Chapter
+
+commit 0658a97ee65475fb4c90bc49d27eb1eeb575bc53
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Mon Sep 7 11:42:06 2020 +1000
+
+    Fixed dropping issue
+
+commit 3f741987b95f192d3c88adb4821f5ea494908a9a
+Merge: b004d53 32a9b22
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Sep 7 11:21:53 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit b004d53bf0cad76489cc67ef9def769caa75d338
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Sep 7 11:21:45 2020 +1000
+
+    BP BodyPart New Fixes
+
+commit 32a9b22336d7f2dceafb884ca0bf63673ce4d4bf
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Mon Sep 7 11:16:02 2020 +1000
+
+    Refactored some stuff, please test
+
+commit 666009cf51cf387643328da98fe3eb036873a925
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Sep 7 09:39:52 2020 +1000
+
+    Adjust RegenSLN
+
+commit c62893c1a389888c8814444a3697e557d7f327b2
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Sep 7 00:21:50 2020 +1000
+
+    Deleted a redundant class
+
+commit 650ed81bcf665ad0a8742e2799f3343f24817092
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Sep 7 00:17:28 2020 +1000
+
+    Set up minigame variables for animating (untested)
+
+commit f18264930c6610aab069eb6cb839981d9cb0f83f
+Merge: bcf5f11 a181c58
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sun Sep 6 23:10:07 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit bcf5f113e017f279c19082d32ebb055aa495223b
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sun Sep 6 23:10:03 2020 +1000
+
+    Set up animating device (untested)
+
+commit a181c580e4daaf369452cb651106856f994c6583
+Author: eva-ko <eva.ko.878@gmail.com>
+Date:   Sun Sep 6 21:47:31 2020 +1000
+
+    Imported female skeletal meshes and renamed male skeleton to BaseBiped
+
+commit 18b446c378d8e8a003dcfe67713bc3442ca289a3
+Merge: ad3d531 89e4e9a
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sun Sep 6 18:59:05 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 89e4e9af46dff3234d9afbe049e8755c82ba5b14
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sun Sep 6 14:20:46 2020 +1000
+
+    Created BP Podium
+
+commit ad3d531ab0b2c5ee7bcfadbc38c2b9fb3647016a
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sun Sep 6 13:40:13 2020 +1000
+
+    Refactoring body part system
+
+commit 73c54e6eb9fbd060aa38e42e6cef295ca165022c
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sun Sep 6 00:46:06 2020 +1000
+
+    Refactoring body part system
+
+commit 0d0912e9239c42484e48f35e68189c1a4a8ef40a
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sat Sep 5 22:39:31 2020 +1000
+
+    WIP animating device
+
+commit 5cba5d5e0b44d7781f262119d0e8a6c0efdbdde2
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sat Sep 5 18:39:20 2020 +1000
+
+    WIP animating device
+
+commit 175f7ed88da383d72a5b9e206cddcb80834e07a4
+Author: Twillij <silentwill29@gmail.com>
+Date:   Fri Sep 4 03:36:15 2020 +1000
+
+    WIP animating device
+
+commit 7a44f508c6d9b9c52783074f9473a250b226601f
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Thu Sep 3 16:04:49 2020 +1000
+
+    Attached Bubble to BodyParts
+
+commit 9dfd5d4a7ba71c4507d42b4b34d88b1235244597
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Thu Sep 3 15:24:43 2020 +1000
+
+    Voices Fix
+
+commit c09f1965eb8ea2884a710de49e0da5c169db2521
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Thu Sep 3 15:09:47 2020 +1000
+
+    Finalise Music & Voices Bug Fixes
+
+commit 61655852766cff45d001aaf7d753137d9abbf08a
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Thu Sep 3 13:14:59 2020 +1000
+
+    Voice Line Implementation Complete
+
+commit f7da219fa5f796712f70119b99d71b01423e4061
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Thu Sep 3 12:42:22 2020 +1000
+
+    Swapped meshes of BP Main Chars
+
+commit 70c16691e93b18620c7c9929746ea42bf85204ce
+Author: xevionne <xevionart@gmail.com>
+Date:   Wed Sep 2 17:00:03 2020 +1000
+
+    making soul fx
+
+commit 00eef18be9f7013448f5f914e0b031a6c59162bb
+Merge: e14abe0 c0241e6
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 2 16:58:51 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit e14abe068b87ce39237219b53277f2fe8bbafe93
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 2 16:58:32 2020 +1000
+
+    Voices In Progress
+
+commit c0241e6a48ed7dad84ac642a0d34947d61beadae
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 2 16:57:02 2020 +1000
+
+    WIP animating device
+
+commit c54fce272973c69431bba4f963175b85d161eb30
+Merge: 7e18a29 99ea673
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 2 16:53:03 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 7e18a29cd096906f615472ce60651bd7543e8617
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 2 16:52:41 2020 +1000
+
+    New class animating device
+
+commit 99ea673c87918adf57aed09f64d5ffc5f7b8e655
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Wed Sep 2 16:34:34 2020 +1000
+
+    Kana
+
+commit 144d69beb78e02e8f8744cc4700a692472e9cdd1
+Author: xevionne <xevionart@gmail.com>
+Date:   Wed Sep 2 16:29:49 2020 +1000
+
+    minor instance bubble tweak
+
+commit 2c306ed234fe5d810acb58cf0f61704b395045a2
+Merge: cc56aae a50c2f1
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 2 16:29:08 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit cc56aaeb310cd0bc97bbf405e98e8afc1afa5152
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 2 16:29:01 2020 +1000
+
+    Implemented Music BUT NOT VOICE YET
+
+commit a50c2f143ba2a1723b699eb91a28ea4d3bad3ab5
+Merge: 4f5e46b 22e300f
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 2 16:27:08 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 4f5e46be19eb618750bce9793b857c7dbd10cbe5
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 2 16:27:01 2020 +1000
+
+    Tested + fixed resizing mechanic
+
+commit 22e300f4eca71332b5904a0e14ff23ae7a1a376a
+Merge: 1591b47 757841a
+Author: xevionne <xevionart@gmail.com>
+Date:   Wed Sep 2 16:19:37 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 757841a47f54a638bcdad36c235478e939a0d2d6
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Wed Sep 2 16:19:02 2020 +1000
+
+    Imported male base mesh parts, angel wings, dove>human tail and demon tail
+
+commit 1591b4782a0a8b65b3e57b439bc76ba5f3991b6a
+Merge: fdefd75 c54be93
+Author: xevionne <xevionart@gmail.com>
+Date:   Wed Sep 2 16:18:59 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit fdefd754dfb853a633e1111cd69d1c4a37adacb4
+Author: xevionne <xevionart@gmail.com>
+Date:   Wed Sep 2 16:18:52 2020 +1000
+
+    Custom Bubble Instance to fiddle with
+
+commit c54be93ed6ade3f77cb952a9ee8a50a6d5748b85
+Merge: ad07d28 7077602
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Sep 2 16:12:12 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit ad07d2882418e79f9add933c56286b1681e065ad
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Sep 2 16:12:07 2020 +1000
+
+    souls fixed with level
+
+commit 7077602d27a280b9ce1a34e11d0569d385e8ba94
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Wed Sep 2 15:31:00 2020 +1000
+
+    Renamed bull parts and hotfixed tail segment
+
+commit 858b8d6e75049ef8995920ec7b9846ed12f2e99c
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 2 15:24:45 2020 +1000
+
+    Improved character interaction
+
+commit 85c80ac64023c644f45b9943cbffdb0cd297ad53
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 2 15:15:36 2020 +1000
+
+    renamed a class
+
+commit 00a96f3f2d083063c1d5c0bdde6c6300835e6f12
+Merge: 96dfec5 36064f0
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 2 14:58:43 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 96dfec51336f377dba2c628a5f5994c61e5902aa
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 2 14:58:26 2020 +1000
+
+    created player interaction with resizing device
+
+commit 36064f0b01b36ee2c32b61d98b74610cef4eb595
+Merge: 38b7b2b 3bf0782
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Sep 2 14:57:55 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 38b7b2bb70efacdcb57abf96cbc28709e8d8b214
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Sep 2 14:57:50 2020 +1000
+
+    cam and lighting (nothing acomplished
+
+commit 3bf0782c8bc0c64c6a42014ec72b0f5c3c4d386f
+Merge: a5470c8 aa191a8
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 2 13:40:46 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit aa191a88dac6dc25e30d0175e46b923570b71a8e
+Merge: aa16628 19693b5
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Sep 2 13:17:59 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 19693b52a4cbbab9c0b2fa3657979cc6e69d1fc8
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 2 13:13:53 2020 +1000
+
+    CollectionUI Done
+
+commit a5470c811d20d6a2e6f6af1cee1acd321e1c24f5
+Merge: 65f9b5f cab99d3
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 2 12:58:26 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 65f9b5f89bc8607b4f610a759e548da3a14e4f82
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 2 12:58:13 2020 +1000
+
+    Resize mechanic added (untested)
+
+commit cab99d3527046b339e739bf2733a1238ca55ba9f
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 2 12:31:01 2020 +1000
+
+    Fix Snap Dissassembly & Box Collider Main Char
+
+commit 33c3a11f66163e6af11b78b20d93a22073398729
+Merge: d11d7af a97d5ef
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 2 12:22:40 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit d11d7af392ac4c35f3f5fcea00d4073d3fdcb06a
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 2 12:22:23 2020 +1000
+
+    Fixed BP Assembly Table Snap
+
+commit aa16628603fd2ffe265152f452dba345835737da
+Merge: ce1ea38 a97d5ef
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Sep 2 12:06:45 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit a97d5efadac46f4406b0f9c96ff0ebae49d48f30
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 2 12:06:05 2020 +1000
+
+    soz it builds now :+1: :100:
+
+commit ce1ea38ec84b5474b34b61a7d02243db59296a10
+Merge: 3a525c1 4a68720
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Sep 2 12:03:02 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 3a525c16b0cd413040fc2ecbd96ce91172fd1f48
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Sep 2 12:02:38 2020 +1000
+
+    Cam tings :(
+
+commit 4a68720a7ee8e9c00ba9bc7be40745f17e12ac1c
+Merge: d818238 273a5d0
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 2 11:58:01 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit d81823836696e3a7ece18082f32fd6c251bdbc06
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 2 11:57:43 2020 +1000
+
+    main character changes
+
+commit 273a5d095a9015e36fbf0657594a216ea2228d77
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 2 11:55:20 2020 +1000
+
+    Fixed BP Assembly Table
+
+commit 580066408411a18a2fc50636ec64db6b63e34bbe
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 2 11:49:23 2020 +1000
+
+    attempt to save the designers
+
+commit e8f0262498c9f3c6a4719c6249e6015f6b51ebd4
+Merge: ee5a36d 9816395
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 2 11:44:51 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit ee5a36d68e5349ac30a3d5a440d4cbaa8e689de2
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 2 11:44:48 2020 +1000
+
+    Create Bull BP
+
+commit 981639512de490df211e36c69b21e028748798bc
+Merge: 8d509e2 51c3778
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Sep 2 10:43:42 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 8d509e20198e9d860c42fa0fe0d8ceffbd8414ac
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Sep 2 10:43:38 2020 +1000
+
+    lighting and cillison changes
+
+commit 51c377809bf00750cae98ae23cf1b3d173f6c728
+Merge: 507febd 1433155
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 2 10:35:33 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 507febd61409a6358a40ff0255c40e8ff458e63b
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Wed Sep 2 10:35:11 2020 +1000
+
+    Fixed crash error
+
+commit 1433155e883a4ba1f29d2ce50091c95be288a414
+Merge: c9ab129 160fdc1
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 2 10:13:25 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit c9ab129d6725f7a2c4e15554cfdcb6c5287d8c71
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Sep 2 10:13:17 2020 +1000
+
+    Implemented Shop Currency
+
+commit 160fdc1b502258ee15eae52ae8aa5169f8ccf39a
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Wed Sep 2 09:54:03 2020 +1000
+
+    Imported bull parts and full skeleton in bull folder
+
+commit 2b3a8e00dc1f0ee36e653957075c228e5c99cf4b
+Merge: de69a35 4b147c2
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Sep 1 16:42:16 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit de69a351ac0215dfbed6b7a6f2d4ceb66974d184
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Sep 1 16:41:27 2020 +1000
+
+    testing bull in bubble
+
+commit 4b147c2d6786398e731b4e59d0c14a7e9e86303b
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 1 16:21:12 2020 +1000
+
+    removed nonsense
+
+commit 4d6d288a934f7e1f51a5f4747beed76747e55f5f
+Merge: 06ddf55 8a3e186
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Sep 1 16:15:32 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 06ddf55961aaa5e148f704cc934df378660a7e09
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Sep 1 16:13:34 2020 +1000
+
+    created bubble
+
+commit 8a3e1867d55f2d48c87933dcd546baf6743c55f2
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 1 15:55:35 2020 +1000
+
+    Created Full Character BPs
+
+commit 4b93637e1e1366946a844afa1e421b640022968e
+Merge: bc5f7a4 ec064a5
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 1 15:33:54 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit bc5f7a480190842423ff08749b18c4f4b25f5ad0
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 1 15:33:32 2020 +1000
+
+    Created BodyPart BPs with new meshes
+
+commit ec064a565742629338e7528a08a09543771cc024
+Merge: 75efcf7 660e0d2
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Tue Sep 1 15:17:58 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 660e0d289285576775609010bfddfe89fa9fb120
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 1 15:13:42 2020 +1000
+
+    Delete Useless Assets, Fixing BP Bodyparts, Fixed Assembling Spots
+
+commit 75efcf796a1f258e980ea089bea723a624d6df80
+Merge: 2268c15 56e65cc
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Tue Sep 1 15:09:11 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 2268c152d6ed7c5cafff135550c7831bd030c3de
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Tue Sep 1 15:08:56 2020 +1000
+
+    cobstruction
+
+commit 56e65cc8b50855334cab631656ccce62729e38cf
+Merge: d62b09f 540e2ff
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Tue Sep 1 15:02:37 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit d62b09f0f4488e37b745ee93fd529a08c439fc17
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Tue Sep 1 15:02:20 2020 +1000
+
+    Fixed build errors
+
+commit 540e2ff6b593a8fb7a0b3caae40916e9aa916662
+Merge: 26df4be b783aaf
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 1 14:58:59 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 26df4befe00af963d3412b53c6e51180c8f84eb2
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 1 14:58:54 2020 +1000
+
+    Assembling Spot Adjust
+
+commit b783aaf54897e52b60e80aee1efd71972ee752c9
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Tue Sep 1 14:52:06 2020 +1000
+
+    removed old error debug log
+
+commit 8a2071b369628f6c87934c42d492f195b2f668cf
+Merge: 4109a17 c82e267
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Tue Sep 1 14:36:14 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 4109a17af18655d5e76dcb329d022b2928943059
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Tue Sep 1 14:36:08 2020 +1000
+
+    Added resize class
+
+commit c82e26746bfff0681d8d933fca5e6ff11dd795c0
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 1 14:14:26 2020 +1000
+
+    AssemblingTableBP Runes
+
+commit 8f9eaaecc1c0cca7f712689c4f082aeab2e6364e
+Merge: c3715a6 5330d95
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 1 12:43:53 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit c3715a69dfd51bb33c368743d30d1b946219b541
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 1 12:43:49 2020 +1000
+
+    eh
+
+commit 5df3ea7d766b05b067496d21869b9ffb6433140b
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 1 12:43:19 2020 +1000
+
+    Animated Quest Notification
+
+commit 5330d95e28ec95555712d6d806c4c60274fb91ff
+Merge: 2b3725d 1f8e925
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Tue Sep 1 12:23:22 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 1f8e925190aca0405143abe0b841cc3e5f1584e1
+Merge: 756c437 bd48b2f
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Tue Sep 1 12:23:08 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 2b3725d2fd15292dd202670c2bd89e5bdacbe1e8
+Author: Will <48894810+Twillij@users.noreply.github.com>
+Date:   Tue Sep 1 12:22:58 2020 +1000
+
+    Formatting issues fixed
+
+commit 756c437df8f1e6514d1f7d72b59026fd074fd05d
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Tue Sep 1 12:20:25 2020 +1000
+
+    cam tings
+
+commit bd48b2fe0402d73d8eee270341acbb198cec8755
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 1 12:00:23 2020 +1000
+
+    Shop & Main Menu Complete
+
+commit 5753bb8db399b21e5a23ab52b1bfce2460152032
+Merge: 46bdcd1 715ffff
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 1 10:53:54 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 46bdcd16301c389c714c31d2291f29c94224219a
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 1 10:53:50 2020 +1000
+
+    Conjure Screen Done
+
+commit 715ffffddad525cb84f457eca630406f27adc196
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Sep 1 10:33:42 2020 +1000
+
+    WIP growth mechanic
+
+commit e1f7cd0e488bc9ca22101607d9e84808bd8a32c6
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Sep 1 10:03:03 2020 +1000
+
+    Quest Objective Pop Up
+
+commit dba322dac3ac214328262682f3ab8a99fbd7ad48
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Mon Aug 31 22:01:27 2020 +1000
+
+    Created Reception BP
+
+commit 6601adbd5618273c2950e9d70afabe46c9ea8beb
+Merge: 464be76 1849da7
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Mon Aug 31 16:58:05 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 1849da7e065ebb5346505a621937e76ab3fd804b
+Merge: 2d76124 f6e23a3
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 31 16:57:38 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 464be7604af6f58bc5756bb27bac009572abdd26
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Mon Aug 31 16:57:35 2020 +1000
+
+    cam changfes nt doen :(
+
+commit f6e23a39866eb9854beaf66a956696ccfb7381e7
+Merge: 3b17087 77788db
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 31 16:53:42 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 3b17087946d117956ada1c43a07b98aa0c47bfbb
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 31 16:53:13 2020 +1000
+
+    Create SM_Yarnball.uasset
+
+commit 2d76124a0d7a4e7c974a18d8b25a4bb0d50b3069
+Merge: 7134e64 77788db
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 31 16:52:00 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 7134e64cf8eec0a736f05b334f021b053257d482
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 31 16:51:51 2020 +1000
+
+    WIP minigame dual button
+
+commit 77788db654dc7c6dd57b4308be674c76ce3537a9
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 31 16:50:31 2020 +1000
+
+    Spawn Player HUD In Level Only
+
+commit 2a506a08c63ec305d8ae24f1cb3f7a3780f6a823
+Merge: 2850636 b529208
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 31 16:44:56 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 2850636b71b583e4f7d1d43226077eb683bbd59c
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 31 16:44:52 2020 +1000
+
+    Level Switching Continues On
+
+commit b5292085f624a84094948a31fec496964a358599
+Merge: b495207 8e486cf
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Mon Aug 31 16:26:26 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit b4952073d7f875fee0c08aa24596e0876f5f0590
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Mon Aug 31 16:20:59 2020 +1000
+
+    Camera FInally working
+
+commit 8e486cfa18fabb98a69aa10093fbf7887b09e208
+Merge: bc526a3 dd5f7ab
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 31 15:41:33 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit bc526a322cc399af01b72a993f8e9fcedb1c7fef
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 31 15:41:20 2020 +1000
+
+    Minor fixes on stunning soul
+
+commit dd5f7abf0eee22871ef106a8dab0d66b71601c55
+Merge: 1248a26 1417747
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 31 15:00:16 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 1248a266a54fa7214a65c9caf98121b5af99acbc
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 31 15:00:10 2020 +1000
+
+    Update Shop
+
+commit 14177474622e65950fd28a0560072b1456537db4
+Merge: bae2ffc 467f1ee
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 31 14:59:50 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit bae2ffcab207d83e1f4196c9d52aa30ee699802d
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 31 14:59:30 2020 +1000
+
+    Create SM_Reception.uasset
+
+commit 467f1ee33c0de5e67a377e8a9d52229cab7f112c
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 31 14:56:25 2020 +1000
+
+    Added soul stunning (tested)
+
+commit 356355c5153cf3b8ce5aa65356a89167d292890d
+Merge: 1b59f1e 1d4aaa9
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 31 14:22:55 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 1b59f1eaa60d951aee86139b8a4a5a4eb0533964
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 31 14:22:25 2020 +1000
+
+    Assembling done (tested)
+
+commit 1d4aaa92b1e55be580dfc584982c0a94dcfb490f
+Merge: 1d21248 7cebeee
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 31 12:34:11 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 1d21248d9d51f157a18bb68e277306b84e5406c6
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 31 12:34:06 2020 +1000
+
+    Shop Almost Done
+
+commit 7cebeeecfa6ebef759f7ca3a95fb22db362a2d7a
+Merge: 20692c8 a6dfe1f
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 31 12:26:22 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 20692c88667f30a1e91afcd08abde5632e84991f
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 31 12:26:17 2020 +1000
+
+    Minigame calls assembling function
+
+commit a6dfe1f0ef4c8ca853f2220edd4f92cefb88222d
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 31 12:07:30 2020 +1000
+
+    added Chandelier
+
+commit 1d4c06caf4c86b6a6463c3dc42e391bb4a4d8272
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 31 11:12:43 2020 +1000
+
+    Can launch minigame
+
+commit c9e6c833485cab40ba2987da878237e1a90d229a
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 31 10:25:53 2020 +1000
+
+    Can do basic gameplay
+
+commit b9d54683cefa9dfe17da3df461fc4be188567d28
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 31 09:47:55 2020 +1000
+
+    Put back main gameplay functionalities
+
+commit 12dd2034e43b77ad8663bf147e9ffd1b86604b0b
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sun Aug 30 01:51:48 2020 +1000
+
+    WIP new tag system
+
+commit b13efc24d6642a3e8dcca13e5878d62627cb49ac
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sat Aug 29 16:08:06 2020 +1000
+
+    Fixed snapping of assembly table
+
+commit 05e0d8600434f9cfa3aa2b9af650eb0b77a9ee39
+Merge: 500481c 692703b
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sat Aug 29 01:40:04 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 500481cfe3df25a3e214ec9e4790a7a0403a6b6e
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sat Aug 29 01:39:52 2020 +1000
+
+    Creation of Sprites & Start Make Main Menu & Store
+
+commit 692703b2599f9998db77318a3f1ca1823e5bdb18
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sat Aug 29 00:50:08 2020 +1000
+
+    WIP assembling body
+
+commit 0b9f7fda02cedd6c45f13258425cc76d511ea380
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Wed Aug 26 20:37:09 2020 +1000
+
+    Can now specify which Dialogue Text to Load
+
+commit 29f2ac1527becdd21f7b55a7382c050a0b90679a
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Wed Aug 26 20:14:16 2020 +1000
+
+    Fixed Character Expression
+
+commit 34009c83a07f5a85b2a445060b729533882eb448
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Wed Aug 26 20:06:55 2020 +1000
+
+    Moved GameMode, Player Controller, GameInstance into Blueprint Folder for Visibility
+
+commit 8a7969d8d1ff4f00e60bb9676e9f40d4133238a0
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Wed Aug 26 20:03:56 2020 +1000
+
+    Moved Dialogues and deleted obsolete Participant
+
+commit acd5414a89734e41adf7a409d6bc886b52d24560
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Wed Aug 26 20:01:29 2020 +1000
+
+    Rename folder DialogueTut to DialogueSystem
+
+commit 85dbcb9e32f03acfff080bc6ec747e47cb3e7904
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Wed Aug 26 19:56:01 2020 +1000
+
+    Removal of Useless Widgets
+
+commit 130031d79a620ba8c599ca14750ce57b4c3e0447
+Merge: c945909 8345748
+Author: xevionne <xevionart@gmail.com>
+Date:   Wed Aug 26 16:59:11 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit c945909b9960ac8f5ff3498cab3e27aefaef7d2c
+Author: xevionne <xevionart@gmail.com>
+Date:   Wed Aug 26 16:59:03 2020 +1000
+
+    Create SM_Podium_LP.uasset
+
+commit 8345748f034fc7f153e5097a8744153c34f0626c
+Merge: a7b4732 c4f018a
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Aug 26 16:58:01 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit a7b47325e5fc02080f430456b502b1609fb1e7b7
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Aug 26 16:57:49 2020 +1000
+
+    lighting changes
+
+commit c4f018af9facb8d4b69bb3d85e8e4ad17c996709
+Merge: 4b1578e 7d762d7
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 16:55:38 2020 +1000
+
+    Merge branch 'broken' into feature
+
+commit 7d762d72e9c8020874c74dcf2dae190959e7ec20
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 16:54:19 2020 +1000
+
+    Fixed Dialogue
+
+commit 4b1578e5279624ce31e2d5b022867b356279688a
+Merge: 8d6b03e 70e7ac9
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Aug 26 16:54:06 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 8d6b03e8fc4a36285c6d03fb31030d7a98b6d46c
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Aug 26 16:52:58 2020 +1000
+
+    WIP testing assembly table code
+
+commit 18d190e9cd631b0e634f363e1b68ee88c6c866fd
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 16:44:26 2020 +1000
+
+    Revert "Revert "Revert "Revert Faulty"""
+    
+    This reverts commit 80704f346d9d0ef986bc3071d474a981f33ee004.
+
+commit 80704f346d9d0ef986bc3071d474a981f33ee004
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 16:44:09 2020 +1000
+
+    Revert "Revert "Revert Faulty""
+    
+    This reverts commit 70e7ac9a6bab3635c4b888ed8df26423ff52cb75.
+
+commit 70e7ac9a6bab3635c4b888ed8df26423ff52cb75
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 16:42:09 2020 +1000
+
+    Revert "Revert Faulty"
+    
+    This reverts commit 93943b015d1be9e9526e73032e2aa9d732d6e5f7.
+
+commit 93943b015d1be9e9526e73032e2aa9d732d6e5f7
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 16:39:54 2020 +1000
+
+    Revert Faulty
+
+commit d83e5d541659682b01e6cc470ffc31c35d2fa794
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 16:38:50 2020 +1000
+
+    Default GameInstance Fix
+
+commit dcd0dbd02a79e71a2dc2ada664135293143e5f23
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 16:34:53 2020 +1000
+
+    Revert "Revert "Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature""
+    
+    This reverts commit 51ce35f078daad873891a9ce4edc88629e3ec998.
+
+commit 87a201cd58e535a7c00050aa608258dd0f43a51c
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 16:34:40 2020 +1000
+
+    Revert "Revert "changes to camera, fixed bug""
+    
+    This reverts commit 46ecb92380fe5e8206b8afcc84bca17f2b228e6e.
+
+commit 550de2fe59a47c50bf54a316bb1b6c2b92dc9307
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 16:34:26 2020 +1000
+
+    Revert "adfsfdsadfsa"
+    
+    This reverts commit 26f2fb7853b926392e0baff58bd7cc2f967ea168.
+
+commit 4d0ddacf5c5200d6c4b4e73b40e1b56dbc7d9596
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 16:34:12 2020 +1000
+
+    Revert "ge4vhbegg"
+    
+    This reverts commit 1bd3b64af07de0d54c2da94126bf37c7d0e5fc57.
+
+commit 1bd3b64af07de0d54c2da94126bf37c7d0e5fc57
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 16:31:03 2020 +1000
+
+    ge4vhbegg
+
+commit 26f2fb7853b926392e0baff58bd7cc2f967ea168
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 16:30:22 2020 +1000
+
+    adfsfdsadfsa
+
+commit 46ecb92380fe5e8206b8afcc84bca17f2b228e6e
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 16:26:47 2020 +1000
+
+    Revert "changes to camera, fixed bug"
+    
+    This reverts commit 205bb4af7e953a1748b6b798d4bbbc01c215850a.
+
+commit 51ce35f078daad873891a9ce4edc88629e3ec998
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 16:26:09 2020 +1000
+
+    Revert "Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature"
+    
+    This reverts commit ee5ef685d412dd188ef8a8d0994b2576b51e04ec, reversing
+    changes made to 205bb4af7e953a1748b6b798d4bbbc01c215850a.
+
+commit c26ba71a58e3b3e7dfed34d730687dc7205b7660
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 16:25:50 2020 +1000
+
+    Revert "Revert"
+    
+    This reverts commit 1ddb40538aed818bb3e0747972b8d34917be9927.
+
+commit 1ddb40538aed818bb3e0747972b8d34917be9927
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 16:21:39 2020 +1000
+
+    Revert
+
+commit ee5ef685d412dd188ef8a8d0994b2576b51e04ec
+Merge: 205bb4a 12b4619
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Aug 26 16:16:42 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 205bb4af7e953a1748b6b798d4bbbc01c215850a
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Aug 26 16:15:41 2020 +1000
+
+    changes to camera, fixed bug
+
+commit 12b4619d856fae7bfae4310d5914d089572ba9b9
+Merge: 14e10f4 79e7407
+Author: xevionne <xevionart@gmail.com>
+Date:   Wed Aug 26 16:14:43 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 14e10f4992e8d6572f5c774b2475b5ffd1adf919
+Merge: adbdb91 7299903
+Author: xevionne <xevionart@gmail.com>
+Date:   Wed Aug 26 16:14:26 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 79e74074f8d800c7e158827c450f31bfde888f1c
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 16:13:58 2020 +1000
+
+    Made BP Assembly spot
+
+commit adbdb9182f4d669957e1185ad394dc3759a47fd8
+Author: xevionne <xevionart@gmail.com>
+Date:   Wed Aug 26 16:13:28 2020 +1000
+
+    moved some folders, added 3 Runes
+
+commit 72999032a6c8e8956680882dba93dccb77ef0044
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 15:58:04 2020 +1000
+
+    Visibility of Dialogue On begin & end Implemented
+
+commit c246ec01d6d70727a9d16ffafc302158ab9b06c3
+Merge: a5367aa 666be77
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 15:48:36 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit a5367aa1083e7ef8b500e0ade2de0d0c1fd7ef0c
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 15:48:05 2020 +1000
+
+    Press to Interact Confirmed Working
+
+commit 666be7707ee35dcd108e14f794abd928221ccacc
+Merge: ef04464 07061cb
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Aug 26 15:45:01 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit ef0446459832472f3e03c452f15b9ab31ef80b70
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Aug 26 15:44:56 2020 +1000
+
+    WIP assembly table refactor
+
+commit 14e5cce97f8eda63502eaf54877469038512ec78
+Merge: cb7f79a 07061cb
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Aug 26 14:45:58 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit cb7f79a47274b463de2edb968d9c9202cb297b00
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Aug 26 14:44:17 2020 +1000
+
+    added camera to dissassembly table
+
+commit 07061cb1abc83785f46e1713b9ed1f5b6a7a709b
+Merge: f1e25f3 3a09e6f
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 13:31:09 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit f1e25f39dc81ce2e1bd7df6ca7b98bebaeef17e0
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 26 13:30:50 2020 +1000
+
+    Fix Dialogue BP Functions
+
+commit 3a09e6f50170c3e772ae6cc06f40f6012bac32bf
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Aug 26 13:22:24 2020 +1000
+
+    refactor assembly table pickup/drop
+
+commit 18524c4c715b897ff782f7ecfe54dfda9179fbd8
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Aug 26 12:04:02 2020 +1000
+
+    Revert "Still need to fix Empty Participants Array for Main BP"
+    
+    This reverts commit fa657b9368326ef7a8ee09ee4ea14c154697e7d6.
+
+commit fa657b9368326ef7a8ee09ee4ea14c154697e7d6
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Wed Aug 26 00:32:16 2020 +1000
+
+    Still need to fix Empty Participants Array for Main BP
+    
+    VNGameInstance Name is detected normally in CDX_Files, but BPGameInstance Name is not detected when changing the CDX_Files
+
+commit e6c5540df40053ae68aead53397510d0d03555fa
+Merge: 693fb1c 2ccee75
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Tue Aug 25 16:56:19 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 2ccee755b58e198b97fe4d5e005efe69ae48f043
+Merge: b5abf04 1f18669
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 25 16:55:01 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 693fb1cd32eb25665dbfedbaff3c9765e0077b86
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Tue Aug 25 16:54:56 2020 +1000
+
+    cam now working
+
+commit b5abf0469c24c07a0841fdf69e61b39edd84f8e6
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 25 16:54:55 2020 +1000
+
+    WIP idk anymore but it builds
+
+commit 1f18669c2f966910f55363ac63a5b403eb0e16bf
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Aug 25 16:54:08 2020 +1000
+
+    Completed Transfer of Tut Code to Base Code
+
+commit 21c8a29f525f3886aca0233c54d1dfa9918f0330
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Aug 25 15:29:31 2020 +1000
+
+    Fixed Text Speed
+
+commit 7f4ee9f059a4247b3db383f234bfa8070003bd01
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Aug 25 10:09:30 2020 +1000
+
+    Renames of Tutorial UI and creation of Real UI
+
+commit a4605f69b7fd4969f412deceeaa4dbc8d39f15f2
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Aug 25 09:52:22 2020 +1000
+
+    Change Dialogue Name and Fix BP Main
+
+commit 95e83844a032e3332357feda4988610a42f60f9f
+Merge: 61db877 4faf0ed
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Tue Aug 25 09:45:25 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 61db877ce86f36d4a2035310338ab2874eb8f154
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Tue Aug 25 09:45:20 2020 +1000
+
+    Create BP_MainCharacter_2.uasset
+
+commit 4faf0ed3f7f039696c7892865fbd07735f8ae612
+Merge: f1af184 99d9163
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 25 09:40:42 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit f1af1844053d5de503113c3f81577bb31fc3a3aa
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 25 09:40:25 2020 +1000
+
+    Removed camera from code
+    
+    To accomodate for Luke's incompetence
+
+commit 99d91639608396a7677d31c1e7c6888a840dc6e9
+Merge: 2316a01 93e22a8
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Aug 25 09:37:18 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 2316a012d852fbad030749c89b471483f4e1c1d0
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Aug 25 09:36:30 2020 +1000
+
+    Revert "Modify BP Tags & Integrating VN"
+    
+    This reverts commit d55b2570cb32c6c0115d6859dfcb9a893549608e.
+
+commit 93e22a8f450006edea1b09deaed51f001ebf138c
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 25 09:25:59 2020 +1000
+
+    Attempt to save Luke
+
+commit 56df86b72a68bf469fdf2ffb621dd017cac62b0c
+Merge: 1cff9b4 d55b257
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 24 16:58:50 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 1cff9b43e9d249e95da2970cb97c5ebccadc745a
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 24 16:58:44 2020 +1000
+
+    WIP assembling body
+
+commit d55b2570cb32c6c0115d6859dfcb9a893549608e
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 24 16:58:31 2020 +1000
+
+    Modify BP Tags & Integrating VN
+
+commit bd7e3764133f93e4b1c55cfa885c23a218dc0d80
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 24 16:19:47 2020 +1000
+
+    Fixed interact
+
+commit 6976da3ef28963310975e4e7424f3383b42c832f
+Merge: f741c99 9af4833
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 24 16:15:11 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit f741c9996cab066428abe11f12d4e09072c1036b
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 24 16:14:38 2020 +1000
+
+    unbroken the supposedly unbroken push
+
+commit 9af483334421c154e66bbb6e7234889a369d5f24
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 24 16:06:23 2020 +1000
+
+    Fixing text speed
+
+commit 5463a64bfa6022776202ab252adcb7224ea8800e
+Merge: 17a8ea5 bdcc69b
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 24 15:56:25 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 17a8ea5aeebf41c6360013c76af1b8bca8e727e0
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 24 15:56:05 2020 +1000
+
+    unbroken the build
+
+commit bdcc69b0872e3bd5491f2292ebe5bbd6fe2aa26f
+Merge: 094d6fd 01591ee
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 24 15:54:53 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 094d6fdeff994c9bc1459c1babb3f2d8472574d2
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 24 15:54:49 2020 +1000
+
+    Change gallery button
+
+commit 01591ee2796ad8df27b95eae4bb0dc01b90bca88
+Merge: ecd0640 c9a69d1
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Mon Aug 24 15:48:31 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit ecd0640a01bcd08e7628b64fbffcd8541ddbfb55
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Mon Aug 24 15:48:13 2020 +1000
+
+    Update BP_MainCharacter.uasset
+
+commit 4c413c34245e746724501cc9c1c6970d9ef024a5
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Mon Aug 24 15:46:36 2020 +1000
+
+    To revert
+
+commit aaa391a19c7dded222fd7b773ddc2a29e26b282a
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Mon Aug 24 15:42:12 2020 +1000
+
+    more changes to cam
+
+commit c9a69d106840ae67c638ab78b2fd2a4d4951ce93
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 24 15:41:51 2020 +1000
+
+    WIP assembling body
+
+commit 1490f1a0ad52e73570b595be706869e39cc07ee6
+Merge: f25aac9 c154e20
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 24 15:33:44 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit f25aac905e30f597a4a605c9d264b580c32b1c67
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 24 15:33:38 2020 +1000
+
+    Scipts into other Scripts
+
+commit c154e209472c0b43abc3abbd1feeef43282aef76
+Merge: d479ea1 2b8b95d
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 24 15:10:00 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit d479ea187d679924cb8d7696a7ab0f09938f40e2
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 24 15:09:55 2020 +1000
+
+    Integrated sewing minigame
+
+commit 2b8b95d46b0365373ef362bac29355818a1849fc
+Merge: 8ee0891 2964019
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 24 11:25:50 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 8ee0891c23f74885e2b8e8b572bf2398c70bfef2
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 24 11:25:45 2020 +1000
+
+    Implement Gallery
+
+commit 0b615f8c5bb7abb3da395e24bfbde96e0febd3b3
+Merge: 20116d4 2964019
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Mon Aug 24 10:43:30 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 20116d428c8099df6233acb149a9e2886ce8172c
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Mon Aug 24 10:41:25 2020 +1000
+
+    work on cameras (almost there)
+
+commit 2964019e7aa4a88f6e50f9eee5b52acdf24a69fc
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 24 10:41:24 2020 +1000
+
+    WIP Widget system
+
+commit 9a7ef1a1e494ccd994fcda5583dc2ba36e8e92d3
+Merge: 45b340b b8bb29c
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sun Aug 23 22:55:20 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 45b340b1f762a0f3df8ce1170c67cda03a43098d
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sun Aug 23 22:55:15 2020 +1000
+
+    Show Chosen Options
+
+commit b8bb29cd28e682fc428fe895b65470528966cc5d
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sun Aug 23 21:59:59 2020 +1000
+
+    code cleanup
+
+commit f90d7f3e1ad15707b1bfd9ea83d33ac1b3357a28
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sun Aug 23 14:55:01 2020 +1000
+
+    Minor refactoring
+
+commit 2acc6f3cf213d9d22aedc9b811c202a4b1f2dd4e
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sun Aug 23 14:40:49 2020 +1000
+
+    Deleted obsolete input commands
+
+commit 0d3b7ef653d77cf23ae58615c245311342eec410
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sun Aug 23 13:52:46 2020 +1000
+
+    Skip and Auto Mode
+
+commit d2d6f9799605f8c67025c78a9a9ff1b5a7aea050
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sun Aug 23 05:13:07 2020 +1000
+
+    Set up anti-spam for minigame
+
+commit 6293c310ca88ce68e1351b5a01558124026a391a
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Sat Aug 22 14:28:02 2020 +1000
+
+    UI
+
+commit 77034f07aae082bd06cf9c6d16981f75c7673da1
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Sat Aug 22 13:44:34 2020 +1000
+
+    Create exclamation mark.png
+
+commit 848928f2d2aa8119fb34135b23d2a3ea810be652
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Sat Aug 22 13:35:49 2020 +1000
+
+    Create currency.png
+
+commit 9aedc303fe5f82bfac29ee5250c4bd7754eb63c2
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sat Aug 22 01:54:56 2020 +1000
+
+    Minor default values changes
+
+commit 9d4e41f7ec0b46d4d2aa35066b2224e9737f03ff
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sat Aug 22 01:16:26 2020 +1000
+
+    Finished basic sewing minigame
+
+commit 5eb55d1f99d7707fe01499cc0b8986200e9e74f8
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Fri Aug 21 18:49:03 2020 +1000
+
+    Optimised BP code
+
+commit 95d1a0704af8884875c84af62b54fe589f99e73f
+Merge: e5db8da b78fff6
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Thu Aug 20 21:30:02 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit e5db8da43cf4b4d01cdd096d03988e2f74bda14d
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Thu Aug 20 21:29:57 2020 +1000
+
+    Following VN Tut and implemented codex
+
+commit b78fff69b303b8b621d3ba6edd0ebe73eb56b269
+Author: Twillij <silentwill29@gmail.com>
+Date:   Thu Aug 20 19:49:36 2020 +1000
+
+    Finished function for moving minigame indicator
+
+commit da0930c0eae76a53a2de44f7c16e6764fbdb3361
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Wed Aug 19 22:06:12 2020 +1000
+
+    Continuing VN Tutorial
+
+commit 325bc2920d03d187012057b2f01ee388b56b0468
+Merge: a4bee75 f974398
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 19 16:59:16 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit f974398e8972ed6dfb5b49ea880189c627943212
+Merge: 9485a00 196d25d
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Aug 19 16:58:03 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 9485a0015d527813b981cd9439d5e5846147fa3e
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Aug 19 16:57:55 2020 +1000
+
+    WIP sewing minigame
+
+commit a4bee7567dfde2c4b323329ada24cad1f571f323
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 19 16:57:49 2020 +1000
+
+    NameTag Sprite Fix
+
+commit 196d25d906502689882e0e98ec76be35f6d6f1bc
+Merge: a5e0034 7614ee0
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Aug 19 16:56:23 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit a5e00342561a55d1458378072d78e76344cf7ed3
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Aug 19 16:54:59 2020 +1000
+
+    removed all camera work, need to work on it ore
+
+commit 7614ee0b915e72240a7b72666c18527408297400
+Merge: 4e5381f 02e919c
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 19 16:46:22 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 4e5381f4d1ddde7668ca622f4e2f70989a1be7d9
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 19 16:46:04 2020 +1000
+
+    Made Nametag Assets
+
+commit 02e919c45546f7e424133423c0bdcc851dfb570e
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Wed Aug 19 16:45:24 2020 +1000
+
+    Update nametag.png
+
+commit 0d046711817c02dce841c8bc39880898b3df08b8
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Wed Aug 19 16:35:42 2020 +1000
+
+    Update QuestObjective.png
+
+commit 3998a73325da8d70c9049eb66dc84d63e601cd77
+Merge: 0b1811a 364b79b
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Wed Aug 19 16:26:33 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 0b1811aa190c917c7a9862a3de5411d9454f7d8d
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Wed Aug 19 16:26:24 2020 +1000
+
+    Update nametag.png
+
+commit 364b79bade436aeab36933f2eef7ab6693c5bb30
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 19 16:25:58 2020 +1000
+
+    Modified MainCharacter BP
+
+commit e99a762b6147b6f852e2c285b324eb8bf15f2e47
+Merge: 4492796 8b93e6c
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 19 15:56:05 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 44927961cc57283c2c2672a55ff989e9ad560e71
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 19 15:56:00 2020 +1000
+
+    Created Main Menu Look
+
+commit 8b93e6c28a55f38357eeab06d2da16f5dc7c0d51
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Wed Aug 19 15:29:27 2020 +1000
+
+    Create nametag.png
+
+commit af3766da09a4d37e1d75387683bd5527dc3a9ce4
+Merge: e76aa91 d62e523
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Aug 19 15:12:00 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit e76aa91a2d110ba9063a337f3245d281ffbeb321
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Aug 19 15:08:59 2020 +1000
+
+    changes to cam, on table now
+
+commit d62e52327a5a4064a623c52ac7bd88cb8fa3ebf8
+Merge: c04632b 5c03659
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Wed Aug 19 14:41:57 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit c04632bd957619e0459a2f0676c529b846d606aa
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Wed Aug 19 14:41:52 2020 +1000
+
+    Create QuestObjective.png
+
+commit 5c03659edab0b9a55d3903406fbb89151ddbf404
+Merge: 5dc2ca0 2aed594
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 19 12:31:37 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 5dc2ca09fda17d0d886f61013220b9af57259b87
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 19 12:31:28 2020 +1000
+
+    Use of some assets in Main Menu
+
+commit 2aed594635ce8070a03c3d49ee40f926bed5e796
+Merge: 8360c5c 67c8ca6
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Wed Aug 19 12:29:32 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 8360c5c00b1b2ce1af703eeece98afacc5946dde
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Wed Aug 19 12:29:27 2020 +1000
+
+    Update MainMenu.png
+
+commit 67c8ca6af4dfe0527333983c063ff79884b3a8d5
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Aug 19 11:37:35 2020 +1000
+
+    Fixed soul taking items held by player
+
+commit ea59f4c011d4f1e6ff808b29bd1e5433ff72d61c
+Merge: 676121a 44fa28f
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Aug 19 11:13:37 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 676121a7acae76d7967b25808becc747ead4b5c6
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Aug 19 11:13:32 2020 +1000
+
+    Refactor: Main character + tables
+
+commit 44fa28f9c7c51085fd19f0751afb06748cca7f0f
+Merge: e6baa75 eaf9f38
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 19 10:19:27 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit e6baa752d9631e30a1aba16baf5f2f8453b49bb6
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 19 10:19:23 2020 +1000
+
+    Fixed Sprites
+
+commit eaf9f38978149eb47c29b2455eaf2616a1d2cc33
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Wed Aug 19 09:54:23 2020 +1000
+
+    MainMenu
+
+commit 810802c81c5814df8d9a78d1ad2b4656b0a4e177
+Merge: fdeb3b5 2895fa1
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Wed Aug 19 09:49:22 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit fdeb3b531d089d3ff03ff749d30b28ca4e04cb56
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Wed Aug 19 09:49:17 2020 +1000
+
+    Create speechbubble.png
+
+commit 2895fa1b92105161ded774d51a5f9d803da0de8e
+Merge: d05138a cbda012
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Aug 19 09:41:14 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit d05138a47bf27c9e93b707f95dba9f19ad7801c2
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Aug 19 09:40:56 2020 +1000
+
+    Refactor: body functions
+
+commit cbda0124527cc92c27b6c140bc960d9734888048
+Merge: 0586ba6 07a0c2c
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 19 09:37:29 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 0586ba6422fda5814c12a1dd8b2a54d2a1e6a9d7
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 19 09:37:10 2020 +1000
+
+    Change 2D Textures
+
+commit 07a0c2c856a5d9352edf3f15ff97db98e057baf1
+Merge: d7f76df 63759f1
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Wed Aug 19 09:36:25 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit d7f76dfc37a6c3f0dc2d64004d5b88077f2e9d2a
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Wed Aug 19 09:36:20 2020 +1000
+
+    Delete speechbubble.png
+
+commit 63759f1f5c0041f863bad1c67f035ae089440225
+Merge: 0dc466f 16ab94f
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Aug 19 09:23:32 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 0dc466f7494f224a3db4d5a0cbc64a21e2c10bf0
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Wed Aug 19 09:23:03 2020 +1000
+
+    made changes to teh collision of the stairs
+
+commit 16ab94f039edf7b0e779a04d8f302bab58f9f602
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 19 09:04:21 2020 +1000
+
+    Moved UI Folder
+
+commit 4ccccc729ec2040287d9386fcc452647f6b8a7f6
+Merge: c0ae99f e0fd968
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 18 16:56:08 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit c0ae99f3f95107d1a4a22f581bf2c6ef11312f26
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 18 16:56:03 2020 +1000
+
+    WIP attaching body
+
+commit e0fd968d7115a8a1de5cdfd368aab9d4da3c3c87
+Merge: f37d8a6 9bf2282
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Tue Aug 18 16:27:04 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit f37d8a6daf02c06560030a7ce2999c52ab959c0d
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Tue Aug 18 16:26:58 2020 +1000
+
+    Update speechbubble.png
+
+commit 9bf22825d6950329e5fdeb005639b9e85d67655b
+Merge: f514c4e aec6e38
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Aug 18 16:11:43 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit f514c4e2adfe527add4e5bdcf7dd3a6380d4ce31
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Aug 18 16:11:39 2020 +1000
+
+    Starting to integrate player dialogue integration
+
+commit aec6e389467839baee913345ca4359cc94288eb6
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Tue Aug 18 15:32:01 2020 +1000
+
+    SpeechBubble
+
+commit d8e69216e1968a3886827881fab5382dd397476b
+Merge: ba01d4a def423e
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Tue Aug 18 15:30:55 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit ba01d4ad9e09e12bcb2e5d17585c2cbf2257e352
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Tue Aug 18 15:30:48 2020 +1000
+
+    Create speechbubble.png
+
+commit def423eeed24ca748ef4cdafc475a31776eac93d
+Merge: 9fcc16b 532bb43
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 18 15:30:12 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 9fcc16bd8194bb34075d2a39a1083a7c627afcf6
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 18 15:27:59 2020 +1000
+
+    Fixed table body redrop bug (tested)
+
+commit 532bb43d2b83e93f66a56db205a1de64a2f38693
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Aug 18 15:17:13 2020 +1000
+
+    updated UVs bull. fishtank, assembly, disassembly and cages. no more stretching!
+
+commit fb5fdbbbe89cbd5db12e58265ad463a716d4a5a1
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 18 14:35:23 2020 +1000
+
+    Fixed table body redrop bug
+
+commit 2d41280f6eac5116e1397ce348b0ecb12609deaa
+Merge: 5fb9ccc af640a8
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 18 14:13:05 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 5fb9ccc2f48ba73b5836cc2a52cc42d76d6c6160
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 18 14:12:45 2020 +1000
+
+    Soul function fix v2
+
+commit af640a80e36f8ed90f41c8714007c83c5c6e999e
+Merge: 97e569b 85dcee8
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Aug 18 13:57:52 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 97e569b605bd1f2d608e778f631946cb8492e9d3
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Aug 18 13:57:47 2020 +1000
+
+    Create Character Assets
+
+commit 85dcee87362cc371afe424c6f88d6cc823dc4d7d
+Merge: 7550660 a62be74
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 18 12:48:02 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 7550660987902b1fc4e8dfef28cccd1dda62ac47
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 18 12:47:52 2020 +1000
+
+    Fixed soul + body storage mechanic
+
+commit a62be74c286adb74cd55d1028ea025adb2a50ce3
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Aug 18 12:01:49 2020 +1000
+
+    Created new interactable environment bp folder
+
+commit c23cad983fc140177d8fa370305583b8a36e7143
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Aug 18 11:56:58 2020 +1000
+
+    Removed Unnecessary Star System
+
+commit 4548f2246047b3a0b431bc2167147f05ab88f9e9
+Merge: f9524f6 f908d20
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Aug 18 11:55:21 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit f9524f6aa67b8a2268b7bb273b1aaad392c55f72
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Aug 18 11:55:04 2020 +1000
+
+    Set up Soul
+
+commit f908d20f4a8f1b035bcf70ad139dd04fb63be8ae
+Merge: 363e9de af72f92
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Tue Aug 18 11:54:42 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 363e9de6320fcb25079a40e2991a4bef1e4ca441
+Author: Luke-Kasper <56334726+Luke-Kasper@users.noreply.github.com>
+Date:   Tue Aug 18 11:54:18 2020 +1000
+
+    Finally have some stuff on luke map, changes to camera
+
+commit af72f92e7b009c443a29161d3bf9a3e69ef2bf45
+Merge: d8efddd 4b6d002
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 18 11:49:09 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit d8efdddabf9b056dc29d77983b06d1a80c80062a
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 18 11:48:53 2020 +1000
+
+    Deleted soul spawner class
+
+commit 4b6d002184e6d644c594b627b0c934532edfd867
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Aug 18 11:44:24 2020 +1000
+
+    Added Scene Transitions
+
+commit 1e9f787c0eaf4b4ae71c2b5a6ec478cec9d0223b
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 18 11:43:53 2020 +1000
+
+    Finished soul mechanic (untested)
+
+commit 6e54f1c3ddf7751bb3d3f040e0ce84ea5067f038
+Merge: df9ff8d d3d954b
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 18 10:39:57 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit df9ff8d47cc87a603047252ece929fbf3ec0e36b
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 18 10:39:51 2020 +1000
+
+    WIP Soul mechanic
+
+commit d3d954b6ccf5be2418a68ce682889493067a5753
+Merge: 4c79be2 fb683f9
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Aug 18 10:35:13 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 4c79be25c0d5725e095155f1521dd3ac7b28f2c9
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Aug 18 10:35:07 2020 +1000
+
+    bull UV updated
+
+commit fb683f99d544f94dbcac8620228d98c2240df84e
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Aug 18 10:30:45 2020 +1000
+
+    Fixed materials and added dove with its parts (unscaled)
+
+commit b8be42112fd79d239ca30390706914e23ed3245c
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Aug 18 09:54:55 2020 +1000
+
+    Imported snake and fish with small bodypart versions
+
+commit 070df3ea3eaa37af6c849247b49e0595725bd706
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Aug 18 09:19:41 2020 +1000
+
+    updated bull necc
+
+commit 9ebcc7999dc5758bf81918177a331b4c6a05cb1f
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Aug 18 09:14:20 2020 +1000
+
+    Fix Ass & Disass BPs & SMs
+
+commit 9c05786e2af60dc11cbef6eefaa6decc462f7b40
+Merge: 4a08304 186a667
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 17 16:59:21 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 4a083045da059a5f3d7f1492736345fd3626b611
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 17 16:58:48 2020 +1000
+
+    WIP Soul functions
+
+commit 186a667fc8398bdb0049cf0250f18caac1344d56
+Merge: a490bc4 165010a
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 17 16:55:24 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit a490bc4331eb4e37afdad3c2b141c840937e7752
+Merge: 41557b2 c65c266
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 17 16:55:07 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 41557b23512da300d4672db6c6722c52861ca575
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 17 16:55:02 2020 +1000
+
+    Create SM_Bull.uasset
+
+commit 165010a5aedd02566e027020a046f35de98ba99a
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 17 16:54:59 2020 +1000
+
+    Delete Old Stairs
+
+commit c65c2664f5dc4fd4d2c426af46c2252e592e03bc
+Merge: 50ee74d 6a3eea4
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 17 16:52:05 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 50ee74dbe961a4facb6c08dc0cb15c7cb3adf11d
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 17 16:51:59 2020 +1000
+
+    Fixed BPs with new assets
+
+commit 6a3eea49f24f0ff9067af675d7981519ef092b2b
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Mon Aug 17 16:51:05 2020 +1000
+
+    Stairs
+
+commit 7d373e7cad4a26e2575565684226c7cd6e906e07
+Merge: 8f1be91 3da89ca
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 17 16:36:06 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 8f1be91b25fbe66cb4d380021f192047880378d9
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 17 16:36:01 2020 +1000
+
+    Character movement, names, fading, expressions implemented
+
+commit 3da89ca658348041724b755dbd33da49006ded96
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Mon Aug 17 15:43:38 2020 +1000
+
+    UI_Art
+
+commit 505a3f1d0fe437c333c0e33bfceb8863f80f26ff
+Merge: f9c40f4 bc4b4cf
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 17 14:41:19 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit f9c40f42407851203b732a44efee6cd18bdc2990
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 17 14:41:14 2020 +1000
+
+    New function: souls
+
+commit bc4b4cf41fccf951163d6989df68a94500555868
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Mon Aug 17 14:34:59 2020 +1000
+
+    Create SM_Stairs.fbx
+
+commit b87a67958b1b833a18e053421a476bf645f37d52
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 17 14:16:00 2020 +1000
+
+    Updated Cage.fbx
+
+commit aca7398d229ef49f3dab10190537f9631a978577
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 17 11:31:49 2020 +1000
+
+    updated Fishbowl
+
+commit 7bc2ea192b2f349e8e524616544e479e568df28e
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 17 10:39:50 2020 +1000
+
+    Update SM_Fishtank.uasset
+
+commit 63add582ebda7a2d0d0f83131f2eb15266d52f61
+Merge: b278b3e 88d0612
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 17 09:16:41 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit b278b3e62d74bcc0346c6965429e098ff3ecde04
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 17 09:06:50 2020 +1000
+
+    Ass and Disass Table uasset in
+
+commit 88d0612359b97ec606f8a349af257f2745a19a69
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sun Aug 16 22:22:17 2020 +1000
+
+    spacing in code
+
+commit d46ab8357428c6fe76bbb2006edaea1a025b7f61
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sun Aug 16 21:54:46 2020 +1000
+
+    Fixed a billion bugs
+
+commit 11985591a1807ee09af5a066b5b724548bde4871
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sun Aug 16 21:45:50 2020 +1000
+
+    Modified BP BodyPart Base
+
+commit f4d999317aaf13cd27a3b2a93a19f3e435e498d8
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sun Aug 16 18:03:26 2020 +1000
+
+    Menu & History for Dialogue
+
+commit 4419beccd40b154ce4ec7655f29ae7433ad42e81
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sun Aug 16 13:17:03 2020 +1000
+
+    Fix Assembly Table BP
+
+commit 1279bfdd2d2111bb992e1b723c22f472b310b899
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sat Aug 15 21:40:06 2020 +1000
+
+    Introduced variables to dialogue
+
+commit 63699be4aabad8cbf484ec30535a3a9b09f70233
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sat Aug 15 19:32:48 2020 +1000
+
+    Now using Rich Text
+
+commit 169254ec167743f46400cb9314405ebd0d5ccf34
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sat Aug 15 17:00:36 2020 +1000
+
+    Dialogue System with Widgets Integrated
+
+commit ad8941f51bb50d50cc51e4d75dcddc9593eb47aa
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sat Aug 15 13:24:33 2020 +1000
+
+    Using NotYet Dialogue Plugin
+
+commit 4ab2447774aa6b77da4ca8953cee0ac0356e262a
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Fri Aug 14 21:22:41 2020 +1000
+
+    Remove VN Framework Complete
+
+commit e98344b507e62885ace63d72f431c1e264df8772
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Fri Aug 14 21:18:12 2020 +1000
+
+    Remove VN Framework
+
+commit af863c40e367cc17f3f1f2fd28d00bf583e1c5b7
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Fri Aug 14 20:02:34 2020 +1000
+
+    Revert "Modify VN Framework to be used with our Main Character BP"
+    
+    This reverts commit 8a9c00165d2deb981344b622af5cd3e714ef5a43.
+
+commit 1f2fda1cd75d7fd73647f0e8d91e08f2ae17fa92
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Fri Aug 14 20:02:32 2020 +1000
+
+    Revert "Implemented Interaction with Objects in BP MainCharacter"
+    
+    This reverts commit f53218dc45efea588bf23ee73e3dddd17aa10558.
+
+commit 8906a55d09693319042f2bfc882c9e1e8ee78d1f
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Fri Aug 14 20:02:30 2020 +1000
+
+    Revert "Fixes to interaction"
+    
+    This reverts commit 323ed6624b076b15f357994e278173fb37c2d8e1.
+
+commit 323ed6624b076b15f357994e278173fb37c2d8e1
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Fri Aug 14 19:45:23 2020 +1000
+
+    Fixes to interaction
+
+commit f53218dc45efea588bf23ee73e3dddd17aa10558
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Fri Aug 14 00:57:35 2020 +1000
+
+    Implemented Interaction with Objects in BP MainCharacter
+
+commit 8a9c00165d2deb981344b622af5cd3e714ef5a43
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Thu Aug 13 23:44:31 2020 +1000
+
+    Modify VN Framework to be used with our Main Character BP
+
+commit 6aa55a7c511807d724947db645fe55c992f37d6b
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Aug 12 16:26:58 2020 +1000
+
+    More on disassembling parts
+
+commit 5cd25d1d9f41032b3520556e4cf5b721a562654e
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 12 16:20:53 2020 +1000
+
+    Fix Generate Overlap Event for BP
+
+commit bea6cd2f44639dc69a2bd6d2aaedb6afb20394d2
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 12 16:11:34 2020 +1000
+
+    Fixed BP Tags
+
+commit 1740a33b258c5b33de385566e6fe371c3abeea79
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 12 16:06:20 2020 +1000
+
+    More BP Fixes
+
+commit 9d4b4ac0255e7debd7d2a10d8eb441d85161132c
+Merge: 10c2281 14f139b
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 12 14:58:27 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 10c228189c0fe3072c37f81732492502225455b8
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 12 14:58:22 2020 +1000
+
+    Fixed BP Tags
+
+commit 14f139b0d7f7c571affb0cf283a14bbff40f8a83
+Author: xevionne <xevionart@gmail.com>
+Date:   Wed Aug 12 14:47:52 2020 +1000
+
+    Create SM_Disassembly_Table.uasset
+
+commit ff7325db0ca404905826af9dfdd6cfd2082ef76d
+Merge: 4a1dabd ab0b967
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 12 13:20:39 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 4a1dabdc46b78bd9aea6a5872907acd6a57bd780
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 12 13:20:31 2020 +1000
+
+    Integrated the VN Framework
+
+commit ab0b967c857e46d38fa33a5d8d808e6c4cf231c2
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Aug 12 12:57:15 2020 +1000
+
+    New feature: Disassembling (tested)
+
+commit fb4381b86b1de52ab0076f332311103049cc20af
+Merge: 09a42f3 cb52c3f
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Aug 12 12:41:04 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 09a42f36950a2c9d9542e8f3ce6efe4d6bdc313a
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Aug 12 12:40:51 2020 +1000
+
+    Minor changes
+
+commit cb52c3f689cf92256ab7a0a4633da42cef0df9a0
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 12 11:51:50 2020 +1000
+
+    Delete Starter Content and Reorganised Folder Structure
+
+commit 6d77eb647e86508a00899f690019b95d914c2d92
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Tue Aug 11 21:44:36 2020 +1000
+
+    Updated player shop UI
+
+commit 5500e04bc7528a7176eba8e1de933ec8a3154be7
+Merge: 13378f1 0ae48a3
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 11 16:56:44 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 13378f11eff0618b3afa0765c035f569805dd518
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 11 16:56:39 2020 +1000
+
+    Progress on disassembling table code
+
+commit 0ae48a3589ae68c529b329a35e467466a726324f
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Aug 11 16:25:34 2020 +1000
+
+    Created BodyPartBPs and FullBodyBPs, created Shop Widget
+
+commit daf892cc4846638480920c9d3c48c1462ad6bc9e
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 11 10:40:46 2020 +1000
+
+    Major fix: pickup issue (tested)
+    
+    Also created classes for body parts and full characters
+
+commit d16dd417c45af27857b99711c93739e256aecf38
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 10 22:58:13 2020 +1000
+
+    Minor progress
+
+commit 5a3284ddaa90c127180363a92a7034b327bec5a0
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 10 16:57:18 2020 +1000
+
+    Broken code
+
+commit 2eef996ac51e0473856094728611e6e148030cb7
+Merge: 55e22d0 3deb349
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 10 15:40:04 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 55e22d0f90c5c38dffa463657a3f0a1f57a590de
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 10 15:39:47 2020 +1000
+
+    Readjusted BPs
+
+commit 3deb349378bef12646b9d5216e5f01faccf33284
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 10 15:23:31 2020 +1000
+
+    Fixed wall texel density and UVs tiling with 512 p
+
+commit 31879e9aafa239980c64ff5c50360d387945f834
+Merge: 70fe8cb 869ca0f
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 10 15:01:48 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 70fe8cba941e1c1125c402307e80d23b3a152ea0
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 10 15:01:43 2020 +1000
+
+    testing wall texture sizes
+
+commit 869ca0f43d2fe776e9ad1042954d3b6f96ccd49a
+Merge: 89c4c55 56870f7
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 10 14:51:20 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 89c4c553dc24e953fdf06f7111ab246ae811536a
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 10 14:51:14 2020 +1000
+
+    Major fix: pickup snapping (tested)
+
+commit 7bb901100403c17d523261c1883d53ff31049a6b
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 10 14:45:16 2020 +1000
+
+    Walls finally finished
+
+commit 56870f71dfe62996228ca1de237790d4a50d8c5f
+Merge: 8c93323 557c75a
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 10 14:29:36 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 8c93323562a26beb851a1934d19f3b3163fc61dc
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 10 14:29:21 2020 +1000
+
+    DialogueSystemImplemented
+
+commit 557c75aa3d4ad74bedfec254d8630bc45fc0546d
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 10 13:50:05 2020 +1000
+
+    Updated wall fbx trying to rid of seams
+
+commit 1814fa00e1e3db0bd9f5542a247288c5187c28a8
+Merge: 0a50ebb 1b73290
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 10 12:37:55 2020 +1000
+
+    Merge branch 'feature' of https://github.com/KoRick95/SliceOfWife into feature
+
+commit 0a50ebb2f1652b9b44a94ff60fb6938fe9429f93
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 10 12:37:50 2020 +1000
+
+    Fixed walls!! We have Walls now!
+
+commit 1b7329081b139095478dbb538ee2a31c2ab0590a
+Merge: bffe7b4 316dc17
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 10 09:34:58 2020 +1000
+
+    Merge branch 'feature' into develop
+
+commit bffe7b432c52b268bb5737c41e64b99280fe91c8
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sun Aug 9 23:28:21 2020 +1000
+
+    Minor fix: charging
+
+commit 316dc17c3cd3b9555c05887b74c198f86eaca97d
+Author: eva-ko <eva.ko.878@gmail.com>
+Date:   Sun Aug 9 22:13:50 2020 +1000
+
+    Testing bp variant with 1 SK mesh and SM limbs
+
+commit dc95f1452dd22e041ea06a3ae5badaa8b4916b16
+Merge: 82a8176 75bb647
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Wed Aug 5 20:13:32 2020 +1000
+
+    Merge branch 'feature' into develop
+
+commit 75bb647798f195b0727ba04b2bc8c61ab0f1354f
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 5 16:04:16 2020 +1000
+
+    TestingChange
+
+commit 82a8176a17fb6fd5e9435647948f2e8d251ee6d8
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Wed Aug 5 15:18:42 2020 +1000
+
+    Mat adjust
+    
+    Minor adjustments to parquet
+
+commit 618fd23451fd2eecfb4f1c78b4dcfb66b9bd1115
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Wed Aug 5 12:03:43 2020 +1000
+
+    Reimported Polina's textures to right format and named them correctly, replaced her material
+
+commit f5163e3090741fdb0c28073ef88cff39385034a6
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Wed Aug 5 11:17:16 2020 +1000
+
+    Minor fixes to materials, added fish textures and new asset version
+    
+    Fixed bump offset issues, changed Normal Flatness param default to 0
+
+commit 137d1151ee1ed584fbfa022294fd2e8629766d6b
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Aug 5 10:33:47 2020 +1000
+
+    Build Submission Build
+
+commit 62649c792a374c9332e28c1a12d780eb78757de9
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Aug 4 16:56:38 2020 +1000
+
+    test
+
+commit c8b64d354f73ecb655b5acd6795a56b3eba48f0e
+Merge: ebc32fa c2b4840
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Aug 4 16:51:57 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit ebc32fa126018c7d694d2d2c95496bd0b46527a6
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Tue Aug 4 16:51:41 2020 +1000
+
+    Updated Tags
+
+commit c2b48407aea06a87b6ad03286ed2e1c9bcf519a7
+Merge: 4e3a80f ebaeee0
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Aug 4 14:08:11 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit 4e3a80fdc23c8f739b4f3fdb1f99c7505d393e81
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Aug 4 14:08:06 2020 +1000
+
+    testing walls
+
+commit ebaeee0395478825d0c0ade47ba0f2cc7f523ee5
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Aug 4 12:17:29 2020 +1000
+
+    Created hair master and emissive master mat
+
+commit ea1d1cc55d44541239283b05bdb1d0c3f179f011
+Merge: ef8c990 dd50cf1
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 4 12:06:18 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit ef8c99058a4a665d2f0daf11a43ecf6e624a9602
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Aug 4 12:06:12 2020 +1000
+
+    missing body error catch
+
+commit dd50cf13cce7e7517b1760eb659926953e12ad71
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Aug 4 10:46:15 2020 +1000
+
+    Modified master material and created transparent master mat
+
+commit 5bd8a84aa01dd07934023dc75dda6afa034a65b9
+Author: Luke Kasper <s191265@students.aie.edu.au>
+Date:   Tue Aug 4 09:10:19 2020 +1000
+
+    added cool floor texture
+
+commit 59d3671e172b0ed49e1a4aa340152fea638ff7b1
+Merge: 3de86a2 72e28f5
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 3 16:57:16 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit 3de86a249d3a7f7f1053213fbc8e50bdce91ab45
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 3 16:56:35 2020 +1000
+
+    testing walls
+
+commit 72e28f583a84a9ff9aea761dc8a4215e2811eae8
+Merge: 7fc7a32 ec95741
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 3 16:52:31 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit 7fc7a321a1731999101e9a1eff8d2aaf487ab01c
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 3 16:52:13 2020 +1000
+
+    slight code cleanup
+
+commit ec957417b58a282eefa2d80e3645c6651b7480a2
+Merge: 8f6b5e8 12afa8a
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 3 16:52:02 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit 8f6b5e85f1532df68170710db1cef80bcf79256b
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 3 16:51:57 2020 +1000
+
+    Added Star System
+
+commit c098af7b21814c0de74164d4f9470ef955aa7c47
+Merge: af5a4df 12afa8a
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 3 16:50:47 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit af5a4df3f9f14ec8ee4839e3bc8d5b90c139667e
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 3 16:50:36 2020 +1000
+
+    Player can drop body to disassembling table
+    
+    Untested
+
+commit 12afa8a9dbba9cffb6ec0f027b133fc4ec0f397d
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Aug 3 16:33:49 2020 +1000
+
+    zoinked a dupe of Ricks map hoho
+
+commit df6e6edab24c3dab55f1d42e03ab0613aa7edda2
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 3 14:47:53 2020 +1000
+
+    Created BodyStorage BP & Functional
+
+commit cd8e18c112d80b1ef6482c5344d099687b3d32f1
+Merge: 016b20a 5819432
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 3 13:59:57 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit 016b20a4845061e744758ce423656bf53552b52e
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 3 13:39:05 2020 +1000
+
+    Created body storage class + basic functionalities
+
+commit 5819432d122a44f99de22e977cf44be734a79891
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 3 13:37:39 2020 +1000
+
+    Update RickMap
+
+commit 97bfa29e075eea8993a2f4cac0b5fd182a29dd40
+Merge: 86c45dd f95140e
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 3 10:34:34 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit 86c45dd3890aa0caa59d84cdfb94579195415ae2
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Aug 3 10:34:12 2020 +1000
+
+    remove object from table fix
+
+commit f95140e00f184b7bea96dcfddb0b467e075ccc62
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 3 10:29:53 2020 +1000
+
+    Update Regen SLN Txt
+
+commit 91c74d1e88ac64fa5b675a5740d50db7d6d4c3ce
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 3 09:23:35 2020 +1000
+
+    Update Regen SLN Txt
+
+commit 3ff071baba49b33974dc88a4b22997c214bfc880
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Mon Aug 3 09:20:55 2020 +1000
+
+    RegenSolutionFileTxt
+
+commit bcee2e1d4484522e69b9d7841d979d96cea22cd3
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sun Aug 2 23:00:53 2020 +1000
+
+    table detects items being removed from table (untested)
+
+commit ec2db64205ca2708be63f3d303d975c6b4d6bb95
+Merge: a3acfe2 f181827
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sun Aug 2 20:18:19 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit a3acfe266d7a9491a419b40506ae307b4847b666
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sun Aug 2 20:17:35 2020 +1000
+
+    Rick Level testing update
+
+commit f18182781f95263e8f518a7d7a77f403e22a536a
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sun Aug 2 20:16:44 2020 +1000
+
+    array runtime error fix
+
+commit ea9ab1597da7aba2c294e4b1db073804d16546af
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sun Aug 2 19:46:40 2020 +1000
+
+    handles existing body parts when dropped to table (untested)
+
+commit d55853605b1e4085378472823d859727f6aea8a4
+Merge: ed4d3e7 a26cce6
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sun Aug 2 17:41:40 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit ed4d3e7d31245061b32be9ac6de7f01d950f987f
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sun Aug 2 17:40:50 2020 +1000
+
+    destroy body parts after animating
+
+commit a26cce6b3c7d5859310cbe0894d8cd0c80a2a468
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sun Aug 2 16:37:28 2020 +1000
+
+    Fix Part Placements and BPs to Skeletal Meshes
+
+commit e00f168068b8813b3c8ce96460734cfffca7647e
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sun Aug 2 13:30:36 2020 +1000
+
+    Basic camera controls added (tested)
+
+commit 184b855f6db2f36fc2ea7faf9dd77399bb30fe1d
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sun Aug 2 01:49:55 2020 +1000
+
+    Update RickMap
+
+commit 4714b5b447fe818321e339e55ebfa0a78af0ca6c
+Merge: e896f6f 2033230
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sat Aug 1 22:52:11 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit e896f6fca3dbbb1645f949b650b4d008fd732f42
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sat Aug 1 22:50:54 2020 +1000
+
+    animate function fix
+
+commit 203323096daacd9d6aa4deb3a8a70dbe47530ae2
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sat Aug 1 22:45:38 2020 +1000
+
+    Fix Folders & Made Mermaid BP
+
+commit 47c60831a8164752dd085ae151bf1d37796dd271
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sat Aug 1 22:03:55 2020 +1000
+
+    Improved code slightly
+
+commit 902c21bc684f16ac12c4e638a7be17ce5f4dd842
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sat Aug 1 20:40:48 2020 +1000
+
+    PLaceholder animate function added (untested)
+
+commit 6c9577f264a7c6512cc5ae05429f2af01f6f0fbf
+Author: eva-ko <eva.ko.878@gmail.com>
+Date:   Wed Jul 29 22:34:38 2020 +1000
+
+    Renaming mat instances
+
+commit d49ecf28657162d0fb4c8431eeab3415c337edd9
+Merge: 9c6d72d b110005
+Author: eva-ko <eva.ko.878@gmail.com>
+Date:   Wed Jul 29 22:32:47 2020 +1000
+
+    Merge branch 'MatOrganisation'
+
+commit b1100057dbdbc0be4794cfbfa6b519644bf6a0c8
+Author: eva-ko <eva.ko.878@gmail.com>
+Date:   Wed Jul 29 22:32:06 2020 +1000
+
+    Reorganised materials
+    
+    Stop importing materials from Maya and create material instances from the master material please :( its much more efficient and clean tyty
+
+commit 9c6d72d2cc55f6b1d4c2934561485265459cd466
+Merge: efe95cb f78e00a
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Jul 29 16:49:53 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit efe95cb18186e489efe338679653906f955fdce7
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Jul 29 16:49:21 2020 +1000
+
+    Made fix attempt on snapping
+
+commit f78e00a520d000c360a47d4fc9edf8bf261b1fe1
+Merge: 54de80f d59eef4
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Jul 29 16:34:29 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit 54de80f0745be120eb8336139592e1fe0a7306f8
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Jul 29 16:34:13 2020 +1000
+
+    Update Assembly Table BP
+
+commit d59eef4e4efa5e9d79c6d22b66ee54cfcd572505
+Merge: 8c06c51 b55a32e
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Jul 29 16:33:27 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit 8c06c519aa322c4eab77bde8bdeee34056be3e04
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Jul 29 16:32:16 2020 +1000
+
+    Fix for snapping objects
+
+commit b55a32eb0a24958ee4b25c3ffbe8afb64cf07410
+Merge: cc904e3 96b6fc9
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Jul 29 15:39:49 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit cc904e3e8922984a8a271db26ad422ff7abd384f
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Jul 29 15:39:44 2020 +1000
+
+    Updated Assembly Table BP
+
+commit 96b6fc937e2bc8dd5baec761b18a00f810ef24ba
+Merge: b004104 8200fc6
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Jul 29 15:39:00 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit b004104f41d7d2af43fa1bd00021e8e9471b20ab
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Jul 29 15:38:47 2020 +1000
+
+    Disabled collision during pick up
+
+commit 8200fc637052e27b8eb4c3a21a4b40f6d2b6a6cc
+Merge: bf0c2b5 24fcf79
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Jul 29 15:02:35 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit bf0c2b585f2b48ad2f31eae438a94242fa3cb075
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Jul 29 15:02:30 2020 +1000
+
+    Updated RickMap
+
+commit 24fcf79bc60fe0fc48820c91bec132dff41b5a6a
+Merge: 72b5812 d23a6f6
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Jul 29 15:00:58 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit 72b5812e649064738e44dff96febd32574c9be0a
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Jul 29 15:00:30 2020 +1000
+
+    Fixed compile error + made assembling table c++ class
+
+commit d23a6f6be41449cd9c639d9c1cb057254941bcaf
+Merge: 9190651 44aa552
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Jul 29 14:52:48 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit 919065100dda199310f1eee82e4e7f4837a6b445
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Jul 29 14:52:27 2020 +1000
+
+    Updated all tags and BP more limbs
+
+commit 44aa552eca5ab3ba24681fe8ef8c11df904bd5c9
+Merge: e756977 21cac7f
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Jul 29 14:50:49 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit e7569774baa385826395334787848ddbefb0ee52
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Jul 29 14:50:06 2020 +1000
+
+    Dropping to assembling table finished (untested)
+
+commit 21cac7fc3e1e5b10304fa924e332ce7930a94dff
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Jul 29 13:42:10 2020 +1000
+
+    Created Pickups Fish & HumanF
+
+commit 11c18832af38fde5bf79a720074f4306d72815b2
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Jul 29 13:05:57 2020 +1000
+
+    BP for Disassembly Table
+
+commit 80f9df876c03858795b4f9d561093a3b4de05d1e
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Jul 29 12:26:30 2020 +1000
+
+    Made disassembling table class
+
+commit d736c8e246c06d74dc05e8ffa8143ad06872f298
+Author: Twillij <silentwill29@gmail.com>
+Date:   Wed Jul 29 11:07:35 2020 +1000
+
+    Dropping works w/ simple test
+
+commit e66b638e9a2cd32892b9526c73eb146cf51ed357
+Merge: 2c938cb 1920977
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Tue Jul 28 16:54:18 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit 2c938cb14f22d1e627e888fe16edbec9ca16b7cf
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Tue Jul 28 16:54:03 2020 +1000
+
+    Updated RickMap
+
+commit 1920977dc9df0c3ea9d388bc831766a5b1642974
+Merge: 16ea860 52bebfb
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Jul 28 16:52:49 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit 16ea860daf086ebe196be283dbfb76df7caa8687
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Jul 28 16:51:44 2020 +1000
+
+    Pickup works finally
+
+commit 52bebfb46e02943fce1e1798d14d858db7db57ab
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Jul 28 15:57:48 2020 +1000
+
+    Added Fishtank, testing particles
+
+commit 05fbbdff985d6e06364ce47505b65de67d9633ba
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Tue Jul 28 15:33:09 2020 +1000
+
+    UpdateHUD
+
+commit 6b8a0b3e19b10f2560dedc5b7d3fa8a613ab4df4
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Jul 28 15:29:26 2020 +1000
+
+    Reimported man skeletal limbs, added blueprint for man
+    
+    8 to play as man in my level,
+    R to toggle visibiliy of base sk mesh/limbs
+
+commit 22ec1638827e3fb9505744289b84deba98992e09
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Jul 28 15:17:32 2020 +1000
+
+    Added man limbs and skeletal meshes
+
+commit 53e029264e06d2db9bf21cca2f26d7bcac0e54c4
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Jul 28 14:41:49 2020 +1000
+
+    Fucked up
+
+commit 3df7a4f70d392d0db958943e0d47e6784d540c82
+Merge: 96f3315 dd5a6fd
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Jul 28 12:32:04 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit 96f3315cfb03c1d2593fb71f9e6fee87dfc13b17
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Jul 28 12:31:45 2020 +1000
+
+    Built the C++ from last changes
+
+commit dd5a6fdfe46c3453907948f89dca0cebf53d23e1
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Tue Jul 28 12:31:40 2020 +1000
+
+    Created Pickup
+
+commit f3330317e204e767366fa6ae265953546a3f0b94
+Merge: 4a2f34a 5633383
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Jul 28 12:30:06 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit 4a2f34aeb2971a6365fc9bbcd2a323d08d6e8da2
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Jul 28 12:30:00 2020 +1000
+
+    Picking up ready for testing
+
+commit 563338305a6e10059d5faa4696dad18314dc4bfd
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Jul 28 12:15:39 2020 +1000
+
+    Imported SM versions of woman limbs
+
+commit 37361e0520afdf30d8f9000c9c330cf04eeae43a
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Jul 28 12:05:26 2020 +1000
+
+    Added whole fish
+    
+    Still need to add woman body part static meshes
+
+commit c65b37253e8e3695ef706d55fa11449fff51b7c9
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Jul 28 11:56:16 2020 +1000
+
+    Saving skeletal meshes and my map
+    
+    Woman's skeletal meshes
+
+commit 84427266bac112b2264ded996c2f7ebe776047ad
+Merge: 564c4e0 1d39597
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Jul 28 11:53:25 2020 +1000
+
+    Merge branch 'MasterPoseComponent_Test'
+
+commit 1d39597f62133dcc38b23ab348121fef7170142c
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Jul 28 11:52:51 2020 +1000
+
+    Got woman's animations working (master pose component doesn't work for this...)
+
+commit fdf10e7e2cbe5eae1ee0f89b42b9c2625549c14d
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Jul 28 11:46:10 2020 +1000
+
+    Woman implemented
+    
+    Press 7 to play as her
+    Q to toggle visibility of fish tail and legs,
+    E to toggle visibility of mesh and limbs
+
+commit 564c4e08fd2eb94ef2144ef487225634ae102152
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Tue Jul 28 11:34:33 2020 +1000
+
+    FixedRotationOfMainCharThingo
+
+commit b1cf5aafecb2f57d47ed2dd3938a8adf670a74d8
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Tue Jul 28 11:27:11 2020 +1000
+
+    Organised limbs folder, added woman, created woman blueprint
+
+commit 51240ad299c01af34d40031a32e9697556e9813b
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Tue Jul 28 11:04:16 2020 +1000
+
+    Changes On BP mainChar
+
+commit f4e5a11562212bf37b031cb07bb6f2f1c8a94390
+Merge: b5c09b0 1682732
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Tue Jul 28 10:43:00 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit b5c09b01d38cad91ca32897433230f698b5950c9
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Tue Jul 28 10:42:48 2020 +1000
+
+    Changed Map
+
+commit 16827326ce90057daa8bcfb4bff36d9f8b54bf1d
+Merge: a1ce171 51d6b86
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Jul 28 10:41:54 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit a1ce171da06dda69a9ce93fdb9d09e9dbb8fa3b3
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Jul 28 10:41:49 2020 +1000
+
+    Push fixes
+
+commit 51d6b86ac1699bd68a6e38d1e85a63953a4e7c21
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Jul 28 10:03:06 2020 +1000
+
+    Create SM_Crafting.fbx
+
+commit 5065c3f279ee28836cb6ddd7776c3b36d0773aee
+Merge: fd44e1f d75f050
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Jul 28 09:36:58 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit fd44e1fd9f2b41b81fb259b28f3e0b418f2d2111
+Author: xevionne <xevionart@gmail.com>
+Date:   Tue Jul 28 09:36:44 2020 +1000
+
+    Create SM_SecondFloor.fbx
+
+commit d75f050f617a6c36174064e7357892de77c3fac7
+Merge: bf9ec91 a3027be
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Jul 28 09:34:34 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit bf9ec91a49bae485929d72a3291a7c711018b67c
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Jul 28 09:34:09 2020 +1000
+
+    Fixing commits
+
+commit a3027be54c74570ef0aba5acef5f33d496788334
+Merge: 63df5f7 f1b30b8
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Tue Jul 28 09:32:32 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit 63df5f78ebb381c2ab3fd2fa261eaccf872fdb7b
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Tue Jul 28 09:32:19 2020 +1000
+
+    Update Rickmap
+
+commit e835c94c9f30e2066dbec785ce1307319a1388b3
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Jul 28 09:32:04 2020 +1000
+
+    Jumping works
+
+commit f1b30b8a040fdcbd41c0553e71e0f5617d600f7d
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Tue Jul 28 09:27:47 2020 +1000
+
+    Create table.fbx
+
+commit 4deea35825fc193f9592a5a5dc619954c4a06356
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Tue Jul 28 09:24:05 2020 +1000
+
+    Revert "Update RickMap"
+    
+    This reverts commit dcd88509355d395ec5b3b6af13525528521f5566.
+
+commit 6cd2f47ddaca827b470901c78507531151eb6c4e
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Tue Jul 28 09:23:14 2020 +1000
+
+    Revert "Merge branch 'master' of https://github.com/KoRick95/SliceOfWife"
+    
+    This reverts commit 25dcb5ccc217cf7d96c4c1751b45aa8cd533a1e9, reversing
+    changes made to dcd88509355d395ec5b3b6af13525528521f5566.
+
+commit 25dcb5ccc217cf7d96c4c1751b45aa8cd533a1e9
+Merge: dcd8850 a0b4511
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Tue Jul 28 09:20:23 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit dcd88509355d395ec5b3b6af13525528521f5566
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Tue Jul 28 09:20:19 2020 +1000
+
+    Update RickMap
+
+commit a0b4511bab230411b9483adc536846653fc477f5
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Tue Jul 28 09:17:33 2020 +1000
+
+    Create table.fbx
+
+commit 55c272eba9177eb6fa84ee0456161c06769eede0
+Merge: a06a0b5 f5f194f
+Author: Twillij <silentwill29@gmail.com>
+Date:   Tue Jul 28 09:15:47 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit f5f194f39342fb528a4787a71e80cc34dbd498ea
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Mon Jul 27 19:54:17 2020 +1000
+
+    Changed RickMap
+
+commit a06a0b5149a675de68a819f33a1f2700fe1e19b4
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Jul 27 16:55:25 2020 +1000
+
+    More changes...
+
+commit 4f960f2914472e27933c577a39c6082282ababd9
+Merge: f5278ab 5d782bd
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Mon Jul 27 16:55:01 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit f5278abde6e9058e4616217f19a46737b37851d5
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Mon Jul 27 16:54:56 2020 +1000
+
+    Updated Player HUD
+
+commit 5d782bdae13f8fdcc0347c9a8b08abadb8e43117
+Merge: 16a3656 6a8798d
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Jul 27 16:53:21 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit 16a3656fa2d357fc57828a86fb1250cbf8e316f8
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Jul 27 16:53:06 2020 +1000
+
+    Made changes to character C++
+
+commit 6a8798d46d60e722971785abfbbb2d3f7b9eb53e
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Jul 27 16:30:35 2020 +1000
+
+    Create SM_Walls.fbx
+
+commit 85f53df28ad76b1f0d335ec86a7c01f32b9f8c54
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Jul 27 16:25:19 2020 +1000
+
+    Create SM_Floor.fbx
+
+commit bc129512ee187058da561d9b089d915cb9a8179a
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Mon Jul 27 14:36:18 2020 +1000
+
+    Testing fish tail version
+    
+    Duplicated my SK mesh test alien blueprint to create a fish tail version, adjusted level blueprint so that when you press 6 you can play as the fish tail version
+
+commit 8ffa256419f39b5f12fe2c2b3d801e8cb936d7bf
+Merge: 38bda0e 21779b5
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Mon Jul 27 13:55:21 2020 +1000
+
+    Merge branch 'Socketing_Tests'
+
+commit 21779b5ea2a95d97fba435a5e87a2192c21dfd22
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Mon Jul 27 13:54:59 2020 +1000
+
+    Fixed weird overwritten changes to sm blueprint
+
+commit 38bda0e8ad395b47b076d552ec0943affaf70806
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Mon Jul 27 13:37:06 2020 +1000
+
+    Create Stairs.fbx
+
+commit ea1a9d081c246d791d1dcacfbc5c670e58246569
+Author: PollyFrancini <66928844+PollyFrancini@users.noreply.github.com>
+Date:   Mon Jul 27 13:36:38 2020 +1000
+
+    Delete SM_RoomTemplate.fbx
+
+commit 3410db4babbefd71bb53bf09b91253aa2f0ba376
+Merge: 5877da1 4787630
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Jul 27 13:35:10 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit 5877da1c82fe69c5811c5ad99522ad6170fe93be
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Jul 27 13:33:49 2020 +1000
+
+    Create SM_Cage.fbx
+
+commit 6d3847803298e7ab9c46ffd67241c26e515f6b42
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Mon Jul 27 12:40:16 2020 +1000
+
+    Replaced character test blueprints with version from older commit
+    
+    Was overwritten from me merging master into my branch >:(
+
+commit b4a21a267491022e276b40b9a068a6661cfcf263
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Mon Jul 27 11:57:05 2020 +1000
+
+    Added fish and fish tail skeletal mesh
+
+commit 4787630096a69e746e83fad8e31eb4db0cf943dd
+Merge: ac50e6d 7b10674
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Jul 27 11:43:11 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit ac50e6d85dadb86338bbaf6e0cc50bc74865eb9a
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Jul 27 11:43:03 2020 +1000
+
+    Movement input working
+
+commit 7b10674a395050e7fda8c152568f9fc021730794
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Jul 27 10:41:10 2020 +1000
+
+    Update SM_Saw.fbx
+
+commit 13f66dc85d60d250be059cebd75c5c646da87408
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Jul 27 10:33:06 2020 +1000
+
+    Updated Scale
+
+commit c37409916828ecd6692d90421f45295f886dc019
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Mon Jul 27 10:28:04 2020 +1000
+
+    minor changes (import saw)
+
+commit ea208192adb924f3438ff588fad4ccc58fa55b7d
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Jul 27 10:23:35 2020 +1000
+
+    Create SM_RoomTemplate.fbx
+
+commit 9785ef4d8514f94af9467582f0bb396653da466d
+Merge: 99b9c02 c39cf88
+Author: Eva Ko <eva.ko.878@gmail.com>
+Date:   Mon Jul 27 10:20:15 2020 +1000
+
+    Merge branch 'master' into Socketing_Tests
+
+commit a583f786cfc5e8ae9f058ee8dc14f6992f893255
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Jul 27 10:14:06 2020 +1000
+
+    Update SM_Saw.fbx
+
+commit c39cf8805bb1c938f1e0385856a96062be187412
+Author: xevionne <xevionart@gmail.com>
+Date:   Mon Jul 27 09:02:49 2020 +1000
+
+    Create SM_Saw.fbx
+
+commit 4d20c8c4d865f915af243e48fad6efd6f24faf28
+Author: Twillij <silentwill29@gmail.com>
+Date:   Mon Jul 27 07:57:29 2020 +1000
+
+    Just testing stuff
+
+commit 99b9c0204b64cfc06f3bba2f9e2d572e2ebfc5f7
+Author: eva-ko <eva.ko.878@gmail.com>
+Date:   Sun Jul 26 22:50:32 2020 +1000
+
+    Changed import settings for SK limb meshes
+    
+    Compute normals changed to import tangents and normals
+
+commit b0e134440d95f71637155f7022e457c423572596
+Author: eva-ko <eva.ko.878@gmail.com>
+Date:   Sun Jul 26 20:25:37 2020 +1000
+
+    Changed separated alien skeletal mesh import setting
+    
+    Compute normals vs. import normals (compute normals led to all hard edges)
+    Map change was adding in another skeletal mesh
+
+commit a4a402495a576d10465f06bdd02c0a519fc138cc
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sat Jul 25 16:38:41 2020 +1000
+
+    Revert "Revert "Created Timer UI""
+    
+    This reverts commit 57a90500ff37f683467b34dac517b612af25c1f4.
+
+commit 57a90500ff37f683467b34dac517b612af25c1f4
+Author: Twillij <silentwill29@gmail.com>
+Date:   Sat Jul 25 16:38:26 2020 +1000
+
+    Revert "Created Timer UI"
+    
+    This reverts commit 5b6e15bddf3499d37fac7a9ae16890147135b2ba.
+
+commit 607c254332974619d0bf99b3dde5e8b25759a4de
+Author: eva-ko <eva.ko.878@gmail.com>
+Date:   Sat Jul 25 16:28:37 2020 +1000
+
+    Testing of skeletal mesh limbs vs. static meshes
+    
+    Added segmented version of whole skeleton body, added skeletal mesh versions of limbs, duplicated and modified blueprint for static meshes (wasn't bothered to completely fix the orientations though)
+
+commit ed21b3b69b1e744e0d13ce51150f04cb1dcc96f8
+Merge: 9482dc3 5b6e15b
+Author: eva-ko <eva.ko.878@gmail.com>
+Date:   Sat Jul 25 14:34:23 2020 +1000
+
+    Merge branch 'master' into Socketing_Tests
+
+commit 5b6e15bddf3499d37fac7a9ae16890147135b2ba
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sat Jul 25 02:55:41 2020 +1000
+
+    Created Timer UI
+
+commit dd9d9bf903d78c4b0445a43a670cb07f772fde5a
+Merge: a8b4f27 9482dc3
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sat Jul 25 01:38:04 2020 +1000
+
+    Merge branch 'master' of https://github.com/KoRick95/SliceOfWife
+
+commit a8b4f273a06068b397265e6e9630cd94a417045f
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Sat Jul 25 01:37:31 2020 +1000
+
+    Created Player HUD
+
+commit 9482dc3dba48631f2ae904cca851d21b8a3df879
+Author: eva-ko <eva.ko.878@gmail.com>
+Date:   Fri Jul 24 18:26:26 2020 +1000
+
+    Added dodgy walk animation for testing, added UV master material function and added a master material
+
+commit aeb06a92857b16c113b65b5df4e25fce4d9bec90
+Merge: 1139fc3 715f528
+Author: eva-ko <eva.ko.878@gmail.com>
+Date:   Fri Jul 24 16:07:35 2020 +1000
+
+    Merge branch 'master' into Socketing_Tests
+
+commit 715f5288936063da176d1ed57a40ced91a3c5327
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Fri Jul 24 16:01:07 2020 +1000
+
+    Fix Map Folder Placement
+
+commit 0ccfaebdad6d168feb1f3c1751c42b43ed800aa9
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Fri Jul 24 14:56:14 2020 +1000
+
+    Added git lfs
+
+commit 7d67dd465a0b29628c01f7a21750098517ef342d
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Fri Jul 24 14:31:40 2020 +1000
+
+    Reorganisation of Folder Structure
+
+commit 1139fc35c8943920da81283cb251c6ef4a6d4df1
+Author: eva-ko <eva.ko.878@gmail.com>
+Date:   Thu Jul 23 18:56:26 2020 +1000
+
+    Duplicated the 3rd person blueprint to make my own test version and reverted changes to the original 3rd person bp,
+    added to level blueprint so that 1 and 2 switch between UEman and test alien,
+    and added functionality in my test 3rd person bp to toggle visibility on the base skeletal mesh by pressing 3 (default spawns invisible, with limbs visible)
+
+commit aded3757b45fe6a46ef5e9b521ab9bf4e5ed477c
+Author: eva-ko <eva.ko.878@gmail.com>
+Date:   Thu Jul 23 18:07:00 2020 +1000
+
+    Test limbs
+
+commit 497c8d44bd3d4aaa12fc5c1dc2e289d1eee40cf5
+Author: eva-ko <eva.ko.878@gmail.com>
+Date:   Thu Jul 23 14:05:36 2020 +1000
+
+    Added test alien skeleton and sockets.
+    Still trying to figure out how to disable rendering of the skeletal mesh in some sort of way that is efficient
+
+commit 040e5b047227e2c9f44836ed7650e1d796e88408
+Author: eva-ko <eva.ko.878@gmail.com>
+Date:   Thu Jul 23 12:26:45 2020 +1000
+
+    Added BP sky, sky light and scale reference alien to my map
+
+commit d70b06dfb6449e1b964fcc423fedd8b957fea7ef
+Author: koshifu <52692335+koshifu@users.noreply.github.com>
+Date:   Wed Jul 22 16:44:44 2020 +1000
+
+    InitialProject
+
+commit 6dbf522d5aee633d4cd6db319a538fd2065bfd34
+Author: KoRick95 <67566385+KoRick95@users.noreply.github.com>
+Date:   Wed Jul 22 12:11:32 2020 +1000
+
+    Initial commit
