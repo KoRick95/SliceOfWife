@@ -256,17 +256,3 @@ void AAssemblingTable::AssembleBodyPart(ABodyPart* bodyPart)
 
 	FinalBody->AttachBodyPart(bodyPart);
 }
-
-bool AAssemblingTable::AnimateBody()
-{
-	if (FinalBody == nullptr)
-	{
-		return false;
-	}
-
-	FinalBody->SetActorRelativeLocation(SpawnOffset);
-	FinalBody->SetActorRelativeRotation(SpawnRotation);
-	DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-
-	return false;
-}
