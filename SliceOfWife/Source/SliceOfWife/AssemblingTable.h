@@ -35,6 +35,12 @@ public:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class UMinigameWidget> MinigameWidget;
 
+	UPROPERTY(EditAnywhere)
+	FVector SpawnOffset = { 0, 0, 150 };
+
+	UPROPERTY(EditAnywhere)
+	FRotator SpawnRotation = { 0, 0, 0 };
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -50,4 +56,6 @@ public:
 	bool BeginSewing(AAssemblingSpot* spot);
 
 	void AssembleBodyPart(ABodyPart* bodyPart);
+
+	bool AnimateBody();
 };
