@@ -40,7 +40,7 @@ void ASoul::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (IsValid(possession))
+	if (!IsValid(possession))
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, FString::Printf(TEXT("A soul lost its possession.")));
 		this->Destroy();
