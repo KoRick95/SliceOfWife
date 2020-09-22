@@ -15,7 +15,7 @@ public:
 	// Sets default values for this actor's properties
 	ASoul();
 
-	AActor* hauntedObject;
+	AActor* possession;
 
 	FVector direction;
 
