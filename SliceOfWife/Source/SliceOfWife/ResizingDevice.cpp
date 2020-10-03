@@ -50,7 +50,7 @@ bool AResizingDevice::DropToDevice(AActor* object)
 
 bool AResizingDevice::RemoveFromDevice()
 {
-	if (objectOnDevice != nullptr)
+	if (objectOnDevice == nullptr)
 		return false;
 
 	objectOnDevice->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
