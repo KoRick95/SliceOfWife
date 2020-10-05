@@ -15,7 +15,7 @@ public:
 	// Sets default values for this actor's properties
 	ADisassemblingTable();
 
-	class AFullBody* bodyOnTable = nullptr;
+	class ACreature* bodyOnTable = nullptr;
 
 	float charge = 0;
 

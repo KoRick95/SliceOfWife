@@ -3,7 +3,7 @@
 #include "RatingWidget.h"
 #include "BodyStorage.h"
 #include "AssemblingTable.h"
-#include "FullBody.h"
+#include "Creature.h"
 #include "EnumsStructs.h"
 #include "Engine/World.h"
 #include "Kismet/GameplayStatics.h"
@@ -18,7 +18,7 @@ int URatingWidget::CalculateRating()
 int URatingWidget::CountPlayerCreatureVariation()
 {
 	AActor* assemblingTable = UGameplayStatics::GetActorOfClass(GetWorld(), AAssemblingTable::StaticClass());
-	AFullBody* playerCreature = Cast<AAssemblingTable>(assemblingTable)->FinalBody;
+	ACreature* playerCreature = Cast<AAssemblingTable>(assemblingTable)->FinalBody;
 
 	return playerCreature->CountCreatureTypeVariation();
 }

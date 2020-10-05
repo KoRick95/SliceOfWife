@@ -1,7 +1,7 @@
 #include "AssemblingTable.h"
 #include "AssemblingSpot.h"
 #include "BodyPart.h"
-#include "FullBody.h"
+#include "Creature.h"
 #include "MinigameWidget.h"
 #include "Blueprint/UserWidget.h"
 #include "Engine.h"
@@ -62,9 +62,9 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 				return false;
 		}
 	}
-	else if (object->IsA(AFullBody::StaticClass()))
+	else if (object->IsA(ACreature::StaticClass()))
 	{
-		AFullBody* body = Cast<AFullBody>(object);
+		ACreature* body = Cast<ACreature>(object);
 
 		if (body->CreatureType == ECreatureType::Custom)
 		{
@@ -247,9 +247,9 @@ void AAssemblingTable::AssembleBodyPart(ABodyPart* bodyPart)
 
 	if (FinalBody == nullptr)
 	{
-		AActor* emptyBody = GetWorld()->SpawnActor(AFullBody::StaticClass(), &SnapPosition, &SnapRotation);
+		AActor* emptyBody = GetWorld()->SpawnActor(ACreature::StaticClass(), &SnapPosition, &SnapRotation);
 		emptyBody->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
-		FinalBody = Cast<AFullBody>(emptyBody);
+		FinalBody = Cast<ACreature>(emptyBody);
 		FinalBody->CreatureType = ECreatureType::Custom;
 		FinalBody->AttachBodyPart(centralBodyPart);
 	}

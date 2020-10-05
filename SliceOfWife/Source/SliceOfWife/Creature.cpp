@@ -1,19 +1,19 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "FullBody.h"
+#include "Creature.h"
 #include "BodyPart.h"
 #include "Engine.h"
 #include "Engine/World.h"
 
 // Sets default values
-AFullBody::AFullBody()
+ACreature::ACreature()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = false;
+ 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = true;
 }
 
 // Called when the game starts or when spawned
-void AFullBody::BeginPlay()
+void ACreature::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -31,30 +31,30 @@ void AFullBody::BeginPlay()
 }
 
 // Called every frame
-void AFullBody::Tick(float DeltaTime)
+void ACreature::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
 
 // Called to bind functionality to input
-void AFullBody::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void ACreature::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
-int AFullBody::GetBodyPartsCount()
+int ACreature::GetBodyPartsCount()
 {
 	return bodyParts.Num();
 }
 
-void AFullBody::AttachBodyPart(ABodyPart* bodyPart)
+void ACreature::AttachBodyPart(ABodyPart* bodyPart)
 {
 	// attach the body part and add it to the array
-	bodyPart->AttachToBody(this);
+	//bodyPart->AttachToBody(this);
 	this->bodyParts.Add(bodyPart);
 }
 
-bool AFullBody::DetachBodyPart(ABodyPart* bodyPart)
+bool ACreature::DetachBodyPart(ABodyPart* bodyPart)
 {
 	// check if the body part is a part of this body
 	for (int i = 0; i < this->bodyParts.Num(); ++i)
@@ -71,7 +71,7 @@ bool AFullBody::DetachBodyPart(ABodyPart* bodyPart)
 	return false;
 }
 
-int AFullBody::CountCreatureTypeVariation()
+int ACreature::CountCreatureTypeVariation()
 {
 	TArray<ECreatureType> creatureTypes;
 

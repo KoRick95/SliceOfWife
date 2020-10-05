@@ -6,7 +6,7 @@
 #include "BodyPart.h"
 #include "BodyStorage.h"
 #include "DisassemblingTable.h"
-#include "FullBody.h"
+#include "Creature.h"
 #include "ResizingDevice.h"
 #include "Soul.h"
 #include "Camera/CameraComponent.h"
@@ -100,7 +100,7 @@ void AMainCharacter::PickUpAndDrop()
 			{
 				objectToHold = Cast<AResizingDevice>(nearbyObjects[i])->objectOnDevice;
 			}
-			else if (nearbyObjects[i]->IsA(AFullBody::StaticClass()))
+			else if (nearbyObjects[i]->IsA(ACreature::StaticClass()))
 			{
 				objectToHold = nearbyObjects[i];
 			}
@@ -214,9 +214,9 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(false);
 	}
 
-	if (objectToHold->IsA(AFullBody::StaticClass()))
+	if (objectToHold->IsA(ACreature::StaticClass()))
 	{
-		AFullBody* fullBody = Cast<AFullBody>(objectToHold);
+		ACreature* fullBody = Cast<ACreature>(objectToHold);
 
 		// attach the object to the player
 		fullBody->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
