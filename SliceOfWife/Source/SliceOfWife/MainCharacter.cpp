@@ -218,13 +218,11 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 	{
 		AFullBody* fullBody = Cast<AFullBody>(objectToHold);
 
-		float bodyHalfHeight = fullBody->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
-
 		// attach the object to the player
 		fullBody->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
 		// add offset to the object
-		fullBody->SetActorRelativeLocation(FVector(0, 0, bodyHalfHeight) + PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
+		fullBody->SetActorRelativeLocation(PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
 	}
 	else if (objectToHold->IsA(ABodyPart::StaticClass()))
 	{
