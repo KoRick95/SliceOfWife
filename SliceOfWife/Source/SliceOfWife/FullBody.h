@@ -8,7 +8,7 @@
 #include "FullBody.generated.h"
 
 UCLASS()
-class SLICEOFWIFE_API AFullBody : public APawn
+class SLICEOFWIFE_API AFullBody : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -37,5 +37,6 @@ public:
 	void AttachBodyPart(ABodyPart* bodyPart);
 	bool DetachBodyPart(ABodyPart* bodyPart);
 
+	UFUNCTION(BlueprintCallable)
 	int CountCreatureTypeVariation();
 };
