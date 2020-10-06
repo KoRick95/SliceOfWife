@@ -19,20 +19,23 @@ public:
 	class UCameraComponent* camera = nullptr;
 	AActor* heldObject = nullptr;
 
-	UPROPERTY(EditAnywhere)
-	float RotationSpeed = 100;
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
+	float MoveSpeed = 1;
 
-	UPROPERTY(EditAnywhere)
-	float DetectionRadius = 100;
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
+	float StrafeSpeed = 1;
 
-	UPROPERTY(EditAnywhere)
-	FVector PickupOffset = { 0, 0, 100 };
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
+	float CameraSensitivity = 3;
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "-90", ClampMax  = "0"))
 	float CameraVerticalMin = -65;
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0", ClampMax = "90"))
 	float CameraVerticalMax = 25;
+
+	UPROPERTY(EditAnywhere)
+	FVector PickupOffset = { 0, 0, 100 };
 
 protected:
 	// Called when the game starts or when spawned
