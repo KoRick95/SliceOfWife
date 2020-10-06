@@ -37,6 +37,13 @@ AMainCharacter::AMainCharacter()
 void AMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	camera = Cast<UCameraComponent>(this->GetComponentByClass(UCameraComponent::StaticClass()));
+
+	if (camera != nullptr)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Glorious success!")));
+	}
 }
 
 // Called every frame
@@ -53,6 +60,9 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMainCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMainCharacter::MoveRight);
 
+	//PlayerInputComponent->BindAxis("LookUp", this, &AMainCharacter::LookUp);
+	//PlayerInputComponent->BindAxis("LookRight", this, &AMainCharacter::LookRight);
+
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
@@ -60,22 +70,38 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &AMainCharacter::Interact);
 }
 
-void AMainCharacter::MoveForward(float Axis)
+void AMainCharacter::MoveForward(float axis)
 {
-	// Find out which way is "forward" and record that the player wants to move that way.
+	// Find out which way is "right" and record that the player wants to move that way.
 	FRotator Rotation = Controller->GetControlRotation();
 	FRotator YawRotation(0, Rotation.Yaw, 0);
 	FVector Direction = FRotationMatrix(YawRotation).GetScaledAxis(EAxis::X);
-	AddMovementInput(Direction, Axis);
+	AddMovementInput(Direction, axis);
+
+	//FVector direction = camera->GetForwardVector();
+	//FRotator rotation = camera->GetForwardVector().ToOrientationRotator();
+
+	//this->AddMovementInput(direction, axis);
+	//this->SetActorRotation(rotation);
 }
 
-void AMainCharacter::MoveRight(float Axis)
+void AMainCharacter::MoveRight(float axis)
 {
 	// Find out which way is "right" and record that the player wants to move that way.
 	FRotator Rotation = Controller->GetControlRotation();
 	FRotator YawRotation(0, Rotation.Yaw, 0);
 	FVector Direction = FRotationMatrix(YawRotation).GetScaledAxis(EAxis::Y);
-	AddMovementInput(Direction, Axis);
+	AddMovementInput(Direction, axis);
+}
+
+void AMainCharacter::LookUp(float axis)
+{
+
+}
+
+void AMainCharacter::LookRight(float axis)
+{
+
 }
 
 void AMainCharacter::PickUpAndDrop()
@@ -289,5 +315,5 @@ void AMainCharacter::Interact()
 
 void AMainCharacter::OnOverlapBegin(UPrimitiveComponent* OverLappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Overlapped.")));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Fucked.")));
 }

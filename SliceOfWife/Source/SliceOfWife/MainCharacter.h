@@ -15,16 +15,17 @@ public:
 	// Sets default values for this character's properties
 	AMainCharacter();
 
+	class UCameraComponent* camera = nullptr;
 	AActor* heldObject = nullptr;
 
-	UPROPERTY(EditAnywhere, Category = "Rotation")
+	UPROPERTY(EditAnywhere)
 	float RotationSpeed = 100;
 
-	UPROPERTY(EditAnywhere, Category = "Detection")
+	UPROPERTY(EditAnywhere)
 	float DetectionRadius = 100;
 
-	UPROPERTY(EditAnywhere, Category = "PickUp")
-	FVector PickupOffset = { 100, 0, 0 };
+	UPROPERTY(EditAnywhere)
+	FVector PickupOffset = { 0, 0, 100 };
 
 protected:
 	// Called when the game starts or when spawned
@@ -37,8 +38,10 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	void MoveForward(float Axis);
-	void MoveRight(float Axis);
+	void MoveForward(float axis);
+	void MoveRight(float axis);
+	void LookUp(float axis);
+	void LookRight(float axis);
 
 	void PickUpAndDrop();
 	bool HoldObject(AActor* objectToHold);
