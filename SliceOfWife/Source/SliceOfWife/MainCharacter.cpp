@@ -5,18 +5,18 @@
 #include "AssemblingSpot.h"
 #include "BodyPart.h"
 #include "BodyStorage.h"
-#include "DisassemblingTable.h"
 #include "Creature.h"
+#include "DisassemblingTable.h"
 #include "ResizingDevice.h"
 #include "Soul.h"
 #include "Camera/CameraComponent.h"
-#include "Components/SceneComponent.h"
-#include "Components/InputComponent.h"
-#include "Components/SphereComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/InputComponent.h"
+#include "Components/SceneComponent.h"
+#include "Components/SphereComponent.h"
 #include "Engine.h"
-#include "GameFramework/PlayerController.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
 
 // Sets default values
@@ -29,7 +29,7 @@ AMainCharacter::AMainCharacter()
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
 
-	GetCharacterMovement()->bOrientRotationToMovement = true;
+	//GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->RotationRate = FRotator(0, RotationSpeed, 0);
 }
 
@@ -38,9 +38,10 @@ void AMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	springArm = Cast<USpringArmComponent>(this->GetComponentByClass(USpringArmComponent::StaticClass()));
 	camera = Cast<UCameraComponent>(this->GetComponentByClass(UCameraComponent::StaticClass()));
 
-	if (camera != nullptr)
+	if (springArm != nullptr && camera != nullptr)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Glorious success!")));
 	}
@@ -60,8 +61,8 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMainCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMainCharacter::MoveRight);
 
-	//PlayerInputComponent->BindAxis("LookUp", this, &AMainCharacter::LookUp);
-	//PlayerInputComponent->BindAxis("LookRight", this, &AMainCharacter::LookRight);
+	PlayerInputComponent->BindAxis("LookUp", this, &AMainCharacter::LookUp);
+	PlayerInputComponent->BindAxis("LookRight", this, &AMainCharacter::LookRight);
 
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
@@ -96,12 +97,17 @@ void AMainCharacter::MoveRight(float axis)
 
 void AMainCharacter::LookUp(float axis)
 {
+	float pitch = springArm->GetComponentRotation().Pitch + axis;
 
+	if (pitch > CameraVerticalMin && pitch < CameraVerticalMax)
+	{
+		springArm->AddLocalRotation(FRotator(axis, 0, 0));
+	}
 }
 
 void AMainCharacter::LookRight(float axis)
 {
-
+	springArm->AddWorldRotation(FRotator(0, axis, 0));
 }
 
 void AMainCharacter::PickUpAndDrop()

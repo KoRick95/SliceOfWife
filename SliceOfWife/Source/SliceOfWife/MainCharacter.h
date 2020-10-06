@@ -15,6 +15,7 @@ public:
 	// Sets default values for this character's properties
 	AMainCharacter();
 
+	class USpringArmComponent* springArm = nullptr;
 	class UCameraComponent* camera = nullptr;
 	AActor* heldObject = nullptr;
 
@@ -26,6 +27,12 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	FVector PickupOffset = { 0, 0, 100 };
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "-90", ClampMax  = "0"))
+	float CameraVerticalMin = -65;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0", ClampMax = "90"))
+	float CameraVerticalMax = 25;
 
 protected:
 	// Called when the game starts or when spawned
