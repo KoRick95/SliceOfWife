@@ -1,5 +1,6 @@
 #include "BodyStorage.h"
 #include "Creature.h"
+#include "Engine.h"
 #include "Engine/World.h"
 
 // Sets default values
@@ -62,6 +63,7 @@ AActor* ABodyStorage::TakeBody()
 		UClass* uClass = Bodies[i].Get();
 		FTransform transform = Bodies[i].GetDefaultObject()->GetActorTransform();
 		FActorSpawnParameters spawnParams;
+		spawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
 		// spawn a new body and add it to the array
 		AActor* newBody = GetWorld()->SpawnActor(uClass, &transform, spawnParams);
