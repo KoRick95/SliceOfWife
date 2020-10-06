@@ -28,9 +28,6 @@ AMainCharacter::AMainCharacter()
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
-
-	//GetCharacterMovement()->bOrientRotationToMovement = true;
-	GetCharacterMovement()->RotationRate = FRotator(0, RotationSpeed, 0);
 }
 
 // Called when the game starts or when spawned
@@ -41,10 +38,13 @@ void AMainCharacter::BeginPlay()
 	springArm = Cast<USpringArmComponent>(this->GetComponentByClass(USpringArmComponent::StaticClass()));
 	camera = Cast<UCameraComponent>(this->GetComponentByClass(UCameraComponent::StaticClass()));
 
-	if (springArm != nullptr && camera != nullptr)
+	if (springArm == nullptr || camera == nullptr)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Glorious success!")));
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Player camera is not set up!")));
 	}
+
+	springArm->bUsePawnControlRotation = false;
+	springArm->SetAbsolute(false, true, false);
 }
 
 // Called every frame
@@ -73,41 +73,37 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void AMainCharacter::MoveForward(float axis)
 {
-	// Find out which way is "right" and record that the player wants to move that way.
-	FRotator Rotation = Controller->GetControlRotation();
-	FRotator YawRotation(0, Rotation.Yaw, 0);
-	FVector Direction = FRotationMatrix(YawRotation).GetScaledAxis(EAxis::X);
-	AddMovementInput(Direction, axis);
+	FVector direction = camera->GetForwardVector() * MoveSpeed;
+	direction.Z = 0;
+	FRotator rotation = camera->GetForwardVector().ToOrientationRotator();
+	rotation.Roll = 0;
+	rotation.Pitch = 0;
 
-	//FVector direction = camera->GetForwardVector();
-	//FRotator rotation = camera->GetForwardVector().ToOrientationRotator();
-
-	//this->AddMovementInput(direction, axis);
-	//this->SetActorRotation(rotation);
+	this->AddMovementInput(direction, axis);
+	this->SetActorRotation(rotation);
 }
 
 void AMainCharacter::MoveRight(float axis)
 {
-	// Find out which way is "right" and record that the player wants to move that way.
-	FRotator Rotation = Controller->GetControlRotation();
-	FRotator YawRotation(0, Rotation.Yaw, 0);
-	FVector Direction = FRotationMatrix(YawRotation).GetScaledAxis(EAxis::Y);
-	AddMovementInput(Direction, axis);
+	FVector direction = camera->GetRightVector() * MoveSpeed;
+	direction.Z = 0;
+
+	this->AddMovementInput(direction, axis);
 }
 
 void AMainCharacter::LookUp(float axis)
 {
-	float pitch = springArm->GetComponentRotation().Pitch + axis;
+	float pitch = springArm->GetComponentRotation().Pitch + axis * CameraSensitivity;
 
 	if (pitch > CameraVerticalMin && pitch < CameraVerticalMax)
 	{
-		springArm->AddLocalRotation(FRotator(axis, 0, 0));
+		springArm->AddLocalRotation(FRotator(axis, 0, 0) * CameraSensitivity);
 	}
 }
 
 void AMainCharacter::LookRight(float axis)
 {
-	springArm->AddWorldRotation(FRotator(0, axis, 0));
+	springArm->AddWorldRotation(FRotator(0, axis, 0) * CameraSensitivity);
 }
 
 void AMainCharacter::PickUpAndDrop()
