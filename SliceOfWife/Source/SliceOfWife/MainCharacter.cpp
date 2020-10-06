@@ -6,7 +6,7 @@
 #include "BodyPart.h"
 #include "BodyStorage.h"
 #include "DisassemblingTable.h"
-#include "FullBody.h"
+#include "Creature.h"
 #include "ResizingDevice.h"
 #include "Soul.h"
 #include "Camera/CameraComponent.h"
@@ -100,7 +100,7 @@ void AMainCharacter::PickUpAndDrop()
 			{
 				objectToHold = Cast<AResizingDevice>(nearbyObjects[i])->objectOnDevice;
 			}
-			else if (nearbyObjects[i]->IsA(AFullBody::StaticClass()))
+			else if (nearbyObjects[i]->IsA(ACreature::StaticClass()))
 			{
 				objectToHold = nearbyObjects[i];
 			}
@@ -214,17 +214,15 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(false);
 	}
 
-	if (objectToHold->IsA(AFullBody::StaticClass()))
+	if (objectToHold->IsA(ACreature::StaticClass()))
 	{
-		AFullBody* fullBody = Cast<AFullBody>(objectToHold);
-
-		float bodyHalfHeight = fullBody->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
+		ACreature* fullBody = Cast<ACreature>(objectToHold);
 
 		// attach the object to the player
 		fullBody->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
 		// add offset to the object
-		fullBody->SetActorRelativeLocation(FVector(0, 0, bodyHalfHeight) + PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
+		fullBody->SetActorRelativeLocation(PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
 	}
 	else if (objectToHold->IsA(ABodyPart::StaticClass()))
 	{

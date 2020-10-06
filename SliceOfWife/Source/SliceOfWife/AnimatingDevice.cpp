@@ -5,7 +5,7 @@
 #include "AssemblingSpot.h"
 #include "AssemblingTable.h"
 #include "BodyPart.h"
-#include "FullBody.h"
+#include "Creature.h"
 #include "MinigameWidget.h"
 #include "Kismet/GameplayStatics.h"
 
