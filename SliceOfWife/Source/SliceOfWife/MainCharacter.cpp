@@ -28,6 +28,8 @@ AMainCharacter::AMainCharacter()
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
+
+	GetCharacterMovement()->bOrientRotationToMovement = true;
 }
 
 // Called when the game starts or when spawned
@@ -73,22 +75,32 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void AMainCharacter::MoveForward(float axis)
 {
-	FVector direction = camera->GetForwardVector() * MoveSpeed;
-	direction.Z = 0;
-	FRotator rotation = camera->GetForwardVector().ToOrientationRotator();
-	rotation.Roll = 0;
-	rotation.Pitch = 0;
+	if (axis)
+	{
+		FVector direction = camera->GetForwardVector() * MoveSpeed;
+		direction.Z = 0;
+		FRotator rotation = FVector(camera->GetForwardVector() * axis).ToOrientationRotator();
+		rotation.Roll = 0;
+		rotation.Pitch = 0;
 
-	this->AddMovementInput(direction, axis);
-	this->SetActorRotation(rotation);
+		this->AddMovementInput(direction, axis);
+		this->SetActorRotation(rotation);
+	}
 }
 
 void AMainCharacter::MoveRight(float axis)
 {
-	FVector direction = camera->GetRightVector() * MoveSpeed;
-	direction.Z = 0;
+	if (axis)
+	{
+		FVector direction = camera->GetRightVector() * MoveSpeed;
+		direction.Z = 0;
+		FRotator rotation = FVector(camera->GetRightVector() * axis).ToOrientationRotator();
+		rotation.Roll = 0;
+		rotation.Pitch = 0;
 
-	this->AddMovementInput(direction, axis);
+		this->AddMovementInput(direction, axis);
+		this->SetActorRotation(rotation);
+	}
 }
 
 void AMainCharacter::LookUp(float axis)
