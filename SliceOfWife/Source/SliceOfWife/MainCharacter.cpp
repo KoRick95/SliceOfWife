@@ -77,12 +77,12 @@ void AMainCharacter::MoveForward(float axis)
 {
 	if (axis)
 	{
-		FVector direction = camera->GetForwardVector() * MoveSpeed;
+		FVector direction = camera->GetForwardVector().GetSafeNormal() * MoveSpeed;
 		direction.Z = 0;
 		FRotator rotation = FVector(camera->GetForwardVector() * axis).ToOrientationRotator();
 		rotation.Roll = 0;
 		rotation.Pitch = 0;
-
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("direction: %f, %f, %f"), direction.X, direction.Y, direction.Z));
 		this->AddMovementInput(direction, axis);
 		this->SetActorRotation(rotation);
 	}
