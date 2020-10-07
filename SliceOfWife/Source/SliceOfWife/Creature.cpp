@@ -10,6 +10,8 @@ ACreature::ACreature()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	this->RootComponent = CreateDefaultSubobject<UBoxComponent>("DefaultSceneRoot");
 }
 
 // Called when the game starts or when spawned
@@ -50,7 +52,7 @@ int ACreature::GetBodyPartsCount()
 void ACreature::AttachBodyPart(ABodyPart* bodyPart)
 {
 	// attach the body part and add it to the array
-	//bodyPart->AttachToBody(this);
+	bodyPart->AttachToBody(this);
 	this->bodyParts.Add(bodyPart);
 }
 
