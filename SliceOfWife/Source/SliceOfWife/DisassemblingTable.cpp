@@ -56,7 +56,7 @@ bool ADisassemblingTable::RemoveFromTable()
 
 bool ADisassemblingTable::Charge()
 {
-	if (!IsOccupied)
+	if (!IsOccupied())
 		return false;
 
 	charge += ChargeRate;
