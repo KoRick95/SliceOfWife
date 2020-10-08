@@ -327,6 +327,11 @@ void AMainCharacter::Interact()
 	}
 }
 
+bool AMainCharacter::IsHoldingObject()
+{
+	return heldObject != nullptr;
+}
+
 void AMainCharacter::OnOverlapBegin(UPrimitiveComponent* OverLappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Fucked.")));

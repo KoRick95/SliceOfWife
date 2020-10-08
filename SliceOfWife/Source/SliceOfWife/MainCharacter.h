@@ -59,6 +59,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Interact();
 
+	UFUNCTION(BlueprintCallable)
+	bool IsHoldingObject();
+
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverLappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 };
