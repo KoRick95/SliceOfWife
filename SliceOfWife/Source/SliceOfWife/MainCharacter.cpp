@@ -295,7 +295,6 @@ void AMainCharacter::Interact()
 {
 	TArray<AActor*> nearbyObjects;
 	this->GetOverlappingActors(nearbyObjects);
-
 	bool hasInteracted = false;
 
 	for (int i = 0; i < nearbyObjects.Num(); ++i)
@@ -325,6 +324,11 @@ void AMainCharacter::Interact()
 		if (hasInteracted)
 			break;
 	}
+}
+
+bool AMainCharacter::IsHoldingObject()
+{
+	return heldObject != nullptr;
 }
 
 void AMainCharacter::OnOverlapBegin(UPrimitiveComponent* OverLappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)

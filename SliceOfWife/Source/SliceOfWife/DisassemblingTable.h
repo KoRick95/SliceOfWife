@@ -10,8 +10,8 @@ UCLASS()
 class SLICEOFWIFE_API ADisassemblingTable : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	ADisassemblingTable();
 
@@ -20,25 +20,25 @@ public:
 	float charge = 0;
 
 	UPROPERTY(EditAnywhere, Category = "Snapping")
-	FVector SnapPosition = { 0, 0, 100 };
+		FVector SnapPosition = { 0, 0, 100 };
 
 	UPROPERTY(EditAnywhere, Category = "Snapping")
-	FRotator SnapRotation = { 0, 90, 180 };
+		FRotator SnapRotation = { 0, 90, 180 };
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
-	float ChargeRate = 1;
+		float ChargeRate = 1;
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
-	float MaxCharge = 5;
+		float MaxCharge = 5;
 
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<class ASoul> SoulBP;
+		TSubclassOf<class ASoul> SoulBP;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -47,4 +47,7 @@ public:
 
 	bool Charge();
 	void DisassembleBody();
+
+	UFUNCTION(BlueprintCallable)
+	bool IsOccupied();
 };
