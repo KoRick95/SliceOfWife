@@ -270,3 +270,8 @@ bool AAssemblingTable::AnimateBody()
 
 	return false;
 }
+
+bool AAssemblingTable::IsCentreOccupied()
+{
+	return centralBodyPart != nullptr;
+}

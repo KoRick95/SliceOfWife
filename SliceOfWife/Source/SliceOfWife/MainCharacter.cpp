@@ -295,7 +295,6 @@ void AMainCharacter::Interact()
 {
 	TArray<AActor*> nearbyObjects;
 	this->GetOverlappingActors(nearbyObjects);
-
 	bool hasInteracted = false;
 
 	for (int i = 0; i < nearbyObjects.Num(); ++i)

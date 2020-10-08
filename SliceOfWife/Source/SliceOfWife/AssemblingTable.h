@@ -58,4 +58,7 @@ public:
 	void AssembleBodyPart(ABodyPart* bodyPart);
 
 	bool AnimateBody();
+
+	UFUNCTION(BlueprintCallable)
+	bool IsCentreOccupied();
 };
