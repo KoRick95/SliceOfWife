@@ -39,4 +39,7 @@ public:
 	bool RemoveFromDevice();
 
 	bool ReplaceObject();
+
+	UFUNCTION(BlueprintCallable)
+	bool IsOccupied();
 };
