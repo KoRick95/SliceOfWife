@@ -26,7 +26,10 @@ public:
 	float StrafeSpeed = 1;
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
-	float CameraSensitivity = 3;
+	float HorizontalCameraSensitivity = 3;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
+	float VerticalCameraSensitivity = 1;
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "-90", ClampMax  = "0"))
 	float CameraVerticalMin = -65;

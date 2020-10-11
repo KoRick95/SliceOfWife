@@ -77,12 +77,16 @@ void AMainCharacter::MoveForward(float axis)
 {
 	if (axis)
 	{
-		FVector direction = camera->GetForwardVector().GetSafeNormal() * MoveSpeed;
+		FVector direction = camera->GetForwardVector() * MoveSpeed;
 		direction.Z = 0;
+		float vecDist = FMath::Sqrt(direction.X * direction.X + direction.Y * direction.Y);
+		float toScale = 1 / vecDist;
+		direction *= toScale;
+
 		FRotator rotation = FVector(camera->GetForwardVector() * axis).ToOrientationRotator();
 		rotation.Roll = 0;
 		rotation.Pitch = 0;
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("direction: %f, %f, %f"), direction.X, direction.Y, direction.Z));
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("direction: %f, %f, %f"), direction.X, direction.Y, direction.Z));
 		this->AddMovementInput(direction, axis);
 		this->SetActorRotation(rotation);
 	}
@@ -105,17 +109,17 @@ void AMainCharacter::MoveRight(float axis)
 
 void AMainCharacter::LookUp(float axis)
 {
-	float pitch = springArm->GetComponentRotation().Pitch + axis * CameraSensitivity;
+	float pitch = springArm->GetComponentRotation().Pitch + axis * VerticalCameraSensitivity;
 
 	if (pitch > CameraVerticalMin && pitch < CameraVerticalMax)
 	{
-		springArm->AddLocalRotation(FRotator(axis, 0, 0) * CameraSensitivity);
+		springArm->AddLocalRotation(FRotator(axis, 0, 0) * VerticalCameraSensitivity);
 	}
 }
 
 void AMainCharacter::LookRight(float axis)
 {
-	springArm->AddWorldRotation(FRotator(0, axis, 0) * CameraSensitivity);
+	springArm->AddWorldRotation(FRotator(0, axis, 0) * HorizontalCameraSensitivity);
 }
 
 void AMainCharacter::PickUpAndDrop()
