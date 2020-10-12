@@ -105,7 +105,7 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 					GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Set pointer #%i"), s + 1));
 					if (spotIndexes[s] >= 0)
 					{
-						assemblingSpots[spotIndexes[s]]->bodyPart = bodyParts[b];
+						assemblingSpots[spotIndexes[s]]->assignedBodyPart = bodyParts[b];
 					}
 					else
 					{
@@ -180,9 +180,9 @@ bool AAssemblingTable::RemoveFromTable(AActor* object)
 			{
 				for (int j = 0; j < assemblingSpots.Num(); ++j)
 				{
-					if (FinalBody->bodyParts[i] == assemblingSpots[j]->bodyPart)
+					if (FinalBody->bodyParts[i] == assemblingSpots[j]->assignedBodyPart)
 					{
-						assemblingSpots[j]->bodyPart = nullptr;
+						assemblingSpots[j]->assignedBodyPart = nullptr;
 						break;
 					}
 				}
@@ -203,9 +203,9 @@ bool AAssemblingTable::RemoveFromTable(AActor* object)
 
 		for (int i = 0; i < assemblingSpots.Num(); ++i)
 		{
-			if (assemblingSpots[i]->bodyPart == bodyPart)
+			if (assemblingSpots[i]->assignedBodyPart == bodyPart)
 			{
-				assemblingSpots[i]->bodyPart = nullptr;
+				assemblingSpots[i]->assignedBodyPart = nullptr;
 			}
 		}
 
@@ -223,7 +223,7 @@ bool AAssemblingTable::RemoveFromTable(AActor* object)
 
 bool AAssemblingTable::BeginSewing(AAssemblingSpot* spot)
 {
-	if (centralBodyPart == nullptr || spot->bodyPart == nullptr || spot->bodyPart->IsAttachedToBody() || MinigameWidget == nullptr)
+	if (centralBodyPart == nullptr || spot->assignedBodyPart == nullptr || spot->assignedBodyPart->IsAttachedToBody() || MinigameWidget == nullptr)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, FString::Printf(TEXT("Check one of the following:\n"
 			"1. Is it missing the central body part?\n"

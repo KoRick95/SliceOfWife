@@ -129,7 +129,7 @@ void AMainCharacter::PickUpAndDrop()
 	this->GetOverlappingActors(nearbyObjects);
 
 	// if the player is not holding anything
-	if (heldObject == nullptr)
+	if (HeldObject == nullptr)
 	{
 		// check all nearby objects
 		for (int i = 0; i < nearbyObjects.Num(); ++i)
@@ -208,22 +208,22 @@ void AMainCharacter::PickUpAndDrop()
 		bool isSnapped = false;
 
 		// detach the held object from the player
-		heldObject->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		HeldObject->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
 		// check nearby objects
 		for (int i = 0; i < nearbyObjects.Num(); ++i)
 		{
 			if (nearbyObjects[i]->IsA(AAssemblingSpot::StaticClass()))
 			{
-				isSnapped = Cast<AAssemblingSpot>(nearbyObjects[i])->DropToTable(heldObject);
+				isSnapped = Cast<AAssemblingSpot>(nearbyObjects[i])->DropToTable(HeldObject);
 			}
 			else if (nearbyObjects[i]->IsA(ADisassemblingTable::StaticClass()))
 			{
-				isSnapped = Cast<ADisassemblingTable>(nearbyObjects[i])->DropToTable(heldObject);
+				isSnapped = Cast<ADisassemblingTable>(nearbyObjects[i])->DropToTable(HeldObject);
 			}
 			else if (nearbyObjects[i]->IsA(AResizingDevice::StaticClass()))
 			{
-				isSnapped = Cast<AResizingDevice>(nearbyObjects[i])->DropToDevice(heldObject);
+				isSnapped = Cast<AResizingDevice>(nearbyObjects[i])->DropToDevice(HeldObject);
 			}
 
 			if (isSnapped)
@@ -233,7 +233,7 @@ void AMainCharacter::PickUpAndDrop()
 		if (!isSnapped)
 		{
 			// enable physics
-			TArray<UActorComponent*> components = heldObject->GetComponentsByClass(UPrimitiveComponent::StaticClass());
+			TArray<UActorComponent*> components = HeldObject->GetComponentsByClass(UPrimitiveComponent::StaticClass());
 			for (int i = 0; i < components.Num(); ++i)
 			{
 				Cast<UPrimitiveComponent>(components[i])->SetSimulatePhysics(true);
@@ -241,7 +241,7 @@ void AMainCharacter::PickUpAndDrop()
 			}
 		}
 
-		heldObject = nullptr;
+		HeldObject = nullptr;
 	}
 }
 
@@ -300,7 +300,7 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 		//Cast<UPrimitiveComponent>(primitiveComponents[i])->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 
-	heldObject = objectToHold;
+	HeldObject = objectToHold;
 	return true;
 }
 
@@ -341,7 +341,7 @@ void AMainCharacter::Interact()
 
 bool AMainCharacter::IsHoldingObject()
 {
-	return heldObject != nullptr;
+	return HeldObject != nullptr;
 }
 
 void AMainCharacter::OnOverlapBegin(UPrimitiveComponent* OverLappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)

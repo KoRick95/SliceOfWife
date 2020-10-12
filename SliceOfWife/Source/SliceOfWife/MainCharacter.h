@@ -17,13 +17,12 @@ public:
 
 	class USpringArmComponent* springArm = nullptr;
 	class UCameraComponent* camera = nullptr;
-	AActor* heldObject = nullptr;
+
+	UPROPERTY(BlueprintReadOnly)
+	AActor* HeldObject = nullptr;
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
 	float MoveSpeed = 1;
-
-	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
-	float StrafeSpeed = 1;
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
 	float HorizontalCameraSensitivity = 3;

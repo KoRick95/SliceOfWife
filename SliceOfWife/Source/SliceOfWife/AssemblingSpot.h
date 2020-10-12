@@ -19,7 +19,7 @@ public:
 
 	class AAssemblingTable* table = nullptr;
 
-	class ABodyPart* bodyPart = nullptr;
+	class ABodyPart* assignedBodyPart = nullptr;
 
 	UPROPERTY(EditAnywhere)
 	TEnumAsByte<EBodyPartType> BodyPartType;
@@ -42,4 +42,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	bool IsOccupied();
+
+	UFUNCTION(BlueprintCallable)
+		bool CheckValidBodyPart(ABodyPart* bodyPart);
 };
