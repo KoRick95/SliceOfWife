@@ -83,12 +83,5 @@ void AAssemblingSpot::AssembleBodyPart()
 
 bool AAssemblingSpot::IsOccupied()
 {
-	bool occupied = bodyPart != nullptr;
-
-	if (occupied)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, FString::Printf(TEXT("An assembling spot is occupied!")));
-	}
-
-	return occupied;
+	return bodyPart != nullptr;
 }

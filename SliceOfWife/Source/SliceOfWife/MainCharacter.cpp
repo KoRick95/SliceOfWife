@@ -237,6 +237,7 @@ void AMainCharacter::PickUpAndDrop()
 			for (int i = 0; i < components.Num(); ++i)
 			{
 				Cast<UPrimitiveComponent>(components[i])->SetSimulatePhysics(true);
+				Cast<UPrimitiveComponent>(components[i])->SetCollisionProfileName("Pickup");
 			}
 		}
 
@@ -256,6 +257,7 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 	for (int i = 0; i < primitiveComponents.Num(); ++i)
 	{
 		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(false);
+		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 
 	if (objectToHold->IsA(ACreature::StaticClass()))
@@ -263,10 +265,11 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 		ACreature* fullBody = Cast<ACreature>(objectToHold);
 
 		// attach the object to the player
-		fullBody->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		fullBody->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
 
 		// add offset to the object
-		fullBody->SetActorRelativeLocation(PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
+		fullBody->SetActorLocation(this->GetActorLocation(), false, nullptr, ETeleportType::ResetPhysics);
+		fullBody->AddActorLocalOffset(PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
 	}
 	else if (objectToHold->IsA(ABodyPart::StaticClass()))
 	{
@@ -282,8 +285,8 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 		objectToHold->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
 		// add the offset to the object
-		objectToHold->SetActorRelativeLocation(FVector(0) + PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
-		objectToHold->AddActorLocalOffset(meshOffset, false, nullptr, ETeleportType::ResetPhysics);
+		objectToHold->SetActorRelativeLocation(PickupOffset + meshOffset, false, nullptr, ETeleportType::ResetPhysics);
+		//objectToHold->AddActorLocalOffset(meshOffset, false, nullptr, ETeleportType::ResetPhysics);
 	}
 	else
 	{
