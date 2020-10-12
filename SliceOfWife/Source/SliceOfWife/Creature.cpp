@@ -11,11 +11,6 @@ ACreature::ACreature()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
-	//OverlapCollider = CreateDefaultSubobject<UBoxComponent>("OverlapCollider");
-	//OverlapCollider->SetRelativeLocation(FVector(-100.f, 0.f, 0.f));
-	//OverlapCollider->bEditableWhenInherited = true;
-	//SetRootComponent(OverlapCollider);
 }
 
 // Called when the game starts or when spawned

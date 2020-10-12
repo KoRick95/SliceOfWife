@@ -200,15 +200,12 @@ bool AAssemblingTable::RemoveFromTable(AActor* object)
 		{
 			centralBodyPart = nullptr;
 		}
-		else
+
+		for (int i = 0; i < assemblingSpots.Num(); ++i)
 		{
-			for (int i = 0; i < assemblingSpots.Num(); ++i)
+			if (assemblingSpots[i]->bodyPart == bodyPart)
 			{
-				if (assemblingSpots[i]->bodyPart == bodyPart)
-				{
-					assemblingSpots[i]->bodyPart = nullptr;
-					break;
-				}
+				assemblingSpots[i]->bodyPart = nullptr;
 			}
 		}
 
