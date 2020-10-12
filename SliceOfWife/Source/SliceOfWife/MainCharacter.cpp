@@ -257,7 +257,7 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 	for (int i = 0; i < primitiveComponents.Num(); ++i)
 	{
 		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(false);
-		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		//Cast<UPrimitiveComponent>(primitiveComponents[i])->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 
 	if (objectToHold->IsA(ACreature::StaticClass()))
@@ -265,7 +265,7 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 		ACreature* fullBody = Cast<ACreature>(objectToHold);
 
 		// attach the object to the player
-		fullBody->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
+		fullBody->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
 		// add offset to the object
 		fullBody->SetActorLocation(this->GetActorLocation(), false, nullptr, ETeleportType::ResetPhysics);
@@ -292,6 +292,12 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Invalid object type.")));
 		return false;
+	}
+
+	for (int i = 0; i < primitiveComponents.Num(); ++i)
+	{
+		//Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(false);
+		//Cast<UPrimitiveComponent>(primitiveComponents[i])->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 
 	heldObject = objectToHold;
