@@ -1,6 +1,6 @@
 #include "DisassemblingTable.h"
 #include "BodyPart.h"
-#include "FullBody.h"
+#include "Creature.h"
 #include "Soul.h"
 #include "Components/PrimitiveComponent.h"
 #include "Components/SkeletalMeshComponent.h"
@@ -27,14 +27,14 @@ void ADisassemblingTable::Tick(float DeltaTime)
 
 bool ADisassemblingTable::DropToTable(AActor* body)
 {
-	if (body->IsA(AFullBody::StaticClass()) && bodyOnTable == nullptr)
+	if (body->IsA(ACreature::StaticClass()) && !IsOccupied())
 	{
 		// snap the body to the table
 		body->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 		body->SetActorLocation(this->GetActorLocation() + SnapPosition);
 		body->SetActorRotation(SnapRotation, ETeleportType::ResetPhysics);
 
-		this->bodyOnTable = Cast<AFullBody>(body);
+		this->bodyOnTable = Cast<ACreature>(body);
 		return true;
 	}
 
@@ -43,7 +43,7 @@ bool ADisassemblingTable::DropToTable(AActor* body)
 
 bool ADisassemblingTable::RemoveFromTable()
 {
-	if (bodyOnTable != nullptr)
+	if (IsOccupied())
 	{
 		// detach the object from the table
 		bodyOnTable->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
@@ -56,7 +56,7 @@ bool ADisassemblingTable::RemoveFromTable()
 
 bool ADisassemblingTable::Charge()
 {
-	if (bodyOnTable == nullptr)
+	if (!IsOccupied())
 		return false;
 
 	charge += ChargeRate;
@@ -83,10 +83,10 @@ void ADisassemblingTable::DisassembleBody()
 		AActor* splitBodyPart = GetWorld()->SpawnActor(uClass, &transform);
 
 		// if the body part has a primitive component, enable its physics
-		UActorComponent* getPrimComp = splitBodyPart->GetComponentByClass(UPrimitiveComponent::StaticClass());
-		if (getPrimComp != nullptr)
+		UActorComponent* primitiveComponent = splitBodyPart->GetComponentByClass(UPrimitiveComponent::StaticClass());
+		if (primitiveComponent != nullptr)
 		{
-			Cast<UPrimitiveComponent>(getPrimComp)->SetSimulatePhysics(true);
+			Cast<UPrimitiveComponent>(primitiveComponent)->SetSimulatePhysics(true);
 		}
 
 		// assign a soul to the body part
@@ -99,4 +99,9 @@ void ADisassemblingTable::DisassembleBody()
 
 	bodyOnTable->Destroy();
 	bodyOnTable = nullptr;
+}
+
+bool ADisassemblingTable::IsOccupied()
+{
+	return bodyOnTable != nullptr;
 }

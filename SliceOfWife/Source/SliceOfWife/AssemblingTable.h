@@ -21,7 +21,7 @@ public:
 	class ABodyPart* centralBodyPart = nullptr;
 
 	UPROPERTY(BlueprintReadOnly)
-	class AFullBody* FinalBody = nullptr;
+	class ACreature* FinalBody = nullptr;
 
 	UPROPERTY(EditAnywhere)
 	FVector SnapPosition = { -90, 0, 105 };
@@ -58,4 +58,7 @@ public:
 	void AssembleBodyPart(ABodyPart* bodyPart);
 
 	bool AnimateBody();
+
+	UFUNCTION(BlueprintCallable)
+	bool IsCentreOccupied();
 };

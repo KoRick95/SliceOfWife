@@ -16,13 +16,16 @@ void UMinigameWidget::StartMinigame(AActor* initiator)
 
 void UMinigameWidget::EndMinigame(bool isCompleted)
 {
-	if (minigameInitator->IsA(AAssemblingSpot::StaticClass()))
+	if (isCompleted)
 	{
-		Cast<AAssemblingSpot>(minigameInitator)->AssembleBodyPart();
-	}
-	else if (minigameInitator->IsA(AAnimatingDevice::StaticClass()))
-	{
-		//Cast<AAnimatingDevice>(minigameInitator)->AnimateBody();
+		if (minigameInitator->IsA(AAssemblingSpot::StaticClass()))
+		{
+			Cast<AAssemblingSpot>(minigameInitator)->AssembleBodyPart();
+		}
+		else if (minigameInitator->IsA(AAnimatingDevice::StaticClass()))
+		{
+			Cast<AAnimatingDevice>(minigameInitator)->AnimateBody();
+		}
 	}
 
 	this->RemoveFromParent();

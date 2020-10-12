@@ -22,7 +22,7 @@ public:
 	int MaxBodyCount = 1;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TArray<TSubclassOf<class AFullBody>> Bodies;
+	TArray<TSubclassOf<class ACreature>> Bodies;
 
 protected:
 	// Called when the game starts or when spawned

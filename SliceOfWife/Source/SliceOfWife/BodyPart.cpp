@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BodyPart.h"
-#include "FullBody.h"
+#include "Creature.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Engine.h"
 
@@ -19,9 +19,9 @@ void ABodyPart::BeginPlay()
 
 	if (this->GetAttachParentActor() != nullptr)
 	{
-		if (this->GetAttachParentActor()->IsA(AFullBody::StaticClass()))
+		if (this->GetAttachParentActor()->IsA(ACreature::StaticClass()))
 		{
-			attachedBody = Cast<AFullBody>(this->GetAttachParentActor());
+			attachedBody = Cast<ACreature>(this->GetAttachParentActor());
 			OriginalCreatureType = attachedBody->CreatureType;
 		}
 	}
@@ -129,7 +129,7 @@ bool ABodyPart::SwitchMesh(int index)
 	return false;
 }
 
-bool ABodyPart::AttachToBody(AFullBody* fullBody)
+bool ABodyPart::AttachToBody(ACreature* fullBody)
 {
 	if (fullBody != nullptr)
 	{

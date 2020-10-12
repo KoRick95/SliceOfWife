@@ -5,18 +5,18 @@
 #include "AssemblingSpot.h"
 #include "BodyPart.h"
 #include "BodyStorage.h"
+#include "Creature.h"
 #include "DisassemblingTable.h"
-#include "FullBody.h"
 #include "ResizingDevice.h"
 #include "Soul.h"
 #include "Camera/CameraComponent.h"
-#include "Components/SceneComponent.h"
-#include "Components/InputComponent.h"
-#include "Components/SphereComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/InputComponent.h"
+#include "Components/SceneComponent.h"
+#include "Components/SphereComponent.h"
 #include "Engine.h"
-#include "GameFramework/PlayerController.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
 
 // Sets default values
@@ -30,13 +30,23 @@ AMainCharacter::AMainCharacter()
 	bUseControllerRotationYaw = false;
 
 	GetCharacterMovement()->bOrientRotationToMovement = true;
-	GetCharacterMovement()->RotationRate = FRotator(0, RotationSpeed, 0);
 }
 
 // Called when the game starts or when spawned
 void AMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	springArm = Cast<USpringArmComponent>(this->GetComponentByClass(USpringArmComponent::StaticClass()));
+	camera = Cast<UCameraComponent>(this->GetComponentByClass(UCameraComponent::StaticClass()));
+
+	if (springArm == nullptr || camera == nullptr)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Player camera is not set up!")));
+	}
+
+	springArm->bUsePawnControlRotation = false;
+	springArm->SetAbsolute(false, true, false);
 }
 
 // Called every frame
@@ -53,6 +63,9 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMainCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMainCharacter::MoveRight);
 
+	PlayerInputComponent->BindAxis("LookUp", this, &AMainCharacter::LookUp);
+	PlayerInputComponent->BindAxis("LookRight", this, &AMainCharacter::LookRight);
+
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
@@ -60,22 +73,53 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &AMainCharacter::Interact);
 }
 
-void AMainCharacter::MoveForward(float Axis)
+void AMainCharacter::MoveForward(float axis)
 {
-	// Find out which way is "forward" and record that the player wants to move that way.
-	FRotator Rotation = Controller->GetControlRotation();
-	FRotator YawRotation(0, Rotation.Yaw, 0);
-	FVector Direction = FRotationMatrix(YawRotation).GetScaledAxis(EAxis::X);
-	AddMovementInput(Direction, Axis);
+	if (axis)
+	{
+		FVector direction = camera->GetForwardVector() * MoveSpeed;
+		direction.Z = 0;
+		float vecDist = FMath::Sqrt(direction.X * direction.X + direction.Y * direction.Y);
+		float toScale = 1 / vecDist;
+		direction *= toScale;
+
+		FRotator rotation = FVector(camera->GetForwardVector() * axis).ToOrientationRotator();
+		rotation.Roll = 0;
+		rotation.Pitch = 0;
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("direction: %f, %f, %f"), direction.X, direction.Y, direction.Z));
+		this->AddMovementInput(direction, axis);
+		this->SetActorRotation(rotation);
+	}
 }
 
-void AMainCharacter::MoveRight(float Axis)
+void AMainCharacter::MoveRight(float axis)
 {
-	// Find out which way is "right" and record that the player wants to move that way.
-	FRotator Rotation = Controller->GetControlRotation();
-	FRotator YawRotation(0, Rotation.Yaw, 0);
-	FVector Direction = FRotationMatrix(YawRotation).GetScaledAxis(EAxis::Y);
-	AddMovementInput(Direction, Axis);
+	if (axis)
+	{
+		FVector direction = camera->GetRightVector() * MoveSpeed;
+		direction.Z = 0;
+		FRotator rotation = FVector(camera->GetRightVector() * axis).ToOrientationRotator();
+		rotation.Roll = 0;
+		rotation.Pitch = 0;
+
+		this->AddMovementInput(direction, axis);
+		this->SetActorRotation(rotation);
+	}
+}
+
+void AMainCharacter::LookUp(float axis)
+{
+	float pitch = springArm->GetComponentRotation().Pitch + axis * VerticalCameraSensitivity;
+
+	if (pitch > CameraVerticalMin && pitch < CameraVerticalMax)
+	{
+		springArm->AddLocalRotation(FRotator(axis, 0, 0) * VerticalCameraSensitivity);
+	}
+}
+
+void AMainCharacter::LookRight(float axis)
+{
+	springArm->AddWorldRotation(FRotator(0, axis, 0) * HorizontalCameraSensitivity);
 }
 
 void AMainCharacter::PickUpAndDrop()
@@ -100,7 +144,7 @@ void AMainCharacter::PickUpAndDrop()
 			{
 				objectToHold = Cast<AResizingDevice>(nearbyObjects[i])->objectOnDevice;
 			}
-			else if (nearbyObjects[i]->IsA(AFullBody::StaticClass()))
+			else if (nearbyObjects[i]->IsA(ACreature::StaticClass()))
 			{
 				objectToHold = nearbyObjects[i];
 			}
@@ -193,6 +237,7 @@ void AMainCharacter::PickUpAndDrop()
 			for (int i = 0; i < components.Num(); ++i)
 			{
 				Cast<UPrimitiveComponent>(components[i])->SetSimulatePhysics(true);
+				Cast<UPrimitiveComponent>(components[i])->SetCollisionProfileName("Pickup");
 			}
 		}
 
@@ -212,19 +257,19 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 	for (int i = 0; i < primitiveComponents.Num(); ++i)
 	{
 		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(false);
+		//Cast<UPrimitiveComponent>(primitiveComponents[i])->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 
-	if (objectToHold->IsA(AFullBody::StaticClass()))
+	if (objectToHold->IsA(ACreature::StaticClass()))
 	{
-		AFullBody* fullBody = Cast<AFullBody>(objectToHold);
-
-		float bodyHalfHeight = fullBody->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
+		ACreature* fullBody = Cast<ACreature>(objectToHold);
 
 		// attach the object to the player
 		fullBody->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
 		// add offset to the object
-		fullBody->SetActorRelativeLocation(FVector(0, 0, bodyHalfHeight) + PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
+		fullBody->SetActorLocation(this->GetActorLocation(), false, nullptr, ETeleportType::ResetPhysics);
+		fullBody->AddActorLocalOffset(PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
 	}
 	else if (objectToHold->IsA(ABodyPart::StaticClass()))
 	{
@@ -240,13 +285,19 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 		objectToHold->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
 		// add the offset to the object
-		objectToHold->SetActorRelativeLocation(FVector(0) + PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
-		objectToHold->AddActorLocalOffset(meshOffset, false, nullptr, ETeleportType::ResetPhysics);
+		objectToHold->SetActorRelativeLocation(PickupOffset + meshOffset, false, nullptr, ETeleportType::ResetPhysics);
+		//objectToHold->AddActorLocalOffset(meshOffset, false, nullptr, ETeleportType::ResetPhysics);
 	}
 	else
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Invalid object type.")));
 		return false;
+	}
+
+	for (int i = 0; i < primitiveComponents.Num(); ++i)
+	{
+		//Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(false);
+		//Cast<UPrimitiveComponent>(primitiveComponents[i])->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 
 	heldObject = objectToHold;
@@ -257,7 +308,6 @@ void AMainCharacter::Interact()
 {
 	TArray<AActor*> nearbyObjects;
 	this->GetOverlappingActors(nearbyObjects);
-
 	bool hasInteracted = false;
 
 	for (int i = 0; i < nearbyObjects.Num(); ++i)
@@ -289,7 +339,12 @@ void AMainCharacter::Interact()
 	}
 }
 
+bool AMainCharacter::IsHoldingObject()
+{
+	return heldObject != nullptr;
+}
+
 void AMainCharacter::OnOverlapBegin(UPrimitiveComponent* OverLappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Overlapped.")));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Fucked.")));
 }

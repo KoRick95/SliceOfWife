@@ -26,31 +26,29 @@ void AResizingDevice::Tick(float DeltaTime)
 
 bool AResizingDevice::DropToDevice(AActor* object)
 {
-	if (object == nullptr)
-		return false;
-
-	FVector offset = SnapLocation;
-
-	if (object->IsA(ABodyPart::StaticClass()))
+	if (object != nullptr && !IsOccupied())
 	{
-		offset = SnapLocation - Cast<ABodyPart>(object)->GetMeshRelativeLocation();
-	}
-	else
-	{
-		//return false;
-	}
+		FVector offset = SnapLocation;
 
-	object->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-	object->SetActorRelativeLocation(offset, false, nullptr, ETeleportType::ResetPhysics);
-	object->SetActorRelativeRotation(FQuat(SnapRotation), false, nullptr, ETeleportType::ResetPhysics);
+		if (object->IsA(ABodyPart::StaticClass()))
+		{
+			offset -= Cast<ABodyPart>(object)->GetMeshRelativeLocation();
+			object->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+			object->SetActorRelativeLocation(offset, false, nullptr, ETeleportType::ResetPhysics);
+			object->SetActorRelativeRotation(FQuat(SnapRotation), false, nullptr, ETeleportType::ResetPhysics);
 
-	objectOnDevice = object;
-	return true;
+			objectOnDevice = object;
+
+			return true;
+		}
+	}
+	
+	return false;
 }
 
 bool AResizingDevice::RemoveFromDevice()
 {
-	if (objectOnDevice != nullptr)
+	if (!IsOccupied())
 		return false;
 
 	objectOnDevice->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
@@ -60,7 +58,7 @@ bool AResizingDevice::RemoveFromDevice()
 
 bool AResizingDevice::ReplaceObject()
 {
-	if (objectOnDevice == nullptr)
+	if (!IsOccupied())
 		return false;
 
 	for (int i = 0; i < ObjectReplacements.Num(); ++i)
@@ -72,6 +70,14 @@ bool AResizingDevice::ReplaceObject()
 			AActor* newObject = GetWorld()->SpawnActor(uClass, &transform);
 			objectOnDevice->Destroy();
 			objectOnDevice = newObject;
+
+			FVector offset = SnapLocation;
+			if (objectOnDevice->IsA(ABodyPart::StaticClass()))
+			{
+				offset -= Cast<ABodyPart>(objectOnDevice)->GetMeshRelativeLocation();
+			}
+			objectOnDevice->SetActorRelativeLocation(offset, false, nullptr, ETeleportType::ResetPhysics);
+			objectOnDevice->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
 			return true;
 		}
 	}
@@ -79,3 +85,7 @@ bool AResizingDevice::ReplaceObject()
 	return false;
 }
 
+bool AResizingDevice::IsOccupied()
+{
+	return objectOnDevice != nullptr;
+}

@@ -42,18 +42,6 @@ void AAssemblingSpot::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-bool AAssemblingSpot::IsOccupied()
-{
-	bool occupied = bodyPart != nullptr;
-
-	if (occupied)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, FString::Printf(TEXT("An assembling spot is occupied!")));
-	}
-
-	return occupied;
-}
-
 bool AAssemblingSpot::SetBodyPart(ABodyPart* aBodyPart)
 {
 	if (aBodyPart != nullptr)
@@ -91,4 +79,9 @@ bool AAssemblingSpot::BeginSewing()
 void AAssemblingSpot::AssembleBodyPart()
 {
 	table->AssembleBodyPart(bodyPart);
+}
+
+bool AAssemblingSpot::IsOccupied()
+{
+	return bodyPart != nullptr;
 }

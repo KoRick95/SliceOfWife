@@ -1,7 +1,7 @@
 #include "AssemblingTable.h"
 #include "AssemblingSpot.h"
 #include "BodyPart.h"
-#include "FullBody.h"
+#include "Creature.h"
 #include "MinigameWidget.h"
 #include "Blueprint/UserWidget.h"
 #include "Engine.h"
@@ -62,9 +62,9 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 				return false;
 		}
 	}
-	else if (object->IsA(AFullBody::StaticClass()))
+	else if (object->IsA(ACreature::StaticClass()))
 	{
-		AFullBody* body = Cast<AFullBody>(object);
+		ACreature* body = Cast<ACreature>(object);
 
 		if (body->CreatureType == ECreatureType::Custom)
 		{
@@ -200,15 +200,12 @@ bool AAssemblingTable::RemoveFromTable(AActor* object)
 		{
 			centralBodyPart = nullptr;
 		}
-		else
+
+		for (int i = 0; i < assemblingSpots.Num(); ++i)
 		{
-			for (int i = 0; i < assemblingSpots.Num(); ++i)
+			if (assemblingSpots[i]->bodyPart == bodyPart)
 			{
-				if (assemblingSpots[i]->bodyPart == bodyPart)
-				{
-					assemblingSpots[i]->bodyPart = nullptr;
-					break;
-				}
+				assemblingSpots[i]->bodyPart = nullptr;
 			}
 		}
 
@@ -247,9 +244,12 @@ void AAssemblingTable::AssembleBodyPart(ABodyPart* bodyPart)
 
 	if (FinalBody == nullptr)
 	{
-		AActor* emptyBody = GetWorld()->SpawnActor(AFullBody::StaticClass(), &SnapPosition, &SnapRotation);
-		emptyBody->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
-		FinalBody = Cast<AFullBody>(emptyBody);
+		AActor* emptyBody = GetWorld()->SpawnActor(ACreature::StaticClass());
+		FinalBody = Cast<ACreature>(emptyBody);
+		FinalBody->SetClassDefaults();
+		FinalBody->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		FinalBody->SetActorRelativeLocation(SnapPosition);
+		FinalBody->SetActorRelativeRotation(SnapRotation);
 		FinalBody->CreatureType = ECreatureType::Custom;
 		FinalBody->AttachBodyPart(centralBodyPart);
 	}
@@ -269,4 +269,9 @@ bool AAssemblingTable::AnimateBody()
 	DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
 	return false;
+}
+
+bool AAssemblingTable::IsCentreOccupied()
+{
+	return centralBodyPart != nullptr;
 }

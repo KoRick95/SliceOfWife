@@ -16,7 +16,7 @@ public:
 	// Sets default values for this actor's properties
 	ABodyPart();
 
-	class AFullBody* attachedBody = nullptr;
+	class ACreature* attachedBody = nullptr;
 
 	class USkeletalMeshComponent* skeletalMeshComponent = nullptr;
 
@@ -46,6 +46,6 @@ public:
 	bool HasMeshOfType(EBodyPartType type, bool switchMesh = false);
 	bool SwitchMesh(int index = 0);
 
-	bool AttachToBody(AFullBody* fullBody);
+	bool AttachToBody(ACreature* fullBody);
 	bool DetachFromBody();
 };
