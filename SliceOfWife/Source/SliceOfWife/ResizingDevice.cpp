@@ -68,9 +68,16 @@ bool AResizingDevice::ReplaceObject()
 			UClass* uClass = ObjectReplacements[i].Output.Get();
 			FTransform transform = objectOnDevice->GetActorTransform();
 			AActor* newObject = GetWorld()->SpawnActor(uClass, &transform);
-			AActor* oldObject = objectOnDevice;
+			objectOnDevice->Destroy();
 			objectOnDevice = newObject;
-			oldObject->Destroy();
+
+			FVector offset = SnapLocation;
+			if (objectOnDevice->IsA(ABodyPart::StaticClass()))
+			{
+				offset -= Cast<ABodyPart>(objectOnDevice)->GetMeshRelativeLocation();
+			}
+			objectOnDevice->SetActorRelativeLocation(offset, false, nullptr, ETeleportType::ResetPhysics);
+			objectOnDevice->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
 			return true;
 		}
 	}
