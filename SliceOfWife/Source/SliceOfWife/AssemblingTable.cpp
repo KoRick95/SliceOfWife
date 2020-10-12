@@ -200,15 +200,12 @@ bool AAssemblingTable::RemoveFromTable(AActor* object)
 		{
 			centralBodyPart = nullptr;
 		}
-		else
+
+		for (int i = 0; i < assemblingSpots.Num(); ++i)
 		{
-			for (int i = 0; i < assemblingSpots.Num(); ++i)
+			if (assemblingSpots[i]->bodyPart == bodyPart)
 			{
-				if (assemblingSpots[i]->bodyPart == bodyPart)
-				{
-					assemblingSpots[i]->bodyPart = nullptr;
-					break;
-				}
+				assemblingSpots[i]->bodyPart = nullptr;
 			}
 		}
 
@@ -247,9 +244,12 @@ void AAssemblingTable::AssembleBodyPart(ABodyPart* bodyPart)
 
 	if (FinalBody == nullptr)
 	{
-		AActor* emptyBody = GetWorld()->SpawnActor(ACreature::StaticClass(), &SnapPosition, &SnapRotation);
-		emptyBody->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
+		AActor* emptyBody = GetWorld()->SpawnActor(ACreature::StaticClass());
 		FinalBody = Cast<ACreature>(emptyBody);
+		FinalBody->SetClassDefaults();
+		FinalBody->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		FinalBody->SetActorRelativeLocation(SnapPosition);
+		FinalBody->SetActorRelativeRotation(SnapRotation);
 		FinalBody->CreatureType = ECreatureType::Custom;
 		FinalBody->AttachBodyPart(centralBodyPart);
 	}

@@ -2,6 +2,7 @@
 
 #include "Creature.h"
 #include "BodyPart.h"
+#include "Components/BoxComponent.h"
 #include "Engine.h"
 #include "Engine/World.h"
 
@@ -10,8 +11,6 @@ ACreature::ACreature()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
-	this->RootComponent = CreateDefaultSubobject<UBoxComponent>("DefaultSceneRoot");
 }
 
 // Called when the game starts or when spawned
@@ -42,6 +41,12 @@ void ACreature::Tick(float DeltaTime)
 void ACreature::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+}
+
+void ACreature::SetClassDefaults()
+{
+	USceneComponent* defaultComponent = NewObject<USceneComponent>(this);
+	RootComponent = defaultComponent;
 }
 
 int ACreature::GetBodyPartsCount()
