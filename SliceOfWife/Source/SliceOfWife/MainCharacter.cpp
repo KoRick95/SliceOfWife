@@ -237,7 +237,7 @@ void AMainCharacter::PickUpAndDrop()
 			for (int i = 0; i < components.Num(); ++i)
 			{
 				Cast<UPrimitiveComponent>(components[i])->SetSimulatePhysics(true);
-				//Cast<UPrimitiveComponent>(components[i])->SetCollisionProfileName("Pickup");
+				Cast<UPrimitiveComponent>(components[i])->SetCollisionProfileName("Pickup");
 			}
 		}
 
@@ -296,8 +296,8 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 
 	for (int i = 0; i < primitiveComponents.Num(); ++i)
 	{
-		//Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(false);
-		//Cast<UPrimitiveComponent>(primitiveComponents[i])->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(false);
+		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 
 	HeldObject = objectToHold;
