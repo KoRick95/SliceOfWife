@@ -257,7 +257,7 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 	for (int i = 0; i < primitiveComponents.Num(); ++i)
 	{
 		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(false);
-		//Cast<UPrimitiveComponent>(primitiveComponents[i])->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 
 	if (objectToHold->IsA(ACreature::StaticClass()))
@@ -319,7 +319,7 @@ void AMainCharacter::Interact()
 		}
 		else if (nearbyObjects[i]->IsA(ADisassemblingTable::StaticClass()))
 		{
-			hasInteracted = Cast<ADisassemblingTable>(nearbyObjects[i])->Charge();
+			hasInteracted = Cast<ADisassemblingTable>(nearbyObjects[i])->ChargeMagic();
 		}
 		else if (nearbyObjects[i]->IsA(AAssemblingSpot::StaticClass()))
 		{

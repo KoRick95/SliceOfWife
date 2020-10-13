@@ -54,20 +54,20 @@ bool ADisassemblingTable::RemoveFromTable()
 	return false;
 }
 
-bool ADisassemblingTable::Charge()
+bool ADisassemblingTable::ChargeMagic()
 {
 	if (!IsOccupied())
 		return false;
 
-	charge += ChargeRate;
+	Charge += ChargeRate;
 	
-	if (charge >= MaxCharge)
+	if (Charge >= MaxCharge)
 	{
 		DisassembleBody();
-		charge = 0;
+		Charge = 0;
 	}
 	
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, FString::Printf(TEXT("Charge: %f"), charge));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, FString::Printf(TEXT("Charge: %f"), Charge));
 	return true;
 }
 

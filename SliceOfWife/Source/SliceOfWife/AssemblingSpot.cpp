@@ -90,3 +90,8 @@ bool AAssemblingSpot::CanDropToTable(AActor* object)
 {
 	return table->CanDropToTable(object, this);
 }
+
+bool AAssemblingSpot::IsBodyPartSewn()
+{
+	return assignedBodyPart != nullptr && assignedBodyPart->IsAttachedToBody();
+}

@@ -45,4 +45,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	bool CanDropToTable(AActor* object);
+
+	UFUNCTION(BlueprintCallable)
+	bool IsBodyPartSewn();
 };
