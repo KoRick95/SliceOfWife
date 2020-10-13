@@ -17,22 +17,23 @@ public:
 
 	class ACreature* bodyOnTable = nullptr;
 
-	float charge = 0;
+	UPROPERTY(BlueprintReadOnly)
+	float Charge = 0;
 
 	UPROPERTY(EditAnywhere, Category = "Snapping")
-		FVector SnapPosition = { 0, 0, 100 };
+	FVector SnapPosition = { 0, 0, 100 };
 
 	UPROPERTY(EditAnywhere, Category = "Snapping")
-		FRotator SnapRotation = { 0, 90, 180 };
+	FRotator SnapRotation = { 0, 90, 180 };
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
-		float ChargeRate = 1;
+	float ChargeRate = 1;
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
-		float MaxCharge = 5;
+	float MaxCharge = 5;
 
 	UPROPERTY(EditAnywhere)
-		TSubclassOf<class ASoul> SoulBP;
+	TSubclassOf<class ASoul> SoulBP;
 
 protected:
 	// Called when the game starts or when spawned
