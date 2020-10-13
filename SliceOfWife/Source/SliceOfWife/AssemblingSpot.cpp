@@ -86,25 +86,7 @@ bool AAssemblingSpot::IsOccupied()
 	return assignedBodyPart != nullptr;
 }
 
-bool AAssemblingSpot::CheckValidBodyPart(ABodyPart* bodyPart)
+bool AAssemblingSpot::CanDropToTable(AActor* object)
 {
-	if (bodyPart != nullptr)
-	{
-		TArray<EBodyPartType> currentTypes = bodyPart->GetCurrentMeshTypes();
-
-		for (int i = 0; i < currentTypes.Num(); ++i)
-		{
-			if (currentTypes[i] == table->CentralBodyPartType)
-			{
-				return true;
-			}
-
-			if (currentTypes[i] == this->BodyPartType)
-			{
-				return true;
-			}
-		}
-	}
-
-	return false;
+	return table->CanDropToTable(object, this);
 }

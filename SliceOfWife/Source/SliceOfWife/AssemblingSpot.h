@@ -44,5 +44,5 @@ public:
 	bool IsOccupied();
 
 	UFUNCTION(BlueprintCallable)
-		bool CheckValidBodyPart(ABodyPart* bodyPart);
+	bool CanDropToTable(AActor* object);
 };

@@ -56,7 +56,7 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 
 		if (bodyPart->HasMeshOfType(CentralBodyPartType, true) || bodyPart->HasMeshOfType(spot->BodyPartType, true))
 		{
-			canBeDropped = CheckBodyPart(bodyPart, &spotIndexes);
+			canBeDropped = CheckValidBodyPart(bodyPart, &spotIndexes);
 
 			if (!canBeDropped)
 				return false;
@@ -72,7 +72,7 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 
 			for (int i = 0; i < bodyParts.Num(); ++i)
 			{
-				canBeDropped = CheckBodyPart(bodyParts[i], &spotIndexes);
+				canBeDropped = CheckValidBodyPart(bodyParts[i], &spotIndexes);
 
 				if (!canBeDropped)
 					return false;
@@ -125,7 +125,51 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 	return canBeDropped;
 }
 
-bool AAssemblingTable::CheckBodyPart(ABodyPart* bodyPart, TArray<int>* spotIndexes)
+bool AAssemblingTable::CanDropToTable(AActor* object, AAssemblingSpot* spot)
+{
+	if (object == nullptr || spot == nullptr)
+	{
+		return false;
+	}
+
+	TArray<ABodyPart*> bodyParts;
+	bool canBeDropped = false;
+
+	if (object->IsA(ABodyPart::StaticClass()))
+	{
+		ABodyPart* bodyPart = Cast<ABodyPart>(object);
+		bodyParts.Add(bodyPart);
+
+		if (bodyPart->HasMeshOfType(CentralBodyPartType, true) || bodyPart->HasMeshOfType(spot->BodyPartType, true))
+		{
+			canBeDropped = CheckValidBodyPart(bodyPart);
+
+			if (!canBeDropped)
+				return false;
+		}
+	}
+	else if (object->IsA(ACreature::StaticClass()))
+	{
+		ACreature* body = Cast<ACreature>(object);
+
+		if (body->CreatureType == ECreatureType::Custom)
+		{
+			bodyParts = body->bodyParts;
+
+			for (int i = 0; i < bodyParts.Num(); ++i)
+			{
+				canBeDropped = CheckValidBodyPart(bodyParts[i]);
+
+				if (!canBeDropped)
+					return false;
+			}
+		}
+	}
+
+	return canBeDropped;
+}
+
+bool AAssemblingTable::CheckValidBodyPart(ABodyPart* bodyPart, TArray<int>* spotIndexes)
 {
 	bool isValid = false;
 	TArray<EBodyPartType> bodyPartTypes = bodyPart->GetCurrentMeshTypes();
@@ -136,7 +180,11 @@ bool AAssemblingTable::CheckBodyPart(ABodyPart* bodyPart, TArray<int>* spotIndex
 
 		if (bodyPartTypes[i] == CentralBodyPartType && centralBodyPart == nullptr)
 		{
-			spotIndexes->Add(-1);
+			if (spotIndexes != nullptr)
+			{
+				spotIndexes->Add(-1);
+			}
+			
 			isValid = true;
 		}
 		else
@@ -145,7 +193,11 @@ bool AAssemblingTable::CheckBodyPart(ABodyPart* bodyPart, TArray<int>* spotIndex
 			{
 				if (bodyPartTypes[i] == assemblingSpots[j]->BodyPartType && !assemblingSpots[j]->IsOccupied())
 				{
-					spotIndexes->Add(j);
+					if (spotIndexes != nullptr)
+					{
+						spotIndexes->Add(j);
+					}
+				
 					isValid = true;
 					break;
 				}
