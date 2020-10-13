@@ -257,7 +257,7 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 	for (int i = 0; i < primitiveComponents.Num(); ++i)
 	{
 		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(false);
-		//Cast<UPrimitiveComponent>(primitiveComponents[i])->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 
 	if (objectToHold->IsA(ACreature::StaticClass()))

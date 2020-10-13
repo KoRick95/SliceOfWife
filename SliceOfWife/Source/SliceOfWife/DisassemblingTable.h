@@ -29,7 +29,7 @@ public:
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
 	float ChargeRate = 1;
 
-	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (ClampMin = "0"))
 	float MaxCharge = 5;
 
 	UPROPERTY(EditAnywhere)

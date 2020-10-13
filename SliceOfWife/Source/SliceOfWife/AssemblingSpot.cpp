@@ -93,14 +93,5 @@ bool AAssemblingSpot::CanDropToTable(AActor* object)
 
 bool AAssemblingSpot::IsBodyPartSewn()
 {
-	bool bodyPartExists = assignedBodyPart != nullptr;
-	bool isAttachedToBody = assignedBodyPart->IsAttachedToBody();
-
-	if (!bodyPartExists)
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("The body part does not exist.")));
-
-	if (!isAttachedToBody )
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("The body part is not attached to body.")));
-
 	return assignedBodyPart != nullptr && assignedBodyPart->IsAttachedToBody();
 }
