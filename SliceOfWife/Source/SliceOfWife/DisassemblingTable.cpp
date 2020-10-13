@@ -54,7 +54,7 @@ bool ADisassemblingTable::RemoveFromTable()
 	return false;
 }
 
-bool ADisassemblingTable::Charge()
+bool ADisassemblingTable::ChargeMagic()
 {
 	if (!IsOccupied())
 		return false;

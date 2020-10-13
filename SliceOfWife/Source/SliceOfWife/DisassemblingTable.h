@@ -46,7 +46,7 @@ public:
 	bool DropToTable(AActor* body);
 	bool RemoveFromTable();
 
-	bool Charge();
+	bool ChargeMagic();
 	void DisassembleBody();
 
 	UFUNCTION(BlueprintCallable)
