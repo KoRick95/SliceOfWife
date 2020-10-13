@@ -319,7 +319,7 @@ void AMainCharacter::Interact()
 		}
 		else if (nearbyObjects[i]->IsA(ADisassemblingTable::StaticClass()))
 		{
-			hasInteracted = Cast<ADisassemblingTable>(nearbyObjects[i])->Charge();
+			hasInteracted = Cast<ADisassemblingTable>(nearbyObjects[i])->ChargeMagic();
 		}
 		else if (nearbyObjects[i]->IsA(AAssemblingSpot::StaticClass()))
 		{
