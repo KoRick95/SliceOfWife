@@ -125,7 +125,7 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 	return canBeDropped;
 }
 
-bool AAssemblingTable::CheckDroppedObject(AActor* object, AAssemblingSpot* spot)
+bool AAssemblingTable::CanDropToTable(AActor* object, AAssemblingSpot* spot)
 {
 	if (object == nullptr || spot == nullptr)
 	{

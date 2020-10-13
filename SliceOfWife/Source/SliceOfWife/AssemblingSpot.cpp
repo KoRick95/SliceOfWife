@@ -86,7 +86,7 @@ bool AAssemblingSpot::IsOccupied()
 	return assignedBodyPart != nullptr;
 }
 
-bool AAssemblingSpot::CheckDroppedObject(AActor* object)
+bool AAssemblingSpot::CanDropToTable(AActor* object)
 {
-	return table->CheckDroppedObject(object, this);
+	return table->CanDropToTable(object, this);
 }
