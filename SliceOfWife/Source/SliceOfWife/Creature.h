@@ -19,6 +19,9 @@ public:
 	TArray<class ABodyPart*> bodyParts;
 
 	UPROPERTY(EditAnywhere)
+	TArray<TSubclassOf<class ABodyPart>> BodyPartBlueprints;
+
+	UPROPERTY(EditAnywhere)
 	TEnumAsByte<ECreatureType> CreatureType;
 
 protected:
