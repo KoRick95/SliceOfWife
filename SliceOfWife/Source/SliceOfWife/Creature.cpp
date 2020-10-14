@@ -30,10 +30,10 @@ void ACreature::BeginPlay()
 		}
 	}
 
-	for (int i = 0; i < BodyPartBlueprints.Num(); ++i)
-	{
-		bodyParts.Add(BodyPartBlueprints[i].GetDefaultObject());
-	}
+	//for (int i = 0; i < BodyPartBlueprints.Num(); ++i)
+	//{
+	//	bodyParts.Add(BodyPartBlueprints[i].GetDefaultObject());
+	//}
 }
 
 // Called every frame
