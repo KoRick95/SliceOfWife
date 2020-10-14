@@ -37,7 +37,7 @@ public:
 	float CameraVerticalMax = 25;
 
 	UPROPERTY(EditAnywhere)
-	FVector PickupOffset = { 0, 0, 100 };
+	FVector PickupOffset = { 100, 0, 100 };
 
 protected:
 	// Called when the game starts or when spawned

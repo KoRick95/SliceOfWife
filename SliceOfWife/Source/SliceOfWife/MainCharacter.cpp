@@ -237,7 +237,7 @@ void AMainCharacter::PickUpAndDrop()
 			for (int i = 0; i < components.Num(); ++i)
 			{
 				Cast<UPrimitiveComponent>(components[i])->SetSimulatePhysics(true);
-				Cast<UPrimitiveComponent>(components[i])->SetCollisionProfileName("Pickup");
+				//Cast<UPrimitiveComponent>(components[i])->SetCollisionProfileName("Pickup");
 			}
 		}
 
@@ -256,9 +256,16 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 	TArray<UActorComponent*> primitiveComponents = objectToHold->GetComponentsByClass(UPrimitiveComponent::StaticClass());
 	for (int i = 0; i < primitiveComponents.Num(); ++i)
 	{
-		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(false);
-		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		UPrimitiveComponent* physicsComponent = Cast<UPrimitiveComponent>(primitiveComponents[i]);
+		physicsComponent->SetSimulatePhysics(false);
+		//physicsComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+		if (physicsComponent != objectToHold->GetRootComponent())
+		{
+			physicsComponent->AttachToComponent(objectToHold->GetRootComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
+		}
 	}
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("%i"), primitiveComponents.Num()));
 
 	if (objectToHold->IsA(ACreature::StaticClass()))
 	{
@@ -292,12 +299,6 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Invalid object type.")));
 		return false;
-	}
-
-	for (int i = 0; i < primitiveComponents.Num(); ++i)
-	{
-		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(false);
-		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 
 	HeldObject = objectToHold;
