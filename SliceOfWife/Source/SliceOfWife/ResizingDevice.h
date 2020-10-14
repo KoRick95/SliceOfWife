@@ -17,6 +17,17 @@ public:
 	AResizingDevice();
 
 	AActor* objectOnDevice = nullptr;
+	
+	bool isActive = false;
+
+	UPROPERTY(BlueprintReadOnly)
+	float ActiveTimer = 0;
+
+	UPROPERTY(EditAnywhere)
+	float WaitTime = 10;
+
+	UPROPERTY(EditAnywhere)
+	float ExpiryTime = 20;
 
 	UPROPERTY(EditAnywhere)
 	FVector SnapLocation = { 0, 0, 100 };
@@ -42,4 +53,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	bool IsOccupied();
+
+	UFUNCTION(BlueprintCallable)
+	void UpdateTimer();
 };

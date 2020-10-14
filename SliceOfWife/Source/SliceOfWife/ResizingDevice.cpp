@@ -38,6 +38,7 @@ bool AResizingDevice::DropToDevice(AActor* object)
 			object->SetActorRelativeRotation(FQuat(SnapRotation), false, nullptr, ETeleportType::ResetPhysics);
 
 			objectOnDevice = object;
+			isActive = true;
 
 			return true;
 		}
@@ -48,12 +49,22 @@ bool AResizingDevice::DropToDevice(AActor* object)
 
 bool AResizingDevice::RemoveFromDevice()
 {
-	if (!IsOccupied())
-		return false;
+	if (IsOccupied() && ActiveTimer > WaitTime)
+	{
+		UPrimitiveComponent* primitiveComponent = Cast<UPrimitiveComponent>(objectOnDevice->GetComponentByClass(UPrimitiveComponent::StaticClass()));
 
-	objectOnDevice->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-	objectOnDevice = nullptr;
-	return true;
+		if (primitiveComponent != nullptr)
+		{
+			//primitiveComponent->AddForce
+			primitiveComponent->AddForce(FVector(0, 0, 1));
+		}
+
+		objectOnDevice->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		objectOnDevice = nullptr;
+		return true;
+	}
+
+	return false;
 }
 
 bool AResizingDevice::ReplaceObject()
@@ -88,4 +99,12 @@ bool AResizingDevice::ReplaceObject()
 bool AResizingDevice::IsOccupied()
 {
 	return objectOnDevice != nullptr;
+}
+
+void AResizingDevice::UpdateTimer()
+{
+	if (isActive)
+	{
+		ActiveTimer += this->GetWorld()->GetDeltaSeconds();
+	}
 }

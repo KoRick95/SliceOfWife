@@ -27,8 +27,12 @@ void ACreature::BeginPlay()
 		if (children[i]->IsA(ABodyPart::StaticClass()))
 		{
 			this->bodyParts.Add(Cast<ABodyPart>(children[i]));
-			bodyParts.Add(BodyPartBlueprints[i].GetDefaultObject());
 		}
+	}
+
+	for (int i = 0; i < BodyPartBlueprints.Num(); ++i)
+	{
+		bodyParts.Add(BodyPartBlueprints[i].GetDefaultObject());
 	}
 }
 
