@@ -21,6 +21,9 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	AActor* HeldObject = nullptr;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool CanMove = true;
+
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
 	float MoveSpeed = 1;
 
