@@ -19,10 +19,10 @@ public:
 	TArray<class ABodyPart*> bodyParts;
 
 	UPROPERTY(EditAnywhere)
-	TArray<TSubclassOf<class ABodyPart>> BodyPartBlueprints;
+	TEnumAsByte<ECreatureType> CreatureType;
 
 	UPROPERTY(EditAnywhere)
-	TEnumAsByte<ECreatureType> CreatureType;
+	TArray<TSubclassOf<class ABodyPart>> BodyPartBlueprints;
 
 protected:
 	// Called when the game starts or when spawned

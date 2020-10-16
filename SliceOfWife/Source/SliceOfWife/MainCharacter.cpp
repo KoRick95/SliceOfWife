@@ -75,7 +75,7 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void AMainCharacter::MoveForward(float axis)
 {
-	if (axis)
+	if (CanMove && axis)
 	{
 		FVector direction = camera->GetForwardVector() * MoveSpeed;
 		direction.Z = 0;
@@ -94,7 +94,7 @@ void AMainCharacter::MoveForward(float axis)
 
 void AMainCharacter::MoveRight(float axis)
 {
-	if (axis)
+	if (CanMove && axis)
 	{
 		FVector direction = camera->GetRightVector() * MoveSpeed;
 		direction.Z = 0;
