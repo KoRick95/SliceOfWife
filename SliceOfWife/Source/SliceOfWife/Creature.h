@@ -16,6 +16,7 @@ public:
 	// Sets default values for this pawn's properties
 	ACreature();
 
+	class USkeletalMeshComponent* skeletalMeshComponent;
 	TArray<class ABodyPart*> bodyParts;
 
 	UPROPERTY(EditAnywhere)
