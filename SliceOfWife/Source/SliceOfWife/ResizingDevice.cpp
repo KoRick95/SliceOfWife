@@ -109,11 +109,6 @@ bool AResizingDevice::ReplaceObject()
 	return false;
 }
 
-bool AResizingDevice::IsOccupied()
-{
-	return objectOnDevice != nullptr;
-}
-
 bool AResizingDevice::Eject(AActor* towards)
 {
 	if (objectOnDevice != nullptr)
@@ -126,9 +121,9 @@ bool AResizingDevice::Eject(AActor* towards)
 			direction.Z = 0;
 			direction = direction.GetSafeNormal();
 			FVector axis = FVector(direction.Y, -direction.X, 0);
-			
+
 			direction = direction.RotateAngleAxis(ImpulseAngle, axis);
-			
+
 			FVector impulse = direction * ImpulseStrength;
 			primitiveComponent->SetSimulatePhysics(true);
 			primitiveComponent->AddImpulse(impulse, NAME_None, true);
@@ -137,6 +132,11 @@ bool AResizingDevice::Eject(AActor* towards)
 	}
 
 	return false;
+}
+
+bool AResizingDevice::IsOccupied()
+{
+	return objectOnDevice != nullptr;
 }
 
 void AResizingDevice::UpdateTimer()
