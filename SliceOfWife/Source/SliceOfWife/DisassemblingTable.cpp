@@ -78,7 +78,7 @@ void ADisassemblingTable::DisassembleBody()
 	for (int i = 0; i < bodyPartsCount; ++i)
 	{
 		UClass* uClass = bodyOnTable->bodyParts[i]->GetClass();
-		FTransform transform = bodyOnTable->bodyParts[i]->GetTransform();
+		FTransform transform = bodyOnTable->skeletalMeshComponent->GetComponentTransform();
 
 		AActor* splitBodyPart = GetWorld()->SpawnActor(uClass, &transform);
 
