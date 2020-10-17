@@ -17,17 +17,16 @@ public:
 	AResizingDevice();
 
 	AActor* objectOnDevice = nullptr;
-	
 	bool isActive = false;
 
 	UPROPERTY(BlueprintReadOnly)
 	float ActiveTimer = 0;
 
 	UPROPERTY(EditAnywhere)
-	float WaitTime = 10;
+	float WaitTime = 5;
 
 	UPROPERTY(EditAnywhere)
-	float ExpiryTime = 20;
+	float ExpiryTime = 15;
 
 	UPROPERTY(EditAnywhere)
 	FVector SnapLocation = { 0, 0, 100 };
@@ -42,10 +41,10 @@ public:
 	TArray<FObjectReplacement> ObjectReplacements;
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
-	float ImpulseStrength = 100;
+	float ImpulseStrength = 500;
 
 	UPROPERTY(EditAnywhere)
-	float ImpulseAngle = 0;
+	float ImpulseAngle = 60;
 
 protected:
 	// Called when the game starts or when spawned
@@ -59,12 +58,10 @@ public:
 	bool RemoveFromDevice(AActor* requester = nullptr);
 
 	bool ReplaceObject();
+	bool Eject(AActor* towards = nullptr);
 
 	UFUNCTION(BlueprintCallable)
 	bool IsOccupied();
-
-	UFUNCTION(BlueprintCallable)
-	bool SpitOut(AActor* towards);
 
 	UFUNCTION(BlueprintCallable)
 	void UpdateTimer();

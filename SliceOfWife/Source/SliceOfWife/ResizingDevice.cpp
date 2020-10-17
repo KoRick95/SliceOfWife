@@ -69,7 +69,7 @@ bool AResizingDevice::RemoveFromDevice(AActor* requester)
 			objectOnDevice = GetWorld()->SpawnActor(uClass, &transform);
 		}
 		
-		if (SpitOut(requester))
+		if (Eject(requester))
 		{
 			objectOnDevice = nullptr;
 			isActive = false;
@@ -101,7 +101,6 @@ bool AResizingDevice::ReplaceObject()
 					offset -= Cast<ABodyPart>(objectOnDevice)->GetMeshRelativeLocation();
 				}
 				objectOnDevice->SetActorLocation(this->GetActorLocation() + offset, false, nullptr, ETeleportType::ResetPhysics);
-				//objectOnDevice->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
 				return true;
 			}
 		}
@@ -115,7 +114,7 @@ bool AResizingDevice::IsOccupied()
 	return objectOnDevice != nullptr;
 }
 
-bool AResizingDevice::SpitOut(AActor* towards)
+bool AResizingDevice::Eject(AActor* towards)
 {
 	if (objectOnDevice != nullptr)
 	{
@@ -123,14 +122,16 @@ bool AResizingDevice::SpitOut(AActor* towards)
 
 		if (primitiveComponent != nullptr)
 		{
-			FVector direction = towards->GetActorLocation() - this->GetActorLocation();
+			FVector direction = (towards == nullptr) ? FMath::VRand() : towards->GetActorLocation() - this->GetActorLocation();
 			direction.Z = 0;
+			direction = direction.GetSafeNormal();
 			FVector axis = FVector(direction.Y, -direction.X, 0);
+			
 			direction = direction.RotateAngleAxis(ImpulseAngle, axis);
-
+			
 			FVector impulse = direction * ImpulseStrength;
-
-			primitiveComponent->AddImpulse(impulse);
+			primitiveComponent->SetSimulatePhysics(true);
+			primitiveComponent->AddImpulse(impulse, NAME_None, true);
 			return true;
 		}
 	}
