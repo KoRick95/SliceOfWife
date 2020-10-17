@@ -33,35 +33,49 @@ bool AResizingDevice::DropToDevice(AActor* object)
 		if (object->IsA(ABodyPart::StaticClass()))
 		{
 			offset -= Cast<ABodyPart>(object)->GetMeshRelativeLocation();
-			object->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-			object->SetActorRelativeLocation(offset, false, nullptr, ETeleportType::ResetPhysics);
-			object->SetActorRelativeRotation(FQuat(SnapRotation), false, nullptr, ETeleportType::ResetPhysics);
-
-			objectOnDevice = object;
-			isActive = true;
-
-			return true;
 		}
+
+		object->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		object->SetActorRelativeLocation(offset, false, nullptr, ETeleportType::ResetPhysics);
+		object->SetActorRelativeRotation(FQuat(SnapRotation), false, nullptr, ETeleportType::ResetPhysics);
+
+		objectOnDevice = object;
+		isActive = true;
+
+		return true;
 	}
 	
 	return false;
 }
 
-bool AResizingDevice::RemoveFromDevice()
+bool AResizingDevice::RemoveFromDevice(AActor* requester)
 {
-	if (IsOccupied() && ActiveTimer > WaitTime)
+	if (IsOccupied())
 	{
-		UPrimitiveComponent* primitiveComponent = Cast<UPrimitiveComponent>(objectOnDevice->GetComponentByClass(UPrimitiveComponent::StaticClass()));
-
-		if (primitiveComponent != nullptr)
+		if (ActiveTimer < WaitTime)
 		{
-			//primitiveComponent->AddForce
-			primitiveComponent->AddForce(FVector(0, 0, 1));
+			objectOnDevice->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		}
+		else if (ActiveTimer < ExpiryTime)
+		{
+			ReplaceObject();
+		}
+		else
+		{
+			UClass* uClass = FailedProduct.Get();
+			FTransform transform = objectOnDevice->GetTransform();
 
-		objectOnDevice->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-		objectOnDevice = nullptr;
-		return true;
+			objectOnDevice->Destroy();
+			objectOnDevice = GetWorld()->SpawnActor(uClass, &transform);
+		}
+		
+		if (SpitOut(requester))
+		{
+			objectOnDevice = nullptr;
+			isActive = false;
+			ActiveTimer = 0;
+			return true;
+		}
 	}
 
 	return false;
@@ -69,27 +83,27 @@ bool AResizingDevice::RemoveFromDevice()
 
 bool AResizingDevice::ReplaceObject()
 {
-	if (!IsOccupied())
-		return false;
-
-	for (int i = 0; i < ObjectReplacements.Num(); ++i)
+	if (IsOccupied())
 	{
-		if (ObjectReplacements[i].Input.Get() == objectOnDevice->GetClass())
+		for (int i = 0; i < ObjectReplacements.Num(); ++i)
 		{
-			UClass* uClass = ObjectReplacements[i].Output.Get();
-			FTransform transform = objectOnDevice->GetActorTransform();
-			AActor* newObject = GetWorld()->SpawnActor(uClass, &transform);
-			objectOnDevice->Destroy();
-			objectOnDevice = newObject;
-
-			FVector offset = SnapLocation;
-			if (objectOnDevice->IsA(ABodyPart::StaticClass()))
+			if (ObjectReplacements[i].Input.Get() == objectOnDevice->GetClass())
 			{
-				offset -= Cast<ABodyPart>(objectOnDevice)->GetMeshRelativeLocation();
+				UClass* uClass = ObjectReplacements[i].Output.Get();
+				FTransform transform = objectOnDevice->GetActorTransform();
+				AActor* newObject = GetWorld()->SpawnActor(uClass, &transform);
+				objectOnDevice->Destroy();
+				objectOnDevice = newObject;
+
+				FVector offset = SnapLocation;
+				if (objectOnDevice->IsA(ABodyPart::StaticClass()))
+				{
+					offset -= Cast<ABodyPart>(objectOnDevice)->GetMeshRelativeLocation();
+				}
+				objectOnDevice->SetActorLocation(this->GetActorLocation() + offset, false, nullptr, ETeleportType::ResetPhysics);
+				//objectOnDevice->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
+				return true;
 			}
-			objectOnDevice->SetActorRelativeLocation(offset, false, nullptr, ETeleportType::ResetPhysics);
-			objectOnDevice->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
-			return true;
 		}
 	}
 
@@ -99,6 +113,29 @@ bool AResizingDevice::ReplaceObject()
 bool AResizingDevice::IsOccupied()
 {
 	return objectOnDevice != nullptr;
+}
+
+bool AResizingDevice::SpitOut(AActor* towards)
+{
+	if (objectOnDevice != nullptr)
+	{
+		UPrimitiveComponent* primitiveComponent = Cast<UPrimitiveComponent>(objectOnDevice->GetComponentByClass(UPrimitiveComponent::StaticClass()));
+
+		if (primitiveComponent != nullptr)
+		{
+			FVector direction = towards->GetActorLocation() - this->GetActorLocation();
+			direction.Z = 0;
+			FVector axis = FVector(direction.Y, -direction.X, 0);
+			direction = direction.RotateAngleAxis(ImpulseAngle, axis);
+
+			FVector impulse = direction * ImpulseStrength;
+
+			primitiveComponent->AddImpulse(impulse);
+			return true;
+		}
+	}
+
+	return false;
 }
 
 void AResizingDevice::UpdateTimer()

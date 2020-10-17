@@ -140,26 +140,22 @@ void AMainCharacter::PickUpAndDrop()
 			{
 				objectToHold = Cast<ABodyStorage>(nearbyObjects[i])->TakeBody();
 			}
-			else if (nearbyObjects[i]->IsA(AResizingDevice::StaticClass()))
-			{
-				objectToHold = Cast<AResizingDevice>(nearbyObjects[i])->objectOnDevice;
-			}
 			else if (nearbyObjects[i]->IsA(ACreature::StaticClass()))
 			{
 				objectToHold = nearbyObjects[i];
 			}
 			else if (nearbyObjects[i]->IsA(ABodyPart::StaticClass()))
 			{
-				ABodyPart* aBodyPart = Cast<ABodyPart>(nearbyObjects[i]);
+				ABodyPart* bodyPart = Cast<ABodyPart>(nearbyObjects[i]);
 
 				// if the body part is attached to a body
-				if (aBodyPart->attachedBody != nullptr)
+				if (bodyPart->attachedBody != nullptr)
 				{
-					objectToHold = aBodyPart->attachedBody;
+					objectToHold = bodyPart->attachedBody;
 				}
 				else
 				{
-					objectToHold = aBodyPart;
+					objectToHold = bodyPart;
 				}
 			}
 
@@ -182,11 +178,6 @@ void AMainCharacter::PickUpAndDrop()
 					{
 						// remove it from the disassembling table
 						canPickupObject = Cast<ADisassemblingTable>(objectAttachParent)->RemoveFromTable();
-					}
-					else if (objectAttachParent->IsA(AResizingDevice::StaticClass()))
-					{
-						// remove it from the resize device
-						canPickupObject = Cast<AResizingDevice>(objectAttachParent)->RemoveFromDevice();
 					}
 					else
 					{
@@ -238,7 +229,6 @@ void AMainCharacter::PickUpAndDrop()
 			{
 				UPrimitiveComponent* physicsComponent = Cast<UPrimitiveComponent>(primitiveComponents[i]);
 				physicsComponent->SetSimulatePhysics(true);
-				//Cast<UPrimitiveComponent>(components[i])->SetCollisionProfileName("Pickup");
 
 				if (physicsComponent != HeldObject->GetRootComponent())
 				{
@@ -299,7 +289,6 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 
 		// add the offset to the object
 		objectToHold->SetActorRelativeLocation(PickupOffset + meshOffset, false, nullptr, ETeleportType::ResetPhysics);
-		//objectToHold->AddActorLocalOffset(meshOffset, false, nullptr, ETeleportType::ResetPhysics);
 	}
 	else
 	{
@@ -334,7 +323,7 @@ void AMainCharacter::Interact()
 		}
 		else if (nearbyObjects[i]->IsA(AResizingDevice::StaticClass()))
 		{
-			hasInteracted = Cast<AResizingDevice>(nearbyObjects[i])->ReplaceObject();
+			hasInteracted = Cast<AResizingDevice>(nearbyObjects[i])->RemoveFromDevice(this);
 		}
 		else if (nearbyObjects[i]->IsA(AAnimatingDevice::StaticClass()))
 		{
