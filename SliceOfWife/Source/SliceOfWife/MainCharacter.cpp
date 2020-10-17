@@ -233,11 +233,17 @@ void AMainCharacter::PickUpAndDrop()
 		if (!isSnapped)
 		{
 			// enable physics
-			TArray<UActorComponent*> components = HeldObject->GetComponentsByClass(UPrimitiveComponent::StaticClass());
-			for (int i = 0; i < components.Num(); ++i)
+			TArray<UActorComponent*> primitiveComponents = HeldObject->GetComponentsByClass(UPrimitiveComponent::StaticClass());
+			for (int i = 0; i < primitiveComponents.Num(); ++i)
 			{
-				Cast<UPrimitiveComponent>(components[i])->SetSimulatePhysics(true);
+				UPrimitiveComponent* physicsComponent = Cast<UPrimitiveComponent>(primitiveComponents[i]);
+				physicsComponent->SetSimulatePhysics(true);
 				//Cast<UPrimitiveComponent>(components[i])->SetCollisionProfileName("Pickup");
+
+				if (physicsComponent != HeldObject->GetRootComponent())
+				{
+					physicsComponent->AttachToComponent(HeldObject->GetRootComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
+				}
 			}
 		}
 
