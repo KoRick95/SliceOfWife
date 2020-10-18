@@ -22,11 +22,11 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	float ActiveTimer = 0;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float WaitTime = 5;
 
-	UPROPERTY(EditAnywhere)
-	float ExpiryTime = 15;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float FailTime = 15;
 
 	UPROPERTY(EditAnywhere)
 	FVector SnapLocation = { 0, 0, 100 };
