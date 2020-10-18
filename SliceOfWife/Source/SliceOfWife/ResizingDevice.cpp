@@ -56,7 +56,7 @@ bool AResizingDevice::RemoveFromDevice(AActor* requester)
 		{
 			objectOnDevice->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		}
-		else if (ActiveTimer < ExpiryTime)
+		else if (ActiveTimer < FailTime)
 		{
 			ReplaceObject();
 		}
