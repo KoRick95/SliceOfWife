@@ -56,7 +56,7 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 
 		if (bodyPart->HasMeshOfType(CentralBodyPartType, true) || bodyPart->HasMeshOfType(spot->BodyPartType, true))
 		{
-			canBeDropped = CheckBodyPart(bodyPart, &spotIndexes);
+			canBeDropped = CheckValidBodyPart(bodyPart, &spotIndexes);
 
 			if (!canBeDropped)
 				return false;
@@ -72,7 +72,7 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 
 			for (int i = 0; i < bodyParts.Num(); ++i)
 			{
-				canBeDropped = CheckBodyPart(bodyParts[i], &spotIndexes);
+				canBeDropped = CheckValidBodyPart(bodyParts[i], &spotIndexes);
 
 				if (!canBeDropped)
 					return false;
@@ -105,7 +105,7 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 					GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Set pointer #%i"), s + 1));
 					if (spotIndexes[s] >= 0)
 					{
-						assemblingSpots[spotIndexes[s]]->bodyPart = bodyParts[b];
+						assemblingSpots[spotIndexes[s]]->assignedBodyPart = bodyParts[b];
 					}
 					else
 					{
@@ -125,7 +125,51 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 	return canBeDropped;
 }
 
-bool AAssemblingTable::CheckBodyPart(ABodyPart* bodyPart, TArray<int>* spotIndexes)
+bool AAssemblingTable::CanDropToTable(AActor* object, AAssemblingSpot* spot)
+{
+	if (object == nullptr || spot == nullptr)
+	{
+		return false;
+	}
+
+	TArray<ABodyPart*> bodyParts;
+	bool canBeDropped = false;
+
+	if (object->IsA(ABodyPart::StaticClass()))
+	{
+		ABodyPart* bodyPart = Cast<ABodyPart>(object);
+		bodyParts.Add(bodyPart);
+
+		if (bodyPart->HasMeshOfType(CentralBodyPartType, true) || bodyPart->HasMeshOfType(spot->BodyPartType, true))
+		{
+			canBeDropped = CheckValidBodyPart(bodyPart);
+
+			if (!canBeDropped)
+				return false;
+		}
+	}
+	else if (object->IsA(ACreature::StaticClass()))
+	{
+		ACreature* body = Cast<ACreature>(object);
+
+		if (body->CreatureType == ECreatureType::Custom)
+		{
+			bodyParts = body->bodyParts;
+
+			for (int i = 0; i < bodyParts.Num(); ++i)
+			{
+				canBeDropped = CheckValidBodyPart(bodyParts[i]);
+
+				if (!canBeDropped)
+					return false;
+			}
+		}
+	}
+
+	return canBeDropped;
+}
+
+bool AAssemblingTable::CheckValidBodyPart(ABodyPart* bodyPart, TArray<int>* spotIndexes)
 {
 	bool isValid = false;
 	TArray<EBodyPartType> bodyPartTypes = bodyPart->GetCurrentMeshTypes();
@@ -136,7 +180,11 @@ bool AAssemblingTable::CheckBodyPart(ABodyPart* bodyPart, TArray<int>* spotIndex
 
 		if (bodyPartTypes[i] == CentralBodyPartType && centralBodyPart == nullptr)
 		{
-			spotIndexes->Add(-1);
+			if (spotIndexes != nullptr)
+			{
+				spotIndexes->Add(-1);
+			}
+			
 			isValid = true;
 		}
 		else
@@ -145,7 +193,11 @@ bool AAssemblingTable::CheckBodyPart(ABodyPart* bodyPart, TArray<int>* spotIndex
 			{
 				if (bodyPartTypes[i] == assemblingSpots[j]->BodyPartType && !assemblingSpots[j]->IsOccupied())
 				{
-					spotIndexes->Add(j);
+					if (spotIndexes != nullptr)
+					{
+						spotIndexes->Add(j);
+					}
+				
 					isValid = true;
 					break;
 				}
@@ -180,9 +232,9 @@ bool AAssemblingTable::RemoveFromTable(AActor* object)
 			{
 				for (int j = 0; j < assemblingSpots.Num(); ++j)
 				{
-					if (FinalBody->bodyParts[i] == assemblingSpots[j]->bodyPart)
+					if (FinalBody->bodyParts[i] == assemblingSpots[j]->assignedBodyPart)
 					{
-						assemblingSpots[j]->bodyPart = nullptr;
+						assemblingSpots[j]->assignedBodyPart = nullptr;
 						break;
 					}
 				}
@@ -203,9 +255,9 @@ bool AAssemblingTable::RemoveFromTable(AActor* object)
 
 		for (int i = 0; i < assemblingSpots.Num(); ++i)
 		{
-			if (assemblingSpots[i]->bodyPart == bodyPart)
+			if (assemblingSpots[i]->assignedBodyPart == bodyPart)
 			{
-				assemblingSpots[i]->bodyPart = nullptr;
+				assemblingSpots[i]->assignedBodyPart = nullptr;
 			}
 		}
 
@@ -223,7 +275,7 @@ bool AAssemblingTable::RemoveFromTable(AActor* object)
 
 bool AAssemblingTable::BeginSewing(AAssemblingSpot* spot)
 {
-	if (centralBodyPart == nullptr || spot->bodyPart == nullptr || spot->bodyPart->IsAttachedToBody() || MinigameWidget == nullptr)
+	if (centralBodyPart == nullptr || spot->assignedBodyPart == nullptr || spot->assignedBodyPart->IsAttachedToBody() || MinigameWidget == nullptr)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, FString::Printf(TEXT("Check one of the following:\n"
 			"1. Is it missing the central body part?\n"

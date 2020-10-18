@@ -17,6 +17,16 @@ public:
 	AResizingDevice();
 
 	AActor* objectOnDevice = nullptr;
+	bool isActive = false;
+
+	UPROPERTY(BlueprintReadOnly)
+	float ActiveTimer = 0;
+
+	UPROPERTY(EditAnywhere)
+	float WaitTime = 5;
+
+	UPROPERTY(EditAnywhere)
+	float ExpiryTime = 15;
 
 	UPROPERTY(EditAnywhere)
 	FVector SnapLocation = { 0, 0, 100 };
@@ -25,7 +35,16 @@ public:
 	FRotator SnapRotation = { 0, 0, 0 };
 
 	UPROPERTY(EditAnywhere)
+	TSubclassOf<AActor> FailedProduct;
+
+	UPROPERTY(EditAnywhere)
 	TArray<FObjectReplacement> ObjectReplacements;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
+	float ImpulseStrength = 500;
+
+	UPROPERTY(EditAnywhere)
+	float ImpulseAngle = 60;
 
 protected:
 	// Called when the game starts or when spawned
@@ -36,10 +55,14 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	
 	bool DropToDevice(AActor* object);
-	bool RemoveFromDevice();
+	bool RemoveFromDevice(AActor* requester = nullptr);
 
 	bool ReplaceObject();
+	bool Eject(AActor* towards = nullptr);
 
 	UFUNCTION(BlueprintCallable)
 	bool IsOccupied();
+
+	UFUNCTION(BlueprintCallable)
+	void UpdateTimer();
 };

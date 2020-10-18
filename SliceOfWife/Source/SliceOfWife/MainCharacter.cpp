@@ -75,7 +75,7 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void AMainCharacter::MoveForward(float axis)
 {
-	if (axis)
+	if (CanMove && axis)
 	{
 		FVector direction = camera->GetForwardVector() * MoveSpeed;
 		direction.Z = 0;
@@ -94,7 +94,7 @@ void AMainCharacter::MoveForward(float axis)
 
 void AMainCharacter::MoveRight(float axis)
 {
-	if (axis)
+	if (CanMove && axis)
 	{
 		FVector direction = camera->GetRightVector() * MoveSpeed;
 		direction.Z = 0;
@@ -129,7 +129,7 @@ void AMainCharacter::PickUpAndDrop()
 	this->GetOverlappingActors(nearbyObjects);
 
 	// if the player is not holding anything
-	if (heldObject == nullptr)
+	if (HeldObject == nullptr)
 	{
 		// check all nearby objects
 		for (int i = 0; i < nearbyObjects.Num(); ++i)
@@ -140,26 +140,22 @@ void AMainCharacter::PickUpAndDrop()
 			{
 				objectToHold = Cast<ABodyStorage>(nearbyObjects[i])->TakeBody();
 			}
-			else if (nearbyObjects[i]->IsA(AResizingDevice::StaticClass()))
-			{
-				objectToHold = Cast<AResizingDevice>(nearbyObjects[i])->objectOnDevice;
-			}
 			else if (nearbyObjects[i]->IsA(ACreature::StaticClass()))
 			{
 				objectToHold = nearbyObjects[i];
 			}
 			else if (nearbyObjects[i]->IsA(ABodyPart::StaticClass()))
 			{
-				ABodyPart* aBodyPart = Cast<ABodyPart>(nearbyObjects[i]);
+				ABodyPart* bodyPart = Cast<ABodyPart>(nearbyObjects[i]);
 
 				// if the body part is attached to a body
-				if (aBodyPart->attachedBody != nullptr)
+				if (bodyPart->attachedBody != nullptr)
 				{
-					objectToHold = aBodyPart->attachedBody;
+					objectToHold = bodyPart->attachedBody;
 				}
 				else
 				{
-					objectToHold = aBodyPart;
+					objectToHold = bodyPart;
 				}
 			}
 
@@ -183,11 +179,6 @@ void AMainCharacter::PickUpAndDrop()
 						// remove it from the disassembling table
 						canPickupObject = Cast<ADisassemblingTable>(objectAttachParent)->RemoveFromTable();
 					}
-					else if (objectAttachParent->IsA(AResizingDevice::StaticClass()))
-					{
-						// remove it from the resize device
-						canPickupObject = Cast<AResizingDevice>(objectAttachParent)->RemoveFromDevice();
-					}
 					else
 					{
 						canPickupObject = false;
@@ -208,22 +199,22 @@ void AMainCharacter::PickUpAndDrop()
 		bool isSnapped = false;
 
 		// detach the held object from the player
-		heldObject->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		HeldObject->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
 		// check nearby objects
 		for (int i = 0; i < nearbyObjects.Num(); ++i)
 		{
 			if (nearbyObjects[i]->IsA(AAssemblingSpot::StaticClass()))
 			{
-				isSnapped = Cast<AAssemblingSpot>(nearbyObjects[i])->DropToTable(heldObject);
+				isSnapped = Cast<AAssemblingSpot>(nearbyObjects[i])->DropToTable(HeldObject);
 			}
 			else if (nearbyObjects[i]->IsA(ADisassemblingTable::StaticClass()))
 			{
-				isSnapped = Cast<ADisassemblingTable>(nearbyObjects[i])->DropToTable(heldObject);
+				isSnapped = Cast<ADisassemblingTable>(nearbyObjects[i])->DropToTable(HeldObject);
 			}
 			else if (nearbyObjects[i]->IsA(AResizingDevice::StaticClass()))
 			{
-				isSnapped = Cast<AResizingDevice>(nearbyObjects[i])->DropToDevice(heldObject);
+				isSnapped = Cast<AResizingDevice>(nearbyObjects[i])->DropToDevice(HeldObject);
 			}
 
 			if (isSnapped)
@@ -233,15 +224,20 @@ void AMainCharacter::PickUpAndDrop()
 		if (!isSnapped)
 		{
 			// enable physics
-			TArray<UActorComponent*> components = heldObject->GetComponentsByClass(UPrimitiveComponent::StaticClass());
-			for (int i = 0; i < components.Num(); ++i)
+			TArray<UActorComponent*> primitiveComponents = HeldObject->GetComponentsByClass(UPrimitiveComponent::StaticClass());
+			for (int i = 0; i < primitiveComponents.Num(); ++i)
 			{
-				Cast<UPrimitiveComponent>(components[i])->SetSimulatePhysics(true);
-				Cast<UPrimitiveComponent>(components[i])->SetCollisionProfileName("Pickup");
+				UPrimitiveComponent* physicsComponent = Cast<UPrimitiveComponent>(primitiveComponents[i]);
+				physicsComponent->SetSimulatePhysics(true);
+
+				if (physicsComponent != HeldObject->GetRootComponent())
+				{
+					physicsComponent->AttachToComponent(HeldObject->GetRootComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
+				}
 			}
 		}
 
-		heldObject = nullptr;
+		HeldObject = nullptr;
 	}
 }
 
@@ -256,9 +252,16 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 	TArray<UActorComponent*> primitiveComponents = objectToHold->GetComponentsByClass(UPrimitiveComponent::StaticClass());
 	for (int i = 0; i < primitiveComponents.Num(); ++i)
 	{
-		Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(false);
-		//Cast<UPrimitiveComponent>(primitiveComponents[i])->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		UPrimitiveComponent* physicsComponent = Cast<UPrimitiveComponent>(primitiveComponents[i]);
+		physicsComponent->SetSimulatePhysics(false);
+		//physicsComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+		if (physicsComponent != objectToHold->GetRootComponent())
+		{
+			physicsComponent->AttachToComponent(objectToHold->GetRootComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
+		}
 	}
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("%i"), primitiveComponents.Num()));
 
 	if (objectToHold->IsA(ACreature::StaticClass()))
 	{
@@ -268,8 +271,8 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 		fullBody->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
 		// add offset to the object
-		fullBody->SetActorLocation(this->GetActorLocation(), false, nullptr, ETeleportType::ResetPhysics);
-		fullBody->AddActorLocalOffset(PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
+		fullBody->SetActorRelativeLocation(PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
+		//fullBody->setactor
 	}
 	else if (objectToHold->IsA(ABodyPart::StaticClass()))
 	{
@@ -286,7 +289,6 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 
 		// add the offset to the object
 		objectToHold->SetActorRelativeLocation(PickupOffset + meshOffset, false, nullptr, ETeleportType::ResetPhysics);
-		//objectToHold->AddActorLocalOffset(meshOffset, false, nullptr, ETeleportType::ResetPhysics);
 	}
 	else
 	{
@@ -294,13 +296,7 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 		return false;
 	}
 
-	for (int i = 0; i < primitiveComponents.Num(); ++i)
-	{
-		//Cast<UPrimitiveComponent>(primitiveComponents[i])->SetSimulatePhysics(false);
-		//Cast<UPrimitiveComponent>(primitiveComponents[i])->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	}
-
-	heldObject = objectToHold;
+	HeldObject = objectToHold;
 	return true;
 }
 
@@ -319,7 +315,7 @@ void AMainCharacter::Interact()
 		}
 		else if (nearbyObjects[i]->IsA(ADisassemblingTable::StaticClass()))
 		{
-			hasInteracted = Cast<ADisassemblingTable>(nearbyObjects[i])->Charge();
+			hasInteracted = Cast<ADisassemblingTable>(nearbyObjects[i])->ChargeMagic();
 		}
 		else if (nearbyObjects[i]->IsA(AAssemblingSpot::StaticClass()))
 		{
@@ -327,7 +323,7 @@ void AMainCharacter::Interact()
 		}
 		else if (nearbyObjects[i]->IsA(AResizingDevice::StaticClass()))
 		{
-			hasInteracted = Cast<AResizingDevice>(nearbyObjects[i])->ReplaceObject();
+			hasInteracted = Cast<AResizingDevice>(nearbyObjects[i])->RemoveFromDevice(this);
 		}
 		else if (nearbyObjects[i]->IsA(AAnimatingDevice::StaticClass()))
 		{
@@ -341,7 +337,7 @@ void AMainCharacter::Interact()
 
 bool AMainCharacter::IsHoldingObject()
 {
-	return heldObject != nullptr;
+	return HeldObject != nullptr;
 }
 
 void AMainCharacter::OnOverlapBegin(UPrimitiveComponent* OverLappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)

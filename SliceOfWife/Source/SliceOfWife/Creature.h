@@ -16,10 +16,14 @@ public:
 	// Sets default values for this pawn's properties
 	ACreature();
 
+	class USkeletalMeshComponent* skeletalMeshComponent;
 	TArray<class ABodyPart*> bodyParts;
 
 	UPROPERTY(EditAnywhere)
 	TEnumAsByte<ECreatureType> CreatureType;
+
+	UPROPERTY(EditAnywhere)
+	TArray<TSubclassOf<class ABodyPart>> BodyPartBlueprints;
 
 protected:
 	// Called when the game starts or when spawned

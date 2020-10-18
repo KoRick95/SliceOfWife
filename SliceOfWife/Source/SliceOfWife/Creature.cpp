@@ -3,6 +3,7 @@
 #include "Creature.h"
 #include "BodyPart.h"
 #include "Components/BoxComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "Engine.h"
 #include "Engine/World.h"
 
@@ -29,6 +30,13 @@ void ACreature::BeginPlay()
 			this->bodyParts.Add(Cast<ABodyPart>(children[i]));
 		}
 	}
+
+	for (int i = 0; i < BodyPartBlueprints.Num(); ++i)
+	{
+		bodyParts.Add(BodyPartBlueprints[i].GetDefaultObject());
+	}
+
+	skeletalMeshComponent = Cast<USkeletalMeshComponent>(GetComponentByClass(USkeletalMeshComponent::StaticClass()));
 }
 
 // Called every frame
