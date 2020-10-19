@@ -58,10 +58,14 @@ public:
 	bool RemoveFromDevice(AActor* requester = nullptr);
 
 	bool ReplaceObject();
+	UClass* GetOutputClass(AActor* object);
 	bool Eject(AActor* towards = nullptr);
 
 	UFUNCTION(BlueprintCallable)
 	bool IsOccupied();
+
+	UFUNCTION(BlueprintCallable)
+	bool IsValidObject(AActor* object);
 
 	UFUNCTION(BlueprintCallable)
 	void UpdateTimer();
