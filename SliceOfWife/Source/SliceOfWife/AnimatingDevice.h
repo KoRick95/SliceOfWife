@@ -36,4 +36,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	bool AnimateBody();
+
+	UFUNCTION(BlueprintCallable)
+	bool CanAnimate();
 };
