@@ -127,7 +127,7 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 
 bool AAssemblingTable::CanDropToTable(AActor* object, AAssemblingSpot* spot)
 {
-	if (object == nullptr || spot == nullptr)
+	if (object == nullptr)
 	{
 		return false;
 	}
@@ -140,12 +140,18 @@ bool AAssemblingTable::CanDropToTable(AActor* object, AAssemblingSpot* spot)
 		ABodyPart* bodyPart = Cast<ABodyPart>(object);
 		bodyParts.Add(bodyPart);
 
-		if (bodyPart->HasMeshOfType(CentralBodyPartType, true) || bodyPart->HasMeshOfType(spot->BodyPartType, true))
+		if (spot == nullptr)
+		{
+			canBeDropped = bodyPart->HasMeshOfType(CentralBodyPartType, true);
+		}
+		else
+		{
+			canBeDropped = bodyPart->HasMeshOfType(CentralBodyPartType, true) || bodyPart->HasMeshOfType(spot->BodyPartType, true);
+		}
+
+		if (canBeDropped)
 		{
 			canBeDropped = CheckValidBodyPart(bodyPart);
-
-			if (!canBeDropped)
-				return false;
 		}
 	}
 	else if (object->IsA(ACreature::StaticClass()))
@@ -161,7 +167,7 @@ bool AAssemblingTable::CanDropToTable(AActor* object, AAssemblingSpot* spot)
 				canBeDropped = CheckValidBodyPart(bodyParts[i]);
 
 				if (!canBeDropped)
-					return false;
+					break;
 			}
 		}
 	}
@@ -174,12 +180,15 @@ bool AAssemblingTable::CheckValidBodyPart(ABodyPart* bodyPart, TArray<int>* spot
 	bool isValid = false;
 	TArray<EBodyPartType> bodyPartTypes = bodyPart->GetCurrentMeshTypes();
 
+	// check all body part types
 	for (int i = 0; i < bodyPartTypes.Num(); ++i)
 	{
 		isValid = false;
 
+		// if the body part is the centre and the centre spot is unoccupied
 		if (bodyPartTypes[i] == CentralBodyPartType && centralBodyPart == nullptr)
 		{
+			// if a spot index list is passed as paramater, fill the list
 			if (spotIndexes != nullptr)
 			{
 				spotIndexes->Add(-1);
@@ -189,21 +198,25 @@ bool AAssemblingTable::CheckValidBodyPart(ABodyPart* bodyPart, TArray<int>* spot
 		}
 		else
 		{
+			// check all the assembling spots
 			for (int j = 0; j < assemblingSpots.Num(); ++j)
 			{
+				// if the body part type match the assembling spot's assigned type AND the assembling spot is occupied
 				if (bodyPartTypes[i] == assemblingSpots[j]->BodyPartType && !assemblingSpots[j]->IsOccupied())
 				{
+					// if a spot index list is passed as paramater, fill the list
 					if (spotIndexes != nullptr)
 					{
 						spotIndexes->Add(j);
 					}
-				
+					
 					isValid = true;
 					break;
 				}
 			}
 		}
 
+		// if one of the body part is not valid, then exit the loop
 		if (!isValid)
 			break;
 	}
