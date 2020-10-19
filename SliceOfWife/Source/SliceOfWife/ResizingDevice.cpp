@@ -26,7 +26,7 @@ void AResizingDevice::Tick(float DeltaTime)
 
 bool AResizingDevice::DropToDevice(AActor* object)
 {
-	if (object != nullptr && !IsOccupied())
+	if (object != nullptr && !IsOccupied() && IsValidObject(object))
 	{
 		FVector offset = SnapLocation;
 
@@ -56,7 +56,7 @@ bool AResizingDevice::RemoveFromDevice(AActor* requester)
 		{
 			objectOnDevice->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		}
-		else if (ActiveTimer < ExpiryTime)
+		else if (ActiveTimer < FailTime)
 		{
 			ReplaceObject();
 		}
@@ -85,28 +85,43 @@ bool AResizingDevice::ReplaceObject()
 {
 	if (IsOccupied())
 	{
-		for (int i = 0; i < ObjectReplacements.Num(); ++i)
-		{
-			if (ObjectReplacements[i].Input.Get() == objectOnDevice->GetClass())
-			{
-				UClass* uClass = ObjectReplacements[i].Output.Get();
-				FTransform transform = objectOnDevice->GetActorTransform();
-				AActor* newObject = GetWorld()->SpawnActor(uClass, &transform);
-				objectOnDevice->Destroy();
-				objectOnDevice = newObject;
+		UClass* outputClass = GetOutputClass(objectOnDevice);
 
-				FVector offset = SnapLocation;
-				if (objectOnDevice->IsA(ABodyPart::StaticClass()))
-				{
-					offset -= Cast<ABodyPart>(objectOnDevice)->GetMeshRelativeLocation();
-				}
-				objectOnDevice->SetActorLocation(this->GetActorLocation() + offset, false, nullptr, ETeleportType::ResetPhysics);
-				return true;
+		if (outputClass)
+		{
+			FTransform transform = objectOnDevice->GetActorTransform();
+			AActor* newObject = GetWorld()->SpawnActor(outputClass, &transform);
+			objectOnDevice->Destroy();
+			objectOnDevice = newObject;
+
+			FVector offset = SnapLocation;
+			if (objectOnDevice->IsA(ABodyPart::StaticClass()))
+			{
+				offset -= Cast<ABodyPart>(objectOnDevice)->GetMeshRelativeLocation();
 			}
+			objectOnDevice->SetActorLocation(this->GetActorLocation() + offset, false, nullptr, ETeleportType::ResetPhysics);
+
+			return true;
 		}
 	}
 
 	return false;
+}
+
+UClass* AResizingDevice::GetOutputClass(AActor* object)
+{
+	if (object != nullptr)
+	{
+		for (int i = 0; i < ObjectReplacements.Num(); ++i)
+		{
+			if (ObjectReplacements[i].Input.Get() == object->GetClass())
+			{
+				return ObjectReplacements[i].Output.Get();
+			}
+		}
+	}
+	
+	return nullptr;
 }
 
 bool AResizingDevice::Eject(AActor* towards)
@@ -126,7 +141,7 @@ bool AResizingDevice::Eject(AActor* towards)
 
 			FVector impulse = direction * ImpulseStrength;
 			primitiveComponent->SetSimulatePhysics(true);
-			primitiveComponent->AddImpulse(impulse, NAME_None, true);
+			primitiveComponent->AddImpulse(impulse);
 			return true;
 		}
 	}
@@ -137,6 +152,11 @@ bool AResizingDevice::Eject(AActor* towards)
 bool AResizingDevice::IsOccupied()
 {
 	return objectOnDevice != nullptr;
+}
+
+bool AResizingDevice::IsValidObject(AActor* object)
+{
+	return (bool)GetOutputClass(object);
 }
 
 void AResizingDevice::UpdateTimer()
