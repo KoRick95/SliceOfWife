@@ -138,7 +138,6 @@ bool AAssemblingTable::CanDropToTable(AActor* object, AAssemblingSpot* spot)
 	if (object->IsA(ABodyPart::StaticClass()))
 	{
 		ABodyPart* bodyPart = Cast<ABodyPart>(object);
-		bodyParts.Add(bodyPart);
 
 		if (spot == nullptr)
 		{
