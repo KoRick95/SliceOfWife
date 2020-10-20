@@ -19,7 +19,7 @@ public:
 
 	class AAssemblingTable* table = nullptr;
 
-	class ABodyPart* assignedBodyPart = nullptr;
+	class ABodyPart* attachedBodyPart = nullptr;
 
 	UPROPERTY(EditAnywhere)
 	TEnumAsByte<EBodyPartType> BodyPartType;
@@ -32,10 +32,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	bool SetBodyPart(ABodyPart* aBodyPart);
+	bool SetBodyPart(ABodyPart* bodyPart);
 
 	bool DropToTable(AActor* object);
-	bool RemoveFromTable(ABodyPart* aBodyPart);
+	bool RemoveFromTable(ABodyPart* bodyPart);
 
 	bool BeginSewing();
 	void AssembleBodyPart();
@@ -48,4 +48,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	bool IsBodyPartSewn();
+
+	UFUNCTION(BlueprintCallable)
+	bool IsCentreBodyPart(ABodyPart* bodyPart);
 };

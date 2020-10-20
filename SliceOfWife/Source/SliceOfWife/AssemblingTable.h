@@ -18,7 +18,7 @@ public:
 
 	TArray<class AAssemblingSpot*> assemblingSpots;
 
-	class ABodyPart* centralBodyPart = nullptr;
+	class ABodyPart* centreBodyPart = nullptr;
 
 	UPROPERTY(BlueprintReadOnly)
 	class ACreature* FinalBody = nullptr;
@@ -30,7 +30,7 @@ public:
 	FRotator SnapRotation = { -90, 0, 90 };
 
 	UPROPERTY(EditAnywhere)
-	TEnumAsByte<EBodyPartType> CentralBodyPartType = EBodyPartType::Torso;
+	TEnumAsByte<EBodyPartType> CentreBodyPartType = EBodyPartType::Torso;
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class UMinigameWidget> MinigameWidget;
@@ -62,4 +62,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	bool IsCentreOccupied();
+
+	UFUNCTION(BlueprintCallable)
+	bool IsCentreBodyPart(ABodyPart* bodyPart);
 };
