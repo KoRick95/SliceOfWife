@@ -342,7 +342,7 @@ bool AAssemblingTable::IsCentreOccupied()
 
 bool AAssemblingTable::IsCentreBodyPart(ABodyPart* bodyPart)
 {
-	if (bodyPart->HasMeshOfType(CentreBodyPartType))
+	if (bodyPart && bodyPart->HasMeshOfType(CentreBodyPartType))
 		return true;
 
 	return false;
