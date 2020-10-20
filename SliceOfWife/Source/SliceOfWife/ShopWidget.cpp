@@ -32,7 +32,7 @@ FGachaItem UShopWidget::RollGacha(EGachaItemType itemType)
 
 	if (itemPool != nullptr)
 	{
-		int index = FMath::RandRange(0, itemPool->Num());
+		int index = FMath::RandRange(0, itemPool->Num() - 1);
 		return (*itemPool)[index];
 	}
 
