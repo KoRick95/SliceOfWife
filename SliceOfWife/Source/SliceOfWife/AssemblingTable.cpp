@@ -54,7 +54,7 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 		ABodyPart* bodyPart = Cast<ABodyPart>(object);
 		bodyParts.Add(bodyPart);
 
-		if (bodyPart->HasMeshOfType(CentralBodyPartType, true) || bodyPart->HasMeshOfType(spot->BodyPartType, true))
+		if (bodyPart->HasMeshOfType(CentreBodyPartType, true) || bodyPart->HasMeshOfType(spot->BodyPartType, true))
 		{
 			canBeDropped = CheckValidBodyPart(bodyPart, &spotIndexes);
 
@@ -105,11 +105,11 @@ bool AAssemblingTable::DropToTable(AActor* object, AAssemblingSpot* spot)
 					GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Set pointer #%i"), s + 1));
 					if (spotIndexes[s] >= 0)
 					{
-						assemblingSpots[spotIndexes[s]]->assignedBodyPart = bodyParts[b];
+						assemblingSpots[spotIndexes[s]]->attachedBodyPart = bodyParts[b];
 					}
 					else
 					{
-						centralBodyPart = bodyParts[b];
+						centreBodyPart = bodyParts[b];
 					}
 					s++;
 				}
@@ -141,11 +141,11 @@ bool AAssemblingTable::CanDropToTable(AActor* object, AAssemblingSpot* spot)
 
 		if (spot == nullptr)
 		{
-			canBeDropped = bodyPart->HasMeshOfType(CentralBodyPartType, true);
+			canBeDropped = bodyPart->HasMeshOfType(CentreBodyPartType, true);
 		}
 		else
 		{
-			canBeDropped = bodyPart->HasMeshOfType(CentralBodyPartType, true) || bodyPart->HasMeshOfType(spot->BodyPartType, true);
+			canBeDropped = bodyPart->HasMeshOfType(CentreBodyPartType, true) || bodyPart->HasMeshOfType(spot->BodyPartType, true);
 		}
 
 		if (canBeDropped)
@@ -185,7 +185,7 @@ bool AAssemblingTable::CheckValidBodyPart(ABodyPart* bodyPart, TArray<int>* spot
 		isValid = false;
 
 		// if the body part is the centre and the centre spot is unoccupied
-		if (bodyPartTypes[i] == CentralBodyPartType && centralBodyPart == nullptr)
+		if (bodyPartTypes[i] == CentreBodyPartType && centreBodyPart == nullptr)
 		{
 			// if a spot index list is passed as paramater, fill the list
 			if (spotIndexes != nullptr)
@@ -236,17 +236,17 @@ bool AAssemblingTable::RemoveFromTable(AActor* object)
 	{
 		for (int i = 0; i < FinalBody->bodyParts.Num(); ++i)
 		{
-			if (FinalBody->bodyParts[i] == centralBodyPart)
+			if (FinalBody->bodyParts[i] == centreBodyPart)
 			{
-				centralBodyPart = nullptr;
+				centreBodyPart = nullptr;
 			}
 			else
 			{
 				for (int j = 0; j < assemblingSpots.Num(); ++j)
 				{
-					if (FinalBody->bodyParts[i] == assemblingSpots[j]->assignedBodyPart)
+					if (FinalBody->bodyParts[i] == assemblingSpots[j]->attachedBodyPart)
 					{
-						assemblingSpots[j]->assignedBodyPart = nullptr;
+						assemblingSpots[j]->attachedBodyPart = nullptr;
 						break;
 					}
 				}
@@ -260,16 +260,16 @@ bool AAssemblingTable::RemoveFromTable(AActor* object)
 	{
 		ABodyPart* bodyPart = Cast<ABodyPart>(object);
 
-		if (bodyPart == centralBodyPart)
+		if (bodyPart == centreBodyPart)
 		{
-			centralBodyPart = nullptr;
+			centreBodyPart = nullptr;
 		}
 
 		for (int i = 0; i < assemblingSpots.Num(); ++i)
 		{
-			if (assemblingSpots[i]->assignedBodyPart == bodyPart)
+			if (assemblingSpots[i]->attachedBodyPart == bodyPart)
 			{
-				assemblingSpots[i]->assignedBodyPart = nullptr;
+				assemblingSpots[i]->attachedBodyPart = nullptr;
 			}
 		}
 
@@ -287,7 +287,7 @@ bool AAssemblingTable::RemoveFromTable(AActor* object)
 
 bool AAssemblingTable::BeginSewing(AAssemblingSpot* spot)
 {
-	if (centralBodyPart == nullptr || spot->assignedBodyPart == nullptr || spot->assignedBodyPart->IsAttachedToBody() || MinigameWidget == nullptr)
+	if (centreBodyPart == nullptr || spot->attachedBodyPart == nullptr || spot->attachedBodyPart->IsAttachedToBody() || MinigameWidget == nullptr)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, FString::Printf(TEXT("Check one of the following:\n"
 			"1. Is it missing the central body part?\n"
@@ -315,7 +315,7 @@ void AAssemblingTable::AssembleBodyPart(ABodyPart* bodyPart)
 		FinalBody->SetActorRelativeLocation(SnapPosition);
 		FinalBody->SetActorRelativeRotation(SnapRotation);
 		FinalBody->CreatureType = ECreatureType::Custom;
-		FinalBody->AttachBodyPart(centralBodyPart);
+		FinalBody->AttachBodyPart(centreBodyPart);
 	}
 
 	FinalBody->AttachBodyPart(bodyPart);
@@ -337,5 +337,13 @@ bool AAssemblingTable::AnimateBody()
 
 bool AAssemblingTable::IsCentreOccupied()
 {
-	return centralBodyPart != nullptr;
+	return centreBodyPart != nullptr;
+}
+
+bool AAssemblingTable::IsCentreBodyPart(ABodyPart* bodyPart)
+{
+	if (bodyPart && bodyPart->HasMeshOfType(CentreBodyPartType))
+		return true;
+
+	return false;
 }

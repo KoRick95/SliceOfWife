@@ -52,7 +52,7 @@ bool AAssemblingSpot::SetBodyPart(ABodyPart* aBodyPart)
 		{
 			if (currentTypes[i] == this->BodyPartType)
 			{
-				assignedBodyPart = aBodyPart;
+				attachedBodyPart = aBodyPart;
 				return true;
 			}
 		}
@@ -78,12 +78,12 @@ bool AAssemblingSpot::BeginSewing()
 
 void AAssemblingSpot::AssembleBodyPart()
 {
-	table->AssembleBodyPart(assignedBodyPart);
+	table->AssembleBodyPart(attachedBodyPart);
 }
 
 bool AAssemblingSpot::IsOccupied()
 {
-	return assignedBodyPart != nullptr;
+	return attachedBodyPart != nullptr;
 }
 
 bool AAssemblingSpot::CanDropToTable(AActor* object)
@@ -93,5 +93,10 @@ bool AAssemblingSpot::CanDropToTable(AActor* object)
 
 bool AAssemblingSpot::IsBodyPartSewn()
 {
-	return assignedBodyPart != nullptr && assignedBodyPart->IsAttachedToBody();
+	return attachedBodyPart != nullptr && attachedBodyPart->IsAttachedToBody();
+}
+
+bool AAssemblingSpot::IsCentreBodyPart(ABodyPart* bodyPart)
+{
+	return table->IsCentreBodyPart(bodyPart);
 }
