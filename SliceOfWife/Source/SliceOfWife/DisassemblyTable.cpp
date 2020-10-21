@@ -1,4 +1,4 @@
-#include "DisassemblingTable.h"
+#include "DisassemblyTable.h"
 #include "BodyPart.h"
 #include "Creature.h"
 #include "Soul.h"
@@ -7,25 +7,25 @@
 #include "Engine.h"
 
 // Sets default values
-ADisassemblingTable::ADisassemblingTable()
+ADisassemblyTable::ADisassemblyTable()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 }
 
 // Called when the game starts or when spawned
-void ADisassemblingTable::BeginPlay()
+void ADisassemblyTable::BeginPlay()
 {
 	Super::BeginPlay();
 }
 
 // Called every frame
-void ADisassemblingTable::Tick(float DeltaTime)
+void ADisassemblyTable::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
 
-bool ADisassemblingTable::DropToTable(AActor* body)
+bool ADisassemblyTable::DropToTable(AActor* body)
 {
 	if (body->IsA(ACreature::StaticClass()) && !IsOccupied())
 	{
@@ -41,7 +41,7 @@ bool ADisassemblingTable::DropToTable(AActor* body)
 	return false;
 }
 
-bool ADisassemblingTable::RemoveFromTable()
+bool ADisassemblyTable::RemoveFromTable()
 {
 	if (IsOccupied())
 	{
@@ -54,7 +54,7 @@ bool ADisassemblingTable::RemoveFromTable()
 	return false;
 }
 
-bool ADisassemblingTable::ChargeMagic()
+bool ADisassemblyTable::ChargeMagic()
 {
 	if (!IsOccupied())
 		return false;
@@ -71,7 +71,7 @@ bool ADisassemblingTable::ChargeMagic()
 	return true;
 }
 
-void ADisassemblingTable::DisassembleBody()
+void ADisassemblyTable::DisassembleBody()
 {
 	int bodyPartsCount = bodyOnTable->GetBodyPartsCount();
 
@@ -101,12 +101,12 @@ void ADisassemblingTable::DisassembleBody()
 	bodyOnTable = nullptr;
 }
 
-bool ADisassemblingTable::IsOccupied()
+bool ADisassemblyTable::IsOccupied()
 {
 	return bodyOnTable != nullptr;
 }
 
-bool ADisassemblingTable::CanDisassemble(ACreature* creature)
+bool ADisassemblyTable::CanDisassemble(ACreature* creature)
 {
 	return creature != nullptr && creature->bodyParts.Num() > 0 && creature->CreatureType != ECreatureType::Custom;
 }
