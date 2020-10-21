@@ -6,7 +6,7 @@
 #include "BodyPart.h"
 #include "BodyStorage.h"
 #include "Creature.h"
-#include "DisassemblingTable.h"
+#include "DisassemblyTable.h"
 #include "ResizingDevice.h"
 #include "Soul.h"
 #include "Camera/CameraComponent.h"
@@ -174,10 +174,10 @@ void AMainCharacter::PickUpAndDrop()
 						// remove it from the assembling table
 						canPickupObject = Cast<AAssemblingTable>(objectAttachParent)->RemoveFromTable(objectToHold);
 					}
-					else if (objectAttachParent->IsA(ADisassemblingTable::StaticClass()))
+					else if (objectAttachParent->IsA(ADisassemblyTable::StaticClass()))
 					{
 						// remove it from the disassembling table
-						canPickupObject = Cast<ADisassemblingTable>(objectAttachParent)->RemoveFromTable();
+						canPickupObject = Cast<ADisassemblyTable>(objectAttachParent)->RemoveFromTable();
 					}
 					else
 					{
@@ -208,9 +208,9 @@ void AMainCharacter::PickUpAndDrop()
 			{
 				isSnapped = Cast<AAssemblingSpot>(nearbyObjects[i])->DropToTable(HeldObject);
 			}
-			else if (nearbyObjects[i]->IsA(ADisassemblingTable::StaticClass()))
+			else if (nearbyObjects[i]->IsA(ADisassemblyTable::StaticClass()))
 			{
-				isSnapped = Cast<ADisassemblingTable>(nearbyObjects[i])->DropToTable(HeldObject);
+				isSnapped = Cast<ADisassemblyTable>(nearbyObjects[i])->DropToTable(HeldObject);
 			}
 			else if (nearbyObjects[i]->IsA(AResizingDevice::StaticClass()))
 			{
@@ -313,9 +313,9 @@ void AMainCharacter::Interact()
 			Cast<ASoul>(nearbyObjects[i])->Despawn();
 			hasInteracted = true;
 		}
-		else if (nearbyObjects[i]->IsA(ADisassemblingTable::StaticClass()))
+		else if (nearbyObjects[i]->IsA(ADisassemblyTable::StaticClass()))
 		{
-			hasInteracted = Cast<ADisassemblingTable>(nearbyObjects[i])->ChargeMagic();
+			hasInteracted = Cast<ADisassemblyTable>(nearbyObjects[i])->ChargeMagic();
 		}
 		else if (nearbyObjects[i]->IsA(AAssemblingSpot::StaticClass()))
 		{
