@@ -105,3 +105,8 @@ bool ADisassemblingTable::IsOccupied()
 {
 	return bodyOnTable != nullptr;
 }
+
+bool ADisassemblingTable::CanDisassemble(ACreature* creature)
+{
+	return creature != nullptr && creature->bodyParts.Num() > 0 && creature->CreatureType != ECreatureType::Custom;
+}

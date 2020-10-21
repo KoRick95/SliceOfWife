@@ -51,4 +51,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	bool IsOccupied();
+
+	UFUNCTION(BlueprintCallable)
+	bool CanDisassemble(ACreature* creature);
 };
