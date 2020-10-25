@@ -20,6 +20,9 @@ public:
 	bool isActive = false;
 
 	UPROPERTY(BlueprintReadOnly)
+	bool TempTutorialBool = false;
+
+	UPROPERTY(BlueprintReadOnly)
 	float ActiveTimer = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
