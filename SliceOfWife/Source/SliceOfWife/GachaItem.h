@@ -17,7 +17,7 @@ class SLICEOFWIFE_API UGachaItem : public UObject
 	
 public:
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FName Name;
 
 	UPROPERTY(EditAnywhere)
