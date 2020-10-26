@@ -18,9 +18,6 @@ public:
 	class ACreature* bodyOnTable = nullptr;
 
 	UPROPERTY(BlueprintReadOnly)
-	bool TempTutorialBool = false;
-
-	UPROPERTY(BlueprintReadOnly)
 	float Charge = 0;
 
 	UPROPERTY(EditAnywhere, Category = "Snapping")
