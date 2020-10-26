@@ -4,7 +4,7 @@
 #include "GachaItem.h"
 #include "GachaPool.h"
 
-void UShopWidget::OnInitialized()
+void UShopWidget::SetupShop()
 {
 	for (int i = 0; i < GachaBlueprints.Num(); ++i)
 	{
