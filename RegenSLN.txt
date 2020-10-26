@@ -11,3 +11,6 @@ UnrealBuildTool.exe -ProjectFiles -project="C:\Users\s191533\Documents\GitHub\Sl
 
 To retrieve Git log:
 git --no-pager log > log.txt
+
+Retrieving Undos:
+https://github.blog/2015-06-08-how-to-undo-almost-anything-with-git/
