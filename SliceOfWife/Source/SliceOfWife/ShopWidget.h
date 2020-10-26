@@ -21,7 +21,7 @@ public:
 	TArray<TSubclassOf<class UGachaPool>> GachaBlueprints;
 
 	UFUNCTION(BlueprintCallable)
-	void OnInitialized();
+	void SetupShop();
 
 	UFUNCTION(BlueprintCallable)
 	class UGachaItem* RollGachaByIndex(int gachaIndex);
