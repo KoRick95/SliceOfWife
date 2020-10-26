@@ -75,35 +75,18 @@ public:
 };
 
 USTRUCT(BlueprintType)
-struct FGachaItem
-{
-	GENERATED_BODY()
-
-public:
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TEnumAsByte<EGachaItemType> Type;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TEnumAsByte<EGachaRarity> Rarity;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TSubclassOf<AActor> Item;
-};
-
-USTRUCT()
 struct FGachaRarityPool
 {
 	GENERATED_BODY()
 
 public:
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(VisibleAnywhere)
 	TEnumAsByte<EGachaRarity> Rarity;
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
 	float ProbabilityValue = 0;
 
 	UPROPERTY(EditAnywhere)
-	TArray<FGachaItem> Items;
+	TArray<TSubclassOf<class UGachaItem>> ItemBlueprints;
 };

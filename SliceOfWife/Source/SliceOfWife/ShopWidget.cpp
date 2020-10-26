@@ -1,79 +1,42 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ShopWidget.h"
+#include "GachaItem.h"
+#include "GachaPool.h"
 
-FGachaItem UShopWidget::RollGacha(EGachaItemType itemType)
+void UShopWidget::OnInitialized()
 {
-	TArray<FGachaItem>* itemPool = nullptr;
-	EGachaRarity rarity = DetermineRarity(itemType);
-
-	if (itemType == EGachaItemType::Skin)
+	for (int i = 0; i < GachaBlueprints.Num(); ++i)
 	{
-		for (int i = 0; i < GachaSkinPool.Num(); ++i)
+		UGachaPool* gachaPool = GachaBlueprints[i].GetDefaultObject();
+
+		if (gachaPool)
 		{
-			if (GachaSkinPool[i].Rarity == rarity)
-			{
-				itemPool = &GachaSkinPool[i].Items;
-				break;
-			}
+			gachaPool->Initialize();
+			GachaPools.Add(gachaPool);
 		}
 	}
-	else if (itemType == EGachaItemType::BodyPart)
-	{
-		for (int i = 0; i < GachaBodyPartPool.Num(); ++i)
-		{
-			if (GachaBodyPartPool[i].Rarity == rarity)
-			{
-				itemPool = &GachaBodyPartPool[i].Items;
-				break;
-			}
-		}
-	}
-
-	if (itemPool != nullptr)
-	{
-		int index = FMath::RandRange(0, itemPool->Num() - 1);
-		return (*itemPool)[index];
-	}
-
-	return FGachaItem();
 }
 
-EGachaRarity UShopWidget::DetermineRarity(EGachaItemType itemType)
+UGachaItem* UShopWidget::RollGachaByIndex(int gachaIndex)
 {
-	float totalProbability = 0;
-	float accumulativeProbability = 0;
-	TArray<FGachaRarityPool>* gachaPool;
-
-	if (itemType == EGachaItemType::Skin)
+	if (gachaIndex >= 0 && gachaIndex < GachaPools.Num())
 	{
-		gachaPool = &GachaSkinPool;
-	}
-	else if (itemType == EGachaItemType::BodyPart)
-	{
-		gachaPool = &GachaBodyPartPool;
-	}
-	else
-	{
-		return EGachaRarity();
+		return GachaPools[gachaIndex]->RollItem();
 	}
 
-	for (int i = 0; i < gachaPool->Num(); ++i)
+	return nullptr;
+}
+
+UGachaItem* UShopWidget::RollGachaByName(FName gachaName)
+{
+	for (int i = 0; i < GachaPools.Num(); ++i)
 	{
-		totalProbability += (*gachaPool)[i].ProbabilityValue;
-	}
-
-	float rng = FMath::FRandRange(0, totalProbability);
-
-	for (int i = 0; i < gachaPool->Num(); ++i)
-	{
-		accumulativeProbability += (*gachaPool)[i].ProbabilityValue;
-
-		if (accumulativeProbability > rng)
+		if (GachaPools[i]->GachaName == gachaName)
 		{
-			return (*gachaPool)[i].Rarity;
+			return GachaPools[i]->RollItem();
 		}
 	}
-
-	return EGachaRarity();
+	
+	return nullptr;
 }

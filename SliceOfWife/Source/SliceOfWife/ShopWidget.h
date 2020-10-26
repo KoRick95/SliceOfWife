@@ -18,17 +18,17 @@ class SLICEOFWIFE_API UShopWidget : public UUserWidget
 public:
 
 	UPROPERTY(EditAnywhere)
-	TArray<FGachaRarityPool> GachaSkinPool;
-
-	UPROPERTY(EditAnywhere)
-	TArray<FGachaRarityPool> GachaBodyPartPool;
-
-public:
+	TArray<TSubclassOf<class UGachaPool>> GachaBlueprints;
 
 	UFUNCTION(BlueprintCallable)
-	FGachaItem RollGacha(EGachaItemType itemType);
+	class UGachaItem* RollGachaByIndex(int gachaIndex);
+
+	UFUNCTION(BlueprintCallable)
+	class UGachaItem* RollGachaByName(FName gachaName);
 
 private:
 
-	EGachaRarity DetermineRarity(EGachaItemType itemType);
+	TArray<UGachaPool*> GachaPools;
+
+	void OnInitialized();
 };
