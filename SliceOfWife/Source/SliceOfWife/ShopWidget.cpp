@@ -3,8 +3,9 @@
 #include "ShopWidget.h"
 #include "GachaItem.h"
 #include "GachaPool.h"
+#include "Engine.h"
 
-void UShopWidget::OnInitialized()
+void UShopWidget::SetupShop()
 {
 	for (int i = 0; i < GachaBlueprints.Num(); ++i)
 	{
@@ -25,6 +26,7 @@ UGachaItem* UShopWidget::RollGachaByIndex(int gachaIndex)
 		return GachaPools[gachaIndex]->RollItem();
 	}
 
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Gacha pool does not exist.")));
 	return nullptr;
 }
 
@@ -38,5 +40,6 @@ UGachaItem* UShopWidget::RollGachaByName(FName gachaName)
 		}
 	}
 	
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Gacha pool does not exist.")));
 	return nullptr;
 }
