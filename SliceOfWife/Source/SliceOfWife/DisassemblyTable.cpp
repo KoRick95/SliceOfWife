@@ -35,8 +35,6 @@ bool ADisassemblyTable::DropToTable(AActor* body)
 		body->SetActorRotation(SnapRotation, ETeleportType::ResetPhysics);
 
 		this->bodyOnTable = Cast<ACreature>(body);
-		Charge = 0;
-
 		return true;
 	}
 
@@ -66,7 +64,7 @@ bool ADisassemblyTable::ChargeMagic()
 	if (Charge >= MaxCharge)
 	{
 		DisassembleBody();
-		TempTutorialBool = true;
+		Charge = 0;
 	}
 	
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, FString::Printf(TEXT("Charge: %f"), Charge));
