@@ -110,6 +110,8 @@ bool AResizingDevice::ReplaceObject()
 			}
 			objectOnDevice->SetActorLocation(this->GetActorLocation() + offset, false, nullptr, ETeleportType::ResetPhysics);
 
+			TempTutorialBool = true;
+
 			return true;
 		}
 	}
