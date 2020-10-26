@@ -18,6 +18,9 @@ public:
 
 	AActor* objectOnDevice = nullptr;
 	bool isActive = false;
+	
+	UPROPERTY(BlueprintReadOnly)
+	bool TempTutorialBool = false;
 
 	UPROPERTY(BlueprintReadOnly)
 	float ActiveTimer = 0;
