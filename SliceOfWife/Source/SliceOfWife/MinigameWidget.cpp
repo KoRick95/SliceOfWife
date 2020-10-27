@@ -16,7 +16,7 @@ void UMinigameWidget::StartMinigame(AActor* initiator)
 
 void UMinigameWidget::EndMinigame(bool isCompleted)
 {
-	if (isCompleted)
+	if (isCompleted && minigameInitator)
 	{
 		if (minigameInitator->IsA(AAssemblingSpot::StaticClass()))
 		{
