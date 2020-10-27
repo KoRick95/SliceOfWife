@@ -24,6 +24,9 @@ public:
 	class ACreature* FinalBody = nullptr;
 
 	UPROPERTY(EditAnywhere)
+	bool SimultaneousSewingOn = true;
+
+	UPROPERTY(EditAnywhere)
 	FVector SnapPosition = { -90, 0, 105 };
 
 	UPROPERTY(EditAnywhere)
@@ -57,6 +60,7 @@ public:
 	bool BeginSewing(AAssemblingSpot* spot);
 
 	void AssembleBodyPart(ABodyPart* bodyPart);
+	void AssembleAllBodyParts();
 
 	bool AnimateBody();
 
