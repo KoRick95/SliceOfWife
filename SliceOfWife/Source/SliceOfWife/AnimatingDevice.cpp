@@ -34,12 +34,15 @@ bool AAnimatingDevice::AnimateBody()
 {
 	if (CanAnimate())
 	{
-		if (MinigameWidget != nullptr)
+		if (MinigameWidget)
 		{
 			CreateWidget<UMinigameWidget>(GetWorld(), MinigameWidget.Get())->StartMinigame(this);
 		}
-
-		assemblingTable->AnimateBody();
+		else
+		{
+			assemblingTable->AnimateBody();
+		}
+		
 		Animated = true;
 
 		return true;

@@ -21,8 +21,8 @@ public:
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
 	int MaxBodyCount = 1;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TArray<TSubclassOf<class ACreature>> Bodies;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<TSubclassOf<class ACreature>> CreaturePool;
 
 protected:
 	// Called when the game starts or when spawned
