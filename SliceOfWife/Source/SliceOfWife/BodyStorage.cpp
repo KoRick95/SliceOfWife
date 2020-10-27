@@ -25,7 +25,7 @@ void ABodyStorage::Tick(float DeltaTime)
 AActor* ABodyStorage::TakeBody()
 {
 	// if there is no body in the storage
-	if (Bodies.Num() < 1)
+	if (CreaturePool.Num() < 1)
 	{
 		return nullptr;
 	}
@@ -57,11 +57,11 @@ AActor* ABodyStorage::TakeBody()
 	if (canCreateNewBody)
 	{
 		// randomise the body being created
-		int i = FMath::RandRange(0, Bodies.Num() - 1);
+		int i = FMath::RandRange(0, CreaturePool.Num() - 1);
 
 		// set the body parameters
-		UClass* uClass = Bodies[i].Get();
-		FTransform transform = Bodies[i].GetDefaultObject()->GetActorTransform();
+		UClass* uClass = CreaturePool[i].Get();
+		FTransform transform = CreaturePool[i].GetDefaultObject()->GetActorTransform();
 		FActorSpawnParameters spawnParams;
 		spawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 

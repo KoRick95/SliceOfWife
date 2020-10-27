@@ -30,7 +30,7 @@ void AAnimatingDevice::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-bool AAnimatingDevice::AnimateBody()
+bool AAnimatingDevice::BeginAnimating()
 {
 	if (CanAnimate())
 	{
@@ -40,15 +40,20 @@ bool AAnimatingDevice::AnimateBody()
 		}
 		else
 		{
-			assemblingTable->AnimateBody();
+			AnimateBody();
 		}
-		
-		Animated = true;
 
 		return true;
 	}
 
 	return false;
+}
+
+void AAnimatingDevice::AnimateBody()
+{
+	bool isAnimated = assemblingTable->AnimateBody();
+
+	Animated = isAnimated;
 }
 
 bool AAnimatingDevice::CanAnimate()
