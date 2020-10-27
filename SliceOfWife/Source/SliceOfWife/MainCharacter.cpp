@@ -327,7 +327,7 @@ void AMainCharacter::Interact()
 		}
 		else if (nearbyObjects[i]->IsA(AAnimatingDevice::StaticClass()))
 		{
-			hasInteracted = Cast<AAnimatingDevice>(nearbyObjects[i])->AnimateBody();
+			hasInteracted = Cast<AAnimatingDevice>(nearbyObjects[i])->BeginAnimating();
 		}
 
 		if (hasInteracted)
