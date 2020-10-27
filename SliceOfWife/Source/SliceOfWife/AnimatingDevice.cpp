@@ -53,7 +53,7 @@ void AAnimatingDevice::AnimateBody()
 {
 	bool isAnimated = assemblingTable->AnimateBody();
 
-	Animated = isAnimated;
+	Animated = true;
 }
 
 bool AAnimatingDevice::CanAnimate()
