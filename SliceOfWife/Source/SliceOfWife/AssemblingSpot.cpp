@@ -78,7 +78,14 @@ bool AAssemblingSpot::BeginSewing()
 
 void AAssemblingSpot::AssembleBodyPart()
 {
-	table->AssembleBodyPart(attachedBodyPart);
+	if (table->SimultaneousSewingOn)
+	{
+		table->AssembleAllBodyParts();
+	}
+	else
+	{
+		table->AssembleBodyPart(attachedBodyPart);
+	}
 }
 
 bool AAssemblingSpot::IsOccupied()

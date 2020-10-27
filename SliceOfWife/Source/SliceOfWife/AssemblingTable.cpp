@@ -321,6 +321,19 @@ void AAssemblingTable::AssembleBodyPart(ABodyPart* bodyPart)
 	FinalBody->AttachBodyPart(bodyPart);
 }
 
+void AAssemblingTable::AssembleAllBodyParts()
+{
+	for (int i = 0; i < assemblingSpots.Num(); ++i)
+	{
+		ABodyPart* bodyPart = assemblingSpots[i]->attachedBodyPart;
+
+		if (bodyPart && !bodyPart->IsAttachedToBody())
+		{
+			AssembleBodyPart(bodyPart);
+		}
+	}
+}
+
 bool AAssemblingTable::AnimateBody()
 {
 	if (FinalBody)
