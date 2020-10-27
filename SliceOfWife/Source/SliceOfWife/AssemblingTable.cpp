@@ -323,14 +323,14 @@ void AAssemblingTable::AssembleBodyPart(ABodyPart* bodyPart)
 
 bool AAssemblingTable::AnimateBody()
 {
-	if (FinalBody == nullptr)
+	if (FinalBody)
 	{
-		return false;
+		FinalBody->SetActorRelativeLocation(SpawnOffset);
+		FinalBody->SetActorRelativeRotation(SpawnRotation);
+		DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		
+		return true;
 	}
-
-	FinalBody->SetActorRelativeLocation(SpawnOffset);
-	FinalBody->SetActorRelativeRotation(SpawnRotation);
-	DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
 	return false;
 }
