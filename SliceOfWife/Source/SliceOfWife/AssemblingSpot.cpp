@@ -100,7 +100,7 @@ bool AAssemblingSpot::CanDropToTable(AActor* object)
 
 bool AAssemblingSpot::IsBodyPartSewn()
 {
-	return attachedBodyPart != nullptr && attachedBodyPart->IsAttachedToBody();
+	return attachedBodyPart && attachedBodyPart->IsAttachedToBody();
 }
 
 bool AAssemblingSpot::IsCentreBodyPart(ABodyPart* bodyPart)

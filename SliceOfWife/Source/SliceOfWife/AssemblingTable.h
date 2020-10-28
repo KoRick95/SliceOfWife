@@ -69,4 +69,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	bool IsCentreBodyPart(ABodyPart* bodyPart);
+
+	UFUNCTION(BlueprintCallable)
+	int GetUnassembledSpotsCount();
 };
