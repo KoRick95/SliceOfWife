@@ -20,12 +20,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FName Name;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FString Description;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TEnumAsByte<EGachaItemType> ItemType;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TEnumAsByte<EGachaRarity> Rarity;
 };
