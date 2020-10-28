@@ -124,6 +124,9 @@ void AMainCharacter::LookRight(float axis)
 
 void AMainCharacter::PickUpAndDrop()
 {
+	if (!CanPickUp)
+		return;
+
 	// get all nearby objects
 	TArray<AActor*> nearbyObjects;
 	this->GetOverlappingActors(nearbyObjects);
