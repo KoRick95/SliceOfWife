@@ -35,7 +35,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	bool AnimateBody();
+	bool BeginAnimating();
+	void AnimateBody();
 
 	UFUNCTION(BlueprintCallable)
 	bool CanAnimate();

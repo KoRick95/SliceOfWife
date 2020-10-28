@@ -30,17 +30,18 @@ void AAnimatingDevice::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-bool AAnimatingDevice::AnimateBody()
+bool AAnimatingDevice::BeginAnimating()
 {
 	if (CanAnimate())
 	{
-		if (MinigameWidget != nullptr)
+		if (MinigameWidget)
 		{
 			CreateWidget<UMinigameWidget>(GetWorld(), MinigameWidget.Get())->StartMinigame(this);
 		}
-
-		assemblingTable->AnimateBody();
-		Animated = true;
+		else
+		{
+			AnimateBody();
+		}
 
 		return true;
 	}
@@ -48,52 +49,62 @@ bool AAnimatingDevice::AnimateBody()
 	return false;
 }
 
+void AAnimatingDevice::AnimateBody()
+{
+	bool isAnimated = assemblingTable->AnimateBody();
+
+	Animated = true;
+}
+
 bool AAnimatingDevice::CanAnimate()
 {
-	if (assemblingTable != nullptr && assemblingTable->FinalBody != nullptr)
+	if (!Animated)
 	{
-		TArray<ABodyPart*> currentBodyParts = assemblingTable->FinalBody->bodyParts;
-		TArray<EBodyPartType> currentMeshTypes;
-
-		// get all of the sewn body part types
-		for (int b = 0; b < currentBodyParts.Num(); ++b)
+		if (assemblingTable != nullptr && assemblingTable->FinalBody != nullptr)
 		{
-			currentMeshTypes.Append(currentBodyParts[b]->GetCurrentMeshTypes());
-		}
+			TArray<ABodyPart*> currentBodyParts = assemblingTable->FinalBody->bodyParts;
+			TArray<EBodyPartType> currentMeshTypes;
 
-		// if there are at least as many sewn body part types as the required body part types
-		if (RequiredBodyParts.Num() <= currentMeshTypes.Num())
-		{
-			// check all the required body part types
-			for (int r = 0; r < RequiredBodyParts.Num(); ++r)
+			// get all of the sewn body part types
+			for (int b = 0; b < currentBodyParts.Num(); ++b)
 			{
-				bool requirementMet = false;
+				currentMeshTypes.Append(currentBodyParts[b]->GetCurrentMeshTypes());
+			}
 
-				// check all the sewn body part types
-				for (int c = 0; c < currentMeshTypes.Num(); ++c)
+			// if there are at least as many sewn body part types as the required body part types
+			if (RequiredBodyParts.Num() <= currentMeshTypes.Num())
+			{
+				// check all the required body part types
+				for (int r = 0; r < RequiredBodyParts.Num(); ++r)
 				{
-					// if the sewn body part type and the required body part type matches
-					if (RequiredBodyParts[r] == currentMeshTypes[c])
+					bool requirementMet = false;
+
+					// check all the sewn body part types
+					for (int c = 0; c < currentMeshTypes.Num(); ++c)
 					{
-						requirementMet = true;
+						// if the sewn body part type and the required body part type matches
+						if (RequiredBodyParts[r] == currentMeshTypes[c])
+						{
+							requirementMet = true;
 
-						// remove the type from the checklist
-						currentMeshTypes.RemoveAt(c);
+							// remove the type from the checklist
+							currentMeshTypes.RemoveAt(c);
 
-						// move on to the next required body part type
-						break;
+							// move on to the next required body part type
+							break;
+						}
+					}
+
+					// if one of the requirement is not met, exit and return false
+					if (!requirementMet)
+					{
+						return false;
 					}
 				}
 
-				// if one of the requirement is not met, exit and return false
-				if (!requirementMet)
-				{
-					return false;
-				}
+				// if the check executed without exiting, then all the requirements are met
+				return true;
 			}
-
-			// if the check executed without exiting, then all the requirements are met
-			return true;
 		}
 	}
 
