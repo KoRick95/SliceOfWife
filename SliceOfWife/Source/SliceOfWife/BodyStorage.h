@@ -16,7 +16,6 @@ public:
 	ABodyStorage();
 
 	TArray<AActor*> currentBodies;
-	int bodyCount = 0;
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
 	int MaxBodyCount = 1;
