@@ -360,3 +360,20 @@ bool AAssemblingTable::IsCentreBodyPart(ABodyPart* bodyPart)
 
 	return false;
 }
+
+int AAssemblingTable::GetUnassembledSpotsCount()
+{
+	int count = 0;
+
+	for (int i = 0; i < assemblingSpots.Num(); ++i)
+	{
+		ABodyPart* bodyPart = assemblingSpots[i]->attachedBodyPart;
+
+		if (bodyPart && !bodyPart->IsAttachedToBody())
+		{
+			count++;
+		}
+	}
+
+	return count;
+}
