@@ -20,5 +20,12 @@ int URatingWidget::CountPlayerCreatureVariation()
 	AActor* assemblingTable = UGameplayStatics::GetActorOfClass(GetWorld(), AAssemblingTable::StaticClass());
 	ACreature* playerCreature = Cast<AAssemblingTable>(assemblingTable)->FinalBody;
 
-	return playerCreature->CountCreatureTypeVariation();
+	if (playerCreature)
+	{
+		return playerCreature->CountCreatureTypeVariation();
+	}
+	else
+	{
+		return 0;
+	}
 }

@@ -124,6 +124,9 @@ void AMainCharacter::LookRight(float axis)
 
 void AMainCharacter::PickUpAndDrop()
 {
+	if (!CanPickUp)
+		return;
+
 	// get all nearby objects
 	TArray<AActor*> nearbyObjects;
 	this->GetOverlappingActors(nearbyObjects);
@@ -327,7 +330,7 @@ void AMainCharacter::Interact()
 		}
 		else if (nearbyObjects[i]->IsA(AAnimatingDevice::StaticClass()))
 		{
-			hasInteracted = Cast<AAnimatingDevice>(nearbyObjects[i])->AnimateBody();
+			hasInteracted = Cast<AAnimatingDevice>(nearbyObjects[i])->BeginAnimating();
 		}
 
 		if (hasInteracted)

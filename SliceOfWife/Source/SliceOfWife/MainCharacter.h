@@ -24,6 +24,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool CanMove = true;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool CanPickUp = true;
+
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
 	float MoveSpeed = 1;
 
