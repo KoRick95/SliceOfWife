@@ -30,15 +30,23 @@ AActor* ABodyStorage::TakeBody()
 		// if the number of used creatures have reached max
 		if (currentBodies.Num() >= MaxBodyCount)
 		{
-			// if the oldest creature in the list is valid
-			if (IsValid(currentBodies[0]))
+			// if permanent limit is on
+			if (bPermamentLimit)
 			{
-				// destroy it and render it invalid
-				currentBodies[0]->Destroy();
+				return nullptr;
 			}
+			else
+			{
+				// if the oldest creature in the list is valid
+				if (IsValid(currentBodies[0]))
+				{
+					// destroy it and render it invalid
+					currentBodies[0]->Destroy();
+				}
 
-			// remove the invalid creature from the list
-			currentBodies.RemoveAt(0);
+				// remove the invalid creature from the list
+				currentBodies.RemoveAt(0);
+			}
 		}
 
 		// randomise the body being created
