@@ -17,6 +17,9 @@ public:
 
 	TArray<AActor*> currentBodies;
 
+	UPROPERTY(EditAnywhere)
+	bool bPermamentLimit = false;
+
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
 	int MaxBodyCount = 1;
 
