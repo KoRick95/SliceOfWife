@@ -81,21 +81,19 @@ void ADisassemblyTable::DisassembleBody()
 	{
 		UClass* uClass = bodyOnTable->bodyParts[i]->GetClass();
 		FTransform transform = bodyOnTable->skeletalMeshComponent->GetComponentTransform();
+		ABodyPart* splitBodyPart = Cast<ABodyPart>(GetWorld()->SpawnActor(uClass, &transform));
 
-		AActor* splitBodyPart = GetWorld()->SpawnActor(uClass, &transform);
-
-		// if the body part has a primitive component, enable its physics
-		UActorComponent* primitiveComponent = splitBodyPart->GetComponentByClass(UPrimitiveComponent::StaticClass());
-		if (primitiveComponent != nullptr)
+		if (splitBodyPart)
 		{
-			Cast<UPrimitiveComponent>(primitiveComponent)->SetSimulatePhysics(true);
-		}
+			// enable the body part's physics
+			splitBodyPart->SetPhysicsState(true);
 
-		// assign a soul to the body part
-		if (SoulBP != nullptr)
-		{
-			ASoul* soul = Cast<ASoul>(GetWorld()->SpawnActor(SoulBP.Get(), &FTransform::Identity));
-			soul->possession = splitBodyPart;
+			// assign a soul to the body part
+			if (SoulBP)
+			{
+				ASoul* soul = Cast<ASoul>(GetWorld()->SpawnActor(SoulBP.Get(), &FTransform::Identity));
+				soul->possession = splitBodyPart;
+			}
 		}
 	}
 
