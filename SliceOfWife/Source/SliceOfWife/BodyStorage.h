@@ -20,7 +20,7 @@ public:
 	UPROPERTY(EditAnywhere)
 	bool bPermamentLimit = false;
 
-	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0"))
 	int MaxBodyCount = 1;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
