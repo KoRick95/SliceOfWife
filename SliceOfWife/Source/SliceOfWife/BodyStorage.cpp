@@ -24,8 +24,7 @@ void ABodyStorage::Tick(float DeltaTime)
 
 AActor* ABodyStorage::TakeBody()
 {
-	// if there are no creatures in the pool
-	if (CreaturePool.Num() > 0)
+	if (MaxBodyCount > 0 && CreaturePool.Num() > 0)
 	{
 		// if the number of used creatures have reached max
 		if (currentBodies.Num() >= MaxBodyCount)

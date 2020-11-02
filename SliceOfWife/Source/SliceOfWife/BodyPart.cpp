@@ -160,3 +160,11 @@ bool ABodyPart::DetachFromBody()
 
 	return false;
 }
+
+void ABodyPart::AttachAccessory(AAccessory* accessory)
+{
+	if (accessory && AccessoryBlueprint && accessory->GetClass() == AccessoryBlueprint.Get())
+	{
+		
+	}
+}
