@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BodyPart.h"
+#include "Accessory.h"
 #include "Creature.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Engine.h"
@@ -82,7 +83,12 @@ TArray<EBodyPartType> ABodyPart::GetCurrentMeshTypes()
 
 void ABodyPart::SetPhysicsState(bool state)
 {
-	Cast<UPrimitiveComponent>(GetComponentByClass(UPrimitiveComponent::StaticClass()))->SetSimulatePhysics(state);
+	UPrimitiveComponent* physicsComponent = Cast<UPrimitiveComponent>(GetComponentByClass(UPrimitiveComponent::StaticClass()));
+	
+	if (physicsComponent)
+	{
+		physicsComponent->SetSimulatePhysics(state);
+	}
 }
 
 bool ABodyPart::IsAttachedToBody()
@@ -131,8 +137,10 @@ bool ABodyPart::SwitchMesh(int index)
 
 bool ABodyPart::AttachToBody(ACreature* fullBody)
 {
-	if (fullBody != nullptr)
+	if (fullBody)
 	{
+		SetPhysicsState(false);
+
 		// attach to the body and store its reference
 		this->AttachToActor(fullBody, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 		this->attachedBody = fullBody;
@@ -153,4 +161,9 @@ bool ABodyPart::DetachFromBody()
 	}
 
 	return false;
+}
+
+void ABodyPart::AttachAccessory(AAccessory* accessory)
+{
+	accessory->AttachToBodyPart(this);
 }

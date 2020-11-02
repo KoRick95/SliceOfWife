@@ -28,6 +28,9 @@ public:
 	UPROPERTY(EditAnywhere)
 	TArray<FBodyPartMesh> BodyPartMeshes;
 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class AAccessory> AccessoryBlueprint;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -48,4 +51,6 @@ public:
 
 	bool AttachToBody(ACreature* fullBody);
 	bool DetachFromBody();
+
+	void AttachAccessory(AAccessory* accessory);
 };
