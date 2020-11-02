@@ -2,6 +2,7 @@
 
 #include "Accessory.h"
 #include "BodyPart.h"
+#include "Components/MeshComponent.h"
 #include "Components/PrimitiveComponent.h"
 
 // Sets default values
@@ -15,6 +16,8 @@ AAccessory::AAccessory()
 void AAccessory::BeginPlay()
 {
 	Super::BeginPlay();
+
+	MeshComponent = Cast<UMeshComponent>(GetComponentByClass(UMeshComponent::StaticClass()));
 }
 
 // Called every frame
@@ -37,7 +40,6 @@ void AAccessory::AttachToBodyPart(ABodyPart* bodyPart)
 {
 	if (bodyPart && this->GetClass() == bodyPart->AccessoryBlueprint.Get())
 	{
-		AttachToActor(bodyPart, FAttachmentTransformRules::SnapToTargetIncludingScale, "Accessory_Socket");
+		AttachToComponent(MeshComponent, FAttachmentTransformRules::SnapToTargetIncludingScale, "Accessory_Socket");
 	}
 }
-

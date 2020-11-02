@@ -1,4 +1,5 @@
 #include "DisassemblyTable.h"
+#include "Accessory.h"
 #include "BodyPart.h"
 #include "Creature.h"
 #include "Soul.h"
@@ -93,6 +94,11 @@ void ADisassemblyTable::DisassembleBody()
 			{
 				ASoul* soul = Cast<ASoul>(GetWorld()->SpawnActor(SoulBP.Get(), &FTransform::Identity));
 				soul->possession = splitBodyPart;
+			}
+
+			if (splitBodyPart->AccessoryBlueprint)
+			{
+				//AAccessory* accessory = Cast<AAccessory>(GetWorld()->SpawnActor(splitBodyPart->AccessoryBlueprint.Get()))
 			}
 		}
 	}
