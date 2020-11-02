@@ -32,8 +32,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	bool SetBodyPart(ABodyPart* bodyPart);
-
 	bool DropToTable(AActor* object);
 	bool RemoveFromTable(ABodyPart* bodyPart);
 
