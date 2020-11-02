@@ -1,5 +1,6 @@
 #include "AssemblingTable.h"
 #include "AssemblingSpot.h"
+#include "Accessory.h"
 #include "BodyPart.h"
 #include "Creature.h"
 #include "MinigameWidget.h"
@@ -168,6 +169,13 @@ bool AAssemblingTable::CanDropToTable(AActor* object, AAssemblingSpot* spot)
 				if (!canBeDropped)
 					break;
 			}
+		}
+	}
+	else if (object->IsA(AAccessory::StaticClass()))
+	{
+		if (spot->attachedBodyPart)
+		{
+			canBeDropped = Cast<AAccessory>(object)->AttachToBodyPart(spot->attachedBodyPart);
 		}
 	}
 
