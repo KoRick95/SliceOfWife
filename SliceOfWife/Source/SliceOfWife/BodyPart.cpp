@@ -163,7 +163,7 @@ bool ABodyPart::DetachFromBody()
 	return false;
 }
 
-void ABodyPart::AttachAccessory(AAccessory* accessory)
+bool ABodyPart::AttachAccessory(AAccessory* accessory)
 {
-	accessory->AttachToBodyPart(this);
+	return accessory->AttachToBodyPart(this);
 }

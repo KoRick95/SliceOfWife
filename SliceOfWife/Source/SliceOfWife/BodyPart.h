@@ -52,5 +52,5 @@ public:
 	bool AttachToBody(ACreature* fullBody);
 	bool DetachFromBody();
 
-	void AttachAccessory(AAccessory* accessory);
+	bool AttachAccessory(AAccessory* accessory);
 };

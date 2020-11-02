@@ -2,8 +2,8 @@
 
 #include "Accessory.h"
 #include "BodyPart.h"
-#include "Components/MeshComponent.h"
 #include "Components/PrimitiveComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 
 // Sets default values
 AAccessory::AAccessory()
@@ -36,11 +36,14 @@ void AAccessory::SetPhysicsState(bool state)
 	}
 }
 
-void AAccessory::AttachToBodyPart(ABodyPart* bodyPart)
+bool AAccessory::AttachToBodyPart(ABodyPart* bodyPart)
 {
-	if (bodyPart && this->GetClass() == bodyPart->AccessoryBlueprint.Get())
+	if (bodyPart && bodyPart->skeletalMeshComponent->DoesSocketExist(this->SocketName))
 	{
 		SetPhysicsState(false);
-		AttachToComponent(MeshComponent, FAttachmentTransformRules::SnapToTargetIncludingScale, "Accessory_Socket");
+		AttachToComponent(bodyPart->skeletalMeshComponent, FAttachmentTransformRules::SnapToTargetIncludingScale, SocketName);
+		return true;
 	}
+
+	return false;
 }

@@ -99,6 +99,13 @@ void ADisassemblyTable::DisassembleBody()
 			if (splitBodyPart->AccessoryBlueprint)
 			{
 				uClass = splitBodyPart->AccessoryBlueprint.Get();
+				transform += splitBodyPart->skeletalMeshComponent->GetSocketTransform("Accessory_Socket");
+				AAccessory* accessory = Cast<AAccessory>(GetWorld()->SpawnActor(uClass, &transform));
+
+				if (accessory)
+				{
+					accessory->SetPhysicsState(true);
+				}
 			}
 		}
 	}
