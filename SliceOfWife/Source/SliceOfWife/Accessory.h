@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "EnumsStructs.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Accessory.generated.h"
@@ -17,6 +18,12 @@ public:
 
 	class UMeshComponent* MeshComponent;
 
+	//UPROPERTY(EditAnywhere)
+	//TEnumAsByte<EBodyPartType> AttachBodyPartType;
+
+	UPROPERTY(EditAnywhere)
+	FName SocketName;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -27,5 +34,5 @@ public:
 
 	void SetPhysicsState(bool state);
 
-	void AttachToBodyPart(class ABodyPart* bodyPart);
+	bool AttachToBodyPart(class ABodyPart* bodyPart);
 };
