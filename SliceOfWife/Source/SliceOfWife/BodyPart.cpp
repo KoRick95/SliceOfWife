@@ -137,8 +137,10 @@ bool ABodyPart::SwitchMesh(int index)
 
 bool ABodyPart::AttachToBody(ACreature* fullBody)
 {
-	if (fullBody != nullptr)
+	if (fullBody)
 	{
+		SetPhysicsState(false);
+
 		// attach to the body and store its reference
 		this->AttachToActor(fullBody, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 		this->attachedBody = fullBody;
@@ -163,8 +165,5 @@ bool ABodyPart::DetachFromBody()
 
 void ABodyPart::AttachAccessory(AAccessory* accessory)
 {
-	if (accessory && AccessoryBlueprint && accessory->GetClass() == AccessoryBlueprint.Get())
-	{
-		
-	}
+	accessory->AttachToBodyPart(this);
 }

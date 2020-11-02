@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Accessory.h"
+#include "BodyPart.h"
 #include "Components/PrimitiveComponent.h"
 
 // Sets default values
@@ -29,6 +30,14 @@ void AAccessory::SetPhysicsState(bool state)
 	if (physicsComponent)
 	{
 		physicsComponent->SetSimulatePhysics(state);
+	}
+}
+
+void AAccessory::AttachToBodyPart(ABodyPart* bodyPart)
+{
+	if (bodyPart && this->GetClass() == bodyPart->AccessoryBlueprint.Get())
+	{
+		AttachToActor(bodyPart, FAttachmentTransformRules::SnapToTargetIncludingScale, "Accessory_Socket");
 	}
 }
 

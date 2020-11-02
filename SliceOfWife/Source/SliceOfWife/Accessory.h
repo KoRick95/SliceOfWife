@@ -24,4 +24,6 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	void SetPhysicsState(bool state);
+
+	void AttachToBodyPart(class ABodyPart* bodyPart);
 };
