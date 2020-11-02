@@ -24,11 +24,10 @@ void ABodyStorage::Tick(float DeltaTime)
 
 AActor* ABodyStorage::TakeBody()
 {
-	// if there are no creatures in the pool
-	if (CreaturePool.Num() > 0)
+	if (MaxBodyCount > 0 && CreaturePool.Num() > 0)
 	{
 		// if the number of used creatures have reached max
-		if (currentBodies.Num() >= MaxBodyCount)
+		if (CurrentCreatures.Num() >= MaxBodyCount)
 		{
 			// if permanent limit is on
 			if (bPermamentLimit)
@@ -38,14 +37,14 @@ AActor* ABodyStorage::TakeBody()
 			else
 			{
 				// if the oldest creature in the list is valid
-				if (IsValid(currentBodies[0]))
+				if (IsValid(CurrentCreatures[0]))
 				{
 					// destroy it and render it invalid
-					currentBodies[0]->Destroy();
+					CurrentCreatures[0]->Destroy();
 				}
 
 				// remove the invalid creature from the list
-				currentBodies.RemoveAt(0);
+				CurrentCreatures.RemoveAt(0);
 			}
 		}
 
@@ -60,7 +59,7 @@ AActor* ABodyStorage::TakeBody()
 
 		// spawn a new body and add it to the array
 		AActor* newBody = GetWorld()->SpawnActor(uClass, &transform, spawnParams);
-		currentBodies.Add(newBody);
+		CurrentCreatures.Add(newBody);
 
 		return newBody;
 	}
