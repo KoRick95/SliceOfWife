@@ -40,6 +40,7 @@ void AAccessory::AttachToBodyPart(ABodyPart* bodyPart)
 {
 	if (bodyPart && this->GetClass() == bodyPart->AccessoryBlueprint.Get())
 	{
+		SetPhysicsState(false);
 		AttachToComponent(MeshComponent, FAttachmentTransformRules::SnapToTargetIncludingScale, "Accessory_Socket");
 	}
 }

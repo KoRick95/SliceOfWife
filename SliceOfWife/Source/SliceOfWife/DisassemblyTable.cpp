@@ -98,7 +98,7 @@ void ADisassemblyTable::DisassembleBody()
 
 			if (splitBodyPart->AccessoryBlueprint)
 			{
-				//AAccessory* accessory = Cast<AAccessory>(GetWorld()->SpawnActor(splitBodyPart->AccessoryBlueprint.Get()))
+				uClass = splitBodyPart->AccessoryBlueprint.Get();
 			}
 		}
 	}
