@@ -42,25 +42,6 @@ void AAssemblingSpot::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-bool AAssemblingSpot::SetBodyPart(ABodyPart* aBodyPart)
-{
-	if (aBodyPart != nullptr)
-	{
-		TArray<EBodyPartType> currentTypes = aBodyPart->GetCurrentMeshTypes();
-
-		for (int i = 0; i < currentTypes.Num(); ++i)
-		{
-			if (currentTypes[i] == this->BodyPartType)
-			{
-				attachedBodyPart = aBodyPart;
-				return true;
-			}
-		}
-	}
-
-	return false;
-}
-
 bool AAssemblingSpot::DropToTable(AActor* object)
 {
 	return table->DropToTable(object, this);
