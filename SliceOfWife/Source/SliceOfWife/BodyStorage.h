@@ -15,9 +15,13 @@ public:
 	// Sets default values for this actor's properties
 	ABodyStorage();
 
-	TArray<AActor*> currentBodies;
+	UPROPERTY(BlueprintReadOnly)
+	TArray<AActor*> CurrentCreatures;
 
-	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
+	UPROPERTY(EditAnywhere)
+	bool bPermamentLimit = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0"))
 	int MaxBodyCount = 1;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
