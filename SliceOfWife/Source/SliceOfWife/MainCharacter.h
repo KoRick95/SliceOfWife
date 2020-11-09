@@ -51,6 +51,10 @@ public:
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
 	float BubbleDepth = 0;
 
+private:
+
+	AActor* Bubble = nullptr;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -70,6 +74,7 @@ public:
 	void PickUpAndDrop();
 	bool HoldObject(AActor* objectToHold);
 	void ApplyBubble(AActor* Object);
+	void PopBubble();
 
 	UFUNCTION(BlueprintCallable)
 	void Interact();
