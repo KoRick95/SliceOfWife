@@ -45,6 +45,12 @@ public:
 	UPROPERTY(EditAnywhere)
 	FVector PickupOffset = { 100, 0, 100 };
 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class AActor> BubbleBlueprint;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
+	float BubbleDepth = 0;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -63,6 +69,7 @@ public:
 
 	void PickUpAndDrop();
 	bool HoldObject(AActor* objectToHold);
+	void ApplyBubble(AActor* Object);
 
 	UFUNCTION(BlueprintCallable)
 	void Interact();

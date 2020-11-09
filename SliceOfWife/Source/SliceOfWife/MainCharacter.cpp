@@ -10,11 +10,14 @@
 #include "ResizingDevice.h"
 #include "Soul.h"
 #include "Camera/CameraComponent.h"
-#include "Components/CapsuleComponent.h"
-#include "Components/InputComponent.h"
 #include "Components/SceneComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "Components/SphereComponent.h"
+#include "Components/InputComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "Engine.h"
+#include "Engine/StaticMesh.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -86,7 +89,7 @@ void AMainCharacter::MoveForward(float axis)
 		FRotator rotation = FVector(camera->GetForwardVector() * axis).ToOrientationRotator();
 		rotation.Roll = 0;
 		rotation.Pitch = 0;
-		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("direction: %f, %f, %f"), direction.X, direction.Y, direction.Z));
+
 		this->AddMovementInput(direction, axis);
 		this->SetActorRotation(rotation);
 	}
@@ -252,19 +255,17 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 	}
 
 	// disable physics on the object
-	TArray<UActorComponent*> primitiveComponents = objectToHold->GetComponentsByClass(UPrimitiveComponent::StaticClass());
-	for (int i = 0; i < primitiveComponents.Num(); ++i)
+	TArray<UActorComponent*> physicsComponents = objectToHold->GetComponentsByClass(UPrimitiveComponent::StaticClass());
+	for (int i = 0; i < physicsComponents.Num(); ++i)
 	{
-		UPrimitiveComponent* physicsComponent = Cast<UPrimitiveComponent>(primitiveComponents[i]);
+		UPrimitiveComponent* physicsComponent = Cast<UPrimitiveComponent>(physicsComponents[i]);
 		physicsComponent->SetSimulatePhysics(false);
-		//physicsComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 		if (physicsComponent != objectToHold->GetRootComponent())
 		{
 			physicsComponent->AttachToComponent(objectToHold->GetRootComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
 		}
 	}
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("%i"), primitiveComponents.Num()));
 
 	if (objectToHold->IsA(ACreature::StaticClass()))
 	{
@@ -275,7 +276,6 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 
 		// add offset to the object
 		fullBody->SetActorRelativeLocation(PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
-		//fullBody->setactor
 	}
 	else if (objectToHold->IsA(ABodyPart::StaticClass()))
 	{
@@ -284,8 +284,8 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 
 		// calculate the mesh offset
 		FVector meshCentre = bodyPart->GetMeshRelativeLocation();
-		float meshHalfHeight = bodyPart->GetMeshRadius();
-		FVector meshOffset = FVector(0, 0, meshHalfHeight) - meshCentre;
+		float meshRadius = bodyPart->GetMeshRadius();
+		FVector meshOffset = FVector(0, 0, meshRadius) - meshCentre;
 
 		// attach the object to the player
 		objectToHold->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
@@ -299,8 +299,55 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 		return false;
 	}
 
+	ApplyBubble(objectToHold);
+
 	HeldObject = objectToHold;
 	return true;
+}
+
+void AMainCharacter::ApplyBubble(AActor* Object)
+{
+	if (Object)
+	{
+		UMeshComponent* MeshComponent = Cast<UMeshComponent>(Object->GetComponentByClass(UMeshComponent::StaticClass()));
+		
+		if (MeshComponent)
+		{
+			AActor* Bubble = GetWorld()->SpawnActor(BubbleBlueprint);
+			UStaticMeshComponent* BubbleMeshComponent = Cast<UStaticMeshComponent>(Bubble->GetComponentByClass(UStaticMeshComponent::StaticClass()));
+
+			if (BubbleMeshComponent)
+			{
+				float BubbleRadius = BubbleMeshComponent->GetStaticMesh()->GetBounds().SphereRadius;
+				FVector BubbleScale(1);
+
+				if (MeshComponent->IsA(UStaticMeshComponent::StaticClass()))
+				{
+					UStaticMesh* StaticMesh = Cast<UStaticMeshComponent>(MeshComponent)->GetStaticMesh();
+					float ObjectRadius = StaticMesh->GetBounds().SphereRadius;
+					BubbleScale *= (ObjectRadius + BubbleDepth) / BubbleRadius;
+				}
+				else if (MeshComponent->IsA(USkeletalMeshComponent::StaticClass()))
+				{
+					USkeletalMesh* SkeletalMesh = Cast<USkeletalMeshComponent>(MeshComponent)->SkeletalMesh;
+					float ObjectRadius = SkeletalMesh->GetBounds().SphereRadius;
+					BubbleScale *= (ObjectRadius + BubbleDepth) / BubbleRadius;
+					GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::White, FString::Printf(TEXT("Object Radius = %f\nBubble Radius = %f\nBubble Scale = %f"), ObjectRadius, BubbleRadius, BubbleScale.X));
+
+					FVector ObjectBoxExtent = SkeletalMesh->GetBounds().BoxExtent;
+					GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::White, FString::Printf(TEXT("Box = %f, %f, %f"), ObjectBoxExtent.X, ObjectBoxExtent.Y, ObjectBoxExtent.Z));
+				}
+				else
+				{
+					return;
+				}
+
+				Bubble->SetActorScale3D(BubbleScale);
+				Bubble->SetActorLocation(Object->GetActorLocation());
+				Bubble->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
+			}
+		}
+	}
 }
 
 void AMainCharacter::Interact()
