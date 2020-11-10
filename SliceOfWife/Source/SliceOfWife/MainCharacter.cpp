@@ -310,9 +310,9 @@ void AMainCharacter::ApplyBubble(AActor* Object)
 {
 	if (Object)
 	{
-		UMeshComponent* MeshComponent = Cast<UMeshComponent>(Object->GetComponentByClass(UMeshComponent::StaticClass()));
+		UMeshComponent* ObjectMeshComponent = Cast<UMeshComponent>(Object->GetComponentByClass(UMeshComponent::StaticClass()));
 		
-		if (MeshComponent)
+		if (ObjectMeshComponent)
 		{
 			AActor* NewBubble = GetWorld()->SpawnActor(BubbleBlueprint);
 			UStaticMeshComponent* BubbleMeshComponent = Cast<UStaticMeshComponent>(NewBubble->GetComponentByClass(UStaticMeshComponent::StaticClass()));
@@ -320,27 +320,43 @@ void AMainCharacter::ApplyBubble(AActor* Object)
 			if (BubbleMeshComponent)
 			{
 				float BubbleRadius = BubbleMeshComponent->GetStaticMesh()->GetBounds().SphereRadius;
+				FVector ObjectCentre(0);
+				FVector ObjectOrigin(0);
 				FVector BubbleScale(1);
 
-				if (MeshComponent->IsA(UStaticMeshComponent::StaticClass()))
+				USceneComponent* CurrentComponent = ObjectMeshComponent;
+				while (CurrentComponent != Object->GetRootComponent())
 				{
-					UStaticMesh* StaticMesh = Cast<UStaticMeshComponent>(MeshComponent)->GetStaticMesh();
+					ObjectCentre -= CurrentComponent->RelativeLocation;
+					CurrentComponent = CurrentComponent->GetAttachParent();
+				}
+
+				if (ObjectMeshComponent->IsA(UStaticMeshComponent::StaticClass()))
+				{
+					UStaticMesh* StaticMesh = Cast<UStaticMeshComponent>(ObjectMeshComponent)->GetStaticMesh();
 					float ObjectRadius = StaticMesh->GetBounds().SphereRadius;
-					float ObjectCentreOffset = FVector::Distance(FVector(0), StaticMesh->GetBounds().Origin);
+					float ObjectCentreOffset = FVector::Distance(FVector(0), ObjectCentre);
 
 					BubbleScale *= (ObjectRadius - ObjectCentreOffset + BubbleDepth) / BubbleRadius;
 				}
-				else if (MeshComponent->IsA(USkeletalMeshComponent::StaticClass()))
+				else if (ObjectMeshComponent->IsA(USkeletalMeshComponent::StaticClass()))
 				{
-					USkeletalMesh* SkeletalMesh = Cast<USkeletalMeshComponent>(MeshComponent)->SkeletalMesh;
+					USkeletalMesh* SkeletalMesh = Cast<USkeletalMeshComponent>(ObjectMeshComponent)->SkeletalMesh;
 					float ObjectRadius = SkeletalMesh->GetBounds().SphereRadius;
-					float ObjectCentreOffset = FVector::Distance(FVector(0), SkeletalMesh->GetBounds().Origin);
+
+					ObjectOrigin = SkeletalMesh->GetBounds().Origin;
+					GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::White, FString::Printf(TEXT("Origin = %f, %f, %f"), ObjectOrigin.X, ObjectOrigin.Y, ObjectOrigin.Z));
+					GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::White, FString::Printf(TEXT("Relative = %f, %f, %f"), ObjectCentre.X, ObjectCentre.Y, ObjectCentre.Z));
+
+					ObjectCentre -= SkeletalMesh->GetBounds().Origin;
+
+					float ObjectCentreOffset = FVector::Distance(FVector(0), ObjectCentre);
 
 					BubbleScale *= (ObjectRadius - ObjectCentreOffset + BubbleDepth) / BubbleRadius;
 					GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::White, FString::Printf(TEXT("Object Radius = %f\nBubble Radius = %f\nOffset = %f\nBubble Scale = %f"), ObjectRadius, BubbleRadius, ObjectCentreOffset, BubbleScale.X));
 
-					FVector ObjectBoxExtent = SkeletalMesh->GetBounds().BoxExtent;
-					GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::White, FString::Printf(TEXT("Box = %f, %f, %f"), ObjectBoxExtent.X, ObjectBoxExtent.Y, ObjectBoxExtent.Z));
+					//FVector ObjectBoxExtent = SkeletalMesh->GetBounds().BoxExtent;
+					//GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::White, FString::Printf(TEXT("Box = %f, %f, %f"), ObjectBoxExtent.X, ObjectBoxExtent.Y, ObjectBoxExtent.Z));
 				}
 				else
 				{
@@ -348,8 +364,8 @@ void AMainCharacter::ApplyBubble(AActor* Object)
 				}
 
 				NewBubble->SetActorScale3D(BubbleScale);
-				NewBubble->SetActorLocation(Object->GetActorLocation());
-				NewBubble->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
+				NewBubble->SetActorRelativeLocation(PickupOffset);
+				NewBubble->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
 				Bubble = NewBubble;
 			}
 		}
@@ -363,6 +379,39 @@ void AMainCharacter::PopBubble()
 		Bubble->Destroy();
 		Bubble = nullptr;
 	}
+}
+
+FVector AMainCharacter::CalculateObjectCentre(AActor* Object)
+{
+	if (Object)
+	{
+		FVector ObjectCentre(0);
+
+		// get the mesh component of the object
+		UMeshComponent* ObjectMeshComponent = Cast<UMeshComponent>(Object->GetComponentByClass(UMeshComponent::StaticClass()));
+		
+		// set the mesh component as the initial value
+		USceneComponent* CurrentComponent = ObjectMeshComponent;
+
+		// go up through the component hierarchy and offset each component's relative location
+		while (CurrentComponent != Object->GetRootComponent())
+		{
+			ObjectCentre -= CurrentComponent->RelativeLocation;
+			CurrentComponent = CurrentComponent->GetAttachParent();
+		}
+
+		if (ObjectMeshComponent->IsA(UStaticMeshComponent::StaticClass()))
+		{
+			
+		}
+		else if (ObjectMeshComponent->IsA(USkeletalMeshComponent::StaticClass()))
+		{
+			// get the object's skeletal mesh from its mesh component
+			USkeletalMesh* SkeletalMesh = Cast<USkeletalMeshComponent>(ObjectMeshComponent)->SkeletalMesh;
+		}
+	}
+
+	return FVector();
 }
 
 void AMainCharacter::Interact()

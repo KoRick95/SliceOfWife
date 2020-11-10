@@ -76,6 +76,8 @@ public:
 	void ApplyBubble(AActor* Object);
 	void PopBubble();
 
+	FVector CalculateObjectCentre(AActor* Object);
+
 	UFUNCTION(BlueprintCallable)
 	void Interact();
 
