@@ -324,39 +324,27 @@ void AMainCharacter::ApplyBubble(AActor* Object)
 				FVector ObjectOrigin(0);
 				FVector BubbleScale(1);
 
-				USceneComponent* CurrentComponent = ObjectMeshComponent;
-				while (CurrentComponent != Object->GetRootComponent())
-				{
-					ObjectCentre -= CurrentComponent->RelativeLocation;
-					CurrentComponent = CurrentComponent->GetAttachParent();
-				}
+				//USceneComponent* CurrentComponent = ObjectMeshComponent;
+				//while (CurrentComponent != Object->GetRootComponent())
+				//{
+				//	ObjectCentre -= CurrentComponent->RelativeLocation;
+				//	CurrentComponent = CurrentComponent->GetAttachParent();
+				//}
 
 				if (ObjectMeshComponent->IsA(UStaticMeshComponent::StaticClass()))
 				{
 					UStaticMesh* StaticMesh = Cast<UStaticMeshComponent>(ObjectMeshComponent)->GetStaticMesh();
 					float ObjectRadius = StaticMesh->GetBounds().SphereRadius;
-					float ObjectCentreOffset = FVector::Distance(FVector(0), ObjectCentre);
 
-					BubbleScale *= (ObjectRadius - ObjectCentreOffset + BubbleDepth) / BubbleRadius;
+					BubbleScale *= (ObjectRadius + BubbleDepth) / BubbleRadius;
 				}
 				else if (ObjectMeshComponent->IsA(USkeletalMeshComponent::StaticClass()))
 				{
 					USkeletalMesh* SkeletalMesh = Cast<USkeletalMeshComponent>(ObjectMeshComponent)->SkeletalMesh;
 					float ObjectRadius = SkeletalMesh->GetBounds().SphereRadius;
 
-					ObjectOrigin = SkeletalMesh->GetBounds().Origin;
-					GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::White, FString::Printf(TEXT("Origin = %f, %f, %f"), ObjectOrigin.X, ObjectOrigin.Y, ObjectOrigin.Z));
-					GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::White, FString::Printf(TEXT("Relative = %f, %f, %f"), ObjectCentre.X, ObjectCentre.Y, ObjectCentre.Z));
-
-					ObjectCentre -= SkeletalMesh->GetBounds().Origin;
-
-					float ObjectCentreOffset = FVector::Distance(FVector(0), ObjectCentre);
-
-					BubbleScale *= (ObjectRadius - ObjectCentreOffset + BubbleDepth) / BubbleRadius;
-					GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::White, FString::Printf(TEXT("Object Radius = %f\nBubble Radius = %f\nOffset = %f\nBubble Scale = %f"), ObjectRadius, BubbleRadius, ObjectCentreOffset, BubbleScale.X));
-
-					//FVector ObjectBoxExtent = SkeletalMesh->GetBounds().BoxExtent;
-					//GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::White, FString::Printf(TEXT("Box = %f, %f, %f"), ObjectBoxExtent.X, ObjectBoxExtent.Y, ObjectBoxExtent.Z));
+					BubbleScale *= (ObjectRadius + BubbleDepth) / BubbleRadius;
+					GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::White, FString::Printf(TEXT("Object Radius = %f\nBubble Radius = %f\nBubble Scale = %f"), ObjectRadius, BubbleRadius, BubbleScale.X));
 				}
 				else
 				{
