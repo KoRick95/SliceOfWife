@@ -64,7 +64,7 @@ float ABodyPart::GetMeshRadius()
 	return skeletalMeshComponent->SkeletalMesh->GetBounds().SphereRadius;
 }
 
-FVector ABodyPart::GetMeshRelativeLocation()
+FVector ABodyPart::GetMeshRelativeOffset()
 {
 	return skeletalMeshComponent->SkeletalMesh->GetBounds().Origin;
 }

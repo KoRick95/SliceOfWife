@@ -43,7 +43,7 @@ public:
 	float CameraVerticalMax = 25;
 
 	UPROPERTY(EditAnywhere)
-	FVector PickupOffset = { 100, 0, 100 };
+	FVector PickupPosition = { 0, 0, 0 };
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class AActor> BubbleBlueprint;

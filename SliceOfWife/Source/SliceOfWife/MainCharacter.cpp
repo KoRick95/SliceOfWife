@@ -21,6 +21,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Math/TransformNonVectorized.h"
 
 // Sets default values
 AMainCharacter::AMainCharacter()
@@ -248,51 +249,55 @@ void AMainCharacter::PickUpAndDrop()
 	}
 }
 
-bool AMainCharacter::HoldObject(AActor* objectToHold)
+bool AMainCharacter::HoldObject(AActor* Object)
 {
-	if (objectToHold == nullptr)
+	if (!Object)
 	{
 		return false;
 	}
 
 	// disable physics on the object
-	TArray<UActorComponent*> physicsComponents = objectToHold->GetComponentsByClass(UPrimitiveComponent::StaticClass());
+	TArray<UActorComponent*> physicsComponents = Object->GetComponentsByClass(UPrimitiveComponent::StaticClass());
 	for (int i = 0; i < physicsComponents.Num(); ++i)
 	{
 		UPrimitiveComponent* physicsComponent = Cast<UPrimitiveComponent>(physicsComponents[i]);
 		physicsComponent->SetSimulatePhysics(false);
 
-		if (physicsComponent != objectToHold->GetRootComponent())
+		if (physicsComponent != Object->GetRootComponent())
 		{
-			physicsComponent->AttachToComponent(objectToHold->GetRootComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
+			physicsComponent->AttachToComponent(Object->GetRootComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
 		}
 	}
 
-	if (objectToHold->IsA(ACreature::StaticClass()))
+	if (Object->IsA(ACreature::StaticClass()))
 	{
-		ACreature* fullBody = Cast<ACreature>(objectToHold);
+		ACreature* Creature = Cast<ACreature>(Object);
 
 		// attach the object to the player
-		fullBody->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		Creature->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
-		// add offset to the object
-		fullBody->SetActorRelativeLocation(PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
+		// get the creature's dimension to determine the size offset
+		FVector SizeOffset = Creature->GetDimensions();
+		SizeOffset.Y = 0;
+
+		// add the total offset to the object
+		Creature->SetActorRelativeLocation(PickupPosition + SizeOffset, false, nullptr, ETeleportType::ResetPhysics);
 	}
-	else if (objectToHold->IsA(ABodyPart::StaticClass()))
+	else if (Object->IsA(ABodyPart::StaticClass()))
 	{
 		// get the object's skeletal mesh component
-		ABodyPart* bodyPart = Cast<ABodyPart>(objectToHold);
+		ABodyPart* BodyPart = Cast<ABodyPart>(Object);
 
 		// calculate the mesh offset
-		FVector meshCentre = bodyPart->GetMeshRelativeLocation();
-		float meshRadius = bodyPart->GetMeshRadius();
-		FVector meshOffset = FVector(0, 0, meshRadius) - meshCentre;
+		FVector meshCentre = BodyPart->GetMeshRelativeOffset();
+		float meshRadius = BodyPart->GetMeshRadius();
+		FVector meshOffset = FVector(meshRadius, 0, meshRadius) - meshCentre;
 
 		// attach the object to the player
-		objectToHold->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		Object->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
-		// add the offset to the object
-		objectToHold->SetActorRelativeLocation(PickupOffset + meshOffset, false, nullptr, ETeleportType::ResetPhysics);
+		// add the total offset to the object
+		Object->SetActorRelativeLocation(PickupPosition + meshOffset, false, nullptr, ETeleportType::ResetPhysics);
 	}
 	else
 	{
@@ -300,62 +305,57 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 		return false;
 	}
 
-	ApplyBubble(objectToHold);
+	ApplyBubble(Object);
 
-	HeldObject = objectToHold;
+	HeldObject = Object;
 	return true;
 }
 
 void AMainCharacter::ApplyBubble(AActor* Object)
 {
-	if (Object)
+	if (!Object || !BubbleBlueprint)
 	{
-		UMeshComponent* ObjectMeshComponent = Cast<UMeshComponent>(Object->GetComponentByClass(UMeshComponent::StaticClass()));
-		
-		if (ObjectMeshComponent)
+		return;
+	}
+
+	float ObjectRadius(0);
+	FVector BubbleLocation(0);
+
+	if (Object->IsA(ACreature::StaticClass()))
+	{
+		ACreature* Creature = Cast<ACreature>(Object);
+
+		ObjectRadius = Creature->GetDimensions().GetAbsMax();
+		//BubbleLocation = Object->GetActorTransform().relative
+	}
+	else if (Object->IsA(ABodyPart::StaticClass()))
+	{
+		ABodyPart* BodyPart = Cast<ABodyPart>(Object);
+
+		ObjectRadius = BodyPart->GetMeshRadius();
+	}
+	else
+	{
+		return;
+	}
+
+	AActor* NewBubble = GetWorld()->SpawnActor(BubbleBlueprint);
+
+	if (NewBubble)
+	{
+		UStaticMeshComponent* BubbleMeshComponent = Cast<UStaticMeshComponent>(NewBubble->GetComponentByClass(UStaticMeshComponent::StaticClass()));
+
+		if (BubbleMeshComponent)
 		{
-			AActor* NewBubble = GetWorld()->SpawnActor(BubbleBlueprint);
-			UStaticMeshComponent* BubbleMeshComponent = Cast<UStaticMeshComponent>(NewBubble->GetComponentByClass(UStaticMeshComponent::StaticClass()));
+			float BubbleRadius = BubbleMeshComponent->GetStaticMesh()->GetBounds().SphereRadius;
+			float BubbleScale = (ObjectRadius + BubbleDepth) / BubbleRadius;
+			
 
-			if (BubbleMeshComponent)
-			{
-				float BubbleRadius = BubbleMeshComponent->GetStaticMesh()->GetBounds().SphereRadius;
-				FVector ObjectCentre(0);
-				FVector ObjectOrigin(0);
-				FVector BubbleScale(1);
-
-				//USceneComponent* CurrentComponent = ObjectMeshComponent;
-				//while (CurrentComponent != Object->GetRootComponent())
-				//{
-				//	ObjectCentre -= CurrentComponent->RelativeLocation;
-				//	CurrentComponent = CurrentComponent->GetAttachParent();
-				//}
-
-				if (ObjectMeshComponent->IsA(UStaticMeshComponent::StaticClass()))
-				{
-					UStaticMesh* StaticMesh = Cast<UStaticMeshComponent>(ObjectMeshComponent)->GetStaticMesh();
-					float ObjectRadius = StaticMesh->GetBounds().SphereRadius;
-
-					BubbleScale *= (ObjectRadius + BubbleDepth) / BubbleRadius;
-				}
-				else if (ObjectMeshComponent->IsA(USkeletalMeshComponent::StaticClass()))
-				{
-					USkeletalMesh* SkeletalMesh = Cast<USkeletalMeshComponent>(ObjectMeshComponent)->SkeletalMesh;
-					float ObjectRadius = SkeletalMesh->GetBounds().SphereRadius;
-
-					BubbleScale *= (ObjectRadius + BubbleDepth) / BubbleRadius;
-					GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::White, FString::Printf(TEXT("Object Radius = %f\nBubble Radius = %f\nBubble Scale = %f"), ObjectRadius, BubbleRadius, BubbleScale.X));
-				}
-				else
-				{
-					return;
-				}
-
-				NewBubble->SetActorScale3D(BubbleScale);
-				NewBubble->SetActorRelativeLocation(PickupOffset);
-				NewBubble->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform);
-				Bubble = NewBubble;
-			}
+			NewBubble->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+			NewBubble->SetActorRelativeScale3D(FVector(BubbleScale));
+			NewBubble->SetActorRelativeLocation(BubbleLocation);
+			
+			Bubble = NewBubble;
 		}
 	}
 }
