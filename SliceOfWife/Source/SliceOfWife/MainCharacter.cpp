@@ -326,13 +326,14 @@ void AMainCharacter::ApplyBubble(AActor* Object)
 		ACreature* Creature = Cast<ACreature>(Object);
 
 		ObjectRadius = Creature->GetDimensions().GetAbsMax();
-		//BubbleLocation = Object->GetActorTransform().relative
+		BubbleLocation = Object->GetRootComponent()->GetRelativeTransform().GetLocation();
 	}
 	else if (Object->IsA(ABodyPart::StaticClass()))
 	{
 		ABodyPart* BodyPart = Cast<ABodyPart>(Object);
 
 		ObjectRadius = BodyPart->GetMeshRadius();
+		BubbleLocation = Object->GetRootComponent()->GetRelativeTransform().GetLocation() + BodyPart->GetMeshRelativeOffset();
 	}
 	else
 	{
