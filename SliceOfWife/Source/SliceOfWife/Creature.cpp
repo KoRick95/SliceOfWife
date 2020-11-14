@@ -86,6 +86,20 @@ bool ACreature::DetachBodyPart(ABodyPart* bodyPart)
 	return false;
 }
 
+FVector ACreature::GetDimensions()
+{
+	if (GetRootComponent()->IsA(UBoxComponent::StaticClass()))
+	{
+		return Cast<UBoxComponent>(GetComponentByClass(UBoxComponent::StaticClass()))->GetScaledBoxExtent();
+	}
+	else if (GetRootComponent()->IsA(USkeletalMeshComponent::StaticClass()))
+	{
+		return Cast<USkeletalMeshComponent>(GetComponentByClass(USkeletalMeshComponent::StaticClass()))->SkeletalMesh->GetBounds().BoxExtent;
+	}
+
+	return FVector();
+}
+
 int ACreature::CountCreatureTypeVariation()
 {
 	TArray<ECreatureType> creatureTypes;

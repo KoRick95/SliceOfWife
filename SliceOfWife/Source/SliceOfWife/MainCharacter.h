@@ -43,7 +43,17 @@ public:
 	float CameraVerticalMax = 25;
 
 	UPROPERTY(EditAnywhere)
-	FVector PickupOffset = { 100, 0, 100 };
+	FVector PickupPosition = { 0, 0, 0 };
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class AActor> BubbleBlueprint;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
+	float BubbleDepth = 0;
+
+private:
+
+	AActor* Bubble = nullptr;
 
 protected:
 	// Called when the game starts or when spawned
@@ -63,6 +73,10 @@ public:
 
 	void PickUpAndDrop();
 	bool HoldObject(AActor* objectToHold);
+	void ApplyBubble(AActor* Object);
+	void PopBubble();
+
+	FVector CalculateObjectCentre(AActor* Object);
 
 	UFUNCTION(BlueprintCallable)
 	void Interact();

@@ -33,7 +33,7 @@ bool AResizingDevice::DropToDevice(AActor* object)
 		if (object->IsA(ABodyPart::StaticClass()))
 		{
 			ABodyPart* bodyPart = Cast<ABodyPart>(object);
-			offset = offset - bodyPart->GetMeshRelativeLocation() + FVector(0, 0, bodyPart->GetMeshRadius());
+			offset = offset - bodyPart->GetMeshRelativeOffset() + FVector(0, 0, bodyPart->GetMeshRadius());
 		}
 
 		object->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
@@ -94,7 +94,7 @@ bool AResizingDevice::ReplaceObject()
 			if (objectOnDevice->IsA(ABodyPart::StaticClass()))
 			{
 				ABodyPart* bodyPart = Cast<ABodyPart>(objectOnDevice);
-				transform.SetLocation(this->GetActorLocation() + SnapLocation - bodyPart->GetMeshRelativeLocation() + FVector(0, 0, bodyPart->GetMeshRadius()));
+				transform.SetLocation(this->GetActorLocation() + SnapLocation - bodyPart->GetMeshRelativeOffset() + FVector(0, 0, bodyPart->GetMeshRadius()));
 			}
 			FActorSpawnParameters spawnParams;
 			spawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
@@ -106,7 +106,7 @@ bool AResizingDevice::ReplaceObject()
 			FVector offset = SnapLocation;
 			if (objectOnDevice->IsA(ABodyPart::StaticClass()))
 			{
-				offset -= Cast<ABodyPart>(objectOnDevice)->GetMeshRelativeLocation();
+				offset -= Cast<ABodyPart>(objectOnDevice)->GetMeshRelativeOffset();
 			}
 			objectOnDevice->SetActorLocation(this->GetActorLocation() + offset, false, nullptr, ETeleportType::ResetPhysics);
 			TempTutorialBool = true;
