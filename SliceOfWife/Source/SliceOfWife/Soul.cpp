@@ -96,7 +96,7 @@ void ASoul::HoldObject()
 
 	// attach the object to the soul
 	possession->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-	possession->SetActorRelativeLocation(-Cast<ABodyPart>(possession)->GetMeshRelativeLocation());
+	possession->SetActorRelativeLocation(-Cast<ABodyPart>(possession)->GetMeshRelativeOffset());
 }
 
 void ASoul::ReleaseObject()
