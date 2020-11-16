@@ -277,7 +277,7 @@ bool AMainCharacter::HoldObject(AActor* Object)
 		Creature->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
 		// get the creature's dimension to determine the size offset
-		FVector SizeOffset = Creature->GetDimensions();
+		FVector SizeOffset = FVector(Creature->GetDimensions().GetMax());
 		SizeOffset.Y = 0;
 
 		// add the total offset to the object
