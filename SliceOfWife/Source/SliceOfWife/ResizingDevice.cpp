@@ -39,6 +39,7 @@ bool AResizingDevice::DropToDevice(AActor* object)
 		object->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 		object->SetActorRelativeLocation(offset, false, nullptr, ETeleportType::ResetPhysics);
 		object->SetActorRelativeRotation(FQuat(SnapRotation), false, nullptr, ETeleportType::ResetPhysics);
+		object->SetActorHiddenInGame(true);
 
 		objectOnDevice = object;
 		isActive = true;
@@ -56,6 +57,7 @@ bool AResizingDevice::RemoveFromDevice(AActor* requester)
 		if (ActiveTimer < WaitTime)
 		{
 			objectOnDevice->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+			objectOnDevice->SetActorHiddenInGame(false);
 		}
 		else if (ActiveTimer < FailTime)
 		{
@@ -138,7 +140,7 @@ bool AResizingDevice::Eject(AActor* towards)
 	if (objectOnDevice != nullptr)
 	{
 		UPrimitiveComponent* primitiveComponent = Cast<UPrimitiveComponent>(objectOnDevice->GetComponentByClass(UPrimitiveComponent::StaticClass()));
-
+		
 		if (primitiveComponent != nullptr)
 		{
 			FVector direction = (towards == nullptr) ? FMath::VRand() : towards->GetActorLocation() - this->GetActorLocation();
