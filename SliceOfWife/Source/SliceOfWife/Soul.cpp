@@ -96,7 +96,7 @@ void ASoul::HoldObject()
 
 	// attach the object to the soul
 	possession->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-	possession->SetActorRelativeLocation(-Cast<ABodyPart>(possession)->GetMeshRelativeLocation());
+	possession->SetActorRelativeLocation(-Cast<ABodyPart>(possession)->GetMeshRelativeOffset());
 }
 
 void ASoul::ReleaseObject()
@@ -122,7 +122,6 @@ void ASoul::Spawn()
 	// roll for a chance to spawn
 	if (rng > SpawnChance)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, FString::Printf(TEXT("Failed chance to spawn."), rng));
 		if (CanRespawn)
 		{
 			spawnTimer = RespawnTime;

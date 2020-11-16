@@ -40,7 +40,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	float GetMeshRadius();
-	FVector GetMeshRelativeLocation();
+	FVector GetMeshRelativeOffset();
 	TArray<EBodyPartType> GetCurrentMeshTypes();
 
 	void SetPhysicsState(bool state);

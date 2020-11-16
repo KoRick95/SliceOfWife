@@ -70,7 +70,6 @@ bool ADisassemblyTable::ChargeMagic()
 		TempTutorialBool = true;
 	}
 	
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, FString::Printf(TEXT("Charge: %f"), Charge));
 	return true;
 }
 

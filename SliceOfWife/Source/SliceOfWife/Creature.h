@@ -43,4 +43,6 @@ public:
 
 	void AttachBodyPart(ABodyPart* bodyPart);
 	bool DetachBodyPart(ABodyPart* bodyPart);
+
+	FVector GetDimensions();
 };

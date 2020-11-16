@@ -10,14 +10,18 @@
 #include "ResizingDevice.h"
 #include "Soul.h"
 #include "Camera/CameraComponent.h"
-#include "Components/CapsuleComponent.h"
-#include "Components/InputComponent.h"
 #include "Components/SceneComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "Components/SphereComponent.h"
+#include "Components/InputComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "Engine.h"
+#include "Engine/StaticMesh.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Math/TransformNonVectorized.h"
 
 // Sets default values
 AMainCharacter::AMainCharacter()
@@ -86,7 +90,7 @@ void AMainCharacter::MoveForward(float axis)
 		FRotator rotation = FVector(camera->GetForwardVector() * axis).ToOrientationRotator();
 		rotation.Roll = 0;
 		rotation.Pitch = 0;
-		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("direction: %f, %f, %f"), direction.X, direction.Y, direction.Z));
+
 		this->AddMovementInput(direction, axis);
 		this->SetActorRotation(rotation);
 	}
@@ -241,57 +245,59 @@ void AMainCharacter::PickUpAndDrop()
 		}
 
 		HeldObject = nullptr;
+		PopBubble();
 	}
 }
 
-bool AMainCharacter::HoldObject(AActor* objectToHold)
+bool AMainCharacter::HoldObject(AActor* Object)
 {
-	if (objectToHold == nullptr)
+	if (!Object)
 	{
 		return false;
 	}
 
 	// disable physics on the object
-	TArray<UActorComponent*> primitiveComponents = objectToHold->GetComponentsByClass(UPrimitiveComponent::StaticClass());
-	for (int i = 0; i < primitiveComponents.Num(); ++i)
+	TArray<UActorComponent*> physicsComponents = Object->GetComponentsByClass(UPrimitiveComponent::StaticClass());
+	for (int i = 0; i < physicsComponents.Num(); ++i)
 	{
-		UPrimitiveComponent* physicsComponent = Cast<UPrimitiveComponent>(primitiveComponents[i]);
+		UPrimitiveComponent* physicsComponent = Cast<UPrimitiveComponent>(physicsComponents[i]);
 		physicsComponent->SetSimulatePhysics(false);
-		//physicsComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
-		if (physicsComponent != objectToHold->GetRootComponent())
+		if (physicsComponent != Object->GetRootComponent())
 		{
-			physicsComponent->AttachToComponent(objectToHold->GetRootComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
+			physicsComponent->AttachToComponent(Object->GetRootComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
 		}
 	}
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("%i"), primitiveComponents.Num()));
 
-	if (objectToHold->IsA(ACreature::StaticClass()))
+	if (Object->IsA(ACreature::StaticClass()))
 	{
-		ACreature* fullBody = Cast<ACreature>(objectToHold);
+		ACreature* Creature = Cast<ACreature>(Object);
 
 		// attach the object to the player
-		fullBody->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		Creature->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
-		// add offset to the object
-		fullBody->SetActorRelativeLocation(PickupOffset, false, nullptr, ETeleportType::ResetPhysics);
-		//fullBody->setactor
+		// get the creature's dimension to determine the size offset
+		FVector SizeOffset = FVector(Creature->GetDimensions().GetMax());
+		SizeOffset.Y = 0;
+
+		// add the total offset to the object
+		Creature->SetActorRelativeLocation(PickupPosition + SizeOffset, false, nullptr, ETeleportType::ResetPhysics);
 	}
-	else if (objectToHold->IsA(ABodyPart::StaticClass()))
+	else if (Object->IsA(ABodyPart::StaticClass()))
 	{
 		// get the object's skeletal mesh component
-		ABodyPart* bodyPart = Cast<ABodyPart>(objectToHold);
+		ABodyPart* BodyPart = Cast<ABodyPart>(Object);
 
 		// calculate the mesh offset
-		FVector meshCentre = bodyPart->GetMeshRelativeLocation();
-		float meshHalfHeight = bodyPart->GetMeshRadius();
-		FVector meshOffset = FVector(0, 0, meshHalfHeight) - meshCentre;
+		FVector meshCentre = BodyPart->GetMeshRelativeOffset();
+		float meshRadius = BodyPart->GetMeshRadius();
+		FVector meshOffset = FVector(meshRadius, 0, meshRadius) - meshCentre;
 
 		// attach the object to the player
-		objectToHold->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+		Object->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
-		// add the offset to the object
-		objectToHold->SetActorRelativeLocation(PickupOffset + meshOffset, false, nullptr, ETeleportType::ResetPhysics);
+		// add the total offset to the object
+		Object->SetActorRelativeLocation(PickupPosition + meshOffset, false, nullptr, ETeleportType::ResetPhysics);
 	}
 	else
 	{
@@ -299,8 +305,102 @@ bool AMainCharacter::HoldObject(AActor* objectToHold)
 		return false;
 	}
 
-	HeldObject = objectToHold;
+	ApplyBubble(Object);
+
+	HeldObject = Object;
 	return true;
+}
+
+void AMainCharacter::ApplyBubble(AActor* Object)
+{
+	if (!Object || !BubbleBlueprint)
+	{
+		return;
+	}
+
+	float ObjectRadius(0);
+	FVector BubbleLocation(0);
+
+	if (Object->IsA(ACreature::StaticClass()))
+	{
+		ACreature* Creature = Cast<ACreature>(Object);
+
+		ObjectRadius = Creature->GetDimensions().GetAbsMax();
+		BubbleLocation = Object->GetRootComponent()->GetRelativeTransform().GetLocation();
+	}
+	else if (Object->IsA(ABodyPart::StaticClass()))
+	{
+		ABodyPart* BodyPart = Cast<ABodyPart>(Object);
+
+		ObjectRadius = BodyPart->GetMeshRadius();
+		BubbleLocation = Object->GetRootComponent()->GetRelativeTransform().GetLocation() + BodyPart->GetMeshRelativeOffset();
+	}
+	else
+	{
+		return;
+	}
+
+	AActor* NewBubble = GetWorld()->SpawnActor(BubbleBlueprint);
+
+	if (NewBubble)
+	{
+		UStaticMeshComponent* BubbleMeshComponent = Cast<UStaticMeshComponent>(NewBubble->GetComponentByClass(UStaticMeshComponent::StaticClass()));
+
+		if (BubbleMeshComponent)
+		{
+			float BubbleRadius = BubbleMeshComponent->GetStaticMesh()->GetBounds().SphereRadius;
+			float BubbleScale = (ObjectRadius + BubbleDepth) / BubbleRadius;
+			
+
+			NewBubble->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+			NewBubble->SetActorRelativeScale3D(FVector(BubbleScale));
+			NewBubble->SetActorRelativeLocation(BubbleLocation);
+			
+			Bubble = NewBubble;
+		}
+	}
+}
+
+void AMainCharacter::PopBubble()
+{
+	if (Bubble)
+	{
+		Bubble->Destroy();
+		Bubble = nullptr;
+	}
+}
+
+FVector AMainCharacter::CalculateObjectCentre(AActor* Object)
+{
+	if (Object)
+	{
+		FVector ObjectCentre(0);
+
+		// get the mesh component of the object
+		UMeshComponent* ObjectMeshComponent = Cast<UMeshComponent>(Object->GetComponentByClass(UMeshComponent::StaticClass()));
+		
+		// set the mesh component as the initial value
+		USceneComponent* CurrentComponent = ObjectMeshComponent;
+
+		// go up through the component hierarchy and offset each component's relative location
+		while (CurrentComponent != Object->GetRootComponent())
+		{
+			ObjectCentre -= CurrentComponent->RelativeLocation;
+			CurrentComponent = CurrentComponent->GetAttachParent();
+		}
+
+		if (ObjectMeshComponent->IsA(UStaticMeshComponent::StaticClass()))
+		{
+			
+		}
+		else if (ObjectMeshComponent->IsA(USkeletalMeshComponent::StaticClass()))
+		{
+			// get the object's skeletal mesh from its mesh component
+			USkeletalMesh* SkeletalMesh = Cast<USkeletalMeshComponent>(ObjectMeshComponent)->SkeletalMesh;
+		}
+	}
+
+	return FVector();
 }
 
 void AMainCharacter::Interact()
